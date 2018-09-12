@@ -1,0 +1,262 @@
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+/*浮动*/
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+
+
+/* topbar start */
+.topbar {
+	height: 31px;
+	background-color: #f1f1f1;
+}
+.topbar .topbar-l li {
+	float: left;
+	height: 31px;
+	line-height: 31px;
+	margin-right: 14px;
+}
+.topbar .topbar-l .login {
+	color: #e33333;
+}
+.topbar .topbar-r li {
+	float: left;
+	margin-left: 14px;
+	height: 31px;
+	line-height: 31px;
+}
+.topbar .topbar-r li span {
+	color: #999;
+}
+.topbar .topbar-r li i {
+	font-size: 14px;
+}
+
+/* topbar end */
+
+/* header start */
+
+.header .container {
+	/*height: 80px;*/
+	/*background-color: #0f0;*/
+	padding: 25px 0;
+}
+.header .search {
+	margin-left: 170px;
+	width: 540px;
+}
+.header .search .text {
+	width: 456px;
+	height: 36px;
+	box-sizing: border-box;
+	border: 2px solid #e33333;
+	padding-left: 1em;
+}
+.header .search .button {
+	height: 36px;
+	width: 83px;
+	color: #fff;
+	background-color: #e33333;
+}
+.header .search li {
+	float: left;
+		padding: 5px 14px;
+}
+.header .shop-car {
+	width: 140px;
+	height: 36px;
+	margin-right: 65px;
+	box-sizing: border-box;
+	border: 1px solid #dfdfdf;
+	background-color: #f7f7f7;
+	position: relative;
+}
+.header .shop-car .car {
+	width: 18px;
+	height: 14px;
+	margin-left: 20px;
+	margin-top: 11px;
+	background: url(../images/icons.png) no-repeat right -127px top -90px;
+}
+.header .shop-car p {
+	line-height: 36px;
+	margin-left: 10px;
+	font-size: 14px;
+}
+.header .shop-car i {
+	font-size: 14px;
+}
+.header .shop-car em {
+	width: 16px;
+	height: 14px;
+	background-color: #e33333;
+	border-radius: 7px 7px 7px 0;
+	position: absolute;
+	right: 10px;
+	top: -4px; 
+	text-align: center;
+	color: #fff;
+}
+
+/* header end */
+
+/*nav start*/
+.nav {
+	border-bottom: 2px solid #e33333;
+}
+.nav .container {
+	height: 46px;
+	/*background-color: #00f;*/
+}
+.nav li {
+	float: left;
+	line-height: 46px;
+}
+.nav .left {
+
+}
+.nav .left li {
+	margin: 0 27px;
+}
+.nav .left a {
+	font-size: 16px;
+	font-weight: bold;
+}
+.nav .right li {
+	margin: 0 22px;
+}
+/*nav end*/
+
+/*banner start*/
+.banner .container {
+	margin-bottom: 15px;
+}
+
+/*banner end*/
+
+/*shop-list start*/
+.shop-list .container {
+	margin-bottom: 200px;
+}
+.shop-list ul {
+	width: 1220px;
+}
+.shop-list li {
+	float: left;
+	width: 290px;
+	height: 458px;
+	box-sizing: border-box;
+	border: 1px solid #fff;
+	margin-right: 13px;
+	margin-bottom: 10px;
+}
+.shop-list li:hover {
+	border: 1px solid #e33333;
+}
+.shop-list li .info {
+	padding: 0 10px;
+}
+.shop-list li .info p {
+	line-height: 20px;
+}
+.shop-list li .info .jiage {
+	color: #e33333;
+	font-size: 16px;
+	line-height: 35px;
+	margin-right: 4px; 
+}
+.shop-list li .buy {
+	height: 50px;
+	background-color: #e33333;
+	font-size: 16px;
+	line-height: 50px;
+	text-align: center;
+	margin-top: 15px;
+}
+.shop-list li .buy a {
+	color: #fff;
+}
+.shop-list li .info .chushou img {
+	margin: 5px;
+}
+/*shop-list end*/
+
+/*footer start*/
+footer {
+	background-color: #f5f5f5;
+}
+footer .serve {
+	height: 110px;
+	border-bottom: 1px solid #ededed;
+	overflow: hidden;
+}
+footer .serve li {
+	margin: 30px 0;
+	height: 50px;
+	float: left;
+	width: 240px;
+}
+footer .serve li div {
+	height: 50px;
+	width: 50px;
+}
+footer .serve li .item1 {
+	background: url(../images/icons.png) no-repeat left -253px top -3px;
+}
+footer .serve li .item2 {
+	background: url(../images/icons.png) no-repeat left -254px top -53px;
+}
+footer .serve li .item3 {
+	background: url(../images/icons.png) no-repeat left -256px top -105px;
+}
+footer .serve li .item4 {
+	background: url(../images/icons.png) no-repeat left -257px top -156px;
+}
+footer .serve li .item5 {
+	background: url(../images/icons.png) no-repeat left -256px top -208px;
+}
+footer .serve li p {
+	margin-left: 60px;
+	padding-top: 5px;
+}
+footer .link {
+	border-bottom: 1px solid #ededed;
+}
+footer .link dl {
+	width: 200px;
+	padding: 20px;
+	float: left;
+	box-sizing: border-box;
+}
+footer .link dt {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+footer .link dd{
+	height: 20px;
+}
+
+footer .footer-bar {
+	margin-top: 30px;
+	margin-left: 200px;
+	padding-bottom: 10px;
+}
+footer .footer-bar li {
+	float: left;
+	margin-right: 10px;
+}
+footer p {
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+}
+/*footer end*/
+

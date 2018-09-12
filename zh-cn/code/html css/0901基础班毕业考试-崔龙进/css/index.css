@@ -1,0 +1,284 @@
+/*top-bar start*/
+.top-bar {
+
+	height: 660px;
+	/*background-color: #f00;*/
+	overflow: hidden;
+	background: url(../images/04.jpg) center;
+	position: relative;
+}
+.top-bar .top {
+
+	height: 100px;
+	background-color: rgba(0,0,0,.2);
+
+}
+.top-bar .container {
+	position: relative;
+}
+.top-bar .logo {
+	margin-top: 25px;
+}
+.top-bar .left {
+	margin-top: 20px;
+	margin-left: 40px;
+	height: 80px;
+	line-height: 80px;
+}
+.top-bar .left li {
+	float: left;
+	padding: 0 20px;
+}
+.top-bar .left li a {
+	color: #fff;
+}
+.top-bar .right ul {
+	margin-top: 10px;
+	height: 40px;
+}
+.top-bar .right { 
+	overflow: hidden;
+}
+.top-bar .right li {
+	float: left;
+
+	margin-right: 25px;
+	position: relative;
+}
+.top-bar .right li a{
+	color: #fff;
+}
+
+.top-bar .right li img {
+	position: absolute;
+	top: 7px;
+	right: -15px;
+}
+.top-bar .right li.sp{
+	margin-right: 5px;
+}
+.top-bar .right .search {
+	position: relative;
+
+}
+
+.top-bar .right input {
+	border: 1px solid #ccc;
+	width: 210px;
+	height: 30px;
+	box-sizing: border-box;
+	padding-left: 1em;
+	color: #fff;
+	background-color: transparent;
+}
+.top-bar .right .search .sea {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 5px;
+	right: 25px;
+}
+.top-bar .hot {
+	position: absolute;
+	bottom: 0;
+	height: 50px;
+	width: 100%;
+	color: #fff;
+	line-height: 50px;
+	padding-left: 20px;
+	background-color: rgba(0,0,0,.5);
+
+}
+.top-bar .hot img {
+	margin-left: 10px;
+}
+.top-bar .hot .arr1 {
+	position: absolute;
+	right: 100px;
+	top: 15px;
+}
+.top-bar .hot span.date {
+	color: #999;
+}
+.top-bar .arr {
+/*	height: 42px;*/
+	position: absolute;
+	width: 1350px;
+	top: 285px;
+	/*background-color: #fff;*/
+}
+
+/*top-bar end*/
+.hangye {
+	margin-top: 40px;
+}
+.hangye .container {
+	text-align: center;
+}
+.hangye .title1 {
+	height: 50px;
+	line-height: 50px;
+	font-size: 30px;
+}
+.hangye  p {
+	color: #999;
+}
+.hangye .pic {
+	margin-top: 80px;
+	margin-bottom: 80px;
+}
+.hangye .pic  li {
+	float: left;
+	position: relative;
+	margin: 0 20px;
+}
+.hangye .pic  li img {
+	width: 400px;
+}
+.hangye .pic  li .info {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 44px;
+	padding-left: 20px;
+	width: 380px;
+	text-align: left;
+	color: #ccc;
+	line-height: 44px;
+	background-color: rgba(0,0,0,.5);
+}
+
+.serve .container {
+	margin-bottom: 70px;
+}
+
+.serve .right {
+	height: 350px;
+	width: 600px;
+	/*background-color: #0ff;*/
+	text-align: center;
+	padding-top: 30px;
+}
+.serve .right .text1 {
+	font-size: 20px;
+}
+.serve .right h3 {
+	font-size: 40px;
+	font-weight: 400;
+	height: 60px;
+	line-height: 60px;
+}
+.serve .right .text2 {
+	color: #999;
+}
+.serve .right ul {
+	margin-top: 50px;
+}
+.serve .right li {
+	width: 200px;
+	height: 200px;
+	float: left;
+}
+.serve .right li img {
+	margin: 10px auto;
+	height: 55px;
+}
+.serve .right li span {
+	color: #999;
+} 
+
+.banner li {
+	position: relative;
+	float: left;
+	margin: 0 20px;
+}
+.banner li:nth-child(2){
+	margin-bottom: 22px;
+}
+
+.banner li img {
+	width: 630px;
+}
+.banner li .msg {
+	position: absolute;
+	width: 570px;
+	top: 0;
+	left: 0;
+	height: 100%;
+	/*padding-top: 30px;*/
+	padding-left: 60px;
+	background-color: rgba(0,0,0,.3);
+}
+.banner li .msg .top {
+	width: 90px;
+	margin-top: 30px;
+	background-color: #fff;
+	text-align: center;
+	color: #0077c8;
+}
+.banner li .msg h3 {
+	font-size: 35px;
+	font-weight: 400;
+	height: 70px;
+	line-height: 70px;
+	color: #fff;
+}
+.banner li .msg p {
+	color: #fff;
+}
+
+
+.banner li .msg .more {
+	width: 90px;
+	border: 1px solid #ccc;
+	text-align: center;
+	margin-top: 30px;
+}
+.banner li .msg .more a {
+	color: #fff;
+}
+
+
+
+
+
+/*footer start */
+.footer .container {
+	position: relative;
+}
+.footer{
+	margin-top: 100px;
+	height: 330px;
+	background-color: #3f4242;
+}
+.footer dl {
+	margin-top: 40px;
+	float: left;
+	margin-right: 60px;
+}
+.footer dt {
+	height: 64px;
+	line-height: 64px;
+	font-size: 14px;
+	color: #fff;
+}
+.footer dd {
+	height: 25px;
+	line-height: 25px;
+}
+
+.footer .lo {
+	position: absolute;
+	width: 117px;
+	text-align: center;
+}
+
+.footer .weibo {
+	top: 60px;
+	right: 150px;
+}
+.footer .weixin {
+	top: 60px;
+	right: 10px;
+}
+/*footer end*/

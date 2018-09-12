@@ -1,0 +1,341 @@
+/*top-bar start*/
+.top-bar {
+	height: 33px;
+	background-color: #dc353c;
+}
+.top-bar ul {
+	height: 23px;
+	padding: 5px 0;
+}
+.top-bar li {
+	float: left;
+	line-height: 23px;
+	text-align: center;
+	padding: 0 10px;
+	color: #fff;
+}
+.top-bar li a {
+	color: #fff;
+}
+.top-bar ul .ctrl {
+	border-radius: 5px;
+	border: 1px solid #fff;
+}
+/*top-bar end*/
+
+.header {
+	height: 70px;
+	background-color: #d8dff2;
+}
+/*.header .w {
+	overflow: hidden;
+}*/
+.header .logo {
+	margin-top: 20px;
+	float: left;
+}
+.header li {
+	float: left;
+	height: 70px;
+	font-size: 14px;
+	margin-left:  20px;
+	line-height: 70px;
+	padding: 0 5px;
+	box-sizing: border-box;
+	border: 2px solid transparent;
+}
+.header li:hover {
+	border-bottom-color: #dc353c;
+}
+
+.banner {
+	background-color: #fff;
+	/*background-image: url(images/003_02.jpg);*/
+}
+.banner .w {
+	position: relative;
+}
+.banner img {
+	display: block;
+	width: 1000px;
+}
+.banner ul {
+	position: absolute;
+	left: 50%;
+	margin-left: -32px;
+	bottom: 20px;
+
+}
+.banner ul li{
+	float: left;
+	padding: 3px;
+}
+.banner ul .dot {
+	width: 10px;
+	height: 10px;
+	background-color: #999;
+	border-radius: 50%;
+}
+.banner ul li:hover .dot{
+	background-color: #fff;
+}
+.serve {
+	margin-top: 40px;
+}
+.serve h3 {
+	text-align: center;
+	font-size: 30px;
+	padding:10px 0;
+}
+.serve .info {
+	text-align: center;
+	padding:10px 0;
+	margin-bottom: 20px;
+}
+.serve .servelist {
+	height: 176px;
+}
+.serve .servelist {
+	
+}
+.serve .servelist ul li {
+	height: 160px;
+	width: 150px;
+	float: left;
+	background-color: #999;
+	color: #fff;
+	text-align: center;
+	margin-right: 3px;
+	position: relative;
+	/*padding-top : 140px;*/
+}
+.serve .servelist ul .text {
+	padding-top: 130px;
+}
+.serve .servelist .serve1 {
+	position: absolute;
+	width: 88px;
+	height: 88px;
+	left: 50%;
+	margin-left: -44px;
+	top: 25px;
+	border-radius: 50%;
+	background: url(images/0015.png) no-repeat center #fff;
+}
+.serve .servelist .serve2 {
+	position: absolute;
+	width: 88px;
+	height: 88px;
+	left: 50%;
+	margin-left: -44px;
+	top: 25px;
+	border-radius: 50%;
+	background: url(images/0016.png) no-repeat center #fff;
+}
+.serve .servelist .serve3 {
+	position: absolute;
+	width: 88px;
+	height: 88px;
+	left: 50%;
+	margin-left: -44px;
+	top: 25px;
+	border-radius: 50%;
+	background: url(images/0017.png) no-repeat center #fff;
+}
+.serve .servelist .serve4 {
+	position: absolute;
+	width: 88px;
+	height: 88px;
+	left: 50%;
+	margin-left: -44px;
+	top: 25px;
+	border-radius: 50%;
+	background: url(images/00192.png) no-repeat center #fff;
+}
+.serve .servelist .serve5 {
+	position: absolute;
+	width: 88px;
+	height: 88px;
+	left: 50%;
+	margin-left: -44px;
+	top: 25px;
+	border-radius: 50%;
+	background: url(images/0021016.png) no-repeat center #fff;
+}
+.serve .servelist .serve6 {
+	position: absolute;
+	width: 88px;
+	height: 88px;
+	left: 50%;
+	margin-left: -44px;
+	top: 25px;
+	border-radius: 50%;
+	background: url(images/0029.png) no-repeat center #fff;
+}
+
+.fangan {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.fangan h3 {
+	text-align: center;
+	font-size: 30px;
+	padding:10px 0;
+
+}
+.fangan .info {
+	text-align: center;
+	padding:10px 0;
+	margin-bottom: 20px;
+}
+
+.jianzhan .info {
+	margin-left: 30px;
+	width: 506px;
+}
+.jianzhan .info h3 {
+	font-size: 30px;
+	padding: 15px 0;
+	border-bottom: 1px solid #ccc;
+}
+.jianzhan .info p {
+	padding-top: 15px;
+}
+.jianzhan .info .more {
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border: 1px solid #f00;
+	margin-top: 15px;
+}
+.new .w {
+	margin-bottom: 100px;
+}
+.new dl {
+	width: 300px;
+	float: left;
+	margin-right: 30px;
+	
+}
+.new dd {
+	font-size: 20px;
+	padding: 10px 0;
+}
+.new dt {
+	padding: 10px 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.new .jiang {
+	position: relative;
+}
+.new .jiang img {
+	position: absolute;
+	top: 60px;
+}
+.footer {
+	background-color: #333132;
+}
+.footer .w {
+	position: relative;
+}
+.footer dl {
+	float: left;
+	margin: 30px 100px 30px 0;
+	color: #666;
+
+}
+.footer dl dd {
+	color: #fff;
+	font-size: 16px;
+	padding-bottom: 30px;
+}
+.footer dl dt {
+	padding: 3px 0;
+}
+
+
+.footer .link {
+	width: 250px;
+	height: 260px;
+	/*background-color: #f00;*/
+	position: absolute;
+	right: 0;
+	top: 30px;
+}
+.footer .link img {
+	
+}
+.footer .link .app {
+	width: 103px;
+	box-sizing: border-box;
+	padding-left: 10px;
+	background-color: #fff;
+	margin-right: 30px;
+
+}
+.footer .link .sanjiao {
+	width: 0;
+	height: 0;
+	border-top: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid #fff;
+	position: absolute;
+	top: 10px;
+	left: 100px;
+}
+.footer .link .app1 {
+	width: 11px;
+	height: 17px;
+	margin-right: 5px;
+	background: url(images/60.png);
+	position: absolute;
+	top: 5px;
+	left: 115px;
+}
+.footer .link .app2 {
+	width: 15px;
+	height: 13px;
+	margin-right: 5px;
+	background: url(images/61.png);
+	position: absolute;
+	top: 43px;
+	left: 115px;
+}
+.footer .link .app3 {
+	width: 17px;
+	height: 14px;
+	margin-right: 5px;
+	background: url(images/66.png);
+	position: absolute;
+	top: 80px;
+	left: 115px;
+}
+.footer .link .app4 {
+	width: 13px;
+	height: 14px;
+	margin-right: 5px;
+	background: url(images/63.png);
+	position: absolute;
+	top: 117px;
+	left: 15px;
+}
+.footer .link .app5 {
+	width: 15px;
+	height: 15px;
+	margin-right: 5px;
+	background: url(images/64.png);
+	position: absolute;
+	top: 156px;
+	left: 15px;
+}
+.footer .link .text {
+	color: #ccc;
+	margin-bottom: 20px;
+}
+.footer .link .phone {
+	padding-left: 40px;
+}

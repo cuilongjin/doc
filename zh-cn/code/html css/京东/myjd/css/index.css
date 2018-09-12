@@ -1,0 +1,246 @@
+/*top-ad start*/
+.top-ad {
+	height: 80px;
+	background-color: #ff5775;
+}
+/*top-ad end*/
+
+/*top-bar start*/
+.top-bar {
+	height: 30px;
+	box-sizing: border-box;
+	background-color: #e3e4e5;
+	border-bottom: 1px solid #ddd;
+}
+.top-bar .w {
+	position: relative;
+}
+.top-bar ul {
+	margin-right: 7px;
+}
+.top-bar ul li {
+	float: left;
+	line-height: 30px;
+	padding: 0 7px;
+}
+.top-bar li span {
+	color: #ccc;
+}
+.top-bar .location {
+	width: 30px;
+	height: 30px;
+	/*background-color: #f00;*/
+	line-height: 30px;
+	margin-left: 200px;
+}
+
+/*top-bar end*/
+
+/*header start*/
+.header .w {
+	position: relative;
+	height: 140px;
+}
+.header .logo a {
+	position: absolute;
+	width: 190px;
+	height: 170px;
+	/*background-color: #fff;*/
+	background: url(../images/logo.png) no-repeat top/190px #fff;
+ }
+ .header .logo {
+ 	position: absolute;
+ 	left: 0;
+ 	top: -30px;
+ 	width: 190px;
+	height: 170px;
+	box-shadow: -12px 0 12px -6px;
+}
+.header .app {
+	position: absolute;
+	right: 17px;
+	width: 72px;
+	height: 72px;
+	padding: 5px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+}
+.header .app a {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	/*background-color: #fff;*/
+	background: url(../images/mobile_qrcode.jpg) no-repeat ;
+ }
+.header .xiaosanjiao {
+	position: absolute;
+	right: 46px;
+	top: -12px;
+	width: 0;
+	height: 0;
+	border-top: 7px solid transparent;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid #fff;
+}
+/*.header .treasure {
+	position: absolute;
+	width: 190px;
+	height: 40px;
+}*/
+.header .treasure a {
+	display: block;
+	width: 190px;
+	height: 40px;
+	position: absolute;
+	right: 0;
+	top: 90px;
+
+	background: url(../images/treasure.jpg);
+}
+.header .header-search {
+margin-top: 30px;
+margin-left: 320px;
+}
+.header .header-search .text {
+	width: 500px;
+	height: 35px;
+	box-sizing: border-box;
+	padding-left: 1em;
+	border: 1px solid #f10215;
+}
+.header .header-search .button {
+	width: 50px;
+	height: 35px;
+	box-sizing: border-box;
+	/*border: 1px solid #f10215;*/
+	background-color: #f10215;
+	color: #fff;
+}
+.header .header-search .shop-car {
+	width: 192px;
+	height: 35px;
+	box-sizing: border-box;
+	border: 1px solid #f10215;
+	line-height: 35px;
+	text-align: center;
+	margin-left: 30px;
+	position: relative;
+}
+.header .header-search .shop-car a {
+		color: #f10215;
+}
+.header .header-search .shop-car .shopnum {
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	background-color: #f10215;
+	color: #fff;
+	line-height: 15px;
+	border-radius: 50%;
+	left: 130px;
+	top: 10px;
+}
+.header .header-hotwords ul {
+	margin-left: 320px;
+}
+.header .header-hotwords li {
+	float: left;
+	padding-right: 10px;
+	line-height: 30px;
+}
+
+.header .header-nav li {
+	font-size: 16px;
+	float: left;
+	padding: 7px 7px;
+	font-weight: bold;
+
+}
+.header .header-nav ul {
+	margin-left: 220px;
+}
+/*header end*/
+
+/*home start*/
+.home {
+	/*height: 480px;*/
+	background: url(../images/bg.png) center;
+}
+.home .home-left {
+	width: 190px;
+	/*height: 480px;*/
+	background: #6e6568;
+} 
+.home .home-left ul {
+	padding: 15px 0;
+
+}
+.home .home-left li {
+	height: 30px;
+	line-height: 30px;
+	padding-left: 10px;
+}
+.home .home-left li a {
+	font-size: 14px;
+	color: #fff;
+}
+.home .home-left li:hover {
+	background: rgba(255,255,255,.5);
+}
+.home .home-center {
+	width: 790px;
+	height: 480px;
+	margin-left: 10px;
+	/*background-color: #f00;*/
+}
+.home .home-center .one {
+	margin-bottom: 10px;
+	position: relative;
+}
+.home .home-center .one .arrow {
+	position: absolute;
+	width: 790px;
+	height: 60px;
+	/*background-color: #f00;*/
+	top: 50%;
+	margin-top: -30px;
+}
+.home .home-center .one .arrow a {
+	height: 60px;
+	width: 30px;
+	text-align: center;
+	line-height: 60px;
+	font-size: 30px;
+	color: #fff;
+	background-color: rgba(0,0,0,.1);
+	display: none;
+}
+.home .home-center .one:hover a {
+	display: block;
+}
+.home .home-center .one .arrow a:hover {
+	display: block;
+	background-color: rgba(0,0,0,.4);
+}
+.home .home-center .two {
+	margin-right: 10px;
+}
+.home .home-right {
+	width: 190px;
+	height: 480px;
+	/*background-color: #0f0;*/
+}
+.home .home-right .top {
+	height: 116px;
+	background-color: red;
+}
+.home .home-right .middle {
+	height: 155px;
+	background-color: green;
+}
+.home .home-right .bottom {
+	height: 207px;
+	background-color: blue;
+}
+/*home end*/

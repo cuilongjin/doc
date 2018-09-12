@@ -1,0 +1,102 @@
+.top {
+	height: 82px;
+	/*background-color: #f00;*/
+	overflow: hidden;
+}
+.top .logo {
+	margin-top: 15px;
+}
+.top .container {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e12d2c;
+}
+.nav {
+	margin-top: 24px;
+}
+.nav .container {
+	height: 43px;
+	background-color: #ececec;
+
+}
+.nav .reg {
+	height: 43px;
+	line-height: 43px;
+	font-size: 16px;
+	margin-left: 10px;
+}
+.nav .login {
+	height: 43px;
+	line-height: 43px;
+	font-size: 14px;
+	margin-right: 10px;
+}
+.nav .login a {
+	color: #e12d2c;
+}
+
+.form {
+	margin-top: 50px;
+	margin: 50px auto;
+}
+.form table {
+
+		margin: 50px auto;
+}
+.form td {
+	width: 240px;
+	height: 57px;
+	position: relative;
+}
+.form td img {
+	position: absolute;
+	top: 19px;
+	left: 5px;
+}
+.form tr.an td{
+	height: 20px;
+}
+.form .anquan p {
+	margin-left: 74px;
+	margin-right: 5px;
+	color: #ccc;
+}
+.form .anquan div {
+	width: 34px;
+	height: 14px;
+	background-color: #de1111;
+	margin-top: 3px;
+	margin-left: 1px;
+	font-size: 12px;
+	line-height: 14px;
+	text-align: center;
+	color: #fff;
+}
+.form .anquan div.zhong {
+	background-color: #40b83f;
+}
+.form .anquan div.zhong {
+	background-color: #f79100;
+}
+
+.form td input[type=text] {
+	border: 1px solid #ccc;
+	width: 240px;
+	height: 37px;
+	box-sizing: border-box;
+}
+.form span {
+	color: #e12d2c;
+	margin-left: 30px;
+}
+.form td input[type=checkbox] {
+	margin: 3px;
+}
+.form td input[type=submit]{
+	width: 208px;
+	height: 35px;
+	background-color: #e12d2c;
+	color: #fff;
+}
+.form a {
+	color: skyblue;
+}
