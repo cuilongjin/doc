@@ -1,0 +1,31 @@
+img{
+	width: 40px
+}
+span{
+	font-size: 25px
+}
+.big{
+	width: 50px;
+	vertical-align: middle;
+}
+.sub{
+	vertical-align:sub;
+}
+.super{
+	vertical-align: super;
+}
+.text-top{
+	vertical-align: text-top;
+}
+.top{
+	vertical-align: top;
+}
+.middle{
+	vertical-align: middle;
+}
+.bottom{
+	vertical-align: bottom;
+}
+.text-bottom{
+	vertical-align: text-bottom;
+}

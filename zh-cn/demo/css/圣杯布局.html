@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        header, footer{
+            height: 100px;
+            background-color: #999;
+            margin: 10px 0;
+
+        }
+        #bd{
+            padding-left:210px; /*给 #aside 预留空间*/
+            overflow: hidden;
+            /*height: 100px;*/
+        }
+        #aside{
+            float:left;
+            position:relative;
+            left:-210px;
+            width:200px;
+            margin-left: -100%;
+            background-color: red;
+            height: 100px;
+        }
+        #main{
+            float:left;
+            width:100%;
+            background-color: #999;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header id="hd">头部</header>
+    <div id="bd">
+        <div id="main">主内容栏自适应宽度</div>
+        <aside id="aside">侧边栏固定宽度</aside>
+    </div>
+    <footer id="ft">底部</footer>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        header, footer{
+            height: 100px;
+            background-color: #999;
+            margin: 10px 0;
+
+        }
+        #bd1{
+            padding-right:210px; /*给 #aside 预留空间*/
+            overflow: hidden;
+            /*height: 100px;*/
+        }
+        #aside1{
+            float:left;
+            position:relative;
+            left:210px;
+            width:200px;
+            margin-left:-200px;
+            background-color: red;
+            height: 100px;
+        }
+        #main1{
+            float:left;
+            width:100%;
+            background-color: #999;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <header id="hd1">头部</header>
+    <div id="bd1">
+        <div id="main1">主内容栏自适应宽度</div>
+        <aside id="aside1">侧边栏固定宽度</aside>
+    </div>
+    <footer id="ft1">底部</footer>
+</body>
+</html>

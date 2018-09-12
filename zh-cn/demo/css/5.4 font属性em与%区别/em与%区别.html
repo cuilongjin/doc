@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>300%、3、3em</title>
+        <style>
+            div{
+                width: 600px;
+                font-size: 32px;
+            }
+            #demo1{
+                line-height: 300%;
+            }
+            .p{
+                font-size: 16px;
+            }
+            #demo1 p{
+                background-color: #fbb;
+            }
+            #demo2{
+                line-height: 3;
+            }
+            #demo2 p{
+                background: #bfb;
+            }
+            #demo3{
+                line-height: 3em;
+            }
+            #demo3 p{
+                background: #bbf;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="demo1">
+        	<p>行高：line-height:300%;</p>
+        	<p class="p">字体大小:font-size:16px;(先计算行高32px*300%=96px,后继承)</p>
+        </div>
+        <div id="demo2">
+        	<p>行高：line-height:3;</p>
+        	<p class="p">字体大小:font-size:16px;先继承3,后计算行高16px*3=48px)</p>
+        </div>
+        <div id="demo3">
+        	<p>行高：line-height:3em;</p>
+        	<p class="p">字体大小:font-size:16px;</p>        	
+        </div>
+    </body>
+</html>
