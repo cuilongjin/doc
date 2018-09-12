@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 2） 【难度★★】写一个程序，要求用户输入鸡蛋数，如果20个鸡蛋放一盒，判断要多少个盒子
+        // var egg = +prompt("请输入鸡蛋数");
+        // var box = 0;
+        // for (var i = 0; i <= egg; i++) {
+        //     if (egg == 0) {
+        //         box = 0;
+        //     }else if (i % 20 -1 == 0) {
+        //         box++;
+        //     }
+        // }
+        // alert(box);
+        
+        var egg = +prompt("请输入鸡蛋数");
+        var box = 0;
+        for (var i = 0; i <= egg; i++) {
+            if (i % 20 == 1) {
+                box++;
+            }
+        }
+        alert("需要" + box + "个盒子");
+        
+    </script>
+</body>
+</html>

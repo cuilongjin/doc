@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 4） 【难度★★★】写一个程序，随机生成三个数，分别输出，并且比较这三个数的大小。
+        var a  = Math.random();
+        var b  = Math.random();
+        var c  = Math.random();
+        // console.log(typeof a);
+        document.write("a = " + a + "<br>");
+        document.write("b = " + b + "<br>");
+        document.write("c = " + c + "<br>");
+
+        if (a > b ) {
+            if (b > c) {
+                document.write("a > b >c");
+            }else if (a > c) {
+                document.write("a > c >b");
+            }else {
+                document.write("c > a >b");
+            }
+        }else if (a > c) {
+                document.write("b > a >c");
+            }else if (b > c) {
+                document.write("b > c >a");
+            }else {
+                document.write("c > b >a");
+            }
+    </script>
+</body>
+</html>
