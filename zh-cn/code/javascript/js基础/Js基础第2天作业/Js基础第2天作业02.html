@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    // 2）【难度4星】
+    // 循环录入5个人的年龄并计算平均年龄,如果录入的数据出现负数或大于100的数
+    // ,立即停止输入,并提示输入有误 
+    var sum = 0;
+    var ave = 0;
+    for (var i = 1; i <= 5; i++) {
+        var age = +prompt("请输入第" + i + "个人的年龄");
+        if (age >= 0 && age <= 100) {
+            sum += age;
+            ave = sum / i;
+        }else{
+            ave = "输入有误";
+            break;
+        }
+    }
+    document.write(ave);
+   
+    </script>
+</body>
+</html>

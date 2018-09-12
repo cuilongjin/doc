@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //     1）【难度2星 女神聊天翻译器】
+    //    男同学 找 女神  聊天，女神回复：（用switch case写）
+	//    通过回复翻译出女神的潜在意思
+ 	//    呵呵            	   老娘不想跟你聊了
+ 	//    我去洗澡了   		滚吧屌丝
+    //     哦               	还行吧，你继续说。
+    var str = prompt("翻译");
+    switch (str) {
+        case "呵呵" :
+            alert("老娘不想跟你聊了");
+            break;
+        case "我去洗澡了" :
+            alert("滚吧屌丝");
+            break;
+        case "哦" :
+            alert("还行吧，你继续说");
+            break;
+        default:
+        alert("无法翻译");
+        break;
+    }
+    </script>
+
+</body>
+</html>
