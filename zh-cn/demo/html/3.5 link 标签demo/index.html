@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>link 标签</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+	<div id="top"></div>
+
+<h2>链接到内部文档</h2>
+<div>
+	<a href="#html">html</a>
+	<a href="#css">css</a>
+</div>
+
+<h3 id="html">HTML</h3>
+<div class="cnt">
+  	超文本标记语言（英文：HyperText Markup Language，HTML）是为“网页创建和其它可在网页浏览器中看到的信息”设计的一种标记语言。…………
+</div>
+<h3 id="css">CSS</h3>
+<div class="cnt">
+  	层叠样式表（英语：Cascading Style Sheets，简写CSS），又称串样式列表、层次结构式样式表文件，…………
+</div>
+
+<a class="top" href="#top">top</a>
+
+<!--  -->
+<h3>链接到外部文档</h3>
+	<div>
+		<a href="html.html" target="_self">html</a>
+		<a href="css.html" target="_blank">css</a>
+		<a href="js.html" target="inner">js</a>
+	</div>
+	<iframe frameborder="0" name="inner"></iframe>
+</body>
+</html>

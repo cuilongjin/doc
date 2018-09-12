@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>map 标签</title>
+	</head>
+
+	<body>
+	<img src="map.png" alt="运动" width="509" height="644" usemap="#Map">
+		<map name="Map">
+			<!--在图片有左上角坐标为（0，0，50，50）的c长方形范围内点击鼠标就会跳到链接的http页面-->
+			<area shape="rect" coords="0,0,50,50" href="" target="-blank" />
+
+			<!--在图片上坐标为75,75半径为25的范围内，点击就会跳到相应的链接页面-->
+			<area shape="circle" coords="75,75,25" href="" target="blank"/>
+
+			<area shape="poligon" coords="0,244,270,240,346,374,0,425" href="http://www.xiupin.com/mainbrand/story?id=8003" target="_blank">
+			<area shape="poligon" coords="0,432,270,427,310,540,313,635,0,635" href="http://www.xiupin.com/mainbrand/story?id=7015" target="_blank">
+			<area shape="poligon" coords="287,386,509,388,508,633,331,632" href="http://www.xiupin.com/mainbrand/story?id=7014" target="_blank">
+		</map>
+	</body>
+</html>

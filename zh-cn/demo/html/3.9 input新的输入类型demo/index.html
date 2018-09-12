@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>input新的输入类型</title>
+</head>
+<body>
+    <form>
+        <p> 1.color 类型用在input字段主要用于选取颜色</p>
+        <input type="color">
+        <hr>
+        <p>2.date 类型允许你从一个日期选择器选择一个日期</p>
+        <input type="date">
+        <hr>
+        <p>3.email 类型用于应该包含 e-mail 地址的输入域<br>在提交表单时，会自动验证 email 域的值是否合法有效</p>
+        <input type="email">
+        <hr>
+        <p>4.month 类型允许你选择一个月份。</p>
+        <input type="month">
+        <hr>
+        <p>5.number 类型用于应该包含数值的输入域。还能够设定对所接受的数字的限定：</p>
+        <input type="number" min="0" max="10" step="3" value="6">
+        <!--
+            下面的属性来规定对数字类型的限定：
+            disabled	规定输入字段是禁用的
+            max	 规定允许的最大值<br>
+            maxlength	规定输入字段的最大字符长度
+            min	规定允许的最小值
+            pattern	规定用于验证输入字段的模式
+            readonly	规定输入字段的值无法修改
+            required	规定输入字段的值是必需的
+            size	规定输入字段中的可见字符数
+            step	规定输入字段的的合法数字间隔
+            value	规定输入字段的默认值
+            -->
+        <hr>
+        <p>6.range 类型用于应该包含一定范围内数字值的输入域。<br>
+            range 类型显示为滑动条。
+        </p>
+        <input type="range" name="points" min="1" max="10">
+        <!--
+            max - 规定允许的最大值
+            min - 规定允许的最小值
+            step - 规定合法的数字间隔
+            value - 规定默认值
+       -->
+        <hr>
+        <p>7.search 类型用于搜索域，比如站点搜索或 Google 搜索。
+        定义一个搜索字段 (类似站点搜索或者Google搜索)</p>
+        <input type="search" name="googlesearch">
+        <hr>
+        8. Input 类型: url 类型用于应该包含 URL 地址的输入域。在提交表单时，会自动验证 url 域的值。
+        <p>
+        定义输入URL字段:
+        添加您的主页: <input type="url" name="homepage">
+        </p>
+    </form>
+</body>
+</html>

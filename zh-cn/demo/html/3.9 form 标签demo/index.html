@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+<form action="/login" method="post">
+	<!--action 数据提交地址，method 数据提交方法-->
+	<fieldset> <!--用来分区-->
+		<legend>照片选择</legend>
+		<label for="file">选择照片</label>
+		<input type="file" name="file" multiple> 
+		<!--multiple选取多个文件-->
+	</fieldset>
+  
+	<fieldset>
+		<legend>综合设置</legend>
+		<div>
+			<input class="cb" type="checkbox" name="size" id="cb-0" value="5" checked  disabled>
+			<!--多选框用CheckBox 单选框用radio   checked表示默认选中   disabled表示禁止用户选择-->
+			<label for="cb-0">5寸</label>
+			<input class="cb" type="checkbox" name="size" id="cb-1" value="6" disabled>
+			<label for="cb-1">6寸</label>
+		</div>
+		<div>选择相纸：</div>
+		<div>
+			<input type="radio" name="meterial" value="fushi" id="rd-0"><label for="rd-0">富士</label>
+			<input type="radio" name="meterial" value="fushi" id="rd-1"><label for="rd-1">科达</label>
+		</div>
+		<!--单选框用radio-->
+		<!--<input type="checkbox"> 和 <input type="radio"> 中必须设置 value 属性-->
+		<div>
+			<label for="delivery">配送方式：</label>
+			<select id="delivery"><!--select 定义下拉列表-->
+				<optgroup label="group1"><!--optgroup 对选项进行分组-->
+				<option value="0">快递</option>
+				<option value="1">EMS</option>
+				</optgroup>
+				<option value="2" selected>平邮</option>
+				<!--selected 表示默认选择此项-->
+			</select>
+		</div>
+		<div>
+			<label for="delivery1">配送方式：</label>
+			<input list="delivery1">
+			<datalist id="delivery1">
+				<option value="0">快递</option>
+				<option value="1">EMS</option>
+				<option value="2">平邮</option>
+			</datalist>
+		</div>
+<!--
+datalist与select区别：一般我们通常使用select制作下拉菜单，但是H5之后，datalist也可以充当select的角色，而且两者还有一点小的不同。
+对于select来说，select的下拉菜单是供用户选择的，用户只能选择其中的选项不能自己添加。datalist不仅可以供用户选择，用户还可以自己输入，而且datalist还可以达到模糊匹配的效果，使用很方便。
+-->
+
+		<div>
+			<label for="description">商品描述：</label>
+		<input type="text" id="description" placeholder="tip" value="good" readonly (hidden)>
+			<!--文本框用type="text"，默认可以不写；placeholder 添加提示；value 添加默认值；readonly 表示只读用户不能修改； hidden表示隐藏，但数据还是存在的；size设定宽度30，默认20-->
+			</div>
+			<div>
+				<label for="feedback">意见反馈</label>
+				<textarea name="feedback" rows="4" cols="3" id="feedback" required ></textarea>
+				<!--多行文本框 用textarea-->
+				<!--required 属性规定必须在提交之前填写输入域（不能为空）-->
+			</div>
+		</fieldset>
+		<filedest>
+			<div>
+				<input type="submit"><!--提交和重置-->
+				<input type="reset">
+				<!--也可以用botton标签--><br>
+				<button type="submit">提交</button>
+				<button type="reset">重置</button>
+			</div>
+		</filedest>	
+	</form>
+<br><hr><br>
+
+Password: <input type="password" name="password">
+<!--创建密码字段-->
+
+<br>---------------------------------------------------------<br>
+
+<h3>发送邮件到 someone@example.com:</h3>
+
+<form action="MAILTO:someone@example.com" method="post" enctype="text/plain">
+	Name:<br>
+	<input type="text" name="name" value="your name" pattern="[A-Za-z]{3}"><br>
+	<!--pattern 属性描述了一个正则表达式用于验证 <input> 元素的值-->
+	E-mail:<br><input type="text" name="mail" value="your email"><br>
+	Comment:<br><input type="text" name="comment" value="your comment" size="50"><br><br>
+	<input type="submit" value="发送">
+	<input type="reset" value="重置">
+</form>
+<br>---------------------------------------------------------<br>
+
+<input type="text" name="name" placeholder="First name" required ><br>
+
+<br>---------------------------------------------------------<br>
+
+<p>output元素</p>
+<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
+<input type="range" id="a" value="50">100
++<input type="number" id="b" value="50">
+=<output name="x" for="a b"></output>
+</form>
+  
+</body>
+</html>

@@ -1,0 +1,21 @@
+ol{
+  list-style-type:upper-roman;
+}
+
+ul{
+  list-style-type:none; /*无标记*/
+  /*list-style-type: disc;  圆点*/
+  /*list-style-type: circle;  圆圈*/
+  /*list-style-type: square;  正方形*/
+  padding: 0px;
+  margin: 0px;
+}
+ul li {
+  list-style-type: none; 
+  /*使用图片*/
+  background-image:url(/img/qwe.jpg);
+  background-repeat:no-repeat;
+  background-position:0px 5px; 
+  background-size: 10px;
+  padding-left:14px;
+}
