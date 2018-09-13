@@ -6,8 +6,8 @@
 </head>
 <body>
 	<script>
-	//1 求一组数中的所有数的和跟平均值
 	var arr = [298, 1, 3, 4, 6, 2, 23, 88,77,44];
+	//1 求一组数中的所有数的和跟平均值
 	var sum = 0;
 	for (var i = 0; i < arr.length; i++) {
 		sum += arr[i];
@@ -16,8 +16,8 @@
 	console.log(sum / arr.length);
 
 	//2 求一组数中的最大值
-	var max = 0;
-	for (var i = 0; i < arr.length; i++) {
+	var max = arr[0];
+	for (var i = 1; i < arr.length; i++) {
 		max = max > arr[i] ? max : arr[i];
 	}
 	console.log(max);
@@ -45,17 +45,19 @@
 			arr_max[1] = i;
 		}
 	}
-	console.log("最小值为" + arr_min[0] + "，所在位置为" +  arr_min[1]);
-	console.log("最大值为" + arr_max[0] + "，所在位置为" +  arr_max[1]);
+	// console.log("最小值为" + arr_min[0] + "，所在位置为" +  arr_min[1]);
+	// console.log("最大值为" + arr_max[0] + "，所在位置为" +  arr_max[1]);
+	console.log(arr_min);
+	console.log(arr_max);
 	//
 	//
 	var arr1 = ["a", "bb","ccc","dddd"];
 	//1.让一个数组倒叙保存另一个数组中的每一项
-	var arr_re = new Array(arr1.length)
-	for (var i = 0; i < arr1.length; i++) {
-		arr_re[arr1.length - i - 1]= arr1[i];
+	var arr1_re = [];
+	for (var i = arr1.length - 1; i >= 0; i--) {
+		arr1_re.push(arr1[i]); 
 	}
-	console.log(arr_re);
+	console.log(arr1_re);
 
 	//2 将字符串数组用|或其他符号分割
 	var str = "";
@@ -76,7 +78,8 @@
 	var arr2_new = [];
 	for (var i = 0; i < arr2.length; i++) {
 		if (arr2[i]) {
-			arr2_new[arr2_new.length]= arr2[i];
+			// arr2_new[arr2_new.length]= arr2[i];
+			arr2_new.push(arr2[i]);
 		}
 	}
 	console.log(arr2_new);
