@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 判断一个数是不是素数
+        function isPrimeNumber(a) {
+            for (var i = 2; i <= a; i++) {
+                if (a % i == 0 && i != a) {
+                    console.log(a + "是合数");
+                    break;
+                }
+                if (i == a) {
+                    console.log(a + "是素数");
+                }
+            }
+        }
+        isPrimeNumber(4);
+    </script>
+</body>
+</html>

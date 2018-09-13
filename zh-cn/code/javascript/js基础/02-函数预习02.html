@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //1. 计算1-n之间所有数的和
+    function getSum(n) {
+        var sum = 0;
+        for (var i = 0; i <= n; i++) {
+            sum += i
+        }
+        console.log(sum);
+    }
+    getSum(50);
+
+    //2. 计算两个数的和
+    function getSum1(a, b) {
+        var sum1 = a + b;
+        console.log(sum1);
+    }
+    getSum1(20, 30);
+    // var result = getSum1(20, 30);
+    // console.log(result);
+
+    //3. 计算m-n之间所有数的积
+    function getProduct(m, n) {
+        product = 1;
+        for (i = m; i <= n; i++) {
+            product *= i;
+        }
+        console.log(product);
+    }
+    getProduct(1, 4);
+    </script>
+</body>
+</html>
