@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function test() {
+            console.log("哈哈");
+        }
+        console.log(typeof test); // function  没括号不调用函数，打印test的数据类型  
+        console.log(typeof test()); // undefined 
+        // 有括号会执行函数 打印出 哈哈，并打印函数执行结果的数据类型 undefined
+
+    </script>
+</body>
+</html>

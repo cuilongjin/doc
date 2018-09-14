@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 实参个数大于形参个数
+ 
+        function getSum(a, b) {
+            // return a + b; // 3
+            // 任意多个数相加, 并没有调用形参，即可以省略不写
+            console.log(arguments)
+            var sum = 0;
+            for (var i = 0; i < arguments.length; i++) {
+                sum += arguments[i];
+            }
+            return sum; 
+        }
+        var result = getSum(1, 2, 5)
+        console.log(result); // 8
+
+        // 实参个数小于形参个数
+
+        function getSum1(a, b, c, d) {
+            console.log(d); // undefined
+            return a + b + c + d;
+        }
+        var result1 = getSum1(1, 2, 5)
+        console.log(result1); // NaN
+    </script>
+</body>
+</html>
