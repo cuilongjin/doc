@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var num = 10;
+        var num1 = 10;
+
+        function test(){
+            var num = 20;
+            num = 30;  // num 在局部声明过，只能修改局部的num值
+            num1 = 20; // 修改全局的 num1 值
+            var num2 = 40; 
+            num3 = 50; // 隐式全局
+            console.log(num);  // 30
+            console.log(num1);  // 20
+            console.log(num2);  // 40
+            console.log(num3);  // 50
+        }
+        test();
+        console.log(num); // 10
+
+        console.log(num1); // 20
+        // 如果 text 函数没执行过，则num1值为 10
+
+        console.log(num3); // 50
+        console.log(num2); // 报错
+    </script>
+</body>
+</html>
+
+33
+44
+11
+44

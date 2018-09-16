@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 函数预解析
+        // 1.
+        function fn(){
+            console.log(a); // undefined
+        }
+        fn();
+        var a = 1;
+
+        // 2.
+        var n = 45;
+        function fn5() {
+            console.log(n); // undefined
+            n = 20;
+            console.log(n); // 20
+            var n = 0;
+            console.log(n); // 0
+        }
+        fn5();
+        console.log(n); // 45
+        
+        // 3.
+        console.log(b); // 函数体
+        var b = 23;
+        function b() {
+            console.log(b);
+        }
+        console.log(b); //23
+        // b(); // 报错
+
+        // 4.
+        console.log(c); // 函数体
+        c(); // 嘿嘿
+        var c = function (){
+            comsole.log("哈哈");
+        }
+
+        function c() {
+            console.log("嘿嘿");
+        }
+
+        //5.
+        console.log(fn1); // 函数体
+        fn1();
+        function fn1(){
+            console.log("哈哈"); //哈哈
+        }
+        console.log(fn2); // undefined
+        // fn2(); // 报错
+        var fn2 = function () {
+            console.log("嘿嘿");
+        }
+        // 对于函数表达式，函数的调用必须在表达式声明之后
+        fn2(); // 嘿嘿
+
+        // 6.
+        // 只有用 var 声明的变量才会预解析
+        // console.log(d); // 报错
+        d = 5;
+        console.log(e);
+        // console.log(f); // 报错
+        var e = f = 10;
+        console.log(f); // 10
+    </script>
+</body>
+</html>
