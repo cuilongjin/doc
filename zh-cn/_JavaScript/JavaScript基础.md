@@ -828,7 +828,7 @@ switch (变量) {
 
 ## while循环
 
-![](C:/Users/C/Desktop/05-%E7%AC%94%E8%AE%B0/imgs/while.png)
+![](images/while.png)
 
 基本语法 :
 
@@ -860,7 +860,7 @@ console.log(sum);
 
 > do..while循环和while循环非常像，二者经常可以相互替代，但是do..while的特点是不管条件成不成立，都会执行一次。
 
-![](C:/Users/C/Desktop/05-%E7%AC%94%E8%AE%B0/imgs/dowhile.png)
+![](images/dowhile.png)
 
 基础语法 :
 
@@ -886,7 +886,7 @@ do{
 
 ## for循环
 
-![](C:/Users/C/Desktop/05-%E7%AC%94%E8%AE%B0/imgs/for.png)
+![](images/for.png)
 
 for循环语法：
 
@@ -1053,37 +1053,6 @@ for(var i = 1; i <=10; i++) {
 
 
 
-- 练习 : 
-
-  ```js
-  //1. 把1-100之间所有的数，放到数组中
-  var arr = [];
-  for (var i = 1; i <= 100; i++) {
-      arr[arr.length] = i;
-  }
-  console.log(arr);
-  
-  //2. 把1-100之间所有的奇数，放到数组中
-  var arr = [];
-  for (var i = 1; i <= 100; i++) {
-      if (i%2) {
-          arr[arr.length] = i;
-      }
-  }
-  console.log(arr);
-  
-  //3. 把1-100之间能被3整数的数字，存到数组中
-  var arr = [];
-  for (var i = 1; i <= 100; i++) {
-      if (!(i % 3)) {
-          arr[arr.length] = i;
-      }
-  }
-  console.log(arr);
-  ```
-
-
-
 ## 数组的遍历
 
 > 遍历 : 对数组的每一个元素都访问一次就叫遍历
@@ -1094,28 +1063,6 @@ for(var i = 1; i <=10; i++) {
 for(var i =0; i < arr.length; i++) {
 	//数组遍历的固定结构
 }
-```
-
-
-
-练习1 : 
-
-```js
-var arr = [298, 1, 3, 4, 6, 2, 23, 88,77,44];
-//1 求一组数中的所有数的和跟平均值
-//2 求一组数中的最大值
-//3 求一组数中的最小值和最小值所在的位置
-//4 求一组数中的最大值和最小值以及所在位置
-```
-
-练习2  :
-
-```js
-var arr = ["a", "bb","ccc","dddd"];
-//1.让一个数组倒叙保存另一个数组中的每一项
-//2 将字符串数组用|或其他符号分割
-//3 有一个字符串数组，求字符串数组中每项的长度，并把长度的数值存储到新的数组中
-//4 将数组中值为0的项去掉，将不为0的值存入一个新的数组
 ```
 
 
@@ -1159,13 +1106,469 @@ console.log(numj);
 
 
 
+# 函数
+
+> 把一段相对独立的具有特定功能的代码块封装起来，形成一个独立实体，就是函数
+>
+> 函数的作用就是封装一段代码，只需要声明一次，就可以被多次调用
+>
+> 提高代码的复用率，提高可维护性
+
+函数三要素包括：**函数名、参数、返回值**
+
+
+
+## 函数的声明与调用
+
+```js
+// 函数声明
+function 函数名() {
+    // 函数体
+}
+
+// 函数表达式
+
+var 函数名 = function(){
+    //函数体
+}
+
+// 函数调用
+函数名();
+
+```
+
+特点：
+
+1. 函数声明的时候,函数体并不会执行,函数体只有在调用的时候,才会执行；
+2. 可多次调用；
+
+练习：
+
+```js
+// 1. 封装一个打招呼的函数
+// 2. 封装一个函数，计算两个数的和
+// 3. 封装一个函数，计算1-100之间所有数的和
+```
+
+
+
+## 函数的参数(arguments)
+
+- **形参 ( 形式参数 )** : 在函数声明时, 设置的参数。作用是占位置 。
+- **实参 ( 实际参数 )** : 在函数调用时,传入的参数。 作用 : 函数调用时，会把实参的值赋值给形参，这样形参就有了值，在函数体里，可以直接使用形参!
+
+**语法 :**
+
+```js
+// 带参数的函数声明
+function 函数名(形参1, 形参2, 形参...){
+  // 函数体
+}
+
+// 带参数的函数调用
+函数名(实参1, 实参2, 实参3);
+
+// 在声明函数的时候，碰到不确定的值的时候，就可以定义成形参
+```
+
+
+
+> 1. 如果实参的个数大于形参的个数，多余的实参会被 保存到函数的arguments对象里，arguments对象里保存了所有的实参，arguments是一个伪数组（可以像数组一样使用）
+> 2. 如果实参的个数小于形参的个数，不够的参数会用 undefined 来补充
+
+```javascript
+// 实参个数大于形参个数
+
+function getSum(a, b) {
+    // return a + b; // 3
+    // 任意多个数相加, 并没有调用形参，即可以省略不写
+    console.log(arguments)
+    var sum = 0;
+    for (var i = 0; i < arguments.length; i++) {
+    sum += arguments[i];
+    }
+    return sum; 
+}
+var result = getSum(1, 2, 5)
+console.log(result); // 8
+
+// 实参个数小于形参个数
+
+function getSum1(a, b, c, d) {
+    console.log(d); // undefined
+    return a + b + c + d;
+}
+var result1 = getSum1(1, 2, 5)
+console.log(result1); // NaN
+```
+
+
+
+## 函数的返回值
+
+> 当函数执行完的时候，我们期望函数给我一些反馈（比如计算的结果），这个时候可以让函数返回一些东西。也就是返回值。函数通过return返回一个返回值
+
+返回值语法：
+
+```javascript
+//声明一个带返回值的函数
+function 函数名(形参1, 形参2, 形参...){
+  //函数体
+  return 返回值;
+}
+
+//可以通过变量来接收这个返回值
+var 变量 = 函数名(实参1, 实参2, 实参3);
+```
+
+函数返回值注意事项：
+
+- **return 语句代表一个函数的结束，后面不能再有语句（语句不会执行）**
+- 函数可以没有返回值，函数如果没有return，那么返回结果是 **undefined**
+- 函数的参数可以有多个，但是返回值只能有 **1** 个
+- `return;`  在函数包含判断语句时，可以用来直接停掉一个函数的执行
+
+**练习：**
+
+```js
+//1. 求两个数的最大值,并且返回。
+//2. 求三个数的最大值,并且返回。
+//3. 求一个数组的最大值和最小值，并且返回。
+```
+
+
+
+## 函数内部调用函数
+
+> 在函数内部是可以继续调用别的函数的。
+
+```js
+// 求阶乘
+function getJc(n) {
+    var sum = 1
+    for (var i = 1; i <= n; i++) {
+        sum *= i;
+    }
+    return sum;
+}
+var result = getJc(5);
+console.log(result);
+
+//求阶乘和
+function getJcSum(n) {
+    var sum1 = 0;
+    for (var j = 1; j <= n; j++) {
+        sum1 += getJc(j);
+    }
+    return sum1;
+}
+var result1 = getJcSum(5);
+console.log(result1);
+```
+
+
+
+## 函数是一种数据类型(function)
+
+### 函数可以作为参数
+
+> 通常，我们把作为参数传递的函数叫做回调函数
+
+```javascript
+function fn1(fn) {
+  fn();
+}
+fn1(function(){
+   console.log("哈哈");
+});
+```
+
+### 函数可以作为返回值
+
+> 在js高级中，闭包会使用到
+
+```javascript
+function fn1() {
+    return function(){
+      console.log("呵呵");
+    }
+}
+fn1()();// 呵呵
+```
+
+
+
+## 匿名函数与自执行函数
+
+### 自执行函数 
+
+函数可以自执行
+
+```javascript
+(function fn(){
+  console.log("我可以自己执行哦");
+})();
+```
+
+### 匿名函数
+
+> 匿名函数：没有名字的函数
+
+```js
+// 匿名自调用函数 ,用完一次就没了
+(function () {
+	console.log("哈哈");
+})();
+```
+
+匿名函数如何使用：
+
+```
+1. 将匿名函数赋值给一个变量，这样就可以通过变量进行调用
+2. 自执行（匿名函数自执行）
+```
+
+匿名函数自执行的作用：防止全局变量污染。
+
+
+
+## 作用域
+
+> 作用域：变量起作用的区域
+
+**全局作用域** ：在script标签内，**函数外**的区域就是全局作用域，在全局作用内声明的变量叫做**全局变量** 。全局变量可以在任意地方访问。（if/while/for 语句中声明的变量也是全局变量）
+
+**函数作用域** ：在函数内的区域叫做函数作用域，在函数作用域内声明的变量叫做**局部变量** ，局部变量只有在当前函数内才能访问到。
+
+> 隐式全局变量：没有使用var定义的变量也是全局变量，叫做隐式全局变量。(不要使用)
+
+
+
+```javascript
+var num = 11;
+function fn() {
+  var num1 = 22;
+  num2 = 33;
+  num = 33;
+  console.log(num1);
+}
+fn();
+console.log(num);
+// console.log(num1);
+console.log(num2);
+```
+
+变量的查找规则：
+
+- 函数内部可以使用函数外部的变量
+
+- 有局部变量就用局部变量，没有局部变量就用全局变量。
+
+
+
+```javascript
+var num = 10;
+var num1 = 10;
+
+function test(){
+    var num = 20;
+    num = 30;  // num 在局部声明过，只能修改局部的num值
+    num1 = 20; // 修改全局的 num1 值
+    var num2 = 40; 
+    num3 = 50; // 隐式全局
+    console.log(num);  // 30
+    console.log(num1);  // 20
+    console.log(num2);  // 40
+    console.log(num3);  // 50
+}
+test();
+console.log(num); // 10
+
+console.log(num1); // 20
+// 如果 text 函数没执行过，则num1值为 10
+
+console.log(num3); // 50
+console.log(num2); // 报错
+```
+
+
+
+## 预解析
+
+js执行代码分为两个过程：
+
+- 预解析过程（var 声明与函数声明提升）（提升到当前作用域的最顶端）
+- 代码一行一行执行
+
+```js
+// 预解析过程
+// 1. var声明的变量：只提升声明,不会提升赋值
+	var num = 10; var fn = function(){..}
+// 2. 函数声明：整体提升
+	function fn(){..}
+// 先提升var声明的变量，后提升函数声明
+// 3. 如果函数声明同名，后者会覆盖前者
+// 4. 如果 var声明 和 函数声明 同名,函数声明会把var声明覆盖
+```
+
+
+
+```javascript
+// 函数预解析
+// 1.
+function fn(){
+    console.log(a); // undefined
+}
+fn();
+var a = 1;
+
+// 2.
+var n = 45;
+function fn5() {
+    console.log(n); // undefined
+    n = 20;
+    console.log(n); // 20
+    var n = 0;
+    console.log(n); // 0
+}
+fn5();
+console.log(n); // 45
+
+// 3.
+console.log(b); // 函数体
+var b = 23;
+function b() {
+    console.log(b);
+}
+console.log(b); //23
+// b(); // 报错
+
+// 4.
+console.log(c); // 函数体
+c(); // 嘿嘿
+var c = function (){
+    comsole.log("哈哈");
+}
+
+function c() {
+    console.log("嘿嘿");
+}
+
+//5.
+console.log(fn1); // 函数体
+fn1();
+function fn1(){
+    console.log("哈哈"); //哈哈
+}
+console.log(fn2); // undefined
+// fn2(); // 报错
+var fn2 = function () {
+    console.log("嘿嘿");
+}
+// 对于函数表达式，函数的调用必须在表达式声明之后
+fn2(); // 嘿嘿
+
+// 6.
+// 只有用 var 声明的变量才会预解析
+// console.log(d); // 报错
+d = 5;
+console.log(e);
+// console.log(f); // 报错
+var e = f = 10;
+console.log(f); // 10
+```
 
 
 
 
 
+## 递归函数（了解）
+
+> 递归函数：自己直接或者间接调用自己的函数; 
+>
+> 注意 : 递归函数一定要留有出口，不然就是死循环了
 
 
+
+```js
+ 1. 求1-100所有数的和
+ 2. 斐波那契数列，有个人想知道，一年之内一对兔子能繁殖多少对？于是就筑了一道围墙把一对兔子关在里面。已知一对兔子每个月可以生一对小兔子，而一对兔子从出生后第3个月起每月生一对小兔子。假如一年内没有发生死亡现象，那么，一对兔子一年内（12个月）能繁殖成多少对？
+//兔子的规律为数列，1，1，2，3，5，8，13，21 ,34 , 55, 89, 144
+// 求斐波那契数列 Fibonacci 中第n个数
+function fn(n) {
+    if (n == 1 || n == 2) {
+        return 1;
+    }
+    return fn(n - 1) + fn(n - 2);
+}
+console.log(fn(12));
+```
+
+
+
+![](images/递归兔子.png)
+
+
+
+## 函数的断点调试
+
+```js
+1. 跳到下个断点, 如果后面没有断点了,那么代码直接执行完
+2. 单步调试 : 下一步  没有断点的话,函数就直接跳过
+3. 单步调试 : 进入函数
+4. 单步调试 : 跳出函数
+5. 单步调试 : 下一步  不管有没有断点,都会一步一步的走,纯碎的下一步
+6. 让所有的断点失效
+7. 自动根据错误断点
+```
+
+
+
+
+
+![](images/断点调试介绍.png)
+
+
+
+![](images/watch监听.png)
+
+
+
+![](images/调用栈.png)
+
+测试代码 : 
+
+```js
+function sum2() {
+
+    console.log('你愁啥');
+    console.log('瞅你咋地');
+}
+
+
+function sum1(num1,num2) {
+
+    var num = num1 + num2;
+    console.log('哈哈');
+    console.log('嘿嘿');
+    num = 10;
+    sum2();
+    return num;
+}
+
+var res =   sum1(2,4);
+console.log(res);
+```
+
+
+
+## 函数的重载
+
+如果多个函数的函数名相同，但是参数或返回值不同，这些函数是不同的函数
+
+参数不同指 1. 参数的个数不同2. 参数的数据类型不同
+
+js中不允许函数的重载，即在js中，只要函数名一样，就是同一个函数，如果两个函数名相同，后边的会覆盖前边的
 
 
 
