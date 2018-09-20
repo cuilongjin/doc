@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 封装一个对数组元素进行冒泡排序的函数（从大到小）
+        var arr = [1, 4, 2, 7, 5];
+        function paiXu(arr){
+            for (var i = 0; i < arr.length - 1; i++) {
+                var flag = true;
+                for (var j = 0; j < arr.length - i - 1; j++) {
+                    if (arr[j] < arr[j + 1]) {
+                        flag = false;
+                        var temp = arr[j + 1];
+                        arr[j + 1] = arr[j];
+                        arr[j] = temp;
+                    }
+                    console.log(arr);
+                }
+                if(flag) {
+                    break;
+                }
+            }
+            return arr;
+        }
+        // paiXu(arr);
+        var newArr = paiXu(arr);
+        console.log(newArr);
+
+
+    </script>
+</body>
+</html>

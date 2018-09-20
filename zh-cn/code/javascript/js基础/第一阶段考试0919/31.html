@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 编写一个函数，将如下字符串'get-element-by-id'修改为驼峰表示法'getElementById'
+        
+        var str = 'get-element-by-id';
+        function changeStr(str) {
+            var arr = str.split("-");
+            // console.log(arr);
+            for (var i = 0; i < arr.length; i++) {
+                if (i) {
+                    arr[i]  = arr[i][0].toUpperCase() + arr[i].slice(1);
+                }
+                // console.log(arr);
+                var newArr = arr.join("");
+            }
+            // console.log(newArr);
+            return newArr;
+        }
+        // changeStr(str);
+        var newArr = changeStr(str);
+        console.log(newArr);
+    </script>
+</body>
+</html>
