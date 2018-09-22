@@ -175,25 +175,25 @@ var b = 20;
 
 ```javascript
 var num;
-typeof (num); //undefined
-typeof (num1); //undefined
-//对未初始化和未声明的变量执行 typeof 操作符都返回 undefined 值
+typeof (num); // undefined
+typeof (num1); // undefined
+// 对未初始化和未声明的变量执行 typeof 操作符都返回 undefined 值
 
 var num = 1;
-typeof num; //number
+typeof num; // number
 
 var num = '1';
-typeof num; //string
+typeof num; // string
 
 var flag = true;
-typeof flag; //bollean
+typeof flag; // bollean
 
 typeof true; // boolean
 
-typeof null; //object //null 被认为是一个空的对象引用
+typeof null; // object //null 被认为是一个空的对象引用
 
 var cat = {name:'kitty'};
-typeof cat; //object
+typeof cat; // object
 ```
 
 
@@ -203,9 +203,9 @@ typeof cat; //object
 * 浮点数
 
 ```javascript
-var num = 3.1416;//3.1416
-var num = 3.12e2;//312
-var num = 3.12e-1;//0.312
+var num = 3.1416; // 3.1416
+var num = 3.12e2; // 312
+var num = 3.12e-1; // 0.312
 ```
 
 
@@ -214,9 +214,9 @@ var num = 3.12e-1;//0.312
 * 整数
 
 ```javascript
-var num = 10;//10
-var num = 070;//56 (八进制)
-var num = 0xA;//10 (十六进制)
+var num = 10; // 10
+var num = 070; // 56 (八进制)
+var num = 0xA; // 10 (十六进制)
 ```
 
 
@@ -225,24 +225,23 @@ var num = 0xA;//10 (十六进制)
 > `NaN` `Infinity`
 
 ```javascript
-var num = 1/0;//Infinity (无穷大)
+var num = 1/0; // Infinity (无穷大)
 ```
 
-	通过isNaN()可以判断是否是一个数字，返回false的时候，表示是一个数字
+> 通过isNaN()可以判断是否是一个数字，返回false的时候，表示是一个数字
 
 
 
 - 浮点数精度丢失问题
 
 ```javascript
-//在进行浮点数运算的时候，可能会出现精度丢失的问题
+// 在进行浮点数运算的时候，可能会出现精度丢失的问题
 0.1 + 0.2 = 0.30000000000000004;
 0.2 + 0.2 = 0.4;
-//尽量少用浮点数进行运算，不要让浮点数进行比较。
+// 尽量少用浮点数进行运算，不要让浮点数进行比较
 
-解决办法 : 根据小数点后面的位数量 乘以对应的整数;
+// 解决办法 : 根据小数点后面的位数量 乘以对应的整数
 0.1 + 0.2  ==> (0.1*10+0.2*10) / 10 = 0.3
-0.01 + 0.02 呢?
 ```
 
 
@@ -252,22 +251,16 @@ var num = 1/0;//Infinity (无穷大)
 只要是在**单引号或双引号**内的就是String类型
 
 ```javascript
-var name = "hello"
-var name = 'july'
-var name = '3.1416'
+var name1 = "hello"
+var name2 = 'july'
+var name3 = '3.1416'
+// 使用索引位置来访问字符串中的每个字符,字符串的索引从 0 开始
+var character = name1[3]; // l
+// 内置属性 length 来计算字符串的长度
+console.log(name1.length); // 5
 ```
 
-使用索引位置来访问字符串中的每个字符,字符串的索引从 0 开始:
-
-```java
-var name = "july"
-var character = name[3];//y
-console.log(name.length); //4
-```
-
->若在字符串中使用引号，字符串中的引号不要与字符串的引号相同，或在字符串添加转义字符`\`来使用引号
-
->内置属性 length 来计算字符串的长度
+>若在字符串中使用引号，字符串中的引号不要与字符串的引号相同，或在字符串添加转义字符 `\` 
 
 字符串可以是对象
 
@@ -278,13 +271,15 @@ typeof x; // String
 typeof y; // Object
 ```
 
+
+
 ## Boolean
 
 布尔型，只有 `true` 和 `false` 两个值，且是小写 
-* true  `1`、`2`、`1.1`、`-1`、`"0"`、`"1"`、`[]`、`Infinity` 
-* false `0`、`""`、`null`、`NaN`、`undefined`
+* true :  `1`、`2`、`1.1`、`-1`、`"0"`、`"1"`、`[]`、`Infinity` 
+* false :  `0`、`""`、`null`、`NaN`、`undefined`
 
->所有非0数都是true，0是false
+>所有非 0 数都是 true，0 是 false
 
 ```javascript
 var sex = true;
@@ -294,6 +289,8 @@ if(sex){
 	document.write('女');
 }
 ```
+
+
 
 ## Array
 
@@ -306,7 +303,7 @@ cat[2] = "blue";
 var cat = ["yellow","red","blue"];
 ```
 
->关键词`new`用于声明新变量的类型
+>关键词 `new` 用于声明新变量的类型
 
 
 
@@ -338,18 +335,18 @@ name = cat["name"];
 对象方法的访问：
 
 ```javascript
-eat = cat.eat();//输出函数执行结果
-eat = cat.eat;//输出函数表达式
+eat = cat.eat(); // 输出函数执行结果
+eat = cat.eat; // 输出函数表达式
 ```
 
 
 
 ## Null
 
-只有一个值：`null`,表示对象不存在
+只有一个值：`null`，表示对象不存在
 
 ```javascript
-var cat = null;//将cat的值清空
+var cat = null; // 将cat的值清空
 ```
 
 
@@ -362,13 +359,13 @@ var cat = null;//将cat的值清空
 
 ```javascript
 var a;
-console.log(a); //undefined
+console.log(a); // undefined
 ```
 
 * 没有明确返回值的变量
 
 ```javascript
-//  获取对象不存在的属性
+// 获取对象不存在的属性
 var obj = {a:1,b:2};
 console.log(obj.c); //undefined
 
@@ -390,36 +387,6 @@ console.log(result); // undefined
 
 
 
-
-
-
-
-# 原始类型与引用类型
-
-* 原始类型
-
-> `Number` `String` `Boolean` `Undefined` `Null`
-
-* 引用类型
-
-> `Object`
-
-```javascript
-var num1 = 123;
-var num2 = num1;
-num2 = 456;
-console.log(num1);//123
-
-var obj1 = {a:1};
-var obj2 = obj1;
-obj2.a = 3;
-console.log(obj1.a);//3
-```
-
->原始类型和引用类型的存储结构不一致，其实，针对“=”本身，对这两种数据类型是没有本质区别的，都是"="左边的值等于右边的值，但不同的是，**针对引用类型，赋值符“=”改变的是对象引用，而不是对象本身**，也就是说当程序执行完`var obj2 = obj1;`之后，obj1和obj2，均指向了同一个对象，因此对obj2的任何操作，同时也会影响到obj1。
-
-
-
 # 数据类型转换
 
 ## 转换成字符串
@@ -430,7 +397,7 @@ console.log(obj1.a);//3
    var a = 1;
    var result = a.toString();
    console.log(typeof result);  //string
-   console.log(typeof a);  //number
+   console.log(typeof a);  // number
    ```
 
    null 、undefined 没有 toString() 方法
@@ -439,17 +406,17 @@ console.log(obj1.a);//3
 
    ```javascript
    va str1 = String(a);
-   console.log(typeof str1); //string
+   console.log(typeof str1); // string
    ```
 
 3. 直接和字符串做加法运算(推荐方法) （隐式因式转换）
 
    ```javascript
    var str2 = a + "";
-   console.log(typeof str2);   //string
+   console.log(typeof str2); // string
    
    var b = true
-   console.log(typeof (b + ""));  //string
+   console.log(typeof (b + "")); //string
    // 任意数据类型的变量和字符串做加法运算结果都是字符串
    ```
 
@@ -461,86 +428,87 @@ console.log(obj1.a);//3
 
 ```javascript
 var a = "123"
+var b = "123c"
 var num1= Number(a);
-console.log(typeof num1); //Number
-
+var num2= Number(b);
+console.log(typeof num1); // number
+console.log(typeof num2); // NaN
 // 如果字符串不能转换成合法数字，转换结果为NaN
-
 ```
 
-2. 使用parseInt()
+2. 使用 parseInt()
 
 ```javascript
 var b = "12.3";
 var num2 = parseInt(b);
-console.log(typeof num2); //number
+console.log(typeof num2); // number
 console.log(num2); //12 只保留整数
 
 var c = "15xyz";
 var d = "15x6yz";
 var num3 = parseInt(c);
 var num4 = parseInt(d);
-console.log(typeof num3); //number
-console.log(num3); //15
-console.log(num4);//15
+console.log(typeof num3); // number
+console.log(num3); // 15
+console.log(num4); // 15
 //如果字符串里有非法的数字，会逐个转换，直到遇到无法转化的字符串为止
 
 ```
 
-3. 使用parseFloat()完成
+3. 使用 parseFloat() 完成
 
 ```javascript
 var c = "12.34";
 var num3 = parseFloat(c);
-console.log(typeof num3);  //number
-console.log(num3);  //12.34 可以保留小数位
+console.log(typeof num3);  // number
+console.log(num3);  // 12.34 可以保留小数位
 ```
 
 4. 让字符串和数字做除了加法以外的运算（隐式转换）
 
 ```javascript
 var d = "345";
-var num4 = +d; （前面加 + 号也可以转换）
+var num4 = +d; // 前面加 + （正）号也可以转换
 //num4 = d - 0;
 //numb4 = d * 1;
 //num4 = d / 1 ;
-console.log(typeof num4); //number
-console.log(num4); //345
+console.log(typeof num4); // number
+console.log(num4); // 345
 ```
 
 
 
 ## 转换成布尔值
 
-1. 使用Boolean()完成
+1. 使用 Boolean() 完成
 
 ```javascript
 var a = 45;
 var result1 = Boolean(a);
-console.log(typeof result1);  //boolean
-console.log(result1);  //true
+console.log(typeof result1);  // boolean
+console.log(result1);  // true
 // 对于数字类型来说：一般的数字都转换成为true，0、NaN 会被转换成为false
 
 var str = "hello";
 //var str = "";
 //var str = " ";
 var result2 = Boolean(str);
-console.log(typeof result2); //boolean
-console.log(result2);  //true
-//字符串中只有空的字符串会被转换成为false
+console.log(typeof result2); // boolean
+console.log(result2);  // true
+//字符串中只有空的字符串会被转换成为 false
 
 var result3 = Boolean(undefined);
-console.log(typeof result3);  //boolean
-console.log(result3);  //false
+console.log(typeof result3);  // boolean
+console.log(result3);  // false
 
 var result4 = Boolean(null);
-console.log(typeof result4);  //boolean
-console.log(result4);  //false
+console.log(typeof result4);  // boolean
+console.log(result4);  // false
 
 var b = false;
 var result5 = Boolean(b);
-console.log(typeof result5);  //boolean
-console.log(result5);  //false
+console.log(typeof result5);  // boolean
+console.log(result5);  // false
 ```
 
 **0,NaN,空字符串，undefined,null,false会被转换成为false**
@@ -550,8 +518,8 @@ console.log(result5);  //false
 2. 使用 !!
 
 ```javascript
-console.log(typeof !!a); //boolean
-console.log(!!a); //true
+console.log(typeof !!a); // boolean
+console.log(!!a); // true
 ```
 
 
@@ -572,79 +540,80 @@ if("") {
 
 ## 算数操作符
 
-> `+`、`-`、`*`、`/`、`%`
+> `+` 、`-` 、`*` 、`/` 、`%`
 
 ```javascript
-var num = 5 + 6; //11
-var num = 5 % 2; //1 取余数
-var num = 5 % (-2); //1
-var num = (-5) % 2; //-1 只与左边值的符号有关
+var num = 5 + 6; // 11
+var num = 5 % 2; // 1 取余数
+var num = 5 % (-2); // 1
+var num = (-5) % 2; // -1 只与左边值的符号有关
 
-var num = "5" + 6 + 7; //"567" 数字与字符串相加，返回字符串
-var num = 5 + 6 + "7"; //"117"
-var num = "" +5 + 6 + "7"; //"567" 字符串+数字得到字符串
-var num = "" +5 + 6 + 7; //"567"
+var num = "5" + 6 + 7; // "567" 数字与字符串相加，返回字符串
+var num = 5 + 6 + "7"; // "117"
+var num = "" +5 + 6 + "7"; // "567" 字符串 + 数字得到字符串
+var num = "" +5 + 6 + 7; // "567"
 
-var num = 5 + true; //6  返回数值，false 转成 0，true 转成 1
+var num = 5 + true; // 6  返回数值，false 转成 0，true 转成 1
 
-var num = "1" + true;//"1true" 字符串与布尔值相加,布尔值转化成字符串
+var num = "1" + true;// "1true" 字符串与布尔值相加,布尔值转化成字符串
 ```
 
 ## 赋值操作符
 
-> `a = a + 1`即`a++`,`a--`即`a = a - 1`
-> `a = a + 5`可简写成`a += 5`，类似的还有`a -= 5`、`a *= 5`、`a /= 5`、`x %= y`
+> `a = a + 1` 即 `a++`,`a--` 即 `a = a - 1`
+> `a = a + 5` 可简写成 `a += 5`，类似的还有 `a -= 5`、`a *= 5`、`a /= 5`、`x %= y`
 >
 > 赋值运算符左边不能是常量或表达式
 
 ```javascript
 var age = 10;
-var num = age++;//num=10 age=11 (先将变量中的值取出做赋值操作,再自身+1)
+var num = age++; // num=10 age=11 (先将变量中的值取出做赋值操作,再自身+1)
 
 var age = 10;
-var num = ++age;//num=11 age=11 (先自身+1,然后再将+1后的结果赋值)
+var num = ++age; // num=11 age=11 (先自身+1,然后再将+1后的结果赋值)
 
 var num = 5;
 console.log(num++); //5
 console.log(++num); //7
 
 var x = 3;
-var y = x++ + ++x + x * 10;//x=3
-//y = 3 + ++x + x * 10  //x=4
-//y = 3 + 5 + x * 10 //x=5
+var y = x++ + ++x + x * 10; // x=3
+//y = 3 + ++x + x * 10  // x=4
+//y = 3 + 5 + x * 10 // x=5
 //y = 58
 ```
 
 ## 关系操作符
 
-> `>`、`<`、`>=`、`<=`
+> `>` 、`<` 、`>=` 、`<=`
+>
+> `==` 相等 、`！=` 不相等 、`===` 全等 、`！===` 不全等
+>
+> `in` `instanceof`
 
 ```javascript
 var result = 6 > 4;
-alert(result); //true 输出Boolean类型
+alert(result); // true 输出Boolean类型
 ```
-
-
-
-> `==` 相等、`！=` 不相等、`===` 全等、`！===` 不全等
 
 运算符的结果类型为 `Boolean`
 
-* `==` 相等、`!=` 不相等  （字面量比较）
-  在转换不同的数据类型时，相等和不相等遵循以下规则：   
-  1. 如果有一个操作数是布尔值，则在比较相等性前先将其转换为**数值**---false转换为0，true转换为1；  
+* `>` 、`<` 、`>=` 、`<=` 、`==` 相等、`!=` 不相等  （字面量比较）
 
-  2. 如果一个操作数是字符串，另一个操作数是数值，则在比较相等性前将字符串转换为数值；
+  在比较前先执行类型转换
 
-  3. 如果两个值都是字符串，则按照字符串的字符编码进行逐位比较
-  4. 如果一个操作数是对象，另一个不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面的规则比较；  
-  5. **null和undefined是相等的**；  
-  6. 在比较相等性之前，不能将null和undefined转换为其他任何值;  
-  7. 如果有一个操作符是NaN，则相等操作符返回false，不相等操作符返回true；即使两个操作数都是NaN,也一样；  
-  8. 如果两个操作数都是对象，则比较它们是否指向同一个对象
+    * 如果有一个操作数是布尔值，则在比较相等性前先将其转换为**数值**---false转换为0，true转换为1；  
+
+    * 如果一个操作数是字符串，另一个操作数是数值，则在比较相等性前将字符串转换为数值；
+    * 如果两个值都是字符串，则按照字符串的字符编码进行逐位比较
+    * 如果一个操作数是对象，另一个不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面的规则比较；  
+    * **null和undefined是相等的**；  
+    * 在比较相等性之前，不能将null和undefined转换为其他任何值;  
+    * 如果有一个操作符是NaN，则相等操作符返回false，不相等操作符返回true；即使两个操作数都是NaN,也一样；  
+    * 如果两个操作数都是对象，则比较它们是否指向同一个对象
 
 
-* `===` 全等、`！===` 不全等      
+* `===` 全等、`！===` 不全等
   两个操作数在未经转换的情况下相等返回true，不相等返回false;
 ```javascript
 0 == false;//true
@@ -662,10 +631,20 @@ null == 0;//false
 5 == NaN;//false
 NaN == NaN;//false
 NaN != NaN;//true
+// x !== x 成立的唯一情况是 x 的值为 NaN
 
+-0 === 0; // true
 "4" === 4;//false
 undefined === null;//false
 ```
+
+* `in`
+
+  判断对象是否拥有给定属性
+
+* `instanceof`
+
+  判断一个对象是否是另一个对象的实例
 
 
 
@@ -673,7 +652,7 @@ undefined === null;//false
 
 > `！` 非、`&&` 与、`||` 或 
 
-* `!` 对Boolean值取反
+* `!` 对 Boolean 值取反
 
 ```javascript
 var flag = true;
@@ -746,8 +725,7 @@ var result = 3 || num++; //3  num=0
 // 语法
 if (条件) {
     // 只有当条件为 true 时,执行代码
-}
-
+} // else部分没有执行语句则 省略
 var age = 10;
 if (age >= 18) {
     console.log('可以访问该网站')
@@ -820,7 +798,7 @@ switch (变量) {
 
 > 注意 :
 > break可以省略，如果省略，代码会继续执行下一个case
-> switch 语句在比较值时使用的是**全等**操作符, 因此不会发生类型转换（例如，字符串'10' 不等于数值 10）
+> switch 语句在比较值时使用的是 **全等** 操作符, 因此不会发生类型转换（例如，字符串'10' 不等于数值 10）
 
 
 
@@ -937,6 +915,12 @@ for ( var i = 1;i<=5;i++ ) {
 //2  网页打印直角三角形
 //3  网页打印9*9乘法表
 ```
+
+
+
+## for ..in 循环
+
+详见遍历对象
 
 
 
@@ -1810,7 +1794,9 @@ var obj = {
 console.log (obj.name) //ok
 console.log (obj[name]) // X
 console.log (obj.'name') // X
-obj.name = '小马哥'; //ok
+
+obj.age = 18; // 增加 age 属性为 18
+obj.name = 'ls'; // 修改name属性为 ls
 
 var key = 'name';
 console.log (obj.key) // X
@@ -1844,7 +1830,7 @@ console.log(str); // 报错 str is not undefined
 
 ## 遍历对象
 
- 通过 `for..in` 语法可以遍历一个对象
+ 通过 `for..in` 循环语法可以遍历一个对象
 
 ```js
 // 遍历对象
@@ -1869,18 +1855,34 @@ var keys = Object.keys(obj);
 
  
 
-## 值类型与引用类型
+## 原始类型与引用类型
 
-### JS数据类型
+- 原始类型（简单数据类型/值类型）
 
-简单数据类型：number、string、boolean、undefined、null
+> `Number` `String` `Boolean` `Undefined` `Null`
 
-引用数据类型：Array、function、自定义的对象、Object
+- 引用类型（复杂数据类型）
 
-简单数据类型也叫值类型，复杂数据类型也叫引用数据类型，这主要是根据内存存储方式来区分的。
+> `Object` `Array` `function` `自定义的对象` `Object`
 
-- 变量在存储简单类型的时候，存的是**值本身**（值类型），进行赋值的时候，赋值的是值本身。
-- 变量在存储复杂数据类型的时候，存的是**引用**，也叫**地址**（类型），如果把第一个对象赋值给另一个变量，此时两个变量会指向同一个对象。
+```javascript
+var num1 = 123;
+var num2 = num1;
+num2 = 456;
+console.log(num1);//123
+
+var obj1 = {a:1};
+var obj2 = obj1; // obj1和obj2，均指向了同一个对象
+obj2.a = 3; // 对obj2的任何操作
+console.log(obj1.a);//3 // 同时也会影响到 obj1
+```
+
+
+
+原始数据类型和引用数据类型，主要是根据内存存储方式来区分的。
+
+- 变量在存储原始数据类型的时候，存的是**值本身**（值类型），进行赋值的时候，赋值的是值本身
+- 变量在存储引用数据类型的时候，存的是**引用**，也叫**地址**，进行赋值的时候，赋值的是地址，而不是数据本身
 
 
 
@@ -1952,7 +1954,20 @@ function Person(name, age, salary) {
 
 
 
+## object.valueOf()
 
+返回值为该对象的原始值，如果对象没有原始值，则`valueOf`将返回对象本身
+
+| **对象** | **返回值**                                               |
+| -------- | -------------------------------------------------------- |
+| Array    | 返回数组对象本身。                                       |
+| Boolean  | 布尔值。                                                 |
+| Date     | 存储的时间是从 1970 年 1 月 1 日午夜开始计的毫秒数 UTC。 |
+| Function | 函数本身。                                               |
+| Number   | 数字值。                                                 |
+| Object   | 对象本身。这是默认情况。                                 |
+| String   | 字符串值。                                               |
+|          | Math 和 Error 对象没有 valueOf 方法。                    |
 
 
 
@@ -2198,6 +2213,8 @@ function Person(name, age, salary) {
   //5. 获取数组中每个元素出现的次数
   ```
 
+
+
 ## 基本包装类型
 
 > **简单数据类型是没有方法的**。为了方便操作基本数据类型，JavaScript还提供了三个特殊的引用类型：String/Number/Boolean。
@@ -2218,8 +2235,8 @@ var result = str.indexOf(“a”);
 > Number 对象是数字的包装类型，数字可以直接使用这些方法
 
 ```javascript
-toFixed(2); // 2表示保留2位小数
-toString(); // 转换成字符串
+num.toFixed(2); // 2表示保留2位小数
+num.toString(); // 转换成字符串
 ```
 
 ### Boolean对象
@@ -2241,8 +2258,12 @@ toString( );//转换成字符串
 - 查找指定字符串
 
   ```javascript
-  // indexOf:获取某个字符串第一次出现的位置，如果没有，返回-1
-  // lastIndexOf:从后面开始查找第一次出现的位置。如果没有，返回-1
+  str.indexOf(""); // 获取某个字符串第一次出现的位置，如果没有，返回-1
+  str.lastIndexOf(""); // 从后面开始查找第一次出现的位置。如果没有，返回-1
+  
+  str.search(regexp); // 查找并输出索引位置,找不到输出-1
+  str.match(regexp); // 输出匹配到的第一个字符，匹配不到返回 null
+  str.match(regexp/g); //全部输出
   ```
 
 - 去除空白
@@ -2265,15 +2286,17 @@ toString( );//转换成字符串
   //可以用concat，用法与数组一样，但是字符串拼串我们一般都用+
   
   //字符串截取的方法有很多，记得越多，越混乱，因此就记好用的就行
-  //slice ：从start开始，end结束，并且取不到end。
-  //substring ：从start开始，end结束，并且取不到end
-  //substr(start, length)：从start开始，截取length个字符。
+  str.slice(start, end); // 从start开始，end结束，并且取不到end，没有end 则截取到末尾
+  // 可以为负数，-1表示从后数第一个，一次为 -2、-3...
+  str.slice(-3); // 截取字符串后三位
+  str.substring(start, end); // 从start开始，end结束，并且取不到end
+  str.substr(start, length); // 从start开始，截取length个字符，没有length则截取到末尾
   ```
 
 - 字符串切割
 
   ```javascript
-  //split:将字符串分割成数组（很常用）
+  str.split(); // 将字符串分割成数组（很常用）
   //功能和数组的join正好相反。
   var str = "张三,李四,王五";
   var arr = str.split(",");
@@ -2282,10 +2305,10 @@ toString( );//转换成字符串
 - 字符串替换
 
   ```javascript
-  replace(searchValue, replaceValue)
+  str.replace(searchValue, replaceValue)
   //参数：searchValue:需要替换的值    replaceValue:用来替换的值  默认只替换第一个
-  replace(/searchValue/g, replaceValue) // 全部替换
-  replace(/ /g, "") // 将全部空格去掉
+  str.replace(/searchValue/g, replaceValue) // 全部替换
+  str.replace(/ /g, "") // 将全部空格去掉
   ```
 
 - 访问
