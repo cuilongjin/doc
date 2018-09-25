@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <button>1</button>
+    <button>2</button>
+    <script>
+        // 给多个按钮注册点击事件，点击的那个变成红色，其他的恢复默认
+
+        var btns = document.getElementsByTagName("button");
+        console.log(btns);
+
+        // 遍历数组
+        for (var i = 0; i < btns.length; i++) { // i = 2
+            // 注册点击事件
+            btns[i].onclick = function () {
+                // console.log(i); // 点击按钮时打印 2
+                // btns[i].className = "red"; // 此时i = 2，报错
+                
+                for (var i = 0; i < btns.length; i++) {
+                    btns[i].className = "";  // 恢复默认样式 ，排他思想
+                }
+                this.className = "red"; // 给自己添加样式
+            }
+        }
+    </script>
+</body>
+</html>

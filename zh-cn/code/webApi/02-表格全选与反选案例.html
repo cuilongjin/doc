@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		table {
+			margin: 100px auto;
+
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+			border: 1px solid #ccc;
+			width: 300px;
+		}
+		td,th {
+			border: 1px solid #d0d0d0;
+			padding: 10px;
+		}
+		tr {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<table>
+			<thead>
+				<tr >
+					<th>
+						<input type="checkbox" id="box1">
+					</th>
+					<th>公主</th>
+					<th>价格</th>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+				<tr>
+					<td>
+						<input type="checkbox">
+					</td>
+					<td>公主</td>
+					<td>价格</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox">
+					</td>
+					<td>公主</td>
+					<td>价格</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+<script>
+	var box1 = document.getElementById("box1");
+	var inputs = document.getElementById("tbody").getElementsByTagName("input");
+	box1.onclick = function(){
+		// console.log(this.checked);
+		for (var i = 0; i < inputs.length; i++) {
+			inputs[i].checked = this.checked;
+		}
+	}
+	for (var i = 0; i < inputs.length; i++) {
+		inputs[i].onclick = function () {
+			var flag = true;
+			for (var i = 0; i < inputs.length; i++) {
+				if (inputs[i].checked == false) {
+					flag = false;
+					break;
+				}
+			}
+			console.log(flag);
+			if (flag == true) {
+				box1.checked = true;
+			} else {
+				box1.checked = false;
+			}
+
+		}
+	}
+	// console.log(inputs);
+</script>
+</html>

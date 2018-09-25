@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button>关灯</button>
+	<script>
+		var btn = document.querySelector("button");
+		btn.onclick = function () {
+			if (this.innerText == "关灯") {
+				document.body.style.background = "#000";
+				this.innerText = "开灯";
+			} else {
+				document.body.style.background = "#fff";
+				this.innerText = "关灯";
+			}
+		}
+	</script>
+</body>
+</html>

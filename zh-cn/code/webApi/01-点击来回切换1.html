@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">点击切换</button>
+    <img src="" alt="">
+    <p class="p">看我变化</p>
+    
+    <script>
+        // 来回切换
+        var btn = document.getElementById("btn");
+        var p = document.getElementsByClassName("p");
+        var flag = true;
+        // console.log(btn, p);
+        btn.onclick = function() {
+            if (flag) {
+                p[0].className = "p red";
+                flag = false;
+            } else {
+                p[0].className = "p";
+                flag = true;
+            }
+
+            // if (p[0].className == "p") {
+            //     p[0].className = "p red";
+            // } else {
+            //     p[0].className = "p";
+            // }
+        }
+    </script>
+</body>
+</html>

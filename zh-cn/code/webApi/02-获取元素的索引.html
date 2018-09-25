@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- 获取元素的索引 -->
+	<button>按钮1</button>
+	<button>按钮2</button>
+	<button>按钮3</button>
+	<button>按钮4</button>
+	<button>按钮5</button>
+	<script>
+		var btns = document.getElementsByTagName("button");
+		for (var i = 0; i < btns.length; i++) {
+			console.log(i);
+			// 将索引保存到 index 属性里
+			btns[i].index = i;
+			btns[i].onclick = function () {
+				// console.log(i);
+				// 获取索引
+				console.log(this.index);
+			}
+		}
+	</script>
+</html>

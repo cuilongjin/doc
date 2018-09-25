@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li>导航1</li>
+		<li>导航2</li>
+		<li>导航3</li>
+		<li>导航4</li>
+		<li>导航5</li>
+	</ul>
+	<script>
+
+		// onmouseover
+		// onmouseout
+		
+		var lis = document.querySelectorAll("ul li");
+
+		for (var i = 0; i < lis.length; i++) {
+			if (i % 2 == 0) {
+				lis[i].style.background = "red";
+			} else {
+				lis[i].style.background = "yellow";
+			}
+
+			var color;
+			lis[i].onmouseover = function () {
+				color = this.style.background
+				this.style.background = "green";
+			}
+			lis[i].onmouseout = function () {
+				// color = this.style.background
+				this.style.background = color
+			}
+		}
+		
+	</script>
+</body>
+</html>

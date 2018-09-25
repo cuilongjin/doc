@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">点击切换</button>
+	<br>
+	<div id="box">0</div>
+	<!-- <img src="images/1.jpg" alt="" id="img"> -->
+
+	<script>
+		var btn = document.getElementById("btn");
+		// var img = document.getElementById("img");
+		var box = document.getElementById("box");
+		var num = 0;
+		btn.onclick = function () {
+			num++;
+			box.innerText = num;
+			// img.src = "images/"+ num +".jpg"
+			if (num == 5) {
+				num = 0;
+			}
+		}
+	</script>
+</body>
+</html>

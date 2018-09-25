@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- 标签里直接添加自定义属性 -->
+	<div id="box" aa="bb" title="haha"></div> 
+	<script>
+		var h = document.getElementById("box");
+		// 直接给标签添加固有的属性 title 等 标签+对象里都有显示
+		console.log(h.title); // haha 
+		//在标签里直接添加的自定义属性，通过元素对象获取不到
+		console.log(h.aa); // undefined  
+		
+		// 在元素对象里直接添加自定义属性,不会再标签中显示，会在对象里
+		h.cc = "dd"; 
+		console.log(h.cc); // dd
+
+
+
+		// attribute 方法  添加自定义属性/标签属性
+		// 标签+对象里都有显示
+
+		h.setAttribute('ee','ff');
+      	console.log(  h.getAttribute('ee') ); // ff
+	</script>
+</html>

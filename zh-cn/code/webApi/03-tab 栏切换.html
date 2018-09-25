@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.box {
+			width: 400px;
+			height: 400px;
+		}
+		ul {
+			list-style: none;
+			overflow: hidden;
+		}
+		ul li {
+			float: left;
+			width: 20%;
+			height: 60px;
+			text-align: center;
+			line-height: 60px;
+		}
+		ul li.now {
+			background: lime;
+		}
+		.content div {
+			width: 400px;
+			height: 340px;
+			text-align: center;
+			line-height: 340px;
+			font-size: 100px;
+			display: none;
+		}
+		.content div.current {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<ul>
+			<li class="now">导航1</li>
+			<li>导航2</li>
+			<li>导航3</li>
+			<li>导航4</li>
+			<li>导航5</li>
+		</ul>
+		<div id="content" class="content">
+			<div class="current">内容1</div>
+			<div>内容2</div>
+			<div>内容3</div>
+			<div>内容4</div>
+			<div>内容5</div>
+		</div>
+	</div>
+	<script>
+		var lis = document.querySelectorAll("li");
+		var div = document.querySelectorAll("#content div")
+		console.log(div);
+		for (var i = 0; i < lis.length; i++) {
+			lis[i].index = i;
+			lis[i].onclick = function () {
+				for (var i = 0; i < lis.length; i++) {
+					lis[i].className = "";
+				}
+				this.className = "now";
+				for (var i = 0; i < div.length; i++) {
+					div[i].className = "";
+				}
+				div[this.index].className = "current";
+			}
+		}
+	</script>
+</body>
+</html>

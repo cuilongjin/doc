@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" value="haha">
+	<script>
+		// onfocus : 获得焦点事件
+      	// onblur  : 失去焦点事件
+		
+		// onfocus 和 onblur 案例
+
+		var input = document.querySelector("input");
+		var temp = input.value
+		input.onfocus = function () {
+			if (this.value == temp) {
+				this.value = "";
+			} 
+		}
+		input.onblur = function () {
+			if (this.value == "") {
+				this.value = temp;
+			}
+	}
+	</script>
+</body>
+</html>

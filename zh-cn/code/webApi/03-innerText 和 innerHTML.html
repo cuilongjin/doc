@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	<div id="div">
+		<h1>哈哈</h1>
+	</div>
+	<script>
+		var div = document.getElementById('div');
+		// 获取内容
+		console.log(div.innerText); // 哈哈
+      	console.log(div.innerHTML); // <h1>哈哈</h1>
+		// 设置内容
+		div.innerText = '<h1>嘿嘿</h1>'; // 只识别文本，标签会被转义
+      	div.innerHTML = '<h1>嘿嘿</h1>'; // 能够识别标签，标签能够生效
+	</script>
+</body>
+</html>
