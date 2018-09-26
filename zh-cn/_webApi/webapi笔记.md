@@ -398,7 +398,9 @@ box.removeAttribute(属性名);
 
 
 
-## 标签的内容属性 innerText 和 innerHTML
+## 标签的内容属性
+
+### innerText 和 innerHTML
 
 - 共同点 : 都是用来获取和设置标签的内容的
 
@@ -441,3 +443,342 @@ function getInnerText(element){
   }
 }
 ```
+
+
+
+
+
+## 行内样式操作（style属性）
+
+> 标签不仅可以通过class属性操作样式 (嵌套样式)，还可以通过style属性操作样式 (行内样式)。
+>
+> 同样的DOM对象可以通过className操作样式  (嵌套样式)，也可以通过style属性操作样  (行内样式)。
+>
+> css : 嵌套样式   =>  js :  类名 div.className = 'red';
+>
+> css : 行内样式   =>  js :  style对象  div.style.color = 'red';
+
+### 样式属性
+
+- style 属性是一个对象, 里面存储了所有行内样式的键值对
+- style 属性只能获取和设置**行内样式**，嵌套样式通过 style 获取不到
+- 如果样式的名字带 `-` , 比如 background-color , 在 style 对象中, backgroundColor  =>  (因为 `-` 在js中不是一个合法的标识符)
+- style 设置的样式是行内样式，优先级要高于className设置的样式 
+
+```js
+<div style="color:red;background-color:blue;">哈哈</div>
+var div = document.querySelector("div");
+// 获取样式
+console.log(div.style);
+console.log(div.style.color); // red
+
+// 设置样式
+div.style.width = "200px";
+div.style.height = "200px";
+div.style.fontSize = "100px";
+div.className = "box";
+```
+
+
+
+### 关于body的样式操作
+
+```js
+var  bd = document.querySelector('body');
+console.log(bd); // 通过 querySelector 获取 body 元素
+console.log(document.body); // 直接获取 body 元素
+
+document.documentElement // 可以获取 html 元素
+document.head // 直接获取 head 元素
+document.title // 获取的是 title 中的文本
+```
+
+**【案例：开关灯案例】**
+
+**【案例：随机背景颜色案例】**
+
+**【案例：百度换肤】**
+
+
+
+### 关于cssText  (了解)
+
+> 使用cssText可以设置style的属性值
+
+```javascript
+<div style="width:100px;height:100px">哈哈哈</div>
+//优点：可以一次性设置多个值
+//缺点：会覆盖其他值 不利于阅读
+var div = document.querySelector('div');
+div.style.cssText = 'background:red;color:yellow';
+```
+
+
+
+## 节点操作 (超级重要)  
+
+### 节点属性 (了解)
+
+**节点分类：**
+
+​	元素节点、文本节点、属性节点、注释节点
+
+**节点常用的属性**
+
+- childNodes :  获取所有的子节点 
+
+- **nodeType**:  节点类型：元素节点 = 1  属性-2(过时)   注释-8  文本-3  
+
+  [nodeType链接-MDN](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nodeType)
+
+- **nodeName**: 节点名称
+
+- **nodeValue**: 节点值
+
+
+
+### 节点查找 (重点)
+
+#### 孩子节点
+
+- ul.childNodes ：获取第一个子节点  (不常用)
+
+- ul.firstChild ： 获取最后一个子节点  (不常用)
+
+- console.log(ul.lastChild);
+  ​      
+
+    // 获取所有的子元素，兼容性：IE678会把注释节点算上
+    console.log(ul.children);
+    // 获取第一个子元素 有兼容性问题（IE678） 
+    console.log(ul.firstElementChild);
+    // 获取最后一个子元素 有兼容性问题（IE678） 
+    console.log(ul.lastElementChild);
+    // 获取第n个子元素 有兼容性问题（IE678）
+    console.log(ul.children[n]);  
+
+```html
+<ul >
+    <!-- 下面是li -->
+    <li>导航1</li>
+    <li>导航2</li>
+    <li>导航3</li>
+    <li>导航4</li>
+</ul>
+<script>
+    var ul = document.querySelector('ul');
+	// 获取ul所有的子节点（包括了元素节点和其他很多类型的节点，基本不常用）
+	console.log(ul.childNodes);
+    // 获取第一个子节点  (不常用)
+    console.log(ul.firstChild);
+    // 获取最后一个子节点  (不常用)
+    console.log(ul.lastChild);
+    
+    // 获取所有的子元素，兼容性：IE678会把注释节点算上
+    console.log(ul.children);
+    // 获取第一个子元素 有兼容性问题（IE678） 
+    console.log(ul.firstElementChild);
+    // 获取最后一个子元素 有兼容性问题（IE678） 
+    console.log(ul.lastElementChild);
+    // 获取第n个子元素 有兼容性问题（IE678）
+	console.log(ul.children[n]);  
+</script>
+```
+
+
+
+#### 兄弟节点
+
+- `nextSibling` : 下一个兄弟节点  (基本不常用)
+- `nextElementSibling` : 下一个兄弟元素（IE678不兼容）
+- `previousSibling` : 上一个兄弟节点  (基本不常用)
+- `previousElementSibling`  : 上一个兄弟元素 有兼容性问题 可以封装一个兼容性方法 
+
+```html
+<p>导航1</p>
+<p class="p">导航2</p>
+<p>导航3</p>
+<script>
+    var p2 = document.querySelector(".p");
+    console.log(p2);
+    console.log(p2.nextSibling);
+    console.log(p2.nextElementSibling);
+    console.log(p2.previousSibling);
+    console.log(p2.previousElementSibling);
+</script>
+```
+
+**【案例1：表单校验】**
+
+
+
+#### 父亲节点
+
+- `parentNode` : 父节点（没有兼容性问题）
+- `parentElement` : 父元素
+
+```
+div.parentNode; // 获取父节点
+```
+
+
+
+### 添加节点 (重点)
+
+appendChild()  
+
+**作用**：在子元素的最后添加一个元素
+
+**语法**：parent.appendChild(newChild)     
+
+```js
+父元素.appendChild(新子元素);
+```
+
+> **注意** : 如果添加的是页面中本来就存在的元素，是一个剪切的效果，原来的就不在了。
+
+### insertBefore()
+
+ **作用**：在某个子元素之前添加一个元素
+
+**语法**：parent.insertBefore(newChild,  refChild)
+
+> 必须要父节点来调用，newChild 为需要添加的那个节点，refChild 为添加到哪一个节点的前面
+
+```javascript
+// 将元素添加到最后
+div.appendChild(p); // (常用)
+div.insertBefore(p, null);
+
+// 将元素添加到 s1 之前(常用)
+div.insertBefore(p, s1);
+
+// 将元素添加到 s1 之后
+// 没有 insertAfter
+div.insertBefore(p, s1.nextElementSibling);
+
+// 将元素添加到最前
+div.insertBefore(p, div.children[0]); // (常用)
+div.insertBefore(p, div.firstElementChild);
+```
+
+
+
+### 克隆节点 (重点)
+
+**语法**：var newNode = 节点.cloneNode([isDeep])
+
+**isDeep参数**：false / true
+
+- false：默认值：是浅复制，只会复制标签节点本身，不会复制节点的孩子
+- true:   深度复制，会复制标签，还会复制标签的所有内容
+
+> 1. 克隆出来的节点跟原来的节点没有关系了，修改了也不会相互影响。
+> 2. 如果克隆的节点带了id，我们需要给id重新设置一个值，不让id冲突
+
+```js
+var newNode = div.cloneNode(true);
+// false : 浅复制  只复制该元素
+// true : 深复制   不仅复制该元素 还复制其子元素
+
+console.log(newNode);
+```
+
+
+
+### 创建节点(3种方式)  (重点)
+
+#### document.write（基本不用）
+
+可以生成新的节点，但是不推荐使用。如果页面已经加载完成了，再用document.write写内容的话，会把之前的页面给覆盖掉 
+
+> 原理：页面从上往下加载的时候，会开启一个文档流，当页面加载完，文档流就会关闭。document.write的本意就是在文档流上写入内容。如果页面没加载完成，文档流还是开着的，document.write直接在这个文档流上写东西，如果页面加载完成了，还是用document.write写东西，会重新开启一个新的文档流，往新的文档流上写东西，旧的文档流就被新的文档流覆盖了。
+
+```js
+window.onload = function () {
+  document.write('你妹')
+}
+```
+
+#### innerHTML (偶尔用)
+
+innerHTML也可以创建节点
+
+> 使用 innerHTML 创建节点时，如果原来有内容的话，会把原先的内容覆盖
+>
+> 慎用：很容易出现效率问题
+
+```js
+div.innerHTML = '<h1>哈哈</h1>'
+```
+
+
+
+#### createElement  (常用)
+
+**语法**：var element = document.createElement("tagName")
+
+**返回**：一个元素
+
+需要配合 添加节点 和 innerText 来使用
+
+```js
+var div = document.querySelector('div')
+var h1 = document.createElement('h1');
+console.log(h1);
+h1.style.background = 'red';
+h1.innerText = '哈';
+div.appendChild(h1);
+```
+
+ 
+
+### 删除节点 (重点)
+
+语法：parent.removeChild(child);
+
+解析 :  父元素.removeChild(子元素);
+
+功能：有父元素调用，删除里面的一个子元素。
+
+```js
+//1 使用1 :
+div.removeChild(p);
+//2 使用2 :
+p.parentNode.removeChild(p);
+```
+
+**【案例 : 节点操作-删除节点】**
+
+```js
+1. 使用 children 和 TagName  =>  需要配合 i--
+// 原因 :动态计算 , 每删除一个,都会重新分配一次下标
+2. 使用 querySelectorAll('li') =>  ok的
+// 原因 : 静态计算 
+```
+
+ **[案例 : 许愿墙案例]**
+
+```js
+功能1 : 克隆10个tip, 并且随机分布
+功能2 : 点击提高层级
+功能3 : 点击x, 删除当前tip
+功能4 : 双击tip头部,删除当前tip
+```
+
+
+
+### 替换节点
+
+语法：parentNode.replaceChild(newChild, oldChild);
+
+- `newChild ` 用来替换 `oldChild ` 的新节点，如果 `newChild` 已经存在于DOM树中，则它会被从原始位置删除。
+
+
+
+### 节点操作综合案例
+
+【动态生成表格】
+
+
+
