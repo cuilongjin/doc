@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="father">
+		<div class="son">
+			<div class="sun">
+				孙子
+			</div>
+		</div>
+	</div>
+
+	<script>
+		var father = document.querySelector(".father");
+		console.log(father);
+		// 默认false
+		var newFather = father.cloneNode();
+		console.log(newFather);
+		// 参数为 false
+		var newFather = father.cloneNode(false);
+		console.log(newFather);
+		// 参数为 true
+		var newFather = father.cloneNode(true);
+		console.log(newFather);
+
+	</script>
+</body>
+</html>

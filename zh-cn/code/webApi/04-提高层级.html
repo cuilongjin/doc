@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			position: absolute;
+		}
+		.red {
+			left: 10px;
+			top: 10px;
+			background-color: red;
+		}
+		.green {
+			left: 20px;
+			top: 20px;
+			background-color: green;
+		}
+		.blue {
+			left: 30px;
+			top: 30px;
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<div class="red"></div>
+	<div class="green"></div>
+	<div class="blue"></div>
+	<script>
+		var div = document.querySelectorAll("div");
+		console.log(div);
+		var count = 1;
+		for (var i = 0; i < div.length; i++) {
+			div[i].onclick = function () {
+				this.style.zIndex = count;
+				count++;
+				console.log(count);
+			}
+		}
+	</script>
+</body>
+</html>

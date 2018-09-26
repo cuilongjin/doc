@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button>点击删除</button>
+	<ul>
+		<li>导航0</li>
+		<li>导航1</li>
+		<li>导航2</li>
+		<li>导航3</li>
+		<li>导航4</li>
+		<li>导航5</li>
+	</ul>
+
+	<script>
+		// 点击删除所有的 li
+		
+		var btn = document.querySelector("button");
+		var ul = document.querySelector("ul");
+		
+		// // 方式一 通过querySelectorAll() 获取所有的 li
+		// var lis = document.querySelectorAll("li");
+		// btn.onclick = function () {
+		// 	for (var i = 0; i < lis.length; i++) {
+		// 		ul.removeChild(lis[i]);
+		// 	}
+		// }
+
+		// // 方式二 通过 getElementsByTagName() 获取所有的 li
+		// // 每删除一个,都会动态的重新分配一次下标 
+      	// // 解决办法 : i--;
+		// var lis = document.getElementsByTagName("li");
+		// btn.onclick = function () {
+		// 	for (var i = 0; i < lis.length; i++) {
+		// 		ul.removeChild(lis[i]);
+		// 		// i--;
+		// 	}
+		// }
+
+		// 方式三 通过 children 获取所有 li
+		// 每删除一个,都会动态的重新分配一次下标 
+      	// 解决办法 : i--;
+		var lis = ul.children;
+		btn.onclick = function () {
+			for (var i = 0; i < lis.length; i++) {
+				ul.removeChild(lis[i]);
+				i--;
+			}
+		}
+
+	</script>
+</body>
+</html>

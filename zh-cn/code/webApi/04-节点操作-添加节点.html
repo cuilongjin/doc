@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li class="l1">我是li-1</li>
+		<li class="l2">我是li-2</li>
+		<li class="l3">我是li-3</li>
+	</ul>
+	<hr>	
+	<p class="other">我不是亲生的</p>
+	<script>
+		var ul = document.querySelector("ul");
+		var li2 = document.querySelector(".l2")
+		var p = document.querySelector(".other");
+		// 在子元素的最后添加一个元素
+		// ul.appendChild(p);
+		
+		// 将元素添加到 l2 之前
+		// ul.insertBefore(p, li2);
+
+		// 添加到所有子元素的最前面  不直接获取l1
+      	// ul.insertBefore(p,ul.firstElementChild);
+     	ul.insertBefore(p,ul.children[0]);
+	</script>
+</body>
+</html>

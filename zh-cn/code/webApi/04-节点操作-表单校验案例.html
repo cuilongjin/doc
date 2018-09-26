@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	用户名：<input type="text"><span></span>
+	<script>
+		// 需求 : 输入用户名必须是2-6位之间 正确(绿色)  错误(红色)
+
+		var input = document.querySelector("input");
+		input.onkeyup = function () {
+			if (this.value.length >= 2 && this.value.length <= 6) {
+				this.nextElementSibling.innerText = "正确";
+				this.nextElementSibling.style.color = "green";
+			} else {
+				this.nextElementSibling.innerText = "错误";
+				this.nextElementSibling.style.color = "red";
+			}
+		}
+	</script>
+</body>
+</html>
