@@ -782,3 +782,303 @@ p.parentNode.removeChild(p);
 
 
 
+# BOM
+
+> BOM（Browser Object Model）：浏览器对象模型，提供了一套操作浏览器功能的工具。
+
+![](images/2.png)
+
+
+
+**重点** ：定时器、 offset系列
+
+
+
+## window
+
+- window 对象是一个全局对象，也可以说是 JavaScript 中的顶级对象
+- 所有定义在全局作用域中的变量、函数都会变成 window 对象的属性和方法
+- 像 document、alert()、console.log() 这些都是 window 的属性，其实 BOM 中基本所有的属性和方法都是 window 的
+- window 对象下的属性和方法调用的时候可以省略 window
+
+
+
+### .onload（掌握）
+
+> window.onload 事件会在  **窗体加载完成**  后执行，通常我们称之为入口函数。
+
+```js
+window.onload = function(){
+	//代码会在窗体加载完成后执行。
+	//窗体加载完成 包括文档树(DOM html)的加载、还有图片、文件的加载完成。
+}
+```
+
+
+
+> 如果有图片加载，那么代码一定要写到window.onload里面，否则会出现图片没有加载完成，获取到的宽度和高度不对的情况。
+>
+> 浏览器会对页面的加载做优化，在加载图片的时候，图片的引入会延迟。
+
+```js
+<img src="./01.png" alt="">
+window.onload = function () {
+  var img = document.querySelector('img');
+  console.log(img.width);
+  console.log(img.height);
+}
+```
+
+
+
+### .open() 与 .close() (了解)
+
+- window.open() 打开一个窗口
+
+```javascript
+//语法：window.open(url, [name], [features]);
+//参数1：需要载入的 url 地址
+//参数2：新窗口的名称或者 targt 属性
+	// _blank:如果指定为 _blank，表示在新的窗口打开
+//参数3：窗口的属性，指定窗口的大小
+//返回值：会返回刚刚创建的那个窗口，在 window.close() 时使用
+//示例：
+var newWin = window.open("http://www.baidu.com","_blank", "width=300,height=300");
+
+//参数配置：https://developer.mozilla.org/zh-CN/docs/Web/API/Window/open
+```
+
+- window.close() 关闭窗口
+
+```javascript
+newWin.close()；// newWin 是刚刚创建的那个窗口
+window.close();// 把当前窗口给关闭
+```
+
+
+
+## 延时器与定时器  (重点)
+
+### setTimeout 延时器
+
+> 可以在延迟一定时间后执行指定的代码
+
+**设置延时器**
+
+```javascript
+// 语法: setTimeOut(callback,time)
+// 参数1: 回调函数, 时间到了就会执行
+// 参数2: 延时的时间  毫秒为单位 1s = 1000毫秒
+// 返回 : 延时器的id,用于清除
+var timer = setTimeOut(function(){
+	//1秒后将执行一次
+}, 1000);
+```
+
+**清除延时器**
+
+```js
+//语法 : clearTimeOut(timerId)
+//参数 : 延时器id
+// 示例 : 
+clearTimeOut(timer) ; // 清除上面定义的延时器
+```
+
+
+
+### setInterval  定时器
+
+> setInterval 方法重复调用一个函数或执行一个代码段，在每次调用之间具有固定的时间间隔。  (每隔一段时间执行一段代码)
+>
+> 定时器除非清除，否则会一直执行下去。
+
+**设置定时器**
+
+```js
+// 语法 :var timerId = setInterval（func,dealy）;
+// 参数1 ： 重复执行的函数
+// 参数2 : 每次间隔的毫秒数
+// 返回 : 定时器的id,  用于清除
+// 示例 : 
+var timer = setInterval(function(){
+  	// 1s 之后开始重复执行
+},1000);
+```
+
+**清除定时器**
+
+```js
+//语法 : clearInterval(intervalId);
+//参数 : 定时器id
+// 示例 : 
+clearInterval(timerId) // 清除上面的定时器
+```
+
+### 案例
+
+【短信验证码案例.html】
+
+
+
+## location 对象
+
+> location 对象也是 window 的一个属性
+>
+> location 其实对应的就是浏览器中的地址栏
+
+### 常用属性和方法
+
+
+
+- location.href : 控制地址栏的地址
+
+```javascript
+document.onclick = function () {
+	location.href = 'http://www.baidu.com'; // 点击页面跳转到百度首页
+}
+```
+
+[案例 : 注册成功，3秒后跳转]
+
+
+
+- location.reload() ; 让页面重新加载 
+
+```javascript
+document.onclick = function () {
+	location.reload();  // 重新刷新
+}
+```
+
+
+
+- location 的其他值
+
+```js
+http://www.bbb.com:8080/index.html?id=666&psd=123#xxx   
+- location.hash  //哈希值 其实就是锚点     ==> #xxx
+- location.host  //服务器 服务器名+端口号  => www.bbb.com:8080
+- location.hostname //服务器名            =>  www.bbb.com
+- location.pathname //路径名             => index.html
+- location.port //端口                   => 8080
+- location.protocol //协议               => http 
+- location.search //参数                 => ?id=666&psd=123
+```
+
+
+
+## 其他对象
+
+- history 对象表示页面的历史
+
+```js
+// 随便打开一个网页 可以演示
+//后退：
+history.back();
+history.go(-1);
+//前进：
+history.forward();
+history.go(1);
+```
+
+
+
+- screen 对象
+
+```js
+console.log(screen.width);//屏幕的宽度 
+console.log(screen.height);//屏幕的高度
+console.log(screen.availWidth);//浏览器可占用的宽度
+console.log(screen.availHeight);//浏览器可占用的高度
+```
+
+
+
+## offset系列 (重要)
+
+> offset 系列用于用于获取元素自身的大小和位置，在webapi中有广泛应用
+> offset 系列主要有：offsetHeight、offsetWidth、offsetParent、offsetLeft、offsetTop
+
+### offsetHeight 与 offsetWidth
+
+- 获取元素真实的高度和宽度
+
+- 获取到的是数值类型，方便计算
+
+- offsetHeight 与 offsetWidth 是只读属性，不能设置
+
+
+
+> style.height 与 style.width
+>
+> - 只能获取和设置行内样式
+>
+> - 获取到的是字符串类型，需要转换
+
+
+
+### offsetParent
+
+- 获取离当前元素最近的**定位父元素**(absolute、relative)，如果没有，那就找body
+
+> parentNode 和 offsetParent
+>
+> - parentNode 始终是父元素
+
+
+
+### offsetLeft 与 offsetTop
+
+- 获取元素自身与 offsetParent 真实的距离
+
+- 获取到的是数值类型，方便计算
+
+- 只读属性，只能获取，不能设置
+
+
+
+> style.left 与 style.top
+>
+> - 只能获取和设置行内样式
+>
+> - 获取到的是字符串，需要转换
+
+
+
+### 总结
+
+- 获取操作：用offset系列  ==> 数值类型
+- 设置操作：用style.xxx进行设置。 ==> 字符串类型
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
