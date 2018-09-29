@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+        table {
+            width: 600px;
+            cursor: pointer;
+        }
+
+        table td {
+            text-align: center;
+        }
+
+        table th {
+            background-color: blueviolet;
+        }
+
+        table tr {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+	<div id="dv">
+        请输入姓名:
+        <input type="text" value="" id="username" />
+        <br/> 请输入邮箱:
+        <input type="text" value="" id="email" />
+        <br/> 请输入手机:
+        <input type="text" value="" id="tel" />
+        <br/> 请输入地址:
+        <input type="text" value="" id="add" />
+        <br/>
+    </div>
+    <input type="button" value="添加" id="btn" />
+    <table border="1" cellpadding="0" cellspacing="0" id="tb">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>邮箱</th>
+                <th>手机</th>
+                <th>地址</th>
+            </tr>
+        </thead>
+        <tbody id="tbd">
+            <tr>
+                <td>小黑</td>
+                <td>xiaohei@126.com</td>
+                <td>19999009090</td>
+                <td>北京</td>
+            </tr>
+        </tbody>
+	</table>
+	<script>
+		var btn = document.getElementById("btn");
+		var tbody = document.getElementById("tbd");
+		var inputs = document.querySelectorAll("#dv input");
+		console.log(inputs);
+		var index = 0;
+
+		btn.onclick = function() {
+			
+			// 判断inputs 里是否有空的
+			for (var i = 0; i < inputs.length; i++) {
+				if (inputs[i].value.length == 0) {
+					alert("不能为空");
+					return;
+				}
+			}
+
+			// 创建添加tr
+			var tr = document.createElement("tr");
+			// console.log(tr);
+			for (var i = 0; i < inputs.length; i++) {
+				// 创建添加td
+				var td = document.createElement("td");
+				td.innerText = inputs[i].value;
+				tr.appendChild(td);
+			}
+			tbody.appendChild(tr);
+
+			// 隔行变色
+			index++;
+			if (index % 2 == 0) {
+				tr.style.background = "red";
+			} else {
+				tr.style.background = "green";
+			}
+		}
+	</script>
+</body>
+</html>
