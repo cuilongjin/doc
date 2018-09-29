@@ -2058,7 +2058,7 @@ function Person(name, age, salary) {
   var date = new Date();// 使用构造函数创建一个当前时间的对象
   var date = new Date("2017-03-22");//创建一个指定时间的日期对象2017/3/22 上午8:00:00
   var date = new Date("2017-03-22 00:52:34");//创建一个指定时间的日期对象
-  var date = new Date(2017, 2, 22, 0, 52, 34); // 201/3/22
+  var date = new Date(2017, 2, 22, 0, 52, 34); // 2017/3/22
   var date = new Date(1523199394644);//参数：毫秒值
   
   Date构造函数的参数
