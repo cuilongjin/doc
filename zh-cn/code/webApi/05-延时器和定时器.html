@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <script>
+        // 设置延时器
+        var timeOut = setTimeout(function () {
+            console.log("哈哈");
+        }, 4000);
+        // 清除延时器
+        document.onclick = function () {
+            console.log("延时已清除");
+            clearTimeout(timeOut);
+        }
+
+        // 设置定时器
+        var interval = setInterval(function () {
+            console.log("呵呵");
+        }, 1000);
+        // 清除定时器
+        document.onclick = function () {
+            console.log("定时已清除");
+            clearInterval(interval);
+        }
+    </script>
+</body>
+</html>

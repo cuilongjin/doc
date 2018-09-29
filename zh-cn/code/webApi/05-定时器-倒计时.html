@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #text {
+            text-align: center;
+            font-size: 30px;
+            margin: 20px 0;
+        }
+        .time {
+            width: 140px;
+            height: 40px;
+            margin: 50px auto;
+            line-height: 40px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        #h, #m, #s {
+            float: left;
+            display: block;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            background-color: #440106;
+            color: #f00;
+            border-radius: 5px;
+        }
+        .split {
+            width: 10px;
+            float: left;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="text">下课倒计时</div>
+   <div class="time">
+        <span id="h">00</span>
+        <span class="split">:</span>
+        <span id="m">00</span>
+        <span class="split">:</span>
+        <span id="s">00</span>
+   </div>
+    <script>
+        var h = document.querySelector("#h");
+        var m = document.querySelector("#m");
+        var s = document.querySelector("#s");
+
+        time();
+        var timeId = setInterval(time, 1000);
+        function time() {
+            var nowTime = new Date(); // 当前时间
+            var msTime = new Date("2018-09-28 22:00:00");
+            var time = parseInt((msTime - nowTime) / 1000)
+            // 如果时间为负数，清除定时器
+            if (time <= 0) {
+                time = 0;
+                clearInterval(timeId);
+            }
+
+            var hours = parseInt(time / 3600);
+            h.innerTextL = addZero(hours);
+
+            var minites = parseInt(time / 60) % 60
+            m.innerText = addZero(minites);
+
+            var seconds = time % 60;
+            s.innerText = addZero(seconds);
+        }
+
+
+        function addZero (n) {
+            return n < 10 ? "0" + n : n;
+        }
+        
+
+    </script>        
+</body>
+</html>  

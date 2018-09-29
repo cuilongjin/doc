@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <script>
+        // // 1.
+        // console.log("1");
+        // var timeOut = setTimeout(function () {
+        //     console.log("哈哈");
+        // }, 0);
+        // console.log("2");
+
+        // // 打印结果为
+        // // 1
+        // // 2
+        // // 哈哈
+
+        // 倒计时函数会在调用栈内没有任何代码时才会执行
+
+        // 2. this
+        // setTimeout 和 setInterval 里面的 this 指的是window
+        var obj = {
+            name : "zs",
+            play : function () {
+                console.log(this); // obj
+                var that = this;
+                setInterval(function () {
+                    console.log(this); // window
+                    console.log(that); // obj
+                    console.log(that.name + "打游戏");
+                }, 1000)
+            }
+        }
+        obj.play();
+
+    </script>
+</body>
+</html>

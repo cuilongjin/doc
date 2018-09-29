@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <img src="./images/05-1.png" alt="">
+    <script>
+        
+        var img = document.querySelector("img");
+        console.log(img.width); // 0
+        console.log(img.height); // 0
+        
+        window.onload = function () {
+            var img = document.querySelector("img");
+            console.log(img.width); // 
+            console.log(img.height); // 
+        }
+    </script>
+</body>
+</html>
