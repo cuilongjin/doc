@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <button>点击左移</button>
+    <button>点击右移</button>
+    <div></div>
+    <script>
+        var btn1 = document.querySelectorAll("button")[0];
+        var btn2 = document.querySelectorAll("button")[1];
+        var div = document.querySelector("div");
+
+
+        function animate(element, target) {
+            // 清除上一个定时器
+            clearInterval(element.timeId);
+            // var timeId = setInterval(function () {
+            element.timeId = setInterval(function () {
+                var current = element.offsetLeft;
+                // 定义步长
+                var step = current < target ? 20 : -20;
+                if (Math.abs(current - target) >= Math.abs(step)) {
+                    current += step;
+                    element.style.left = current + "px";
+                } else {
+                    // 清除定时器
+                    clearInterval(element.timeId);
+                    // 不够步长 ，直接赋值
+                    element.style.left = target + "px";
+                }
+            }, 20);
+        }
+        
+        btn1.onclick = function () {
+            animate(div, 0);
+        }
+        btn2.onclick = function () {
+            animate(div, 410);
+        }
+    </script>
+</body>
+</html> 

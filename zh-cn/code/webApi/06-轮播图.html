@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            width: 500px;
+            height: 300px;
+            /* background-color: #f00; */
+            position: relative;
+            overflow: hidden;
+        }
+        ul {
+            width: 2000px;
+            list-style: none;
+            position: absolute;
+        }
+        ul li {
+            float: left;
+            width: 500px;
+            height: 300px;
+        }
+        ul li:first-child,
+        ul li:last-child {
+            background-color: rgb(221, 81, 69);
+        }
+        ul li:nth-child(2) {
+            background-color: rgb(22, 160, 93);
+        }
+        ul li:nth-child(3) {
+            background-color: rgb(255, 205, 67);
+
+        }
+        ol {
+            height: 20px;
+            background-color: rgba(255, 255, 255, .3);
+            list-style: none;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
+        ol li {
+            width: 14px;
+            height: 14px;
+            /* background-color: #fff; */
+            float: left;
+            margin: 0 8px;
+            text-align: center;
+            line-height: 14px;
+            font-size: 12px;
+            user-select: none;
+            cursor: pointer;
+            margin-top: 3px;
+            border-radius: 50%;
+        }
+        ol li.current {
+            background-color: #fff;
+        }
+
+        .left,
+        .right {
+            width: 30px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            line-height: 60px;
+            font-size: 30px;
+            cursor: pointer;
+            user-select: none;
+            display: none;
+        }
+        .left {
+            left: 0;
+            color: rgb(66, 133, 244)
+        }
+        .right {
+            right: 0;
+            color: rgb(66, 133, 244)
+        }
+        .box:hover .left,
+        .box:hover .right {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <!-- 轮播 图片 -->
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <!-- 1. 轮播图结构 小圆点 -->
+        <ol>
+            <li class="current">1</li>
+            <li>2</li>
+            <li>3</li>
+        </ol>
+
+        <!-- 3. 轮播结构 左右箭头 -->
+        <div class="arrow">
+            <span class="left">&lt;</span>
+            <span class="right">&gt;</span>
+        </div>
+    </div>
+    <script>
+        var box = document.querySelector(".box");
+        var ulis = document.querySelectorAll("ul li");
+        var ulisWth = ulis[0].offsetWidth;
+        var ul = document.querySelector("ul");
+        var lis = document.querySelectorAll("ol li");
+        
+        // 2. 轮播 点击圆点切换
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].index = i;
+            lis[i].onclick = function () {
+                for (var i = 0; i < lis.length; i++) {
+                    lis[i].className = "";
+                }
+                this.className = "current";
+                animate(ul, -this.index * ulisWth);
+                // ul.style.left = -this.index * ulisWth + "px";
+
+                index = this.index;
+            }
+        }
+        
+        // 4. 轮播 点击左右按钮
+        var left = document.querySelector(".left");
+        var right = document.querySelector(".right");
+        var index = 0;
+        
+        right.onclick = function () {
+            if (index == 3) {
+                ul.style.left = 0;
+                index = 0;
+            }
+            index++;
+            a(index);
+            animate(ul, -index * ulisWth);
+        }
+
+        left.onclick = function () {
+            if (index == 0) {
+                ul.style.left = -3 * ulisWth + "px";
+                index = 3
+            }
+            index--;
+            a(index);
+            animate(ul, -index * ulisWth);
+        }
+        
+        // 7. 自动播放
+        var timeId = setInterval(function () {
+            right.onclick();
+        }, 3000)
+
+        box.onmouseover = function () {
+            clearInterval(timeId);
+        }
+        box.onmouseout = function () {
+            timeId = setInterval(function () {
+                right.onclick();
+            }, 3000)
+        }
+
+
+// 函数
+        // 5. 圆点同步
+        function a (index) {
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].className = "";
+            }
+            if ( index == 3) {
+                lis[0].className = "current";
+            } else {
+                lis[index].className = "current";
+            }
+        }
+
+
+        // 6. 动画函数
+        function animate (element, target) {
+            clearInterval(element.timeId);
+            element.timeId = setInterval(function () {
+                var current = element.offsetLeft;
+                var step = current < target ? 10 : -10;
+                if (Math.abs(current - target) >= Math.abs(step)) {
+                    current += step;
+                    element.style.left = current + "px";
+                } else {
+                    clearInterval(element.timeId);
+                    element.style.left = target + "px";
+                }
+            }, 20);
+        }
+    </script>
+</body>
+</html>  
