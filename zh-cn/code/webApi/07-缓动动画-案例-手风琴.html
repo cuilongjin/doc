@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #accordion {
+            width: 1200px;
+            height: 400px;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        #accordion li {
+            width: 1000px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+        
+</head>
+<body>
+    <div id="accordion">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        var lis = document.querySelectorAll("li");
+        for (var i = 0; i < lis.length; i++){
+            lis[i].style.background = "url(images/Google-" + (i + 1) + ".png";
+            lis[i].style.left = i * 200 + "px";
+            lis[i].index = i;
+            lis[i].onmouseover = function () {
+                console.log(this.index);
+                for (var i = 0; i < lis.length; i++) {
+                    if (i <= this.index) {
+                        // lis[i].style.left = i * 100 + "px";
+                        animate(lis[i], {"left" : i * 100});
+                    } else {
+                        // lis[i].style.left = i * 100 + 600 + "px";
+                        animate(lis[i], {"left" : i * 100 + 600});
+                    }
+                }
+            }
+            lis[i].onmouseout = function () {
+                for (var i = 0; i < lis.length; i++) {
+                    // lis[i].style.left = i * 200 + "px";
+                    animate(lis[i], {"left" : i * 200});
+                }
+            }
+        }
+
+        function animate (element, obj) {
+            clearInterval(element.timeId);
+            element.timeId = setInterval(function () {
+                var flag = true;
+                for (var key in obj) {
+                    var attribute = key;
+                    var target = obj[key];
+                    var current = window.getComputedStyle(element)[attribute];
+                    // console.log(attribute);
+                    // console.log(current); // 获取到的是字符串，带单位
+                    current = parseInt(current);
+                    var step = (target - current) / 10;
+                    step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                    current += step;
+                    console.log(current);
+                    element.style[attribute] = current + "px";
+                    // console.log(current);
+                    if (current != target) {
+                        flag = false;
+                    }
+                }
+                // 到达位置 清除定时器
+                if (flag == true) {
+                    clearInterval(element.timeId);
+                }
+            }, 15)
+        }
+    </script>
+</body>
+</html>  

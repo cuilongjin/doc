@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .box {
+            width: 500px;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        ul {
+            width: 3000px;
+            list-style: none;
+            position: absolute;
+        }
+        ul li {
+            float: left;
+            width: 500px;
+            height: 300px;
+        }
+        ul li:first-child,
+        ul li:last-child {
+            background-color: rgb(221, 81, 69);
+        }
+        ul li:nth-child(2) {
+            background-color: rgb(255, 205, 67);
+        }
+        ul li:nth-child(3) {
+            background-color: rgb(22, 160, 93);
+        }
+        ul li:nth-child(4) {
+            background-color: rgb(66, 133, 244);
+        }
+        ul li:nth-child(5) {
+            background-color: rgb(194, 66, 244);
+        }
+        ol {
+            height: 20px;
+            background-color: rgba(255, 255, 255, .3);
+            list-style: none;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
+        ol li {
+            width: 14px;
+            height: 14px;
+            float: left;
+            margin: 0 8px;
+            text-align: center;
+            line-height: 14px;
+            font-size: 12px;
+            user-select: none;
+            cursor: pointer;
+            margin-top: 3px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .5);
+        }
+        ol li.current {
+            background-color: #fff;
+        }
+
+        .left,
+        .right {
+            width: 30px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            line-height: 60px;
+            font-size: 30px;
+            cursor: pointer;
+            user-select: none;
+            color: rgba(255, 255, 255, .5)
+        }
+        .arrow {
+            display: none;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            right: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <!-- 轮播 图片 -->
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <!-- 1. 轮播图结构 小圆点 -->
+        <ol></ol>
+
+        <!-- 3. 轮播结构 左右箭头 -->
+        <div class="arrow">
+            <span class="left">&lt;</span>
+            <span class="right">&gt;</span>
+        </div>
+    </div>
+    <script>
+        var box = document.querySelector(".box");
+        var ulis = document.querySelectorAll("ul li");
+        var ulisWth = ulis[0].offsetWidth;
+        var ul = document.querySelector("ul");
+        var ol = document.querySelector("ol");
+
+ 
+        // 2. 轮播 点击圆点切换
+        // 2.1 根据 ulis 个数创建圆点
+        for (var i = 0; i < ulis.length; i++) {
+            var oli = document.createElement("li");
+            oli.innerText = i + 1;
+            ol.appendChild(oli);
+        }
+        var olis = document.querySelectorAll("ol li");
+        olis[0].className = "current";
+
+        // 2.2 遍历注册事件
+        for (var i = 0; i < olis.length; i++) {
+            olis[i].index = i;
+            olis[i].onclick = function () {
+                for (var i = 0; i < olis.length; i++) {
+                    olis[i].className = "";
+                }
+                this.className = "current";
+                animate2(ul, -this.index * ulisWth);
+                
+                // 同步 index
+                index = this.index
+            }
+        }
+        
+        // 轮播 点击左右箭头
+        var left = document.querySelector(".left");
+        var right = document.querySelector(".right");
+        var uli = ulis[0].cloneNode(true);
+        ul.appendChild(uli);
+        var index = 0;
+        left.onclick = function () {
+            if (index == 0) {
+                ul.style.left = -5 * ulisWth + "px";
+                index = 5;
+            }
+            index--;
+            a(index);
+            animate2(ul, -index * ulisWth);
+        }
+
+        right.onclick = function () {
+            if (index == 5) {
+                ul.style.left = 0;
+                index = 0;
+            }
+            index++;
+            // console.log(index);
+            a(index);
+            animate2(ul, -index * ulisWth);
+        }
+        // 自动播放
+        var arrow = document.querySelector(".arrow");
+        // console.log(arrow);
+        var timeId = setInterval(function () {
+            right.onclick()
+        }, 3000)
+        box.onmouseover = function () {
+            clearInterval(timeId);
+            arrow.style.display = "block";
+        }
+        box.onmouseout = function () {
+            timeId = setInterval(function () {
+                right.onclick();
+            }, 3000)
+            arrow.style.display = "none";
+        }
+
+// 函数
+
+        // 函数 同步小圆点
+        function a(index) {
+            for (var i = 0; i < olis.length; i++) {
+                olis[i].className = "";
+            }
+            if (index == 5) {
+                index = 0;
+                olis[index].className = "current";
+            } else {
+                olis[index].className = "current";
+            }
+        }
+
+        // 函数 动画
+        function animate (element, target) {
+            clearInterval(element.timeId);
+            element.timeId = setInterval(function () {
+                var current = element.offsetLeft;
+                var step = current < target ? 20 : -20;
+                if (Math.abs(current - target) >= Math.abs(step)) {
+                    current += step;
+                    element.style.left = current + "px";
+                } else {
+                    clearInterval(element.timeId);
+                    element.style.left = target + "px";
+                }
+            }, 20);
+        }
+
+
+        function animate2(element, target) {
+            clearInterval(element.timeId);
+            element.timeId = setInterval(function () {
+                var current = element.offsetLeft;
+                var step = (target - current) / 10;
+                //当step>0,对step向上取整,否则向下，保证至少走1px
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                current += step;
+                element.style.left = current + "px";
+                if (current == target) {
+                clearInterval(element.timeId);
+                }
+            }, 15);
+        }
+    </script>
+</body>
+</html>  

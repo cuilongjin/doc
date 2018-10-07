@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            font-size: 15px;
+            text-align: center;
+            line-height: 100px;
+            background-color: rgb(221, 81, 69);
+            color: rgb(255, 205, 67);
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <button>点击文字变大</button>
+    <button>点击变宽</button>
+    <div class="box">哈哈</div>
+    <script>
+        var btn1 = document.querySelectorAll("button")[0];
+        var btn2 = document.querySelectorAll("button")[1];
+        var box = document.querySelector(".box");
+        
+        btn1.onclick = function () {
+            animate(box, "fontSize", 50);
+           
+        }
+        
+        btn2.onclick = function () {
+            animate(box, "width", 200);
+        }
+        
+        function animate (element, attribute, target) {
+            clearInterval(element.timeId);
+            element.timeId = setInterval(function () {
+                var current = window.getComputedStyle(element)[attribute];
+                // console.log(attribute);
+                // console.log(current); // 获取到的是字符串，带单位
+                current = parseInt(current);
+                
+                var step = (target - current) / 10;
+
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                // if (step > 0) {
+                //     // 向上取整
+                //     step = Math.ceil(step);
+                // } else {
+                //     // 向下取整
+                //     step = Math.floor(step);
+                // }
+
+                current += step;
+                console.log(current);
+                element.style[attribute] = current + "px";
+                // console.log(current);
+
+                // 到达位置 清除定时器
+                if (current == target) {
+                    clearInterval(element.timeId);
+                }
+            }, 15)
+        }
+    </script>
+</body>
+</html>  

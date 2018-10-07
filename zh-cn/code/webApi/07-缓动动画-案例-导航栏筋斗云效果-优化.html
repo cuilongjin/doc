@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            background-color: #333;
+        }
+        ul {
+            list-style: none;
+            position: relative;
+        }
+        .nav {
+            width: 415px;
+            margin: 100px auto;
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav li {
+            width: 83px;
+            height: 42px;
+            text-align: center;
+            line-height: 42px;
+            float: left;
+            cursor: pointer;
+        }
+        #cloud {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 83px;
+            height: 42px;
+            background: url(images/cloud.gif) no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <span id="cloud"></span>
+        <ul id="navBar">
+            <li>哈哈</li>
+            <li>哈哈</li>
+            <li>哈哈</li>
+            <li>哈哈</li>
+            <li>哈哈</li>
+        </ul>
+    </div>
+    <script>
+        var lis = document.querySelectorAll("li");
+        var span = document.querySelector("span");
+        var spanWth = span.offsetWidth;
+            
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].onclick = function () {
+                positionLeft = this.offsetLeft;
+            }
+            var positionLeft = 0;
+            lis[i].onmouseover = function () {
+               animate(span, this.offsetLeft);
+            }
+            lis[i].onmouseout = function () {
+                animate(span, positionLeft)
+            }
+        }
+        
+        // 动画 函数
+        function animate (element, target) {
+            clearInterval(element.timeId);
+            element.timeId = setInterval(function () {
+                var current = element.offsetLeft;
+
+                // offset 获取到的是整数,导致无法到达 target 位置
+                var step = (target - current) / 10;
+
+                step = step > 0 ? Math.ceil(step) : Math.floor(step);
+                // if (step > 0) {
+                //     // 向上取整
+                //     step = Math.ceil(step);
+                // } else {
+                //     // 向下取整
+                //     step = Math.floor(step);
+                // }
+
+                current += step;
+                element.style.left = current + "px";
+                // console.log(current);
+
+                // 到达位置 清除定时器
+                if (current == target) {
+                    clearInterval(element.timeId);
+                }
+            }, 15)
+        }
+    </script>
+</body>
+</html>  
