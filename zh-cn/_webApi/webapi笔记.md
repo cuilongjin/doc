@@ -2,7 +2,7 @@
 
 **API**（Application Programming Interface,应用程序编程接口）,
 
-**API是一些预先定义的方法，这些方法能够实现某些特定的功能**
+**API 是一些预先定义的方法，这些方法能够实现某些特定的功能**
 
 - 任何开发语言都会提供自己的API 
 - API的特征输入和输出(参数/返回值)
@@ -541,21 +541,6 @@ div.style.cssText = 'background:red;color:yellow';
 
 #### 孩子节点
 
-- ul.childNodes ：获取第一个子节点  (不常用)
-
-- ul.firstChild ： 获取最后一个子节点  (不常用)
-
-- console.log(ul.lastChild);
-  ​      
-
-    // 获取所有的子元素，兼容性：IE678会把注释节点算上
-    console.log(ul.children);
-    // 获取第一个子元素 有兼容性问题（IE678） 
-    console.log(ul.firstElementChild);
-    // 获取最后一个子元素 有兼容性问题（IE678） 
-    console.log(ul.lastElementChild);
-    // 获取第n个子元素 有兼容性问题（IE678）
-    console.log(ul.children[n]);  
 
 ```html
 <ul >
@@ -926,9 +911,9 @@ clearInterval(timerId) // 清除上面的定时器
 >
 > location 其实对应的就是浏览器中的地址栏
 
+
+
 ### 常用属性和方法
-
-
 
 - location.href : 控制地址栏的地址
 
@@ -1052,33 +1037,106 @@ console.log(screen.availHeight);//浏览器可占用的高度
 
 
 
+## 缓动动画
+
+### 缓动动画初体验
+
+动画公式 :
+
+```js
+var step = (target-current)/10;
+current += step;
+```
+
+[案例演示 : ]
+
+```
+1. 三步走 
+- 获取当前位置
+- 累加小碎步
+- 重复赋值回去
+2. 定时器
+```
+
+**缺点** : 打开控制台, 查看盒子的结构行内样式left, 发现并没有跑到400px, 只能跑到396.4/395.5;
+
+**原因** : offsetLeft获取值的时候, 只会获取整数 ,  (对小数部分会四舍五入,整数有时候往上取整,有时候往下取整);   **可以在获取的offset地方打印查看**
 
 
 
+### 缓动动画 - 移动400位置
+
+动画公式 : 
+
+```js
+var step =  (target-current)/10;
+    step = Math.ceil(step); // 往上取整 
+current += step;
+
+// 为什么往上取整 :
+//1. 如果不取整,,赋值为小数的话,下次取值还是会取个 整数回来,,这就是之前的缺点
+//2. 往上取整的额原因是 : (400-395)/10 = 0.5 如果往下取整为0  那就不会走了,,所以
+//为了保证 可以走,,往上取整 取 1  步数 为 1
+```
+
+案例演示 注意点 :  
+
+```js
+1.查看位置 : left有时候为 395.5/ 396.4 
+2.打印: offsetLeft  => 395 / 396
+2.step为整数  往上取整 
+```
+
+### 缓动动画 - 回到0点位置
+
+动画公式 : 
+
+```js
+var step =  (target-current)/10;
+    step = Math.floor(step) ;//往下取整
+ current += step;  
+
+// 为什么往下取整 :
+//1. 如果不取整,,赋值为小数的话,下次取值还是会取个 整数回来,,这就是之前的缺点
+//2. 往上取整的额原因是 : (0-5)/10 = -0.5 如果往上取整为0  那就不会走了,,所以
+//为了保证 可以走,,往下取整 : 取 -1    步数 为 -1
+```
+
+案例演示注意点 : 
+
+```js
+1. 先把盒子 设置 left : 400px 位置;  回到0位置
+2. 查看位置 : left有时候为 4.5
+3. 打印: offsetLeft  => 5
+4. step为整数  往下取整 
+```
 
 
 
+### 缓动动画 - 封装函数:
 
+```js
+function animate(element, target) {
+    if(element.timerId){
+        clearInterval(element.timerId);
+	}
+    element.timerId = setInterval(function () {
+        //1. 获取当前位置
+        var current = element.offsetLeft;
+        //2. 累加小碎步
+        var step = (target - current) / 10;
+        // 往上取整 ? 为什么,,,因为 0.5 如果网下取整也是0 ,,不会走
+        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+        current += step; //1
+        //3. 重新赋值
+        element.style.left = current + 'px'; //400
+        if (current == target) {
+          clearInterval(element.timerId);
+        }
+    }, 15);
+}
+```
 
+[案例 : 筋斗云]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[案例：开机提示关闭]
