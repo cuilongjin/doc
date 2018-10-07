@@ -381,6 +381,12 @@ function getSum(a, b) {
 // getSum(20, 30); // 50
 var result = getSum(20, 30);
 console.log(result); // undefined
+
+// 函数参数没有传入
+function f(i) {
+    console.log(i);
+	}
+f(); // undefined
 ```
 
 
@@ -405,7 +411,7 @@ console.log(result); // undefined
 2. 调用String()构造函数（显式转换）
 
    ```javascript
-   va str1 = String(a);
+   var str1 = String(a);
    console.log(typeof str1); // string
    ```
 
@@ -427,10 +433,8 @@ console.log(result); // undefined
 1.  Number(a) 
 
 ```javascript
-var a = "123"
-var b = "123c"
-var num1= Number(a);
-var num2= Number(b);
+var num1= Number("123");
+var num2= Number("123c");
 console.log(typeof num1); // number
 console.log(typeof num2); // NaN
 // 如果字符串不能转换成合法数字，转换结果为NaN
@@ -439,15 +443,12 @@ console.log(typeof num2); // NaN
 2. 使用 parseInt()
 
 ```javascript
-var b = "12.3";
-var num2 = parseInt(b);
+var num2 = parseInt("12.3");
 console.log(typeof num2); // number
 console.log(num2); //12 只保留整数
 
-var c = "15xyz";
-var d = "15x6yz";
-var num3 = parseInt(c);
-var num4 = parseInt(d);
+var num3 = parseInt("15xyz");
+var num4 = parseInt("15x6yz");
 console.log(typeof num3); // number
 console.log(num3); // 15
 console.log(num4); // 15
@@ -458,8 +459,7 @@ console.log(num4); // 15
 3. 使用 parseFloat() 完成
 
 ```javascript
-var c = "12.34";
-var num3 = parseFloat(c);
+var num3 = parseFloat("12.34");
 console.log(typeof num3);  // number
 console.log(num3);  // 12.34 可以保留小数位
 ```
@@ -533,6 +533,23 @@ if("") {
 ```
 
 
+
+## 变量转换表
+
+| Value     | Boolean  | Number   | String            |
+| --------- | -------- | -------- | ----------------- |
+| undefined | false    | NaN      | "undefined"       |
+| null      | false    | **0**    | "null"            |
+| true      | true     | 1        | "true"            |
+| false     | false    | 0        | "false"           |
+| ""        | false    | 0        | ""                |
+| "123"     | true     | 123      | "123"             |
+| "1a"      | true     | NaN      | "1a"              |
+| 0         | false    | 0        | "0"               |
+| 1         | true     | 1        | "1"               |
+| Infinity  | true     | Infinity | "Infinity"        |
+| NaN       | false    | NaN      | "NaN"             |
+| {}        | **true** | NaN      | "[object Object]" |
 
 
 
@@ -1881,8 +1898,8 @@ console.log(obj1.a);//3 // 同时也会影响到 obj1
 
 原始数据类型和引用数据类型，主要是根据内存存储方式来区分的。
 
-- 变量在存储原始数据类型的时候，存的是**值本身**（值类型），进行赋值的时候，赋值的是值本身
-- 变量在存储引用数据类型的时候，存的是**引用**，也叫**地址**，进行赋值的时候，赋值的是地址，而不是数据本身
+- 原始类型储存在栈（Stack）中，存的是**值本身**（值类型），进行赋值的时候，赋值的是值本身
+- 引用类型储存在堆（Heap）中，并非储存变量真实数值而是**引用**，也叫**地址**，进行赋值的时候，赋值的是地址，而不是数据本身
 
 
 
