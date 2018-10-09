@@ -242,15 +242,30 @@ document.querySelectorAll(".box");
 
 ## 事件学习
 
-### 焦点事件 : onfocus 和 onblur
+### 焦点事件
 
-- **onfocus**   :  当前元素 **获得焦点** 时会触发`onfocus`事件
-- **onblur**     :  当前元素 **失去焦点 **时会触发`onblur`事件
+- `onfocus`  :  当前元素 `获得焦点` 时触发事件
+- `onblur`  :  当前元素 `失去焦点` 时触发事件
 
-### 鼠标事件  onmouseover 和  onmouseout
+### 鼠标事件
 
-- **onmouseover **   :  当 **鼠标在元素上方** 会触发 **onmouseover **  事件
-- **onmouseout **     :  当 **鼠标离开**  会触发 **onmouseout** 事件
+* `onclick` : 单击事件
+* `ondblclick` ：双击事件
+* `onmouseover` :  当 `鼠标在元素上方` 时触发事件
+* `onmouseout` :  当 `鼠标离开` 时触发事件
+* `onmousedown` ：当 `鼠标按下` 时触发事件
+* `onmouseup`  ：放当 `鼠标抬起/鼠标释` 时触发事件
+* `onmousemove` ：放当 `鼠标移动` 时触发事件
+
+### 键盘事件
+
+* `onkeydown` 和 `onkeypress` ：当 `键盘按下` 时触发
+
+* `onkeyup`： 当 `键盘释放` 时触发
+
+
+
+
 
 ### 事件中的this 
 
@@ -981,12 +996,12 @@ console.log(screen.availHeight);//浏览器可占用的高度
 
 ## offset系列 (重要)
 
-> offset 系列用于用于获取元素自身的大小和位置，在webapi中有广泛应用
+> offset 系列用于用于**获取元素自身的大小和位置**，在webapi中有广泛应用
 > offset 系列主要有：offsetHeight、offsetWidth、offsetParent、offsetLeft、offsetTop
 
 ### offsetHeight 与 offsetWidth
 
-- 获取元素真实的高度和宽度
+- 获取元素真实的高度和宽度 (内容大小+border+padding)
 
 - 获取到的是数值类型，方便计算
 
@@ -1113,7 +1128,7 @@ var step =  (target-current)/10;
 
 
 
-### 缓动动画 - 封装函数:
+### 缓动动画 - 封装函数
 
 ```js
 function animate(element, target) {
@@ -1140,3 +1155,384 @@ function animate(element, target) {
 [案例 : 筋斗云]
 
 [案例：开机提示关闭]
+
+
+
+## 事件对象
+
+### 事件对象的概述
+
+> 在**触发某个事件**的时候，都会产生一个**事件对象Event**，这个对象中**包含所有与事件相关的一些信息**，包括触发事件的元素，事件的类型以及其他与事件相关的信息。
+
+**鼠标**事件**触发**时，事件对象中会包含**鼠标的位置信息**。
+
+**键盘**事件**触发**时，事件对象中会包含**按下的键相关的信息**。
+
+
+
+### 获取事件对象
+
+**现代浏览器获取 : (掌握)**
+
+```js
+// 给一个形参即可
+btn.onclick = function(event){
+    // event就是事件对象，里面包含了事件触发时的一些信息
+	console.log(event);
+}
+```
+
+**低版本浏览器 (ie678):  (了解)**
+
+```js
+btn.onclick = function(){
+	// IE678 通过 window.event 获取事件对象
+	console.log(window.event);
+}
+```
+
+**兼容性 :**
+
+```js
+btn.onclick = function(event){
+  	// 只要用到了事件对象，就要记得处理浏览器兼容性
+    // 低版本IE event 不存在为undefined
+	event = event || window.event;
+}
+```
+
+
+
+### 事件对象的常用属性
+
+> 事件对象中有很多很多的属性，但是很多属性并不常用。我们经常用到的是***鼠标位置信息*** 和***键盘码***  相关的信息。
+
+#### 鼠标位置信息
+
+- `clientX` 与 `clientY` ： 相对于浏览器可视区左上角的位置（常用）
+- `pageX` 与 `pageY` ：相对于网页内容（文档document）左上角的位置                    
+- `screenX` 与 `screenY` ：相对于屏幕左上角的位置
+
+
+
+```js
+document.onmousemove = function (event) {
+    console.log(event.clientX, event.clientY);
+    console.log(event.pageX, event.pageY);
+    console.log(event.screenX, event.screenY);
+}
+```
+
+![](/images/client和page和screen.png)
+
+**[案例 : 拖拽案例]**
+
+
+
+#### 键盘码
+
+```
+event.keyCode:键盘按下的那个键的键盘码
+```
+
+
+
+### 注册事件的两种方式
+
+#### on + 事件名称
+
+> onclick、onmouseover 这种 on+事件名称的方式注册事件几乎所有的浏览器都支持
+
+```javascript
+// 注册事件
+box.onclick = function(){
+	//事件处理程序	
+}
+// 移除事件
+box.onclick = null;	
+```
+
+on+事件名称注册事件的缺点：
+
+同一个元素同一类型的事件，只能注册一个，如果注册了多个，会出现覆盖问题
+
+#### addEventListener
+
+> 现代浏览器支持的注册事件的新方式，这种方式注册的事件不会出现覆盖问题。
+
+**addEventListener的语法**
+
+```js
+// type：事件的类型：click mouseover  字符串类型，不带 on
+// fn：函数，监听者，每次点击，这个函数就执行。
+element.addEventListener(type, fn);
+btn.addEventListener('click', function () {
+      console.log("哈哈"); 
+ })
+```
+
+**removeEventListen的语法**
+
+```js
+// type：事件的类型
+// fn：要移除的那个函数
+element.removeEventListener(type, fn);
+btn.removeEventListener('click', fn);
+// 注意 : 如果想让注册的事件能移除，不能用匿名函数。
+```
+
+低版本浏览器兼容问题:  (了解)
+
+> IE678不支持addEventListener与removeEventListen两个方法，但是支持attachEvent与detachEvnet
+
+attachEvent的用法：
+
+```javascript
+//type:事件类型   需要加上on   onclick  onmouseenter
+//fn:需要执行的那个事件
+attachEvent(type, fn);
+btn.attachEvent('onclick',function () {
+    alert("哈哈");
+});
+```
+
+detachEvent的用法
+
+```javascript
+// type:事件类型   需要加上on   onclick  onmouseenter
+// fn:需要执行的那个事件
+detachEvent(type, fn)
+```
+
+#### 兼容性封装（了解）
+
+```js
+//添加事件
+function addEvent(element, type, fn){
+    //能力检测
+    if(element.addEventListener){
+        element.addEventListener(type, fn, false);
+    }else if(element.attachEvent){
+        element.attachEvent("on"+type, fn);
+    }else {
+        //如果都不行，那就用on方式
+        element["on"+type] = fn;
+    }
+}
+
+//移除事件
+function removeEvent(element, type, fn) {
+    if(element.removeEventListener){
+        element.removeEventListener(type, fn, false);
+    }else if(element.detachEvent){
+        element.detachEvent("on"+type, fn);
+    }else {
+        element["on"+type] = null;
+    }
+}
+```
+
+
+
+## 事件流
+
+
+
+### 事件冒泡
+
+> 当一个元素的事件被触发时,同样的事件将会在该元素的所有祖先元素中依次被触发。这一过程被称为冒泡
+>
+> 说白了就是：**当我们触发了子元素的某个事件后，父元素对应的事件也会触发。** 
+
+on 创建的事件默认为冒泡，无法修改
+
+**[案例 : 弹窗案例]**
+
+
+
+#### 阻止事件冒泡  (掌握)
+
+**代码 :   event.stopPropagation();**
+
+```js
+//1. 因为是事件的冒泡,,因事件引起,也要因事件停止
+father/son/sun.onclick = function (event) {
+    event.stopPropagation();
+}
+// 参数3：true => 捕获 ， false => 冒泡（默认）
+father/son/sun.addEventListener("click", function(){}, 参数3);
+```
+
+
+
+### 事件捕获  (了解)
+
+> 事件冒泡 是 ie 提出来的
+>
+> ​    路径 :  触发事件的目标元素(son) > you > father > body > document
+>
+> 事件捕获是火狐提出来的
+>
+>    路径 : document > body >  father >you  > 触发事件的目标元素 (son)
+>
+> 解析 : 事件的处理将从DOM层次的根开始，而不是从触发事件的目标元素开始，事件被从目标元素的所有祖先元素依次往下传递
+
+
+
+```js
+// 当 addEventListener 第三个参数为 true 时，表示事件捕获
+arr[i].addEventListener("click", function () {
+    console.log(this);
+},true);
+```
+
+
+
+### 事件流的三个阶段 (掌握)
+
+> 1. 事件的捕获阶段
+> 2. 事件的目标阶段（触发自己的事件）
+> 3. 事件的冒泡阶段
+
+
+
+事件有三个阶段  : 
+
+- 捕获事件和冒泡事件都存在的话 , 首先发生的是捕获阶段, 然后是目标阶段,,最后才是冒泡阶段
+- addEventListener 第三个参数为是否捕获
+- 如果为true时, 表示该事件在捕获阶段发生
+- 如果为false时 , 表示该事件在冒泡阶段发生
+- 某一个事件只会执行一次
+
+
+
+## 三大家族
+
+### offset 家族  (都掌握)
+
+> offset系列用于用于获取  **元素自身的大小和位置**  ，在网页特效中有广泛应用
+>
+> offset家族主要有：offsetHeight、offsetWidth、offsetParent、offsetLeft、offsetTop
+
+**offsetHeight 与 offsetWidth**
+
+1. 获取的是元素真实的高度和宽度
+2. 获取到的是数值类型，方便计算
+3. offsetHeight与offsetWidth是只读属性，不能设置。
+
+**style.height 与 style.width**
+
+1. 只能获取行内样式
+2. 获取到的是字符串类型，需要转换
+
+**总结**
+
+```js
+//0. 要求 :  都要掌握
+//1. 获取以后用 : offsetWidth 和 offsetheight   
+                (内容大小+border+padding)
+//2. 设置以后用 : style.width 和 style.height
+```
+
+![offset](images/offset.png)
+
+### scroll 家族 (掌握1个)
+
+> scroll 家族是用来获取**盒子内容的大小和位置**
+>
+> scroll 家族主要有 :  scrollWidth、scrollHeight、scrollLeft、scrollTop
+
+**scrollWidth 与 scrollHeight**
+
+1. scrollWidth 与 scrollHeight 是盒子内容的真实的宽度和高度。与盒子大小无关，仅仅与盒子的内容有关系。 (padding + 内容)
+2. 如果内容不超过盒子，盒子高度就是 scrollHeight (宽度同理)
+3. 如果内容超过盒子， 内容高度就是scrollHieght
+
+**scrollTop**
+
+1. scrollTop 用于获取内容垂直滚动的像素数。如果没有滚动条，那么scrollTop值是0
+2. 内容超过盒子, 盒子设置 overflow:scroll 就可出现滚动条
+
+**scrollLeft**
+
+1. scrollLeft 用于获取内容水平滚动的像素数
+
+2. 浏览器切忌这种出现水平滚动条,用户体验极差,避免
+
+  ​    
+
+   ![scroll](images/scroll.png)
+
+**onscroll 事件**
+
+对于有滚动条的盒子, 可以使用 onscroll 注册滚动事件，每滚动一像素，就会触发该事件
+
+```js
+var div = doucment.getElementById(“div”);
+div.onscroll = function(){
+	console.log(div.scrollLeft);
+    console.log(div.scrollTop);
+}
+```
+
+
+
+**场景 :  获取页面被卷去的高度和宽度**
+
+> 通常来说，scroll 家族用的最多的地方就是用来获取页面 **被卷去的高度**，非常的常用
+
+- 对于老式的浏览器，需要获取 html 或者 body 的 scrollTop
+- 对于现在浏览器，使用 window.pageYOffset 进行获取
+
+页面被卷去的高度和宽度的兼容性封装
+
+```js
+// 给整个页面注册滚动事件
+document.onscroll = function() {
+	var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+	var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0；
+    console.log(scrollLeft,scrollTop);
+}
+```
+
+**[案例 : 固定导航案例]**
+
+
+
+### client 家族
+
+> clien t家族用于获取盒子可视区的大小 (内容 + padding)
+>
+> client 家族有 clientWidth、clientHeight、clientLeft、clientTop
+
+**clientWidth、clientHeight  可视区宽高**
+
+![client1](images/client1.png)
+
+
+
+**clientTop** 与 **clientLeft** 完全没有用，他们就是borderTop与borderLeft
+
+**onresize 事件：onresize 事件会在窗口被调整大小的时候发生。**
+
+```js
+window.onresize = function(){
+	//事件处理程序
+}
+```
+
+**场景 : client 系列一般用来获取页面的可视区宽高**
+
+> 低版本浏览器 :  获取的html 和 body
+>
+> 高版本的浏览器 : window.innerWidth  (掌握)
+
+```js
+// 因为求的是窗口大小所以用 window
+window.onresize =  function () {
+    var W = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    console.log(W);
+    var H = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    console.log(H);
+}
+```
