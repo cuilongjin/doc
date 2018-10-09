@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 属性1 : 键盘码  (事件对象的属性)
+        document.onkeyup = function (event) {
+            // 第一步 : 通过keyCode 获取按键对应的键盘码
+            console.log(e.keyCode);
+            // 82   71   66
+            // 需求 :  r:红色 g:绿色  b: 蓝色
+            // 第二步:判断
+            switch (event.keyCode) {
+                case 82:
+                    document.body.style.background = 'red';
+                    break;
+                case 71:
+                    document.body.style.background = 'green';
+                    break;
+                case 66:
+                    document.body.style.background = 'blue';
+                    break;
+                default:
+                    document.body.style.background = '';
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

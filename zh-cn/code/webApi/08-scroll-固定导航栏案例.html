@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .top {
+            height: 100px;
+            width: 100%;
+            background-color: rgb(233, 204, 76);
+        }
+        .nav {
+            height: 100px;
+            background-color: rgb(0, 255, 234);
+            width: 100%;
+        }
+        .main {
+            height: 2000px;
+            background-color: rgb(230, 74, 113);
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="top" id="topPart"></div>
+    <div class="nav" id="navBar"></div>
+    <div class="main" id="mainPart">
+        <h1>哈哈</h1>
+        <h1>哈哈</h1>
+        <h1>哈哈</h1>
+        <h1>哈哈</h1>
+        <h1>哈哈</h1>
+        <h1>哈哈</h1>
+    </div>
+    <script>
+        
+        //思路 : 
+        //1. 获取网页被浏览器卷去的部分 scrollTop
+        //2.  scrollTop > topPart的高度 => navBar固定定位
+        //3.  scrollTop <= topPart的高度 => navbar取消定位
+
+        //1. 获取元素
+        var topPart = document.querySelector('#topPart');
+        var navBar = document.querySelector('#navBar');
+        var mainPart = document.querySelector('#mainPart');
+        //2. 给document注册onscroll事件,,随机获取scrollTop
+        document.onscroll = function () {
+            // 3. 获取scrollTop
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            
+            //4. 比较 
+            if (scrollTop > topPart.offsetHeight) {
+                // 导航固定
+                navBar.style.position = 'fixed';
+                navBar.style.top = 0;
+                mainPart.style.marginTop = navBar.offsetHeight + 10 + 'px';
+                
+            } else {
+                // 导航定位取消
+                navBar.style.position = '';
+                mainPart.style.marginTop = '10px';
+            }  
+        }
+    </script>
+</body>
+
+</html>

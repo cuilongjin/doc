@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+        // 窗口可视区大小
+        var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        console.log(w);
+        // 给窗口注册事件 调整窗口大小
+        window.onresize = function () {
+            var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;  
+            var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            console.log(w, h);
+        }
+   </script>
+</body>
+
+</html>

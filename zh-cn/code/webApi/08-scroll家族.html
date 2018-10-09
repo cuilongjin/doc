@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+            overflow: scroll;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+    </div>
+   <script>
+        var div = document.querySelector("div");
+        console.log(div.scrollWidth);
+        console.log(div.scrollHeight);
+        console.log(div.scrollLeft);
+        console.log(div.scrollTop);
+
+        // 注册滚动事件
+        // 只要一滚动,就会触发事件
+        div.onscroll = function () {
+            console.log(div.scrollTop);
+        }
+
+
+   </script>
+</body>
+
+</html>
