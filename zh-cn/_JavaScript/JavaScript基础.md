@@ -169,35 +169,6 @@ var b = 20;
 
 
 
-## typeof 操作符
-
-> 是一个操作符而不是函数，圆括号可以使用，但不是必需的
-
-```javascript
-var num;
-typeof (num); // undefined
-typeof (num1); // undefined
-// 对未初始化和未声明的变量执行 typeof 操作符都返回 undefined 值
-
-var num = 1;
-typeof num; // number
-
-var num = '1';
-typeof num; // string
-
-var flag = true;
-typeof flag; // bollean
-
-typeof true; // boolean
-
-typeof null; // object //null 被认为是一个空的对象引用
-
-var cat = {name:'kitty'};
-typeof cat; // object
-```
-
-
-
 ## Number
 
 * 浮点数
@@ -390,6 +361,33 @@ f(); // undefined
 ```
 
 
+
+## typeof 操作符
+
+> 是一个操作符而不是函数，圆括号可以使用，但不是必需的
+
+```javascript
+var num;
+typeof (num); // undefined
+typeof (num1); // undefined
+// 对未初始化和未声明的变量执行 typeof 操作符都返回 undefined 值
+
+var num = 1;
+typeof num; // number
+
+var num = '1';
+typeof num; // string
+
+var flag = true;
+typeof flag; // bollean
+
+typeof true; // boolean
+
+typeof null; // object //null 被认为是一个空的对象引用
+
+var cat = {name:'kitty'};
+typeof cat; // object
+```
 
 
 
@@ -619,15 +617,14 @@ alert(result); // true 输出Boolean类型
 
   在比较前先执行类型转换
 
-    * 如果有一个操作数是布尔值，则在比较相等性前先将其转换为**数值**---false转换为0，true转换为1；  
-
-    * 如果一个操作数是字符串，另一个操作数是数值，则在比较相等性前将字符串转换为数值；
+    * 如果有一个操作数是**布尔值**，则在比较相等性前先将其转换为**数值**---false转换为0，true转换为1；  
+    * 如果一个操作数是**字符串**，另一个操作数是**数值**，则在比较相等性前将字符串转换为**数值**；
     * 如果两个值都是字符串，则按照字符串的字符编码进行逐位比较
-    * 如果一个操作数是对象，另一个不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面的规则比较；  
+    * 如果一个操作数是对象，另一个不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面的规则比较；
+    * 如果两个操作数都是对象，则比较它们是否指向同一个对象
     * **null和undefined是相等的**；  
     * 在比较相等性之前，不能将null和undefined转换为其他任何值;  
     * 如果有一个操作符是NaN，则相等操作符返回false，不相等操作符返回true；即使两个操作数都是NaN,也一样；  
-    * 如果两个操作数都是对象，则比较它们是否指向同一个对象
 
 
 * `===` 全等、`！===` 不全等
@@ -637,6 +634,7 @@ alert(result); // true 输出Boolean类型
 1 == true;//true
 2 == true;//false
 
+false == "0"; // true
 '' == 0;//true
 '4' == 4;//true
 
@@ -649,6 +647,11 @@ null == 0;//false
 NaN == NaN;//false
 NaN != NaN;//true
 // x !== x 成立的唯一情况是 x 的值为 NaN
+
+[] == [];// false
+{} == {};// false
+1 == [];// false
+1 == [1];// true
 
 -0 === 0; // true
 "4" === 4;//false
@@ -696,6 +699,18 @@ var num = 0;
 var result = "" && num++; //""   num = 0 
 ```
 
+`&&` 使用場景
+
+```javascript
+function animate(fn){
+    fn && fn();
+}
+// 不传参数不会报错
+animate();
+```
+
+
+
 * `||` 如果第一个值转换成boolean值之后为true， 则输出第一个值，且第二个值不在执行；如果第一个值转换成boolean值之后为false，则输出第二个值，以此类推，（取第一个为true的值，如果都为false ，则输出最后一个值。）
 
 ```javascript
@@ -708,6 +723,20 @@ var result = numm || true; //true
 
 var num = 0;
 var result = 3 || num++; //3  num=0
+```
+
+`||` 使用场景
+
+```javascript
+// 1.兼容性问题：
+var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+
+// 2. 函数的参数默认值
+function sum(n){
+    n = n || 10; // 给形参 n 设置默认值
+    console.log(n + 10);
+}
+sum();
 ```
 
 
