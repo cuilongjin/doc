@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        table {
+            width: 500px;
+            border-collapse: collapse;
+        }
+        th {
+            background: rgb(118, 4, 153);
+        }
+        th, td {
+            border: 1px solid #000;
+            text-align: center;
+        }
+        .red {
+            background-color: #f00;
+        }
+        .yellow {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span>请输入姓名：</span>
+        <input type="text">
+        <br>
+        <span>请输入姓名：</span>
+        <input type="text">
+        <br>
+        <span>请输入姓名：</span>
+        <input type="text">
+        <br>
+        <span>请输入姓名：</span>
+        <input type="text">
+        <br>
+        <button>添加</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>邮箱</th>
+                <th>手机</th>
+                <th>地址</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="yellow">
+                <td>小黑</td>
+                <td>xoaohei@126.com</td>
+                <td>19999999999</td>
+                <td>北京</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        var btn = document.querySelector("button");
+        var tbody = document.querySelector("tbody");
+        var inputs = document.querySelectorAll("input");
+        var index = 0;
+        btn.onclick = function () {
+            var tr = document.createElement("tr");
+            var flag = true;
+            for (var i = 0; i < inputs.length; i++) {
+                var td = document.createElement("td");
+                td.innerText = inputs[i].value;
+                tr.appendChild(td);
+                // ？ inputs[i].value 去掉首尾空格
+                if (inputs[i].value == "") {
+                    flag = false;
+                }
+            }
+            if (flag == true) {
+                tbody.appendChild(tr);
+                index++;
+            } else {
+                alert("请将数据填入完全");
+            }
+            if (index % 2 == 1) {
+                tr.className = "red";
+            } else {
+                tr.className = "yellow";
+            }
+        }
+    </script>
+</body>
+</html>
