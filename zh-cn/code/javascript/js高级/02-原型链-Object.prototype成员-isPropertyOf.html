@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // isPrototypeOf()
+        // 语法： 对象A.isPrototypeOf(对象B)
+        // 作用： 对象A是否在对象B的原型链上，说白了，就是A是否是B的祖宗。
+
+        function Person(){
+
+        }
+        var p = new Person();
+
+        // p 的原型链： 
+        // p ==> Person.prototype ==> Object.prototype ==> null;
+
+        console.log(Person.isPrototypeOf(p)); // false Person是构造函数
+        console.log(Person.prototype.isPrototypeOf(p)); // true 
+        console.log(Object.prototype.isPrototypeOf(p)); // true
+
+
+        // 任何对象的原型链上都有 Object.prototype
+        console.log(Object.prototype.isPrototypeOf([])); // true
+
+    // instancesof
+        // 语法： 实例对象 instanceof 构造函数
+        // 作用： 判断构造函数的 prototype 属性是否在实例对象的原型链上。如果在，返回true
+
+        var p = new Person();
+
+        console.log(p instanceof Person);  // true
+        console.log(p instanceof Object); // true
+
+    // 两者作用是一样， 区别在于写法
+        // A.isPropertyOf(B);   判断的是A是否在B的原型链上， A 是个原型对象
+        // B instanceof A;      判断的是A的prototype属性是否在B的原型链上， A 是个构造函数
+
+        console.log(Array.isPrototypeOf([])); // false
+        console.log(Array.prototype.isPrototypeOf([])); // true
+
+        console.log([] instanceof Array); // true
+        console.log([] instanceof Array.prototype); // 语法错误，instanceof 的右边是个构造函数
+    </script>
+</body>
+
+</html>

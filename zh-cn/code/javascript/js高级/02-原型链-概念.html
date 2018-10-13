@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <script>
+        // 原型链
+        // 任何对象都有 __proto__ 属性， 指向了原型对象， 原型对象也有 __proto__ 属性，
+        // 指向了原型对象
+        // 的原型对象，原型对象也有自己的原型对象，这样形成的链式结构，我们叫做原型链 。
+
+        function Person(){
+
+        }
+        var p = new Person();
+
+        console.log(Person.prototype.__proto__); // 找爸爸
+        console.log(Person.prototype.__proto__ == Object.prototype); // true
+        console.log(Person.prototype.__proto__.constructor); // 找妈妈
+
+        console.log(Object.prototype.__proto__); // null
+
+        // 实例对象p的原型链： 
+        //  p ==> Person.prototype  ==> Object.prototype ==> null;
+
+
+        // 内置对象的原型链
+
+        // Array
+        var arr = new Array();
+        // console.log(Array.prototype.__proto__ === Object.prototype);
+        // 实例对象arr 的原型链
+        //  arr ==> Array.prototype ==> Object.prototype ==> null;
+
+        // Date
+        var date = new Date();
+        // 实例对象 date 的原型链：
+        //  date ==> Date.prototype ==> Object.prototype ==> null;
+
+        // Math  , 是个内置对象， 不是个构造函数，不能够new
+        // var math = new Math();
+        console.log(Math.__proto__.constructor);
+
+        // Math 的原型链：
+        //  Math ==> Object.prototype ==> null;
+
+        // 总结： 任何对象的原型链上都有 Object.prototype
+    </script>
+</body>
+
+</html>

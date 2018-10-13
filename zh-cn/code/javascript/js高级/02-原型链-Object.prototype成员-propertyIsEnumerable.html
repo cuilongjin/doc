@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // propertyIsEnumerable() 的使用
+        //  语法： 对象.propertyIsEnumerable("属性");
+        //  作用： 判断对象的该属性是否可遍历
+            // 该方法内部会做两件事情
+            //  1. 判断该属性是否是对象自身的
+            //  2. 判断该属性是否可遍历
+            //  只有上面两个条件都满足了才返回true
+
+        Object.prototype.name = "zs";
+        for(var k in Object.prototype){
+            console.log(k);
+            // 只打印出了 name
+            // 实际上有好多属性，（从颜色上可以辨别是否可遍历）
+        }
+
+        function Person(name){
+            this.name = name;
+        }
+        Person.prototype.age = 19;
+        var p = new Person("lw");
+        for(var k in p){
+            console.log(k); // name age
+        }
+        console.log(p.propertyIsEnumerable("name")); // true
+        console.log(p.propertyIsEnumerable("age")); // false
+    </script>
+</body>
+
+</html>

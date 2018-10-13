@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // toString  tolocaleString  valueOf  来源于 Object.prototype
+
+    // valueOf() 
+        // 语法： 对象.valueOf()
+        // 作用： 返回对象的原始值（简单数据类型）,默认的 valueOf 方法（Object.prototype 上的valueOf 方法）只会返回对象自身
+        // 日期对象的 valueOf 方法返回的是时间戳，因为 Date 的原型链上有自己的valueOf方法，该valueOf的作用就是返回日期的时间戳
+
+        var obj = {
+            name: "zs",
+            age: 19
+        }
+        // obj ==> Object.prototype ==> null;
+        console.log(obj.valueOf()); // obj
+
+        var arr = [1,2,3];
+        // arr ==>  Array.prototype ==> Object.prototype ==> null;
+        console.log(arr.valueOf()); // arr
+
+        var date = new Date();
+        // date 原型链
+        // date ==> Date.prototype ==> Object.prototype ==> null;
+        console.log(Date.prototype); // 含有 valueOf 方法
+        console.log(date.valueOf()); // 时间戳
+
+    // toString()  ==> 返回对象的字符串格式
+        //  每个内置对象的原型上都有属于自己的toString 方法
+        // toLocaleString() 和 toString作用一样， 但是在Date上有区别
+
+        var obj = {
+            name: "zs",
+            age: 19
+        }
+        // obj ==> Object.prototype ==> null;
+        console.log(obj.toString()); // "[object Object]"
+        console.log(obj.toLocaleString()); // "[object Object]"
+
+        var arr = [1,2,3];
+        // arr ==>  Array.prototype ==> Object.prototype ==> null;
+        //           toString()            toString()
+        console.log(Array.prototype); // 含有自己的 toString 方法
+        console.log(arr.toString());  // "1,2,3"
+        console.log(arr.toLocaleString());  // "1,2,3"
+
+        var date = new Date();
+        //  date ==> Date.prototype ==> Object.prototype ==> null;
+        //           toString()               toString()
+        console.log(Date.prototype); // 含有自己的 toString 方法
+        console.log(date.toString()); // Wed Oct 10 2018 16:00:51 GMT+0800 (中国标准时间)
+        console.log(date.toLocaleString()); // 2018/10/10 下午4:00:51 得到的是本地时间格式
+
+
+    // valueOf 和 toString 的应用 1
+        // 当对象在参与运算和比较的时候，js内部会自动的调用 valueOf 和 toString 方法
+        // 调用规则：
+        //  1. 默认先调用 vauleOf， 尝试将对象转成简单数据类型， 如果没有转成简单数据类型， 会继续在调用 toString 方法
+        //  2. 如果 valueOf 和 toString 方法都没有转成简单数据类型，会报错
+
+        var obj = {
+            name: "zs",
+            money: 12000
+        }
+
+        console.log(obj + 1); // "[object Object]" + 1  ==> "[object Object]1"
+        // obj.valueOf()  ==> obj
+        // obj.toString()  ==> "[object Object]"
+
+        console.log(obj - 0); // NaN - 0  ==> NaN
+        // obj.valueOf()  ==> obj
+        // obj.toString()  ==> "[object Object]"
+        // "[object Object]" ==> 数字 ==> NaN
+
+        // 比较运算符的比较规则的第四条：都转成数值进行比较
+        console.log(false == []); // true
+        // false ==> 0
+        // [].valueOf() ==> []
+        // [].toString() ==> ""
+        // ""  ==>  +""  ==> 0
+
+        console.log(false == {}); // false
+        // false ==> 0
+        // {}.valueOf()  ==> {}
+        // {}.toString() ==> "[object Object]"
+        // "[object Object]"  ==>  +"[object Object]"  ==> NaN
+
+
+    // valueOf 和 toString 的应用 2
+        var obj = {
+            name: "lw"
+        }
+        // 1. 给obj 对象自身添加了 valueOf 方法，并且有返回值
+        obj.valueOf = function(){
+            console.log("valueOf 方法被调用了");
+            return 1;
+            // return [];
+        }
+        console.log(obj + 1); // 2   
+        // obj.valueOf();  // valueOf 来源于obj 对象自身的
+
+        // 2. 给obj 对象自身添加了 valueOf 方法，没有返回值
+        obj.valueOf = function(){
+            console.log("valueOf 方法被调用了");
+            // 函数没有返回值， 默认返回 undefined （简单数据类型）
+        }
+        console.log(obj + 1); // NaN
+        
+        // 3. 
+        obj.valueOf = function(){
+            console.log("valueOf 方法被调用了");
+            return [];
+        }
+        obj.toString = function(){
+            console.log("toString 方法被调用了");
+            // return "1";
+            // return {};
+        }
+        console.log(obj + 1); // NaN
+        
+        // 4. 
+        obj.valueOf = function(){
+            console.log("valueOf 方法被调用了");
+            return [];
+        }
+        obj.toString = function(){
+            console.log("toString 方法被调用了");
+            return {};
+        }
+        console.log(obj + 1); // 报错
+        
+        // 5. 
+        obj.valueOf = function(){
+            console.log("valueOf 方法被调用了");
+            return [];
+        }
+        obj.toString = function(){
+            console.log("toString 方法被调用了");
+            return "1";
+        }
+        console.log(obj + 1); // 11
+    </script>
+</body>
+
+</html>

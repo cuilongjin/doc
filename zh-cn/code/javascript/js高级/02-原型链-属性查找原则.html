@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <script>
+        // 属性搜索（查找）原则： 沿着原型链进行查找
+        //  1. 首先在当前对象上查找是否有该属性，如果有，直接返回属性值
+        //  2. 如果没有，去对象的原型上查找，如果有，直接返回属性值
+        //  3. 如果也没有， 沿着原型链进行查找，在哪一层查找到了，就返回属性值，直到 Object.prototype 
+        //  4. 如果还没有，返回undefined
+
+        function Person(name, age){
+            this.name = name;
+            this.age = age;
+        }
+        Person.prototype.name = "zs";
+        Object.prototype.gender = "male";
+
+        var p = new Person("ls", 19);
+        var p1 = new Person(); 
+        console.log(p);
+
+        // p 的原型链：
+        //  p ==> Person.prototype ==> Object.prototype ==> null;
+
+        console.log(p.name); // ls
+        console.log(p.age);  // 19
+        console.log(p.gender); // male
+        console.log(p.sex);   // undefined
+        
+        console.log(p1.name); // undefined
+        console.log(p1.age);  // undefined
+        // p1 对象依旧有 name 和age 属性， 只不过属性值都是 undefined
+        console.log(p1.gender); // male
+        console.log(p1.sex);   // undefined
+
+
+        // 属性设置（修改）原则：如果有，就覆盖。 没有就添加
+        //  1. 如果对象没有该属性，给对象添加了该属性
+        //  2. 如果对象有该属性， 覆盖了原来的属性值
+
+        p.gender = "不详";
+        console.log(p);
+        // console.log(p.gender); // 不详
+
+        p.name = "ww";
+        console.log(p);
+        // console.log(p.name); // ww
+    </script>
+</body>
+
+</html>

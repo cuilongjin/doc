@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 给对象添加不可遍历的属性
+        //  Object.defineProperty();
+        //  语法： Object.defineProperty(obj, prop, desc);
+        //  参数：
+        //      obj： 给哪个对象添加属性
+        //      prop：属性， 类型是字符串
+        //      desc： 属性描述符， 类型是个对象
+        //  作用： 定义对象的属性特征
+
+        var obj = {
+            name: "zs",
+            age: 19
+        }
+
+        // 给obj 添加一个不可遍历的 gender 属性
+        Object.defineProperty(obj, "gender", {
+            value: "female", // 配置该属性的默认值
+            writable: true, // 配置该属性是否可以被修改， 默认值是false， 不可修改
+            enumerable: true // 配置该属性是否可遍历， 默认值是false， 不可遍历
+        });
+        obj.gender = "male";
+        console.log(obj);
+        console.log(obj.propertyIsEnumerable("gender")); // false
+    </script>
+</body>
+</html>

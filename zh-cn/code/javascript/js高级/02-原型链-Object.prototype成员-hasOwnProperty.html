@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // hasOwnProperty 的使用
+        // 语法： 对象.hasOwnProperty("属性");
+        // 作用： 判断对象自身是否有该属性，如果有，就返回true
+
+        function Person(name){
+            this.name = name;
+        }
+
+        Person.prototype.age = 19;
+        Object.prototype.gender = "male";
+
+        var p = new Person("zs");
+
+        console.log(p.hasOwnProperty("name"));  // true
+        console.log(p.hasOwnProperty("gender")); // false
+        console.log(p.hasOwnProperty("age"));    // false
+        console.log(p.hasOwnProperty("hasOwnProperty"));  // false
+
+        console.log(Person.prototype.hasOwnProperty("age"));  // true
+        console.log(Object.prototype.hasOwnProperty("gender"));  // true
+
+        // 数组自身没有push方法， 该方法来源于数组的原型
+        console.log([].hasOwnProperty("push")); // false
+
+
+    // hasOwnProperty 与 in 的区别
+        // in: 判断对象能否访问到该属性（不管这个属性是自己提供的，还是从原型上继承来的），
+        // 如果可以访问到， 都会返回 true
+
+        console.log("name" in p);  // true
+        console.log("age" in p);  // true
+        console.log("gender" in p);  // true
+
+
+    // hasOwnProperty 的使用场景：用在for...in 循环中
+        for(var k in p){
+            // 可以遍历到对象自身的属性以及对象原型链上的属性
+            // console.log(k);
+
+            // 只遍历得到对象自身的属性，if 条件过滤下
+            if(p.hasOwnProperty(k)){
+                console.log(k);
+            }
+        }
+    </script>
+</body>
+
+</html>
