@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div, p{
+            height: 100px;
+            background-color: #f99;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <script>
+        // 面向过程
+        // 1. 获取到页面中的div元素
+        // 2. 遍历获取到div元素
+        // 3. 给每一个div都设置上边框
+
+        // 1.
+        var divs = document.querySelectorAll("div");
+        // 2.
+        for(var i = 0; i < divs.length; i++){
+            // 3.
+            divs[i].style.border = "10px solid #ccc";
+        }
+
+        // 1.
+        var ps = document.querySelectorAll("p");
+        // 2.
+        for(var i = 0; i < ps.length; i++){
+            // 3.
+            ps[i].style.border = "10px solid #ccc";
+        }
+
+// ========================================================
+
+        // 把上面的功能给封装起来
+        // 这样容易造成全局污染的问题
+        function getEle(selector){
+            return document.querySelectorAll(selector);
+        }
+
+        // 设置边框
+        function setBorder(ele){
+            for(var i = 0; i < ele.length; i++){
+                ele[i].style.border = "10px solid #ccc";
+            }
+        }
+
+        setBorder(getEle("div"));
+        setBorder(getEle("p"));
+
+// ========================================================
+
+        // 面向对象： 重点，在于找对象
+        // 使用对象来封装， 可以减少全局污染问题
+        var tools = {
+            getEle: function (selector){
+                return document.querySelectorAll(selector);
+            },
+            setBorder: function (ele){
+                for(var i = 0; i < ele.length; i++){
+                    ele[i].style.border = "10px solid #ccc";
+                }
+            },
+            // ...
+        }
+        tools.setBorder(tools.getEle("div"));
+        tools.setBorder(tools.getEle("p"));
+
+    </script>
+</body>
+</html>

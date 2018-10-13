@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 单独写个对象，对象里面写实例对象需要的方法
+        var obj = {
+            sayHi: function (){
+                console.log("hello");
+            },
+        }
+        
+// =========================================================
+
+        function Person(name, age){
+            this.name = name;
+            this.age = age;
+
+            // 如果在构造函数内部创建方法，会造成内存浪费问题
+            this.running = function(){
+                console.log("running");
+            }
+
+            // 可以单独写个对象，对象里面写实例对象需要的方法，再调用
+            this.sayHi = obj.sayHi;
+        }
+        var p = new Person("zs", 20);
+        var p2 = new Person("ls", 19);
+
+        // p 和 p2 对象都有sayHi 方法， 方法里面存储的是外面 sayHi函数的地址
+        console.log(p.sayHi == p2.sayHi); // true
+        console.log(p.running == p2.running); // false
+    </script>
+</body>
+</html>
