@@ -1260,7 +1260,7 @@ on+事件名称注册事件的缺点：
 
 > 现代浏览器支持的注册事件的新方式，这种方式注册的事件不会出现覆盖问题。
 
-**addEventListener的语法**
+**addEventListener 的语法**
 
 ```js
 // type：事件的类型：click mouseover  字符串类型，不带 on
