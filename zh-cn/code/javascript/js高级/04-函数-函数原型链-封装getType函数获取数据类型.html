@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 封装getType函数（获取数据类型）
+        function getType(obj){
+            // slice();  支持负数的， 负数表示从后面开始截取，数字表示截取几位
+            // slice 方法是 字符串调用起来的
+            return Object.prototype.toString.call(obj).slice(8, -1); // "[object 构造函数]"
+        }
+
+        var ret = getType([]);
+        // var ret = getType({});
+        // var ret = getType(function fn(){});
+        // var ret = getType(new Date());
+        console.log(ret);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div id = "box"></div> -->
+    <script>
+    // 解决这种可能会报错，也可能不会报错的代码，使用 try-catch
+        // 语法：
+        // try ==> 尝试
+        // catch ==> 捕获
+
+        try{
+            // try 里面的代码始终都要执行， 能够避免报错
+            // 如果try 中代码有错误， 会被catch捕获到，进入catch语句
+            // 如果try 中的代码没有错误，就不会执行catch语句
+            var box = document.getElementById("box"); // null
+            box.onclick = function(){
+                console.log(1);
+            }
+        }catch(e){
+            console.log("代码有错");
+            // e: 错误对象
+            // console.log(e);
+        }
+        // try 中的代码如果有错误，不会影响下面代码执行
+        console.log(2);
+    </script>
+</body>
+
+</html>

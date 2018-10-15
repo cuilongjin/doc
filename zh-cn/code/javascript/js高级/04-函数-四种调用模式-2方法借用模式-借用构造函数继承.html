@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 借用构造函数继承
+        function Person(name, age, gender){
+            this.age = age;
+            this.name = name;
+            this.gender = gender;
+        }
+
+        /*function Chinese(name, age, gender, skin){
+            this.age = age;
+            this.name = name;
+            this.gender = gender;
+
+            this.skin = skin;
+        }*/
+
+        // 改写Chinese 构造函数
+        function Chinese(name, age, gender, skin){
+            // Person.call(this, name, age, gender);
+            Person.apply(this, [name, age, gender]);
+            // Person 函数被调用了
+            // this  ==>  Chinese 的实例对象， xm
+            // name, age, gender 这些参数的作用， Person 函数的实参
+            // 给Chinese 的实例对象， xm  添加了 name， age， gender 这些属性
+            this.skin = skin;
+        }
+        var xm = new Chinese("zm", 20, "male", "黄");
+        console.log(xm);
+    </script>
+</body>
+
+</html>

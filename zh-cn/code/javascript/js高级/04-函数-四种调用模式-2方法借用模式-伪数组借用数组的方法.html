@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 伪数组经常会去借用数组的方法
+        // 伪数组特征：
+        // 1. 有数字下标
+        // 2. 有 length 属性
+        // 3. 没有数组的方法
+        // 4. 可以进行遍历
+
+        // 常见的伪数组有
+        // 1. arguments
+        // 2. document.querySelectorAll
+        // 3. jQuery 对象 也是伪数组
+
+        // 伪数组
+        var obj = {
+            0: "zs",
+            1: "ls",
+            2: "ww",
+            length: 3
+        }
+
+    // 1. 给obj添加一项 3: "zl"
+        // obj[3] = "zl";
+        // obj.length++;
+
+        // 上面代码还需要手动维护length属性的值，麻烦。
+ 
+        // obj 去借用数组的 push 方法
+        // 借用方法的思路：
+        //  1. 有什么方法已经实现了该功能
+        //  2. 如何去拿到该方法，进行借用
+
+        // push 方法在 Array 的原型上
+        // Array.prototype.push  ==> 从数组的原型上去拿到push方法
+        // 数组的 push 方法会添加项， 还会自动维护length属性
+        Array.prototype.push.call(obj, "zl");
+        console.log(obj);
+
+    // 2. 把obj中的每一项使用"-" 拼接起来返回一个字符串
+        var str = Array.prototype.join.call(obj, "-"); 
+        console.log(str);
+
+        // 3. 将伪数组转换成真数组
+        // 用slice方法截取obj
+        obj = Array.prototype.slice.call(obj);
+        console.log(obj);
+
+        // // 如何快速的复制一个数组，得到一个新的数组
+        // var arr = [10, 20, 30];
+        // // 这样是将arr的地址赋值给了arr2，没有得到一个新的数组
+        // // var arr2 = arr;
+
+        // // slice 用来截取数组部分的， 没有传参，从头截到尾
+        // // slice 不会修改原数组，会返回一个新数组
+        // var arr2 = arr.slice(0);
+        // console.log(arr2);
+    </script>
+</body>
+
+</html>

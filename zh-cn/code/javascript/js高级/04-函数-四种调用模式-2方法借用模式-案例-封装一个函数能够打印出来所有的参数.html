@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 封装一个函数，能够打印出来所有的参数
+
+        // clg 函数 封装 console.log(); 的功能
+        function clg(){
+            // 通过 arguments 来获取所有的实参 [1, 2, 3]
+            // console.log(arguments);
+            console.log.apply(arguments, arguments); // 第一项可以随便写
+        }
+        clg("哈哈", "嘻嘻", "嘿嘿");
+
+        // 需求： 在每次打印的时候，打印的字符串的前面加上指定的内容
+        function clg2(){
+            // 往arguments这个伪数组前面加上指定的字符串"友情提示"
+
+            // 需要让 arguments 去借用 unshift 方法
+            Array.prototype.unshift.call(arguments, "友情提示");
+            // Array.prototype.unshift.apply(arguments, ["友情提示"]);
+            console.log.apply(null, arguments);
+        }
+        clg2("哈哈", "嘻嘻", "嘿嘿");
+    </script>
+</body>
+
+</html>

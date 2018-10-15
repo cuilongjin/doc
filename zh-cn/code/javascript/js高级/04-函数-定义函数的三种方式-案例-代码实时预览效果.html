@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="" id="text" cols="60" rows="20"></textarea>
+    <script>
+    // 代码实时预览效果
+        // 获取文本框
+        var text = document.getElementById("text");
+
+        // 给文本框注册键盘弹起的监听事件
+        text.addEventListener("keyup", function(){
+            // console.log(1);
+
+            try{
+                // 获取文本框的内容， 把内容当做是js去执行
+                var val = text.value;
+                var fn = new Function(val); // val 的类型是字符串，val 被当做是创建出来的函数的函数体
+                // console.log(fn);
+                fn();
+            }catch(e){
+
+            }
+        });
+    </script>
+</body>
+
+</html>

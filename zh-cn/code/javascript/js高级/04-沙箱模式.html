@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 沙箱模式
+        (function(window){
+            // 代码写在了 自调用函数里面： 减少全局污染
+            var num = 10;
+            var fn = function(){
+                console.log("这是fn函数");
+            }
+            // fn();
+
+            // 想在外面去使用到 fn函数
+            // 将fn 暴露到全局
+            window.fn = fn; // 将fn函数的地址赋值给了 window 上的 fn 属性
+            window.num = num;
+        })(window);
+        
+        fn();
+        console.log(num);
+        
+        // 一般，我们一个js文件只会暴露一个核心的功能（函数、方法）： 目的还是为了减少全局污染
+
+
+    </script>
+</body>
+
+</html>

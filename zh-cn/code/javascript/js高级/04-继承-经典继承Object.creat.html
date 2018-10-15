@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 经典继承  -- Object.create()
+        // 语法： 
+        //  var obj2 = Object.create(obj);
+        //  作用： 
+        //      该方法会返回一个新对象， 返回的新对象的原型是参数obj
+
+        var o = {
+            house: "内蒙海景房",
+            money: "有钱人",
+            car: "全世界的mobile"
+        }
+
+        var o2 = Object.create(o);
+        console.log(o2);
+        console.log(o2.__proto__ == o); // 访问o2 的原型
+
+        console.log(o2.house); // o2 没house 属性，访问的是原型o上的成员house
+
+    </script>
+</body>
+
+</html>

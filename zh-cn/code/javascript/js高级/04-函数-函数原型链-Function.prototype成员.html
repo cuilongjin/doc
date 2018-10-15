@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 函数也是对象
+        function Person(){
+
+        }
+        // 内部： var Person = new Function(); // Person 是 Funtion的实例对象
+        // Person 实例对象的原型链：
+        // Person ==> Function.prototype ==> Object.prototype ==> null;
+
+        // Function.prototype 原型类型是个函数
+        console.dir(Function.prototype);
+
+        // Function.prototype 成员
+            // 1. call 、 apply、 bind ， 任何函数都可以访问到这三方法（任何函数的原型链上都有 Function.prototype）
+            // 2. arguments: 是Function.prototype 原型上的成员，是一个属性
+            //      实参列表
+            //      这个属性已经被废弃
+            function fn(){
+                // console.log(fn.arguments); // 原型上的arguments属性,已废弃，不建议使用
+                console.log(arguments); // 内置对象
+            }
+            fn(1,2,3);
+
+            // 3. caller: 获取该函数是在哪个函数内被调用的，废弃
+            function fn2(){
+                function inner(){
+                    console.log(inner.caller);
+                }
+                inner();
+            }
+            fn2();
+
+            // 4. constructor ： 指向了当前的构造函数 Function
+
+            // 5. length：形参的个数
+            function fn3(n1, n2, n3, n4){
+
+            }
+            console.log(fn3.length); // 4
+
+            // 形参的个数和实参的个数一起使用
+            function sum(n1, n2, n3){
+                // 判断形参的个数和实参的个数是否想等
+                if(sum.length !== arguments.length){
+                    return;
+                }
+                console.log(n1 + n2 + n3);
+            }
+            sum(10, 20, 40); // 70
+
+            // 6. name:  函数的函数名, name 属性是只读的。
+
+            // 7. toString() : 得到函数的字符串格式
+            function fn5(){
+                console.log("fn5");
+            }
+
+            // fn5的原型链：
+            //  fn5 ==> Function.prototype ==> Object.prototype ==> null;
+            //              toString                toString
+            console.log(fn5.toString()); // fn5函数的字符串格式
+
+            // 需求：让fn5 去借用 Object.prototype 上的 toString 方法
+            // console.log(Object.prototype.toString.call(fn5));  // [object Function]
+                        // object ==>  表示fn5 是个对象
+                        // Function  ==> fn5 这个对象是Function建出来的
+            console.log(Object.prototype.toString.call([])); // [object Array]
+    </script>
+</body>
+
+</html>

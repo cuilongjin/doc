@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 函数的四种调用模式 ==>  分析this的指向问题
+
+        // 1. 任何函数都有属于自己的this
+        // 2. this 是动态的，this在函数声明的时候是确定不了的。
+            // 也就是说，只有当函数被调用了才能够确定this 的指向
+            // this 的指向和函数在哪被调用时没有关系
+
+        // 分析this的问题的思路：
+        // 1. this是属于哪个函数
+        // 2. 这个函数是何种调用模式
+
+    // 函数的四种调用模式
+
+    // 4. 上下文模式（借用模式）
+        // call  apply  bind
+        // 任何函数都能够调用call  apply bind 这三个方法
+
+        // apply方法
+        // apply的作用和call的作用是一样。区别在于写法不同
+
+        // apply的语法：
+        // apply(thisArg, 实参列表); 
+        //      thisArg ==> 改变函数内的this指向的
+        //      实参列表 ==> 是一个数组或者是伪数组
+
+        // 1. apply 能够调用函数
+        function fn(){
+            console.log(1);
+        }
+        fn.apply(); // 1
+
+        // 2. apply 改变this 指向
+        function fn(){
+            console.log(this);
+        }
+        fn.apply([10,20,30]); // [10,20,30]
+
+
+        // 3. apply 第二个参数是数组
+        function fn(n1, n2){
+            console.log(this);
+            console.log(n1 + n2);
+        }
+        fn.apply({name: "zs"}, [10, 20]); // {name: "zs"}, 30
+        // apply的特性： 平铺性，把数组中的每一项取出来作为函数的实参
+        // fn.call({name: "dahuige"}, 10, 20); // {}, 30
+    </script>
+</body>
+
+</html>

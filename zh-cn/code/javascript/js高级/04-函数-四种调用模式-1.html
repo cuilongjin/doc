@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 函数的四种调用模式 ==>  分析this的指向问题
+
+        // 1. 任何函数都有属于自己的this
+        // 2. this 是动态的，this在函数声明的时候是确定不了的。
+            // 也就是说，只有当函数被调用了才能够确定this 的指向
+            // this 的指向和函数在哪被调用时没有关系
+
+        // 分析this的问题的思路：
+        // 1. this是属于哪个函数
+        // 2. 这个函数是何种调用模式
+
+    // 函数的四种调用模式
+    // 1. 函数调用模式 函数名();  ==> this 指向了 window
+
+        function fn(){
+            console.log(this);
+        }
+        fn(); // window
+
+    // 2. 方法调用模式 ==> this指向调用该方法的对象
+
+        var f = function(){
+            console.log(this);
+        }
+        var obj = {
+            a: 1,
+            fn: f,
+        }
+        obj.fn();   // obj
+        obj['fn']();  // obj
+
+        var arr = [f, 10, 30];
+        // 也是方法调用模式
+        arr[0]();  // arr
+        // arr.0(); // 报错，点语法后面不能是 0 
+
+        // 通过点语法或者中括号语法来访问方法，都是属于方法调用模式
+
+    // 3. 构造函数模式,  ==> this 指向了新创建的实例对象
+        function Person(){
+            console.log(this);
+        }
+        // new 构造函数()
+        Person(); // this 指向 window
+        var p = new Person(); // this 指向 p
+    </script>
+</body>
+
+</html>

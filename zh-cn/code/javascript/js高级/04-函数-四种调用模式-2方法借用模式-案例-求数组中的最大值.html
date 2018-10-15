@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 求数组中的最大值
+        var arr = [23, 55, 66, 89, 72, 81, 19];
+
+        // 使用 apply 去借用 Math.max 方法
+        // apply 的第一个参数随便写， max 只需要给参数进行求出最大值，不需要改变max函数里面的this指向了
+        var res = Math.max.apply(Math, arr);
+        console.log(res);
+    </script>
+</body>
+
+</html>

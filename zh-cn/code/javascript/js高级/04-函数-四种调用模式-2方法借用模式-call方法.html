@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 函数的四种调用模式 ==>  分析this的指向问题
+
+        // 1. 任何函数都有属于自己的this
+        // 2. this 是动态的，this在函数声明的时候是确定不了的。
+            // 也就是说，只有当函数被调用了才能够确定this 的指向
+            // this 的指向和函数在哪被调用时没有关系
+
+        // 分析this的问题的思路：
+        // 1. this是属于哪个函数
+        // 2. 这个函数是何种调用模式
+
+    // 函数的四种调用模式
+
+    // 4. 上下文模式（借用模式）
+        // call  apply  bind
+        // 任何函数都能够调用call  apply bind这三个方法
+
+        // call
+
+        // 1. 可使用 call 来调用函数
+        function fn(){
+            console.log(1);
+        }
+        // fn();
+        fn.call();
+
+        // 2. call 可以改变函数内的 this 指向
+        // call的第一个参数用来改变函数内的this指向
+        function fn(){
+            console.log(this);
+        }
+        // fn(); // this ==> window
+        fn.call([1,2,3]); // this ==>[1,2,3]
+
+        // 3. call 其余的参数用来传递给函数做为实参
+        function fn(n1, n2){
+            console.log(this);
+            console.log(n1 + n2);
+        }
+        // fn(10, 20); // window 30
+        fn.call({name: "lw"}, 100, 200); // {} 300
+
+        // 4. 如果call调用的时候没有传递参数或者传递了null, 函数内的this指向了window
+        function fn(){
+            console.log(this);
+        }
+        fn.call(null); // this ==> window
+        // 5. 举例
+        var zs = {
+            name: "zs",
+            sayHi: function(){
+                console.log("hello ,我是" + this.name);
+            }
+        }
+        // zs.sayHi();
+        var ls = {
+            name: "ls",
+        }
+        // ls 借用 zs 的 sayHi 方法
+        zs.sayHi.call(ls);
+    </script>
+</body>
+
+</html>

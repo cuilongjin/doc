@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // bind方法
+
+        // 语法：
+        // fn.bind(thisArg);
+        // 参数： thisArg 是用来改变 this 指向的
+        // 作用：创建并且返回一个新函数，新函数和 fn 函数长的一模一样，新函数的 this 指向被固定了，固定成了thisArg参数
+        //      所谓的固定： 无论函数是何种调用模式，this 指向都是固定的。
+
+        // bind 和call apply 的区别
+        //  使用call apply ， 会把函数给调用
+        //  bind 不会调用函数，返回一个新函数
+
+        var fn = function(){
+            console.log(this);
+        }
+
+        var newFn = fn.bind([1,2,3]);
+        // newFn 是 bind 创建并返回出来的
+        console.log(newFn);
+        console.log(newFn == fn); // false , 因为newFn 是个新函数
+        newFn(); // 虽然这是属于函数调用模式，但是newFn 函数里面的this 已经被固定了，固定了bind的参数
+        
+        // 举例
+        var zs = {
+            name: "zs",
+            lover: "ls",
+            sayLove: function(){
+                setInterval(function(){
+                    // 定时器里面的this ==> window
+                    console.log(this.lover + "， 你爱" + this.name + "吗？ ");
+                }.bind(this), 1000)
+                console.log(this);
+            }
+        }
+        zs.sayLove();
+    </script>
+</body>
+
+</html>
