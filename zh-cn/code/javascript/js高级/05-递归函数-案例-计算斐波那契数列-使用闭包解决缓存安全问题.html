@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 使用闭包解决缓存安全问题
+        function outer(){
+            var cache = {};
+            function fib(n){
+                if(n === 1 || n === 2){
+                    return 1;
+                }
+                // 先查看缓存容器中是否有对应的值
+                if(cache[n]){
+                    // cache[n]  ==>  取出对应月份的值， 如果值存在， if条件true， 说明了缓存中已经有值
+                    return cache[n];
+                }else{
+                    // 缓存中没有该月份的值
+                    var ret = fib(n - 1) + fib(n - 2);
+                    // 把计算结果添加到缓存中 -- 这一步千万别落下。
+                    cache[n] = ret;
+                    // 返回计算结果
+                    return ret;
+                }
+            }
+            return fib;
+        }
+        var ret = outer();
+        console.log(ret(10));
+    </script>
+</body>
+</html>

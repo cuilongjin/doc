@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 计算斐波那契数列
+        // 兔子数
+        // 题目：有个人想知道，一年之内一对兔子能繁殖多少对？于是就筑了一道围墙把一对兔子关在里面。已知一对兔子每个月可以生一对小兔子，而一对兔子从出生后第3个月起每月生一对小兔子。假如一年内没有发生死亡现象，那么，一对兔子一年内（12个月）能繁殖成多少对？
+
+        // 月份：   1 2 3 4 5 6  7  8   9  10
+        // 兔子对数：   1 1 2 3 5 8 13  21  34 55   ==>  斐波那契数列
+        // 特征：前两个月的兔子数量都是1， 后面每个月的兔子数量都是 前两个月的兔子数量之和
+
+
+        // 求第n个月的兔子数量
+        function fib(n){
+            // n 是 月份
+            // 第二部： 考虑什么时候结束递归
+            if(n === 1 || n === 2){
+                return 1;
+            }
+            // 第一步： 将未知的转成已知的
+            return fib(n - 1) + fib(n - 2);
+        }
+        var ret = fib(12);  // 求出第12个月的兔子数
+        console.log(ret);
+
+        // fib(12)  ==>  fib(11) + fib(10); //
+        // fib(11)  ==>  fib(10) + fib(9);
+        // ...
+        // fib(3) ==> fib(2) + fib(1);
+        // fib(2)  ==> 1
+        // fib(1)  ==> 1
+
+        // 上面的代码存在问题： 大量重复计算的问题
+        // 如何解决这个问题： 使用缓存
+    </script>
+</body>
+
+</html>
+    </script>
+</body>
+
+</html>

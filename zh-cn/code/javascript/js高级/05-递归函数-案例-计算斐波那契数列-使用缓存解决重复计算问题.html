@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 解决计算斐波那契数列重复计算的问题 -- 使用缓存
+
+        // 缓存中的键： 表示 月份
+        // 缓存中的值： 表示对应月份的数量
+        // 演示
+
+        var cache = {};
+        var count = 0;
+        function fib(n){
+            count++;
+            if(n === 1 || n === 2){
+                return 1;
+            }
+            // 先查看缓存容器中是否有对应的值
+            if(cache[n]){
+                // cache[n]  ==>  取出对应月份的值， 如果值存在， if条件true， 说明了缓存中已经有值
+                return cache[n];
+            }else{
+                // 缓存中没有该月份的值
+                var ret = fib(n - 1) + fib(n - 2);
+                // 把计算结果添加到缓存中 -- 这一步千万别落下。
+                cache[n] = ret;
+                // 返回计算结果
+                return ret;
+            }
+        }
+        var ret = fib(40);
+        console.log(ret);
+        console.log("fib 函数调用了" + count + "次");
+    </script>
+</body>
+
+</html>
+    </script>
+</body>
+
+</html>

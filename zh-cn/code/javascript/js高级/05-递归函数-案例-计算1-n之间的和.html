@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 求 1 - n 之间的和
+        function sum(n){
+            // 第二部：考虑什么时候结束掉递归
+            if(n === 1){
+                return 1;
+            }
+            // 第一步： 把一个未知的问题转成已知的问题
+            return sum(n - 1) + n;
+        }
+        var ret = sum(100);  //求1-100之间的和
+        console.log(ret);
+
+        // sum(100)  ==>  sum(99) + 100;  // sum(99),求1-99之间的和，前99个数的和
+        // sum(99)  ==>   sum(98) + 99;
+        // sum(98)  ==>   sum(97) + 98;
+        // ...
+        // sum(4)  ==>  sum(3) + 4;
+        // sum(3) ==> sum(2) + 3;
+        // sum(2)  ==> sum(1) + 2;
+        // sum(1)  ==> 1
+    </script>
+</body>
+
+</html>
