@@ -1073,3 +1073,619 @@ console.dir(Function.prototype);
 
 1. 所有函数都是 new Function 创建出来的，因此 `所有函数.__proto__` 都是 `Function.prototype`
 2. 所有对象都是 new Object 创建出来的，因此 `所有对象.__proto__` 都是 `Object.prototype`
+
+
+
+### 预解析与作用域
+
+#### 预解析
+
+> 预解析：预先解析
+
+js执行代码分为两个过程：
+
+- 预解析过程（变量与函数提升）
+- 代码一行一行执行
+
+预解析过程：JavaScript解析器在执行代码前，会把所有变量的声明和函数的声明提升到当前作用域的顶部。例如`var a = 11;`其实会分为`var a;` 和`a = 11`两部分，其中`var a;`会被提升。
+
+预解析规则：
+
+1. 函数优先，先提升function，后提升 var
+2. 遇到重名的 var 会被忽略
+3. 遇到重名的 function 会被覆盖
+
+- 思考以下代码的结果
+
+```javascript
+// 1.
+console.log(a); // a 函数体
+function a() {
+  console.log("aaaaa");
+}
+var a = 1;
+console.log(a); // 1
+// 2.
+if("a" in window){
+    var a = "abc";
+}
+console.log(a); // abc
+```
+
+**推荐：不要在一个作用域内重复的声明相同的变量和函数**
+
+
+
+#### 作用域
+
+> 作用域：变量起作用的区域，也就是说：变量定义后，可以在哪个范围内使用该变量。
+
+```javascript
+var num = 11;//全局变量
+function fn(){
+  var num1 = 22;//局部变量
+  console.log(num);  // 全局变量在任何地方都能访问到
+  console.log(num1);  
+}
+console.log(num);
+```
+
+
+
+编程语言中，作用域规则分为两种：
+
+- 词法作用域
+- 块级作用域 --- js没有块级作用域
+
+> 1. 全局变量：在函数外使用var 声明的变量， 在任何地方都可以访问到
+>
+> 2. 局部变量：在函数内使用var 声明的变量，只能在函数内部访问到
+>
+> 3. 自由变量：对于一个函数来说，函数内部没有声明该变量，但在函数内部有访问该变量。对于这个函数来说， 该变量就是一个自由变量。
+
+在js里只有函数可以形成作用域，所有，**词法作用域**又叫函数作用域。
+
+因为函数能够形成作用域，所以，函数内部声明的变量函数外部无法访问
+
+**函数作用域是在函数定义的时候作用域就确定下来了，和函数在哪调用无关**
+
+```javascript
+var num = 123;
+function f1() {
+  console.log(num);
+}
+
+function f2(){
+  var num = 456;
+  f1();
+}
+f2(); // 123
+```
+
+#### 作用域链
+
+> 作用域链：只要是函数，就会形成一个作用域，如果这个函数被嵌套在其他函数中，那么外部函数也有自己的作用域，这个一直往上到全局环境，就形成了一个作用域链。
+
+`变量的搜索原则`：
+
+1. 从当前作用域开始查找是否声明了该变量，如果存在，那么就直接返回这个变量的值。
+2. 如果不存在，就会往上一层作用域查询，如果存在，就返回。
+3. 如果不存在，一直查询到全局作用域，如果存在，就返回。如果在全局中也没有找到该变量会**报错**
+
+#### 作用域链练习
+
+```javascript
+// 1.
+var num = 10;
+fn1();
+function fn1() {
+  console.log(num);  // undefined
+  var num = 20;
+  console.log(num);  // 20
+}
+console.log(num);    // 10
+
+// 2 -- 改造上面的面试题
+var num = 10;
+fn1();
+function fn1() {
+  console.log(num);  // 10
+  num = 20;
+  console.log(num);  // 20
+}
+console.log(num);    // 20
+
+// 3
+var num = 123;
+function f1(num) {
+    console.log(num); // 456 undefined
+}
+function f2() {
+    var num = 456;
+    f1(num);
+    f1();
+}
+f2();
+
+// 4
+var num1 = 10;
+var num2 = 20;
+function fn(num1) {
+  num1 = 100;
+  num2 = 200;
+  num3 = 300;
+  console.log(num1); // 100
+  console.log(num2); // 200
+  console.log(num3); // 300
+  var num3;
+}
+fn();
+console.log(num1); // 10
+console.log(num2); // 200
+console.log(num3); // error
+
+// 5
+var num = 1;
+function fn(){
+  var num = 100;
+  num++;
+  console.log(num);
+}
+fn(); // 101
+fn(); // 101
+console.log(num); // 1
+
+// 6.
+var color = "red"; // blue
+function outer() {
+    var anotherColor = "blue"; // red
+    function inner() {
+        var tmpColor = color; // red
+        color = anotherColor;
+        anotherColor = tmpColor; // red
+        console.log(anotherColor); // red
+    }
+    inner();
+}
+outer();
+console.log(color); // blue
+```
+
+
+
+### 递归函数
+
+> 递归函数：函数内部直接或者间接的调用自己
+
+递归的要求：
+
+1. 自己调用自己（直接或者间接）
+2. 要有结束条件（出口）
+
+递归函数主要是`化归思想` ，将一个复杂的问题简单化，主要用于解决数学中的一些问题居多。
+
+- 把要解决的问题，归结为已经解决的问题上。
+- 一定要考虑什么时候结束让函数结束，也就是停止递归（一定要有已知条件）
+
+
+
+```javascript
+var count = 0;
+function fn(){
+    count++;
+    console.log("fn 函数被调用了");
+    if (count < 5) {
+    	fn();
+    }
+}
+fn();
+```
+
+
+
+练习：
+
+- 计算1-100之间所有数的和
+- 计算斐波那契数列
+
+
+
+
+
+# 闭包
+
+## 闭包的基本概念
+
+`闭包（closure）`是JavaScript语言的一个难点，也是JavaScript的一个特色，很多高级的应用都要依靠闭包来实现。
+
+### 作用域
+
+在js中，函数会形成函数作用域，在函数内部可以直接访问全局变量
+
+```javascript
+var str = "zs";
+function fn(){
+  console.log(str);//访问全局变量
+}
+fn();//zs
+```
+
+在函数外部却无法访问函数内部的变量
+
+```javascript
+function fn(){
+  var str = "zs";
+}
+fn();
+console.log(str);//报错 str is not defined
+```
+
+问题：我怎么才能获取到函数内部的变量？
+
+### 作用域链
+
+在函数内部有一个函数，那么函数内部的函数是可以访问到外部函数的变量的。
+
+解决方法：
+
+```javascript
+function fn(){
+  var str = "zs";
+  function f2(){
+    console.log(str);
+  }
+  f2();
+}
+fn();
+```
+
+在上述代码中，fn中定义的所有变量，对于f2函数都来都是可以访问的。但是现在f2在函数的内部，我们如何在外部访问到f2这个函数呢？
+
+```javascript
+function fn(){
+  var str = "zs";
+  function f2(){
+    console.log(str);
+  }
+  return f2;
+}
+var result = fn();
+result();// "zs"
+```
+
+### 闭包的概念
+
+> 闭包是函数和声明该函数的词法环境的组合。 
+
+在JavaScript中，在函数中可以（嵌套）定义另一个函数时，如果内部的函数引用了外部的函数的变量，产生闭包。
+
+**闭包中包含了内部函数的代码，以及所需外部函数中的变量的引用 **
+
+产生闭包的条件
+
+```javascript
+当内部函数访问了外部函数的变量的时候，就会形成闭包。
+```
+
+闭包的作用：
+
+1. 私有变量，保护数据安全
+2. 持久化维持数据
+
+## 闭包的应用
+
+### 计数器
+
+需求：统计一个函数的调用次数
+
+```javascript
+var count = 0;
+function fn(){
+  count++;
+  console.log("我被调用了，调用次数是"+count);
+}
+fn();
+fn();
+fn();
+```
+
+缺点：count是全局变量，不安全。
+
+使用闭包解决这个问题！！！！
+
+```javascript
+function outer(){
+  var count = 0; // 私有变量, 将count保护起来了
+  function add(){
+    count++;
+    console.log("当前count"+count);
+  }
+  return add;
+}
+
+var result = outer();
+result();
+```
+
+【银行存钱取钱.html】
+
+### 实现缓存
+
+> 缓存（cache）：数据的缓冲区，当要读取数据时，先从缓冲中获取数据，如果找到了，直接获取，如果找不到，重新去请求数据，在js里面使用数组或者是对象来表示缓存的容器， 通过键来存值，根据键来取值。
+
+计算斐波那契数列，会有很大的性能问题，因为重复的计算了很多次，因此我们可以使用缓存来解决这个性能问题。
+
+使用缓存的基本步骤：
+
+- 如果要获取数据，先查询缓存，如果有就直接使用
+- 如果没有，就进行计算，并且将计算后的结果放到缓存中，方便下次使用。
+
+```javascript
+//缓存
+var arr = [];
+var fbi = function (n) {
+  count++;
+  if (n == 1 || n == 2) {
+    return 1;
+  }
+  if (arr[n]) {
+    return arr[n];
+  } else {
+    var temp = fbi(n - 1) + fbi(n - 2);
+    arr[n] = temp;//存入缓存
+    return temp;
+  }
+}
+```
+
+缺点：既然使用缓存，就需要保证缓存的数据的安全，不能被别人修改，因此，需要使用闭包来实现缓存的私有化。
+
+```javascript
+function outer() {
+  //缓存
+  var arr = [];
+
+  var fbi = function (n) {
+    if (n == 1 || n == 2) {
+      return 1;
+    }
+    if (arr[n]) {
+      return arr[n];
+    } else {
+      var temp = fbi(n - 1) + fbi(n - 2);
+      arr[n] = temp;//存入缓存
+      return temp;
+    }
+  }
+  return fbi;
+}
+var fbi = outer();
+console.log(fbi(40));
+```
+
+## 闭包存在的问题
+
+> 闭包占用的内存是不会被释放的，因此，如果滥用闭包，会造成内存泄漏的问题。闭包很强大，但是只有在必须使用闭包的时候才使用。
+
+### js的垃圾回收机制
+
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Memory_Management
+
+- 内存：计算机中所有程序的运行都是在`内存`中进行的，因此内存的性能对计算机的影响非常大，运行程序需要消耗内存，当程序结束时，内存会得到释放。
+- javascript分配内存：当我们定义变量，javascript需要分配内存存储数据。无论是值类型或者是引用类型，都需要存储在内存中。
+- 垃圾回收：当代码执行结束，分配的内存已经不需要了，这时候需要将内存进行回收，在javascript语言中，`垃圾回收机器`会帮我们回收`不再需要使用`的内存。
+
+#### 引用记数法清除
+
+引用记数垃圾收集：如果没有引用指向某个对象（或者是函数作用域），那么这个对象或者函数作用域就会被垃圾回收机制回收。
+
+```javascript
+var o = {
+  name:"zs"
+}
+//对象被o变量引用  ，引用记数1
+var obj = o;   //变量被o和obj引用，引用记数2
+
+o = 1;  //o不在引用对象了， 引用记数1
+obj = null; //obj不在引用对象了，引用记数0，可以被垃圾回收了。
+```
+
+#### 标记清除法清除
+
+使用引用计数法进行垃圾回收的时候，会出现循环引用导致内存泄漏的问题。因此现代的浏览器都采用标记清除法来进行垃圾回收。
+
+这个算法假定设置一个叫做根（root）的对象（在Javascript里，根是全局对象Window）。定期的，垃圾回收器将从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象……从根开始，垃圾回收器将找到所有可以获得的对象和所有不能获得的对象。 
+
+**从2012年起，所有现代浏览器都使用了标记-清除垃圾回收算法。** 
+
+### 闭包占用内存释放
+
+```javascript
+function outer(){
+  var count = 0;
+
+  function fn(){
+    count++;
+    console.log("执行次数"+count);
+  }
+  return fn;
+}
+
+
+var result = outer();
+result();
+result = null;//当函数fn没有被变量引用了，那么函数fn就会被回收，函数fn一旦被回收，那么outer调用形成的作用域也就得到了释放。
+```
+
+
+
+# 正则表达式
+
+> 正则表达式：用于匹配规律规则的表达式，正则表达式最初是科学家对人类神经系统的工作原理的早期研究，现在在编程语言中有广泛的应用，经常用于表单校验，高级搜索等。
+
+## 创建正则表达式
+
+【07-正则表达式的创建.html】
+
+构造函数的方式
+
+```javascript
+var regExp = new RegExp(/\d/);
+```
+
+正则字面量
+
+```javascript
+var regExp = /\d/;
+```
+
+正则的使用
+
+```javascript
+/\d/.test("aaa1");
+```
+
+## 元字符
+
+> 正则表达式由一些普通字符和元字符组成，普通字符包括大小写字母、数字等，而元字符则具有特殊的含义。
+
+### 常见元字符
+
+![yuan](G:/File/docsify/zh-cn/_JavaScript/images/yuan.png)
+
+`|`表示或，优先级最低
+
+`()`优先级最高，表示分组
+
+### 字符类的元字符
+
+`[]`在正则表达式中表示一个字符的位置，[]里面写这个位置可以出现的字符。
+
+```javascript
+console.log(/[abc]/);//匹配a,b,c
+```
+
+`[^]`在中扩号中的^表示非的意思。
+
+```javascript
+//^表示该位置不可以出现的字符
+console.log(/[^abc]/);//匹配除了a，b，c以外的其他字符
+```
+
+`[a-z]` `[1-9]`表示范围
+
+```javascript
+console.log(/[a-z]/.test("d"));//小写字母
+console.log(/[A-Z]/.test("d"));//大写字母
+console.log(/[0-9]/.test("8"));//数字
+console.log(/[a-zA-Z0-9]/);//所有的小写字母和大写字母以及数字
+```
+
+### 边界类元字符
+
+> 我们前面学习的正则只要有满足的条件的就会返回true，并不能做到精确的匹配。
+
+【12-正则边界.html】
+
+^表示开头   ***[]里面的^表示取反***
+
+$表示结尾
+
+```javascript
+console.log(/^chuan/.test("dachuan"));//必须以chuan开头
+console.log(/chuan$/.test("chuang"));//必须以chuan结尾
+console.log(/^chuan$/.test("chuan"));//精确匹配chuan
+
+//精确匹配chuan,表示必须是这个
+console.log(/^chuan$/.test("chuanchuan"));//fasle
+```
+
+### 量词类元字符
+
+> 量词用来控制出现的次数，一般来说量词和边界会一起使用
+
+【13-正则量词.html】
+
+1. `*`表示能够出现0次或者更多次，x>=0;
+2. `+`表示能够出现1次或者多次，x>=1
+3. `?`表示能够出现0次或者1次，x=0或者x=1
+4. `{n}`表示能够出现n次
+5. `{n,}`表示能够出现n次或者n次以上
+6. `{n,m}`表示能够出现n-m次
+
+思考：如何使用{}来表示*+? 
+
+## 正则的使用
+
+### 正则测试
+
+1. 验证座机
+
+   - 比如010-12345678  0797-1234567
+   - 开头是3-4位，首位必须是0
+   - -后面是7-8位
+
+   ```javascript
+   var phoneReg = /^0\d{2,3}-\d{7,8}$/;
+   ```
+
+2. 验证姓名
+
+   - 只能是汉字
+   - 长度2-6位之间
+   - 汉字范围[\u4e00-\u9fa5]
+
+   ```javascript
+   var nameReg = /^[\u4e00-\u9fa5]{2,6}$/;
+   ```
+
+3. 验证QQ
+
+   - 只能是数字
+   - 开头不能是0
+   - 长度为5-11位
+
+   ```javascript
+   var qqReg = /^[1-9]\d{4,10}$/;
+   ```
+
+4. 验证手机
+
+   - 11位数字组成
+   - 号段13[0-9] 147 15[0-9] 17[0178] 18[0-9]
+
+   ```javascript
+   var mobileReg = /^(13[0-9]|147|15[0-9]|17[0178]|18[0-9])\d{8}$/;
+   ```
+
+5. 验证邮箱
+
+   - 前面是字母或者数字
+   - 必须有@
+   - @后面是字母或者数字
+   - 必须有.
+   - .后面是字母或者数字
+
+   ```javascript
+   var emailReg = /^\w+@\w+(\.\w+)+$/;
+   ```
+
+### 正则替换
+
+```javascript
+var str = "   123AD  asadf   asadfasf  adf  ";
+1  替换掉字符串中的所有空白
+2. 将所有的ad替换成xx
+3. 将所有的ad/AD替换成xx
+
+var str = "abc,efg,123,abc,123,a"
+4. 所有的逗号替换成句号
+
+var jsonStr = '[{"name":"张三",score:80},{"name":"张三",score:90},{"name":"张三",score:81}]'; 
+5. 把所有成绩都修改成100分
+```
+
+
+
+
+
