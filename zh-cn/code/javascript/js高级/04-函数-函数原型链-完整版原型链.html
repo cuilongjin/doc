@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 完整版原型链
+
+        // 将函数和对象综合考虑
+
+        // 1. 把函数当做是构造函数来理解
+        function Fn(){
+
+        }
+        var fn = new Fn();
+        // 构造函数： Fn
+        // 原型对象： Fn.prototype
+        // 实例对象： fn
+        // console.log(Fn.prototype.__proto__.constructor);
+
+        // 2. 把Fn当做是实例对象（是谁创建出来的），
+        // var Fn = new Function();
+        // 构造函数： Function
+        // 原型对象： Function.prototype
+        // 实例对象： Fn
+
+        // 3. 把构造函数Object 考虑进来
+        var obj = new Object();
+        // 构造函数： Object
+        // 原型对象： Object.prototype
+        // 实例对象： obj
+
+        // 4. 把Object当做是实例对象（是谁创建了Object）
+        // var Object = new Function();
+        // 构造函数： Function
+        // 原型对象： Function.prototype
+        // 实例对象： Object
+
+        // 5. 把Function 当做是 实例对象（是谁创建了 Function）
+        // var Function = new Function();  // Function 自己创建了自己
+        // 构造函数： Function
+        // 原型对象： Function.prototype
+        // 实例对象： Function
+
+        // console.log(Function.prototype == Function.__proto__);
+
+        // 函数有 prototype属性
+        // 对象有 __proto__ 属性
+        // 函数也是对象，所以函数既有 prototype属性， 也有 __proto__ 属性
+
+        // 语法： 实例对象 instanceof 构造函数
+        /*console.log(Function instanceof Function); // true   Function.prototype 属性是否在 Function（实例对象）的 原型链上
+        console.log(Function instanceof Object);  // true
+        console.log(Object instanceof Object);   // true
+        console.log(Object instanceof Function); // true*/
+
+        console.log(Array.isPrototypeOf([])); // false  isPrototypeOf 来源于 Object的原型上。
+        // 把Array当做是实例对象的时候，Array的原型链上有Object的原型。
+    </script>
+</body>
+</html>
