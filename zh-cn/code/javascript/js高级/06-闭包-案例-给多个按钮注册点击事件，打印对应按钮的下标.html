@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <button>按钮4</button>
+    <button>按钮5</button>
+    <button>按钮6</button>
+    <button>按钮7</button>
+    <button>按钮8</button>
+    <button>按钮9</button>
+    <button>按钮10</button>
+    <script>
+    // 使用闭包-给多个按钮注册点击事件，打印对应按钮的下标
+
+        var btns = document.querySelectorAll("button");
+        // 使用自调用函数 + 闭包实现了功能
+        for(var i = 0; i < btns.length; i++){
+            (function(j){
+                // var j = i;
+                // 给每一个按钮注册点击事件
+                btns[j].onclick = function(){
+                    console.log(j);
+                };
+            })(i);
+        }
+
+        // 其他闭包写法
+        /*for(var i = 0; i < btns.length; i++ ){
+            btns[i].onclick = (function(j){
+                // var j = i;
+
+                return function(){
+                    console.log(j);
+                }
+
+            })(i);
+        }*/
+
+
+    // 推导过程
+        // 1.
+        // for(var i = 0; i < btns.length; i++){
+        //     console.log(i); // 0-9
+        // }
+
+        // 2.
+        // for(var i = 0; i < btns.length; i++){
+        //     function fn(){
+        //         console.log(i); // 0-9
+        //     }
+        //     fn();
+        //     // 创建fn函数，并且理解调用fn函数，fn函数内部访问i的值，i是全局当前for的i的值。
+        // }
+
+
+        // 3.
+        // for(var i = 0; i < btns.length; i++){
+        //     function fn(j){
+        //         console.log(j); // 0-9
+        //     }
+        //     fn(i);
+        // }
+
+        // 4.   已经实现了效果， 能不能优化下
+        // for(var i = 0; i < btns.length; i++){
+        //     function fn(j){
+        //         // var j = 1;
+        //         // console.log(j); // 0-9
+
+        //         // btns[j]  ==> 每一个按钮
+        //         // console.log(btns[j]);
+
+        //         // 给每一个按钮注册点击事件
+        //         btns[j].onclick = function(){
+        //             console.log(j);
+        //         }
+        //     }
+        //     fn(i);
+        // }
+
+        // 5. 使用自调用函数 + 闭包实现了功能
+        // for(var i = 0; i < btns.length; i++){
+        //     (function(j){
+        //         // var j = i;
+
+        //         // 给每一个按钮注册点击事件
+        //         btns[j].onclick = function(){
+        //             console.log(j);
+        //         }
+        //     })(i)
+        // }
+
+        // 其他闭包写法
+        /*for(var i = 0; i < btns.length; i++ ){
+            btns[i].onclick = (function(j){
+                // var j = i;
+
+                return function(){
+                    console.log(j);
+                }
+
+            })(i);
+        }*/
+    </script>
+</body>
+</html>

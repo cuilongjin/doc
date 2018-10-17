@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 银行存钱取钱
+        function kaihu(){
+            var money = 0;
+            function saveMoney(name, num){
+                money += num;
+                console.log("尊敬的" + name + "，您当前存钱" + num + "，余额" + money);
+            }
+            function getMoney(name, num){
+                money -=num;
+                console.log("尊敬的" + name + "，您当前取钱" + num + "，余额" + money);
+            }
+            // 返回了一个对象，对象有存取钱的方法
+            return {
+                saveMoney: saveMoney,
+                getMoney: getMoney
+            };
+        }
+        var xm = kaihu();
+        var xh = kaihu();
+        xm.saveMoney("小明", 10000);
+        xm.getMoney("小明", 1000);
+        xh.saveMoney("小红", 1000);
+        xh.getMoney("小红", 100);
+    </script>
+</body>
+</html>
