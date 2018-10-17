@@ -9,10 +9,12 @@ zh-cn
 ├─_JavaScript
 ├─_linux
 ├─_webApi
+├─_jquery
 ├─code
 │ ├─html css
 │ ├─javascript
-│ └─webapi
+│ ├─webapi
+│ └─jquery
 ├─demo
 └─参考手册
 ```
