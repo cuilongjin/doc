@@ -646,9 +646,10 @@ null == 0;//false
 5 == NaN;//false
 NaN == NaN;//false
 NaN != NaN;//true
-// x !== x 成立的唯一情况是 x 的值为 NaN
 
+[] != [];// true
 [] == [];// false
+[] == ![];// true
 {} == {};// false
 1 == [];// false
 1 == [1];// true
