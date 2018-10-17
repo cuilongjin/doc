@@ -8,6 +8,7 @@
 	- [Fixed定位脱离Viewport的bug](zh-cn/_css/Fixed定位脱离Viewport的bug)
 * **JavaScript**
 	- [JavaScript基础](zh-cn/_JavaScript/JavaScript基础)
+	- [JavaScript高级](zh-cn/_JavaScript/JavaScript高级)
 * **Linux**
 	- [linux 基础](zh-cn/_linux/linux 基础)
 * **WebApi**
