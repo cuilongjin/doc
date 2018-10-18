@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li>哈哈哈哈</li>
+		<li>哈哈哈哈</li>
+		<li>哈哈哈哈</li>
+		<li>哈哈哈哈</li>
+		<li>哈哈哈哈</li>
+		<li>哈哈哈哈</li>
+		<li>哈哈哈哈</li>
+		<li>哈哈哈哈</li>
+		<li>哈哈哈哈</li>
+		<li>哈哈哈哈</li>
+	</ul>
+	<script src="jquery-1.12.4/jquery.min.js"></script>
+	<script>
+		var $lis = $("li");
+		for (var i = 0; i < $lis.length; i++) {
+			if (i % 2 == 0) {
+				$lis[i].style.backgroundColor = "yellow";
+			} else {
+				$lis[i].style.backgroundColor = "red";
+			}
+		}
+	</script>
+</body>
+</html>

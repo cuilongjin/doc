@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            list-style: none;
+        }
+        .wrap {
+            margin: 100px auto 0;
+            width: 630px;
+            height: 420px;
+            padding: 10px 0 0 10px;
+            background: #000;
+            overflow: hidden;
+            /*border: 1px solid #fff;*/
+        }
+        .wrap li {
+            width: 200px;
+            height: 200px;
+            float: left;
+            margin: 0 10px 10px 0;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul>
+            <li><a href=""><img src="" alt=""></a></li>
+            <li><a href=""><img src="" alt=""></a></li>
+            <li><a href=""><img src="" alt=""></a></li>
+            <li><a href=""><img src="" alt=""></a></li>
+            <li><a href=""><img src="" alt=""></a></li>
+            <li><a href=""><img src="" alt=""></a></li>
+        </ul>
+    </div>
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        // 突出显示案例
+        $(function(){
+            var $lis = $(".wrap li");
+            $lis.mouseenter(function () {
+                // $(this).siblings().css("opacity", ".9");
+                // $(this).css("opacity", "1");
+                // 链式编程  可以通过 . 一直写下来
+                $(this).css("opacity", "1").siblings().css("opacity", ".9");
+            });
+
+            $(".wrap").mouseleave(function () {
+                // children()  ==> 子元素
+                // find()  ==>  找当前元素的后代元素
+                $(this).find("li").css("opacity", "1");
+            });
+        });
+    </script>
+</body>
+</html>

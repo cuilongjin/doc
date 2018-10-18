@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			height: 100px;
+			background-color: #f99;
+			margin: 20px;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<button id="btn1">展示</button>
+	<button id="btn2">设置内容</button>
+	<button id="btn3">设置内容文字大小</button>
+	<div></div>
+	<script src="jquery-1.12.4/jquery.min.js"></script>
+	<script>
+		$("#btn1").click(function(){
+			$("div").show(500);
+		});
+		$("#btn2").click(function(){
+			$("div").text("哈哈");
+		});
+		$("#btn3").click(function(){
+			$("div").css("fontSize", 30);
+		});
+	</script>
+</body>
+</html>

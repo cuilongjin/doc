@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <ul>
+        <li><a href="#">哈哈1</a></li>
+        <li><a href="#">哈哈2</a></li>
+        <li><a href="#">哈哈3</a></li>
+        <li><a href="#">哈哈4</a></li>
+        <li><a href="#">哈哈5</a></li>
+    </ul>
+	<script src="jquery-1.12.4/jquery.min.js"></script>
+	<script>
+        // index()  ==> 获取当前元素在所有兄弟中的下标（索引）
+
+        $("li").click(function () {
+            console.log($(this).index());
+        });
+
+        // $("a").click(function () {
+        //     console.log($(this).parent().index());
+        // });
+
+	</script>
+</body>
+</html>

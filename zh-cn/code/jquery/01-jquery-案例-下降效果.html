@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		div {
+			height: 150px;
+			text-align: center;
+			/*border: 1px solid #ccc;*/
+			background-color: #fff;
+			display: none;
+	</style>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<script src="jquery-1.12.4/jquery.min.js"></script>
+	<script>
+		$(function () {
+			for (var i = 1; i <= 90; i++) {
+				setTimeout(function (j) {
+					return function () {
+						// console.log(j);
+						var $divs = $("div");
+						$($divs[9 - j]).slideDown(1000).css("backgroundColor", "#f" + (9 - j) + "0");
+					};
+				}(i), 200* i);
+			}
+		});
+	</script>
+</body>
+</html>
