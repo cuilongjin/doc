@@ -1692,9 +1692,13 @@ console.log(str3);
 ```javascript
 var str = "今天是2018-10-16，我这里的需求是提取出年月日";
 // var reg = /\d{4}-\d{2}-\d{2}/;  ==>  符合整个正则表达式的字符
-var reg = /(\d{4})-(\d{2})-(\d{2})/;  // ==> 有分组存在
-var ret = reg.exec(str);// 提取出分组的内容以下标的形式存在返回的数组里面
+var reg = /(\d{4})-(\d{2})-(\d{2})/;  // ==> 有分组存在 ，默认组名为 undefined
+var reg2 = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;  // ?<组名> 添加组名
+var ret = reg.exec(str); // 提取出分组的内容以下标的形式存在返回的数组里面
+var ret2 = reg2.exec(str);
 console.log(ret);
+console.log(ret2);
+// index 代表 匹配到 ret 在 str 中的下标
 ```
 
 
