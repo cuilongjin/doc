@@ -13,3 +13,5 @@
 	- [linux 基础](zh-cn/_linux/linux 基础)
 * **WebApi**
 	- [webapi笔记](zh-cn/_webApi/webapi笔记)
+* **jQuery**
+	- [jquery笔记](zh-cn/_jquery/jquery笔记)
