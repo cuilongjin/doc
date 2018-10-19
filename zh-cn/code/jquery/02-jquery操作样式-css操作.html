@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>哈哈1</li>
+        <li>哈哈2</li>
+        <li>哈哈3</li>
+    </ul>
+	<script src="jquery-1.12.4/jquery.min.js"></script>
+	<script>
+        $(function(){
+        // css()  方法 设置获取样式
+
+            // css(name, value); // 设置单个样式
+            // css(obj)          // 设置多个样式
+            //      对于设置样式来说，把获取到的所有元素都设置上相同的样式
+            //
+            // css(name)  ， 样式名，注意是个字符串类型  // 获取样式
+            //      对于获取样式来说，只获取第一个元素的对应的样式值
+
+        // 设置样式
+            // $("li").css("color", "blue");
+            // $("li").css("fontSize", "30px");
+
+            // $("li").css({
+            //     color: "blue",
+            //     fontSize: 30
+            // });
+
+        // 获取样式
+            $("li").eq(0).css("fontSize", 36);
+            $("li").eq(1).css("fontSize", 30);
+            $("li").eq(2).css("fontSize", 34);
+            console.log($("li").css("fontSize"));
+        });
+	</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            height: 300px;
+            background-color: #f99;
+        }
+        .big {
+            background-color: orange;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <button>添加类名</button>
+    <button>删除类名</button>
+    <button>判断是否有big类名</button>
+    <button>切换big类名</button>
+    <div>哈哈哈</div>
+	<script src="jquery-1.12.4/jquery.min.js"></script>
+	<script>
+        $(function () {
+
+            // 添加类名
+            // addClass() ==> 添加类名
+            $("button").eq(0).click(function () {
+                $("div").addClass("big");
+            });
+
+            // 删除类名
+            // removeClass()  ==> 移除类名
+            $("button").eq(1).click(function () {
+                $("div").removeClass("big");
+            });
+
+            // 判断类名是否存在
+            // hasClass()  ==> 如果有，就返回true， 否则，返回false
+            // 判断标准是： 只要有一个元素有指定的类名，就返回true，所有的元素都没有该类名，就返回false
+            $("button").click(function () {
+                console.log($("div").hasClass("big"));
+            });
+
+            //切换类名
+            // toggleClass();
+            //  如果元素有该类名， 就移除该类名，如果没有，就添加该类名
+            $("button").eq(3).click(function(){
+                // if($("div").hasClass("big")){
+                //     // div 有 big 类名
+                //     $("div").removeClass("big");
+                // }else{
+                //     // 没有，就添加
+                //     $("div").addClass("big");
+                // }
+
+                $("div").toggleClass("big");
+            });
+        });
+	</script>
+</body>
+</html>

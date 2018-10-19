@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: #f99;
+            position: absolute;
+        }
+	</style>
+</head>
+<body>
+	<div></div>
+	<script src="jquery-1.12.4/jquery.js"></script>
+	<script>
+		// 有顺序的执行效果
+            // 动画队列：
+            // 像链式编程一样，通过 . 继续写动画，给元素添加了多个动画, 这多个动画会添加到元素的动画队列里面，按照顺序依次执行
+		$(function(){
+            $("div")
+                .animate({
+                    left: 800
+                }, 1000)
+                .animate({
+                    top: 300
+                }, 1000)
+                .animate({
+                    borderRadius: 50
+                }, 1000)
+                .slideUp(2000)
+                .slideDown(2000);
+
+            // 好处：可以有顺序的执行动画效果
+            // 坏处： bug
+            //      给元素不停的添加动画，元素就不停的运动，直到生命时候停下来，动画队列里面的动画都执行结束了。
+        });
+    </script>
+</body>
+</html>
