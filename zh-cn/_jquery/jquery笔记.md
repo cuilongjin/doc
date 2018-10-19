@@ -280,3 +280,239 @@ jQuery 选择器有很多，基本兼容了 CSS1 到 CSS3 所有的选择器，�
 
 JavaScript是一门编程语言，jQuery仅仅是用JavaScript实现的一个JavaScript库，目的是简化我们的开发。
 
+
+
+## jQuery 样式操作
+
+### css 操作
+
+> 功能：设置或者修改样式，操作的是 style 属性。
+
+> 设置单个样式
+
+```javascript
+// name：需要设置的样式名称
+// value：对应的样式值
+css(name, value);
+// 使用案例
+$("#one").css("background","gray"); // 将背景色修改为灰色
+```
+
+> 设置多个样式
+
+```javascript
+// 参数是一个对象，对象中包含了需要设置的样式名和样式值
+css(obj);
+// 使用案例
+$("#one").css({
+    "background":"gray",
+    "width":"400px",
+    "height":"200px"
+});
+```
+
+> 获取样式
+
+```javascript
+// name:需要获取的样式名称
+css(name);
+//案例
+$("div").css("background-color");
+```
+
+注意：
+
+1. 设置操作的时候，如果是多个元素，那么给所有的元素设置相同的值
+2. 获取操作的时候，如果是多个元素，那么只会返回第一个元素的值。
+
+
+
+### class操作
+
+* 添加样式类
+
+```javascript
+// name：需要添加的样式类名，注意参数不要带点.
+addClass(name);
+// 例子,给所有的div添加one的样式。
+$("div").addClass("one");
+```
+
+* 移除样式类
+
+```javascript	
+// name:需要移除的样式类名
+removeClass("name");
+// 例子，移除div中one的样式类名
+$("div").removeClass("one");
+```
+
+* 判断是否有某个样式类
+
+```javascript
+// name: 需要判断的样式类名
+// 判断标准是： 只要有一个元素有指定的类名，就返回true，所有的元素都没有该类名，就返回false
+hasClass(name)
+// 例子，判断是否有one的样式类
+$("div").hasClass("one");
+```
+
+* 切换样式类
+
+```javascript
+// name: 需要切换的样式类名，如果有，移除该样式，如果没有，添加该样式。
+toggleClass(name);
+// 例子
+$("div").toggleClass("one");
+```
+
+【案例：tab栏切换案例.html】
+
+
+
+## jQuery 属性操作
+
+### attr 操作   
+
+> 设置单个属性
+
+```javascript
+// 第一个参数：需要设置的属性名
+// 第二个参数：对应的属性值
+attr(name, value);
+// 用法举例
+$("img").attr("title", "哈哈");
+$("img").attr("alt", "哈哈");
+```
+
+> 设置多个属性
+
+```javascript
+// 参数是一个对象，包含了需要设置的属性名和属性值
+attr(obj)
+// 用法举例
+$("img").attr({
+    title:"哎哟，不错哦",
+    alt:"哎哟，不错哦",
+    style:"opacity:.5"
+});
+```
+
+> 获取属性
+
+```javascript
+// 传需要获取的属性名称，返回对应的属性值
+attr(name)
+// 用法举例
+var oTitle = $("img").attr("title");
+alert(oTitle);
+```
+
+> 移除属性
+
+```javascript
+// 参数：需要移除的属性名，
+removeAttr(name);
+//用法举例
+$("img").removeAttr("title");
+```
+
+【案例：美女相册.html】
+
+
+
+### prop 操作
+
+> 在jQuery1.6之后，对于 checked、selected、disabled 这类 boolean 类型的属性来说，不能用 attr 方法，只能用 prop 方法。
+
+```javascript
+// 设置属性
+$(“input:checked”).prop(“checked”,true);
+// 获取属性
+$(“input:checked”).prop(“checked”); // 返回 true 或者 false
+```
+
+【案例：表格全选案例.html】
+
+
+
+## jQuery 动画
+
+> jquery 提供了三组基本动画，这些动画都是标准的、有规律的效果，jquery 还提供了自定义动画的功能。【演示动画例子】
+
+### 三组基本动画
+
+> 显示 (show) 与隐藏 (hide) 与切换 (slideToggle) 
+> 滑入 (slideUp) 与滑出 (slideDown) 与切换 (slideToggle)，效果与卷帘门类似
+> 淡入 (fadeIn) 与淡出 (fadeOut) 与切换 (fadeToggle)
+
+```javascript
+// show() 系列
+show([speed], [easing], [callback]);
+// speed(可选)：动画的执行时间
+	 // 1.如果不传，就没有动画效果。如果是 slide 和 fade 系列，会默认为 normal
+	 // 2.毫秒值(比如1000),动画在1000毫秒执行完成(推荐)
+     // 3.固定字符串，slow(200)、normal(400)、fast(600)，如果传其他字符串，则默认为normal
+// easing(可选)： 动画效果，默认是swing，秋千，提供了一个linear 匀速的效果
+// callback(可选):执行完动画后执行的回调函数
+
+// slide 系列，参数使用和show 是一样的，不传参数，默认有动画效果
+slideDown([speed], [easing], [callback]);
+
+// fade 系列，参数使用和show 是一样的，不传参数，默认有动画效果
+fadeIn([speed], [easing], [callback]);
+```
+
+
+
+【案例：下拉菜单动画版.html】
+【案例：京东轮播图(呼吸灯).html】 
+
+
+
+### 自定义动画
+
+> animate: 自定义动画
+
+```javascript
+$(selector).animate({params},[speed],[easing],[callback]);
+// {params}：要执行动画的CSS属性，带数字（必选），多个属性会同时执行
+// speed：执行动画时长（可选）
+// easing: 执行效果，默认为swing（缓动）  linear（匀速）
+// callback：动画执行完后立即执行的回调函数（可选）
+```
+
+
+
+### 动画队列与停止动画
+
+> 在同一个元素上执行多个动画，那么对于这个动画来说，后面的动画会被放到动画队列中，等前面的动画执行完成了才会执行。
+
+```javascript
+// 有顺序的执行效果
+// 动画队列：
+// 像链式编程一样，通过 . 继续写动画，给元素添加了多个动画, 这多个动画会添加到元素的动画队列里面，按照顺序依次执行
+$(function(){
+    $("div")
+        .animate({left: 800}, 1000)
+        .animate({top: 300}, 1000)
+        .animate({borderRadius: 50}, 1000)
+        .slideUp(2000)
+        .slideDown(2000);
+});
+// 好处：可以有顺序的执行动画效果
+// 坏处： bug 给元素不停的添加动画，元素就不停的运动
+```
+
+* stop 方法
+
+```javascript
+// 停止当前正在执行的动画，如果元素的动画队列里面有后续动画，后续动画会执行
+stop(clearQueue, jumpToEnd);
+// 第一个参数：可选，是否清除队列，true，表示清除掉，默认 false
+// 第二个参数：可选，是否跳转到当前正在执行的动画的最终效果，true，表示跳转， 默认false
+```
+
+【案例：手风琴特效】
+【案例：音乐导航】
+
