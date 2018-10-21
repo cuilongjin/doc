@@ -154,6 +154,29 @@ $("#btnShowDiv").click(function () {
 
 
 
+### jquery 中的 $ 符号
+
+$ 来源于  jQuery ， 是个函数（查看jQuery源码中最后几行代码）
+
+```javascript
+// jquery 和 $ 是等价的
+jQuery === $ // true
+```
+
+
+
+**作用**：根据参数的不同， 作用是不同的
+
+​	参数是个函数  `$(function(){}); `         作用是入口函数
+
+​	参数是个dom对象   `$(document);  `        作用是dom 转jq
+
+​	参数是选择器    `$("body"); `             作用是获取元素
+
+​	参数是个html字符串 `$("<a>123</a>");`    作用是创建节点
+
+
+
 ### jQuery 对象与 DOM 对象(重点)
 
 基本概念：
@@ -473,6 +496,8 @@ fadeIn([speed], [easing], [callback]);
 ### 自定义动画
 
 > animate: 自定义动画
+>
+> 只支持数值型的动画
 
 ```javascript
 $(selector).animate({params},[speed],[easing],[callback]);
