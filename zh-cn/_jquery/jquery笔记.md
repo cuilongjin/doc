@@ -541,3 +541,193 @@ stop(clearQueue, jumpToEnd);
 【案例：手风琴特效】
 【案例：音乐导航】
 
+
+
+## jQuery节点操作
+
+### 创建节点
+
+```javascript
+// $();
+// 括号内写 html 格式的字符串
+$("<span>这是一个span元素</span>");
+```
+
+### 添加节点
+
+```javascript
+// append
+A.append(B); // 把 B 添加到 A 里面去，B 作为 A 的最后一个子元素
+// appendTo
+B.appendTo(A); // 作用同上，写法不同
+
+// prepend
+A.prepend(B); // 把 B 添加到 A 里面去，B 作为 A 的第一个子元素
+// prependTo
+B.prependTo(A); // 作用同上，写法不同
+
+// after
+A.after(B);   // 把 B 作为 A 的兄弟，B 在的 A 的后面
+// before
+A.before(B);   // 把 B 作为 A 的兄弟，B 在的 A 的前面
+```
+
+【案例：城市选择案例】
+
+
+
+### 清空节点与删除节点
+
+> empty：清空指定节点的所有元素，自身保留(清理门户)
+
+```javascript
+$(“div”).empty();// 清空 div 的所有内容（推荐使用，会清除子元素上绑定的内容，源码）
+$(“div”).html("");// 使用 html 方法来清空元素，不推荐使用，会造成内存泄漏，绑定的事件不会被清除。
+```
+
+> remove：删除节点，会把元素自身给删除掉
+
+```javascript
+$(“div”).remove(); // 删除 div 节点
+```
+
+
+
+### 克隆节点
+
+> clone：克隆元素节点
+
+```javascript
+$(“div”).clone();// 返回复制的 div 新元素，（默认不显示，需要配合 append 方法）
+// 新元素和原来的元素没有任何关系
+
+// clone(布尔类型参数)， 参数为true， 克隆元素的事件，默认值是false
+```
+
+
+
+## jQuery特殊属性操作
+
+### val()
+
+> val 方法用于设置和获取表单元素的值，例如input、textarea的值
+
+```javascript
+// 设置值
+$("#name").val("张三");
+// 获取值
+$("#name").val();
+```
+
+【案例：搜索框】
+
+
+
+### html() 与 text()
+
+> html 方法相当于 innerHTML，text 方法相当于 innerText
+
+```javascript
+//设置内容
+$(“div”).html("<span>这是一段内容</span>");
+//获取内容
+$("div").html()
+
+//设置内容
+$("div").text("<span>这是一段内容</span>");
+//获取内容
+$("div").text()
+```
+
+**区别**：html 方法会识别 html 标签，text 方法会将内容直接当成字符串，并不会识别 html 标签。
+
+
+
+### width() 与 height()
+
+> 设置或者获取 **内容区域** 的宽度和高度
+
+```javascript
+// 带参数表示设置
+$("div").width(200);
+$("div").height(200);
+// 不带参数表示获取
+$("div").width();
+$("div").height();
+```
+
+> 获取 **内容区域 + padding** 的宽度和高度
+
+```javascript
+$("div").innerWidth();
+$("div").innerHeight();
+```
+
+> 获取 **内容区域 + padding + border** 的宽度和高度
+
+```javascript
+$("div").outerWidth();
+$("div").outerHeight();
+```
+
+> 获取 **内容区域 + padding + border + margin** 的宽度和高度
+
+```javascript
+// 传入参数true 
+$("div").outerWidth(true);
+$("div").outerHeight(true);
+```
+
+> 获取网页的可视区宽高
+
+```javascript
+$(window).width();
+$ (window).height();
+```
+
+
+
+### scrollTop 与 scrollLeft
+
+> 设置或者获取垂直滚动条的位置
+
+```javascript
+// 传参表示设置，不传参表示获取
+$(window).scrollTop(2000);
+$(window).scrollLeft();
+
+// 实时的去获取到页面垂直卷曲的距离
+$(window).scroll(function(){
+    console.log($(window).scrollTop());
+    console.log($(window).scrollLeft());
+});
+```
+
+
+
+**返回顶部固定写法**
+
+```javascript
+$goTop.click(function() {
+    $("html, body").animate({
+        scrollTop: 0
+    }, 1000);
+});
+```
+
+【案例：固定菜单栏案例】
+【案例：小火箭返航案例】
+
+
+
+### offset方法与position方法
+
+> offset 方法获取元素距离 document 的位置，position 方法获取的是元素距离有定位的父元素的位置
+
+```javascript
+// 获取元素距离 document 的位置，和父元素没有关系，返回值为对象：{left:100, top:100}
+$(selector).offset();
+
+// 获取相对于其最近的有定位的父元素的位置，返回值为对象
+$(selector).position();
+```
