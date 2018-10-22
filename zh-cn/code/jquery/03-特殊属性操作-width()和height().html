@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            width: 300px;
+            padding: 20px;
+            border: 10px solid #ccc;
+            margin: 10px;
+            height: 300px;
+            background-color: #f99;
+        }
+    </style>
+</head>
+<body>
+
+    <div></div>
+
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        $(function(){
+        // width方法与height方法
+
+            // 使用css 获取宽高可以的，但是结果需要参与运算就比较麻烦
+            // console.log($("div").css("width"));
+
+            // 获取， 没有传参 ，获取的就是内容区域的宽度
+            console.log($("div").width());
+            // 传参就是设置
+            // $("div").width(500);
+
+            // innerWidth()  ==>  内容的width + padding
+            console.log($("div").innerWidth());
+
+            // outerWidth()  ==> 内容的width + padding + border
+
+            //  outerWidth(布尔类型)， 参数为true， 表示需要获取元素的margin
+            //      默认值是false
+            console.log($("div").outerWidth());
+
+            // outerWidth(true); ==> 内容的width + padding + border + margin
+            console.log($("div").outerWidth(true));
+
+            // 获取可视区的宽高
+            $(window).width();
+            $(window).height();
+        });
+    </script>
+</body>
+</html>

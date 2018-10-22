@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <input type="text" value="哈哈">
+
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        $(function(){
+        // 搜索框的效果
+            // 聚焦  focus
+            // 先判断，判断输入框的值是否是 默认值，如果是，把input的内容清空
+
+            $("input").focus(function(){
+                // trim()  ==>  去除字符串两端的空格
+
+                if($(this).val().trim() === "哈哈"){
+                    $(this).val("");
+                }
+            });
+
+            // 失焦
+            // 先判断，判断输入框的值是否有空，如果是，恢复成默认值
+            $("input").blur(function(){
+                // $(this).val().trim()  ==>  去除字符串两端的空格
+                // $(this).val().trim().length   ==>  字符串的长度
+                if($(this).val().trim().length === 0){
+                    $(this).val("哈哈");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <style>
+        div{
+            width: 400px;
+            height: 400px;
+            background-color: #f99;
+            padding: 20px;
+        }
+        p{
+            padding: 20px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p class="innerP">内部的p</p>
+    </div>
+    <p class="outerP">外部的p</p>
+
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        $(function() {
+
+        // 创建节点
+            // 语法： $(html字符串);
+            // 注意点： 引号的问题
+            var $a = $('<a href="http://www.baidu.com" target="_blank">百度一下</a>');
+
+            $("body").append($a);
+
+        // 添加节点
+        // append()
+            // 语法： A.append(B);   // 把B添加到A里面去，B作为A的最后一个子元素
+
+            // 如果参数 B 是页面上已经存在的元素，是剪切的效果
+
+            // $("div").append( $(".outerP") );
+
+            // 如果参数B 是 html字符串，先根据html字符串去创建该节点，在添加参数A里面去
+            // $("div").append( '<p class="outerP">这是大慧哥123在外面一本正经的样子</p>' );
+
+
+            // appendTo()  // 作用是一样的，写法不同
+            // 语法： B.appendTo(A);
+
+            // $(".outerP").appendTo( $("div") );
+
+            // 上面的简写
+            // $(".outerP").appendTo( "div" );
+
+
+
+            // prepend()
+            // 语法： A.prepend(B);   // 把B添加到A 里面去， 将B作为第一个子元素
+            // $("div").prepend( $(".outerP") );
+            // $("div").prepend( '<p class="outerP">这是大慧哥456在外面一本正经的样子</p>' );
+
+
+            // prependTo();  //作用同 prepend()
+            // 语法： B.prependTo(A);
+            // $(".outerP").prependTo($("div"));
+            // $(".outerP").prependTo("div");
+
+
+
+            // after  before()
+            // 语法： A.after(B);   // 把B作为A的兄弟，B在的A的后面
+
+            // $("div").after( $(".innerP") );
+            // $("div").before( $(".innerP") );
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <style>
+        div{
+            width: 400px;
+            height: 400px;
+            background-color: #f99;
+            padding: 20px;
+        }
+        p{
+            padding: 20px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p class="innerP">内部的p</p>
+    </div>
+    <p class="outerP">外部的p</p>
+
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        $(function() {
+        // 清空节点  -- 推荐使用 empty()
+            // empty(), 把元素里面的内容清空掉，自身还存在 (清理门户)
+            $("div").empty();
+
+            /*div.innerHTML = "";  // 在 ie里面会造成内存泄漏的问题
+            html("");*/
+
+        // 删除节点
+            // remove(), 把元素自身给删除掉 (自杀)
+            // $("div").remove();
+
+        // 克隆节点：
+            // clone(), 克隆元素节点
+            // clone(布尔类型参数)， 参数为true， 克隆元素的事件，默认值是false
+
+            /*$(".outerP").click(function () {
+                alert("outerP的click 事件");
+            })
+            var $p = $(".outerP").clone(true);  // 克隆出来的一份
+            $("div").append($p);*/
+
+        });
+    </script>
+</body>
+</html>

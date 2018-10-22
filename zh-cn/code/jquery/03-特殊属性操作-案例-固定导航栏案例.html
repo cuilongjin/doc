@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .top {
+            height: 100px;
+            width: 100%;
+            background-color: rgb(233, 204, 76);
+        }
+        .nav {
+            height: 100px;
+            background-color: rgb(0, 255, 234);
+            width: 100%;
+        }
+        .main {
+            height: 2000px;
+            background-color: rgb(230, 74, 113);
+            text-align: center;
+            width: 100%;
+        }
+        .fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="top" id="topPart"></div>
+    <div class="nav" id="navBar"></div>
+    <div class="main" id="mainPart">
+        <h1>哈哈</h1>
+        <h1>哈哈</h1>
+        <h1>哈哈</h1>
+        <h1>哈哈</h1>
+        <h1>哈哈</h1>
+        <h1>哈哈</h1>
+    </div>
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        $(function() {
+            var $topPart = $( "#topPart" );
+            var $navBar = $( "#navBar" );
+            var $mainPart = $( "#mainPart" );
+
+            $(window).scroll(function() {
+
+                var $scrollTop = $(window).scrollTop();
+                var $H = $topPart.height();
+
+                if ( $scrollTop > $H ) {
+                    $navBar.addClass( "fixed" );
+
+                    $mainPart.css({
+                        "marginTop": $navBar.height(),
+                    });
+                } else if ( $scrollTop < $H ) {
+                    $navBar.removeClass( "fixed" );
+
+                    $mainPart.css({
+                        "marginTop": 0,
+                    });
+                }
+
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>
