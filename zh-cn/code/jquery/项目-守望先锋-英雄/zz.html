@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		html, body {
+			margin: 0;
+			background-color: hotpink;
+			height: 100%;
+			user-select: none;
+		}
+		div {
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+		.hf {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		.dd {
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<img class="hf" src="images/zz/2.gif" alt="">
+	</div>
+	<script src="js/jquery-1.12.4/jquery.min.js"></script>
+	<script>
+		$img = $("img");
+		$("div").click(function() {
+			// console.log($(this));
+			$("img").toggleClass("dd");
+		});
+
+		setTimeout(function() {
+			window.close();
+		}, 2680);
+	</script>
+</body>
+</html>

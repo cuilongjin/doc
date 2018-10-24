@@ -1,0 +1,303 @@
+/*nav start */
+.nav-bar {
+    width: 100%;
+    /*height: 40px;*/
+    background-color: rgba(2, 25, 72, .3);
+    position: absolute;
+    /*overflow: hidden;*/
+    /*margin-top: 1px;*/
+    user-select:none;
+}
+
+.nav-bar .inner {
+    max-width: 1600px;
+    min-width: 800px;
+    height: 40px;
+    margin: 0 auto;
+    padding: 0 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, .15);
+    position: relative;
+}
+
+.nav-bar .inner .blizzard {
+    margin-right: 30px;
+    width: 80px;
+    height: 40px;
+    cursor: pointer;
+    background: url(../images/common/icon-sprite.png) no-repeat top -75px left 0;
+}
+
+.nav-bar .inner .blizzard:hover {
+    background: url(../images/common/icon-sprite.png) no-repeat top -119px left 0;
+}
+
+.nav-bar .inner .item li {
+    float: left;
+    font-size: 16px;
+    margin-right: 30px;
+    line-height: 40px;
+}
+
+.nav-bar .inner .item a {
+    color: #eee;
+}
+
+.nav-bar .inner .itemL li:first-child a {
+    font-weight: 500;
+    color: #fff;
+}
+
+.nav-bar .inner .item a:hover {
+    color: #fff;
+}
+
+/*game start*/
+.nav-bar .game {
+    height: 250px;
+    background-color: rgb(24, 29, 38);
+    display: none;
+    z-index: 2;
+    position: relative;
+}
+
+.nav-bar .game ul {
+    width: 80%;
+    max-width: 1600px;
+    min-width: 1200px;
+
+    height: 250px;
+    margin: 0 auto;
+    display: none;
+}
+
+.nav-bar .game li {
+    width: 13%;
+    min-width: 150px;
+    height: 180px;
+    float: left;
+    box-sizing: border-box;
+    border: 1px solid #333;
+    cursor: pointer;
+    margin-top: 35px;
+    margin-left: 1.1%;
+    position: relative;
+    opacity: 0.8;
+    overflow: hidden;
+
+}
+
+.nav-bar .game img {
+    height: 180px;
+    position: relative;
+    left: 50%;
+    margin-left: -108px;
+    right: auto;
+}
+
+.nav-bar .game li:hover {
+    border: 1px solid #666;
+}
+
+/*game end*/
+
+
+.nav-bar .sj {
+    color: rgb(24, 29, 38);
+    position: absolute;
+    top: -20px;
+    display: none;
+}
+
+/*电子竞技开始*/
+.nav-bar .sport {
+    height: 300px;
+    background-color: rgb(25, 31, 40);
+    position: relative;
+    z-index: 2;
+    display: none;
+}
+
+.nav-bar .sport .items {
+    width: 960px;
+    height: 276px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.nav-bar .sport a {
+    width: 192px;
+    height: 236px;
+    padding: 20px 0;
+    /*background-color: #f00;*/
+    float: left;
+    position: relative;
+    display: none;
+    overflow: hidden;
+}
+
+.nav-bar .sport .inn {
+    width: 96px;
+    height: 276px;
+    position: absolute;
+    left: 192px;
+    top: 0;
+    float: right;
+    overflow: hidden;
+    background-color: rgb(21, 21, 21);
+}
+.nav-bar .sport .inn img {
+    width: 96px;
+    float: left;
+}
+.nav-bar .sport .inn img:hover {
+    background-color: rgb(30,30,30);
+}
+.nav-bar .sport .items span {
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    margin: 0 auto;
+}
+.nav-bar .sport .items a:first-child span {
+    text-align: left;
+    margin-left: 50px;
+}
+.nav-bar .sport .items a {
+    color: #ccc;
+}
+
+.nav-bar .sport .items a:hover {
+    background-color: rgb(41, 48, 60);
+    color: #fff;
+}
+
+/*电子竞技结束*/
+
+/*通行证开始*/
+.nav-bar .pass {
+    width: 320px;
+    height: 166px;
+    background-color: rgb(24, 29, 38);
+    position: absolute;
+    float: right;
+    overflow: hidden;
+    border: 1px solid #333;
+    top: 40px;
+    right: 50px;
+    z-index: 2;
+    display: none;
+}
+
+.nav-bar .pass .login {
+    width: 278px;
+    height: 40px;
+    background-color: rgb(14, 134, 202);
+    text-align: center;
+    font-size: 16px;
+    color: #eee;
+    line-height: 40px;
+    margin: 20px auto;
+    cursor: pointer;
+    display: none;
+
+}
+
+.nav-bar .pass .login:hover {
+    background-color: rgb(0, 174, 255);
+}
+
+.nav-bar .pass .user,
+.nav-bar .pass .register {
+    height: 42px;
+    padding-left: 20px;
+    /*background-color: #fff;*/
+    font-size: 16px;
+    line-height: 40px;
+    border-top: 1px solid #333;
+    color: #ccc;
+    cursor: pointer;
+    display: none;
+}
+
+.nav-bar .pass .user:hover,
+.nav-bar .pass .register:hover {
+    background-color: rgb(38, 42, 54);
+    color: #fff;
+}
+
+/*通行证结束*/
+
+/*半透明背景 开始*/
+.nav-bar .bg {
+    width: 100%;
+    height: 1080px;
+    position: absolute;
+    top: 40px;
+    z-index: 2;
+    background-color: rgba(52, 51, 55, .8);
+    display: none;
+}
+
+/*半透明背景 结束*/
+/*nav end */
+
+/*mainNav 开始*/
+
+.mainNav {
+    width: 96%;
+    height: 64px;
+    background-color: rgb(53, 65, 92);
+    margin: 0 auto;
+    position: fixed;
+    top: 64px;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    user-select:none;
+}
+
+.mainNav li {
+    float: left;
+    width: 95px;
+    height: 64px;
+    line-height: 64px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.mainNav li a {
+    color: #ccc;
+}
+
+.mainNav li:hover {
+    background-color: rgb(72, 84, 108);
+}
+
+.mainNav li:hover a {
+    color: #fff;
+}
+
+.mainNav .logo-mobile {
+    float: left;
+    padding: 0 24px;
+}
+
+.mainNav .buy {
+    width: 100px;
+    height: 64px;
+    background-color: rgb(247, 147, 30);
+    float: right;
+    color: #eee;
+    text-align: center;
+    font-size: 16px;
+    line-height: 64px;
+    cursor: pointer;
+}
+
+.mainNav .buy:hover {
+    background-color: rgb(248, 158, 53);
+    color: #fff;
+}
+
+/*mainNav 结束*/

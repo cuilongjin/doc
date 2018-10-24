@@ -1,0 +1,205 @@
+#footer {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  line-height: 26px;
+  width: auto;
+}
+
+#footer img {
+  display: inline-block;
+}
+
+
+.footer .logo_bz {
+  display: inline-block;
+  width: 140px;
+  height: 80px;
+  position: relative;
+  background: url(../images/common/Fblizzard.png) no-repeat;
+  top: 4px;
+}
+
+.footer .logo_ne {
+  display: inline-block;
+  background: url("../images/common/Flogo_ne.png")  no-repeat;
+  width: 125px;
+  height: 38px;
+}
+
+.footer .cprt {
+  text-align: left;
+  width: 1000px;
+  margin: 0 auto 8px;
+  padding-top: 40px;
+  position: relative
+}
+
+.footer .cprt .info {
+  width: 706px;
+  float: right;
+  text-align: left;
+  padding: 0 0 0 73px;
+  vertical-align: middle;
+  position: relative;
+  *display: inline;
+  *zoom: 1;
+  box-sizing: border-box
+}
+
+.footer .cprt .info ul {
+  margin: 0 0 0 -10px;
+  padding: 0 0 5px;
+  overflow: hidden;
+  list-style: none
+}
+
+.footer .cprt .info ul li {
+  float: left;
+  list-style: none
+}
+
+.footer .cprt .info ul li a {
+  color: #ccc;
+  padding: 0 10px;
+  font-size: 14px
+}
+
+.footer .cprt .info p a:hover {
+  color: #fff
+}
+
+.footer .info p {
+  font-size: 12px;
+  margin: 0;
+  line-height: 20px;
+  font-weight: 400
+}
+
+.footer a {
+  text-decoration: none;
+  padding-top: 5px;
+  color: #fff;
+  font-weight: 400
+}
+
+.footer .tips {
+  text-align: center;
+  clear: both;
+  position: relative;
+  font-size: 12px;
+  line-height: 20px
+}
+
+
+
+.footer .integrity {
+  padding: 8px 0
+}
+
+.footer .integrity a {
+  margin-right: 5px
+}
+
+#f-business {
+  width: 1000px;
+  position: relative;
+  left: 50%;
+  margin-left: -500px;
+  color: #fff;
+  z-index: 100;
+  padding-top: 79px;
+  font-size: 14px
+}
+
+#f-business .icon {
+  background-repeat: no-repeat
+}
+
+#f-business .icon-1,
+#f-business .icon-2,
+#f-business .icon-3 {
+  background-position: -6px -7px;
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  margin-right: 10px
+}
+
+#f-business .icon-2 {
+  background-position: -36px -8px;
+  top: 6px
+}
+
+#f-business .icon-3 {
+  background-position: -8px -32px;
+  top: 4px
+}
+
+#f-business .f-cs {
+  float: left;
+  font-size: 14px
+}
+
+#f-business .f-cs a {
+  color: #fff;
+  margin-right: 37px;
+  vertical-align: middle
+}
+
+.ow-footer {
+  height: 358px;
+  background: #202020
+}
+
+.ow-footer #f-business {
+  padding-top: 40px
+}
+
+.ow-footer #f-business .icon {
+  background-image: url("../images/common/Fsprite-24-blue.png");
+  width: 24px;
+  height: 24px;
+  top: 5px
+}
+
+.ow-footer #f-business .icon-1 {
+  background-position: -96px 0
+}
+
+.ow-footer #f-business .icon-2 {
+  background-position: -144px -24px
+}
+
+.ow-footer #f-business .icon-3 {
+  background-position: -24px -119px
+}
+
+.ow-footer .cprt {
+  clear: both;
+  padding-top: 50px;
+  border-bottom: 1px solid rgba(255, 255, 255, .15);
+  overflow: hidden;
+  padding-bottom: 20px
+}
+
+.ow-footer .cprt .info p {
+  line-height: 20px;
+  vertical-align: top
+}
+
+.ow-footer .cprt .info ul {
+  margin-bottom: 3px
+}
+
+.ow-footer .cprt .info,
+.ow-footer .cprt .info a {
+  color: rgba(255, 255, 255, .5)
+}
+
+.ow-footer .tips {
+  color: rgba(255, 255, 255, .3)
+}
+
