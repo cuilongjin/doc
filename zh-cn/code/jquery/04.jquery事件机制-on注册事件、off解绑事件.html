@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 300px;
+            height: 300px;
+            background-color: #f99;
+            padding: 20px;
+        }
+        p{
+            padding: 20px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <button id="create">创建p元素添加到div</button>
+    <button id="off">解绑事件</button>
+    <br>
+    <div>
+        <p>这是 div 内自带的 p 元素</p>
+    </div>
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        $(function(){
+        // on注册事件
+            // 语法： on(type, selector, data, fn);
+            //  type： 事件类型
+            //  selector： 选择器，指定的子元素，如果该参数存在，说明需要注册的是事件委托
+            //                  如果不存在，说明注册的是简单事件
+            //                  说明该参数是可选的
+            //  data： 可选
+            //  fn
+
+            // 给div注册事件, 事件是注册给了div，div自己去触发该事件
+            // ("div").on("click", function(){
+            //     alert(1);
+            // });
+
+
+            // 使用 on 注册事件委托
+            $("div").on("click mouseenter", "p", function () {
+                // 由指定的子元素p去触发事件
+                alert(2);
+            });
+
+            // 新创建出来的子元素也能触发事件
+            $("#create").on("click", function(){
+                $("div").append( "<p>这是创建出来的p元素</p>" );
+            });
+
+
+        // off 解绑事件
+            $("#off").on("click", function(){
+                // $("div").off();  // 解绑事件， 把元素所有的事件都解绑了
+                // $("div").off("mouseenter");  // 解绑具体的事件类型
+
+                // 只解绑元素注册的事件委托
+                $("div").off("click mouseenter", "p");
+            });
+        });
+    </script>
+</body>
+</html>

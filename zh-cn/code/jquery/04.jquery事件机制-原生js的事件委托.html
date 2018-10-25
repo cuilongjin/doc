@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        ul,li{
+            list-style: none;
+        }
+        ul{
+            background-color: #f99;
+            padding: 20px;
+        }
+        li{
+            padding: 10px;
+            background-color: #ccc;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">创建li</button>
+    <ul>
+        <li>这是1个li元素</li>
+        <li>这是2个li元素</li>
+        <li>这是3个li元素</li>
+    </ul>
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+    // 原生 js 的事件委托
+
+        // 给li 注册click alert("li")
+
+        // 使用事件委托
+        // 事件是注册给父元素的，由子元素去触发该事件
+        // 原理： 事件冒泡
+
+        // 事件委托的好处：
+        //  1. 节省内存
+        //  2. 支持动态绑定
+
+        var btn = document.querySelector("#btn");
+        var ul = document.querySelector("ul");
+
+        btn.onclick = function(){
+            var li = document.createElement("li");
+            li.innerText = "这创建出来的li";
+
+            ul.appendChild(li);
+        };
+
+        ul.onclick = function(e){
+
+            // console.log(e);
+            // e 里面有 target ，指向了谁触发了事件，指向谁
+            if(e.target.nodeName === "LI"){
+                // 成立了，说明点击的元素就是li
+                // 让这句话只能是点击li 去触发
+                alert("li");
+            }
+        };
+    </script>
+</body>
+</html>

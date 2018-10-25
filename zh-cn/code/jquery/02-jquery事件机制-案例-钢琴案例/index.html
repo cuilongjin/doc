@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .nav {
+            width: 700px;
+            height: 60px;
+            background-color: #f99;
+            margin: 0 auto;
+        }
+        .maps {
+            width: 700px;
+            text-align: center;
+        }
+        .maps button {
+            display: block;
+            padding: 5px 10px;
+            margin: 10px auto;
+        }
+        .maps img {
+            width: 80%;
+        }
+        .nav li {
+            width: 100px;
+            height: 60px;
+            float: left;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav a {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            font-size: 24px;
+            color: blue;
+            text-align: center;
+            line-height: 60px;
+            text-decoration: none;
+            z-index: 2;
+        }
+        .nav span {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: yellow;
+            top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <ul>
+            <li>
+                <a href="javascript:void(0);">导航1</a>
+                <span></span>
+            </li>
+            <li><a href="javascript:void(0);">导航2</a><span></span></li>
+            <li><a href="javascript:void(0);">导航3</a><span></span></li>
+            <li><a href="javascript:void(0);">导航4</a><span></span></li>
+            <li><a href="javascript:void(0);">导航5</a><span></span></li>
+            <li><a href="javascript:void(0);">导航6</a><span></span></li>
+            <li><a href="javascript:void(0);">导航7</a><span></span></li>
+        </ul>
+        <div class="maps">
+            <button class="change">切换图片</button>
+            <img src="images/1.jpg" alt="">
+        </div>
+        <div class="mp3">
+            <audio src="mp3/1.mp3"></audio>
+            <audio src="mp3/2.mp3"></audio>
+            <audio src="mp3/3.mp3"></audio>
+            <audio src="mp3/4.mp3"></audio>
+            <audio src="mp3/5.mp3"></audio>
+            <audio src="mp3/6.mp3"></audio>
+            <audio src="mp3/7.mp3"></audio>
+        </div>
+    </div>
+    <script src="../jquery-1.12.4/jquery.js"></script>
+    <script>
+        $(function () {
+            // 切换图片的效果
+            var index = 0;  // 控制显示哪一张图片
+            var arrs = ["1.jpg", "2.jpg", "3.jpg"];
+
+            $(".change").click(function () {
+                index++;
+
+                if (index === arrs.length) {
+                    index = 0;
+                }
+                $(".maps img").attr("src", "images/" + arrs[index]);
+            });
+
+            // 思路：
+            //  1. 获取到所有的li  $lis
+            //  2. 给li  注册 mouseenter
+            //  3. 获取当前li的下标
+            //  4. 去audio 中找到对应下标的 进行播放
+            //  5. 让当前li 下的span 做 animate top = 0；
+
+            // 1.
+            var $lis = $(".nav li");
+            var $audios = $(".mp3 audio");
+
+            // 2.
+            $lis.mouseenter(function(){
+                // 3.
+                var idx = $(this).index();
+                // console.log(idx);
+
+                // 4.
+                // play()  ==>  是H5提供的，jq没有对齐进行封装，play 方法只能由dom对象进行调用
+                // load()  ==>  重新加载资源，是H5提供的，jq没有对齐进行封装，load方法只能由dom对象进行调用
+                $audios[idx].load();
+                $audios[idx].play();
+
+                // 5.
+                $(this).children("span").stop().animate({
+                    top: 0
+                }, 100);
+            });
+            // 鼠标离开事件
+            $lis.mouseleave(function(){
+                // 让当前li 下的span 做 animate top = 60
+                $(this).children("span").stop().animate({
+                    top: 60
+                }, 100);
+            });
+
+
+            // 添加键盘事件 1-7
+            // keydown ==> 触发对应导航的 mouseenter事件
+
+            // 节流阀，让事件有限制去执行
+            var flag = true; // 默认可以触发 keydown 事件
+
+            $(document).on("keydown", function(e) {
+                // console.log(e.keyCode);
+                // 当flag为true时才触发事件
+                if(flag) {
+                    flag = false;
+                    var keyCode = e.keyCode;
+                    // consoel.log(keyCode); // 打印出1-7键盘码 49-55
+                    if(keyCode >= 49 && keyCode <= 55) {
+
+                        var index = keyCode - 49; // 得到下标
+                        $lis.eq(index).mouseenter(); // 触发
+                    }
+                }
+            });
+
+            // 键盘弹起事件， 触发对应导航的mouseleave事件
+            $(document).on("keyup", function(e) {
+                flag = true;   // 在松手后，keydown 事件还可以继续执行
+                var keyCode = e.keyCode;
+
+                if (keyCode >= 49 && keyCode <= 55) {
+                    //如果if成立，说明 数字 1-7
+
+                    var index = keyCode - 49; // 下标
+                    $lis.eq(index).trigger("mouseleave");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

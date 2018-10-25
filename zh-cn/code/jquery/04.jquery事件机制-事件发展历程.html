@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            width: 400px;
+            padding: 20px;
+            background-color: #f99;
+        }
+        p{
+            padding: 20px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <button id="unbind">点击我解绑div的事件</button>
+    <button id="create">点击我创建p元素添加到div内</button>
+    <br>
+    <br>
+    <div >
+        <p>这是div 内自带的p元素</p>
+    </div>
+
+
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        $(function(){
+        // jQuery 事件发展历程
+
+        // 简单事件注册
+            // click(function(){})
+            // mouseenter(function(){})
+
+            /*$("div").click(function(){
+                alert("1")
+            })
+
+            // jq 注册是不会被覆盖
+            $("div").click(function(){
+                alert("2")
+            })*/
+
+            // $("div").click(null);
+
+            // 简单事件注册存在的问题： 没有解绑的方法
+
+        // bind() 来绑定事件
+            // 语法： bind(type, fn);
+            //  type ==> 事件类名
+            //  fn ==>  事件处理函数
+
+            // 如果需要给元素注册多个事件，在 type 里面用空格隔开写上多个事件名
+            /*$("div").bind("click mouseenter", function(){
+                alert(2);
+            })
+
+            // unbind()  来解绑事件 ==> 没有传参就是解绑所有事件
+            // unbind(type)  ==>  需要解绑的事件类名
+            $("#unbind").click(function () {
+                // $("div").unbind();
+                $("div").unbind("mouseenter");
+            })*/
+
+            // bind 绑定事件存在问题  --- 不支持动态绑定
+
+            /*// 演示 bind 存在的问题
+            // $("p")  ==> 找到页面中的所有p元素， 不包含手动创建的p元素
+            $("p").bind("click", function(){
+                alert(3);
+            })
+
+            $("#create").click(function(){
+                $("div").append( "<p>这是创建的p元素</p>" );
+            })*/
+
+            // delegate()  ==> 用来注册事件委托的
+            // 把事件注册给父元素的，由子元素去触发
+            // 语法： delegate(selector, type, fn);
+            //      selector  ==> 选择器， 指定的子元素
+
+            $("div").delegate("p", "click", function(){
+                // 事件是注册给了 父元素 div
+                // 由指定的子元素 p 去触发
+
+                alert(5);
+            });
+
+            $("#create").click(function(){
+                $("div").append( "<p>这是创建的p元素</p>" );
+            });
+
+            // undelegate()   来解绑事件
+            $("#unbind").click(function () {
+                $("div").undelegate();
+            });
+        });
+    </script>
+</body>
+</html>
