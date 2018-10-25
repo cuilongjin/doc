@@ -261,12 +261,13 @@ jQuery 选择器有很多，基本兼容了 CSS1 到 CSS3 所有的选择器，�
 
 > 筛选选择器的功能与过滤选择器有点类似，但是用法不一样，`筛选选择器`主要是方法。
 
-| 名称                 | 用法                          | 描述                           |
-| ------------------ | --------------------------- | :--------------------------- |
-| children(selector) | $(“ul”).children(“li”)      | 获取当前元素的所有子元素中的li元素           |
-| find(selector)     | $(“ul”).find(“li”);         | 获取当前元素中的后代元素中的li元素           |
-| siblings(selector) | $(“#first”).siblings(“li”); | 查找兄弟节点，不包括自己本身。              |
-| parent()           | $(“#first”).parent();       | 查找父亲                         |
+| 名称               | 用法                        | 描述                               |
+| ------------------ | --------------------------- | :--------------------------------- |
+| children(selector) | $(“ul”).children(“li”)      | 获取当前元素的所有子元素中的li元素 |
+| find(selector)     | $(“ul”).find(“li”);         | 获取当前元素中的后代元素中的li元素 |
+| siblings(selector) | $(“#first”).siblings(“li”); | 查找兄弟节点，不包括自己本身。     |
+| parent()           | $(“#first”).parent();       | 查找父亲                           |
+| parents()          | $(“#first”).parents("");    | 查找所有祖宗（参数 指定具体祖宗）  |
 | eq(index)          | $(“li”).eq(2);              | 相当于`$(“li:eq(2)”)`,index从0开始 |
 | next()             | $(“li”).next()              | 找下一个兄弟                       |
 | prev()             | $(“li”).prev()              | 找上一次兄弟                       |
@@ -731,3 +732,165 @@ $(selector).offset();
 // 获取相对于其最近的有定位的父元素的位置，返回值为对象
 $(selector).position();
 ```
+
+
+
+## jQuery 事件机制
+
+> JavaScript 中已经学习过了事件，但是 jQuery 对 JavaScript 事件进行了封装，增加并扩展了事件处理机制。jQuery 不仅提供了更加优雅的事件处理语法，而且极大的增强了事件的处理能力。
+
+
+
+### jQuery 事件发展历程(了解)
+
+简单事件绑定>> bind 事件绑定>> delegate 事件绑定 >>on 事件绑定(推荐)
+
+- 简单方式事件注册
+
+```javascript
+click()			单击事件
+mouseenter()		鼠标进入事件
+mouseleave()		鼠标离开事件
+// jq 中简单方式注册相同的事件是不会被覆盖的
+$("div").click(function(){
+    alert("2");
+});
+$("div").click(null); // alert("2") 依然会执行
+```
+
+缺点：不能同时注册多个事件，无法解绑事件
+
+
+
+- bind 方式注册事件
+
+```javascript
+// 第一个参数：事件类型，如果需要给元素注册多个事件，可以用空格隔开写上多个事件名
+// 第二个参数：事件处理函数
+$("p").bind("click mouseenter", function(){
+    //事件响应方法
+});
+```
+
+> unbind  解绑事件（不用）
+
+```javascript
+$("div").unbind(); // 不传参数解绑所有的事件
+$("div").unbind("click"); // 解绑指定的事件
+```
+
+缺点：不支持动态事件绑定
+
+
+
+- delegate 注册委托事件
+
+  > 事件是注册给父元素的，由子元素去触发该事件
+  >
+  > 原理： 事件冒泡
+  >
+  > 优点：节省内存，支持动态绑定
+
+```javascript
+// 第一个参数：要绑定事件的元素
+// 第二个参数：事件类型
+// 第三个参数：事件处理函数
+$("div").delegate("p", "click", function(){
+    // 事件注册给了父元素 div，为所有的子元素 p 绑定事件， 由 p 去触发事件
+});
+```
+
+> undelegate 解绑事件（不用）
+
+```javascript
+$("div").undelegate(); // 解绑所有的 delegate 事件
+$("div").undelegate( “click” ); // 解绑所有的 click 事件
+```
+
+缺点：只能注册委托事件，因此注册时间需要记得方法太多了
+
+
+
+### on 注册事件(重点)
+
+> jQuery1.7 之后，jQuery 用 on 统一了所有事件的处理方法，强烈建议使用。
+
+- on 注册简单事件
+
+```javascript
+// 表示给$("div")绑定事件，并且由自己触发，不支持动态绑定。
+$("div").on("click", function() {});
+```
+
+- on 注册委托事件
+
+```javascript
+// 表示给$("div")绑定代理事件，当必须是它的内部元素 span 才能触发这个事件，支持动态绑定
+$("div").on( "click","span", function() {});
+```
+
+- on 注册事件的语法
+
+```javascript
+// 第一个参数：events，绑定事件的名称可以是由空格分隔的多个事件（标准事件或者自定义事件）
+// 第二个参数：selector, 执行事件的后代元素（可选），如果没有后代元素，那么事件将有自己执行
+// 第三个参数：data，传递给处理函数的数据，事件触发的时候通过event.data来使用（不常使用）
+// 第四个参数：handler，事件处理函数
+$(selector).on(events[,selector][,data],handler);
+```
+
+
+
+### off 解绑事件
+
+```javascript
+// 解绑匹配元素的所有事件，父元素子元素的所有事件都解绑了
+$("div").off();
+// 解绑匹配元素的所有 click 事件
+$("div").off("click");
+// 解绑子元素 p 的所有 click 事件, 父元素的click事件不会被解绑
+$("div").off("click", "p");
+```
+
+
+
+### 触发事件
+
+```javascript
+// 点击 div 触发事件
+$("div").on("click", function () {
+    alert(2);
+});
+
+// 可由其他元素触发 div 的事件
+// 点击 btn 触发 div 的 click 事件
+$("#btn").on("click", function(){
+    // $("div").click();  // 触发div的click 事件
+    $("div").trigger("click"); // trigger(type) 触发div的click 事件
+});
+```
+
+
+
+### jQuery 事件对象
+
+jQuery 事件对象其实就是js事件对象的一个封装，处理了兼容性。
+
+```javascript
+//screenX和screenY	对应屏幕最左上角的值
+//clientX和clientY	距离页面左上角的位置（忽视滚动条）
+//pageX和pageY	距离页面最顶部的左上角的位置（会计算滚动条的距离）
+
+//event.keyCode	按下的键盘代码
+//event.data	存储绑定事件时传递的附加数据
+
+//event.stopPropagation()	阻止事件冒泡行为
+//event.preventDefault()	阻止浏览器默认行为
+//return false 既能阻止事件冒泡，又能阻止浏览器默认行为
+```
+
+**注意**：`js` 中的 `return false` 只能起到阻止浏览器的默认行为，`jquery` 中的 `return false`  既能阻止事件冒泡也能阻止浏览器的默认行为。
+
+【案例：钢琴版导航（加强】
+
+【案例：弹幕效果】
