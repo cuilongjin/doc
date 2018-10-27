@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        console.log($); // {}
+
+        // 多库共存： 其他库如果也使用$ 来表示功能，那个和jquery里面 $ 就冲突了。
+
+        var a = jQuery.noConflict(); // 让jq释放对$ 的控制权， 该方法会返回 $ 的功能
+
+        // console.log($);
+        console.log(a);  // a 就表示 jquery的$ 功能。
+
+        // 可以使用jQuery 来使用 $ 的功能，但是麻烦
+        a(function(){
+            a("body").css("backgroundColor", "#f99");
+        });
+    </script>
+</body>
+</html>

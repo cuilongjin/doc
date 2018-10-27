@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        // 封装一个bgc插件，该插件提供了一个方法bgc， 可以用来设置背景颜色
+        // 往jq的原型上添加方法
+        $.fn.bgc = function(color){
+            // this  ==>  $("body"),   是个jq对象
+            // console.log(this);
+
+            this.css("backgroundColor", color);
+
+            return this; // 目的； 为了实现链式编程，这就是链式编程的原理
+        };
+    </script>
+    <script>
+        $(function() {
+            // $("body").css("backgroundColor", "#f99");
+
+            // 对于设置性操作，返回当前的jq对象
+            $("body").bgc("#f99").css("fontSize", 50);
+        });
+    </script>
+</body>
+</html>

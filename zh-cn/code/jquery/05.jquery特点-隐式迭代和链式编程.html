@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>这是第1个li</li>
+        <li>这是第2个li</li>
+        <li>这是第3个li</li>
+    </ul>
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        $(function() {
+        // jq的两个特点：
+        // 1. 隐式迭代
+            //  偷偷的遍历
+            //  对于设置性操作，把获取到的所有元素都设置上相同的操作
+            //  对于获取性操作， 只会获取第一个元素的对应的值
+            //  如果需要给每个元素设置上不同操作，需要手动遍历
+
+            // $("li").css("color", "red");
+            // console.log($("li").css("fontSize"));
+
+            // var arr = ["pink", "yellow", "green"];
+            // for(var i = 0; i < arr.length; i++){
+            //     $("li").eq(i).css("backgroundColor", arr[i]);
+            // }
+
+
+            // jq 里 each方法， 该方法用来遍历 jq 对象
+            // 语法：
+            //  each(function(index, ele){
+            //      index: 当前遍历的元素的下标
+            //      ele:  当前遍历的元素, 是个dom对象
+            //      this: 在函数内部，this的指向了ele
+            //  })
+
+
+            // 使用each来遍历$("li")
+            var arr = ["pink", "yellow", "green"];
+            $("li").each(function(index, ele){
+                // console.log(index, ele);
+                // $(ele).css("backgroundColor", arr[index]);
+                $(this).css("backgroundColor", arr[index]);
+            });
+
+            // 2. 链式编程
+            // 通过 . 一直写下去(限制条件，都是设置性操作)
+            // 对于设置性操作，返回当前的jq对象, 后面能继续链式编程了
+            // 对于获取性操作，会返回具体的值，没有返回jq对象，后面就不能继续链式编程了
+
+            console.log($("body").css("backgroundColor", "#f99").css("fontSize", 50).css("fontSize")); // $("body")
+
+            // 推荐 链式编程不要太长
+            $("body").css("backgroundColor", "#f99").css("fontSize", 50).css("fontSize").css("color", "yellow");
+        });
+    </script>
+</body>
+</html>

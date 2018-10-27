@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .comment {
+            font-size: 40px;
+            color: #ff16cf;
+        }
+        .comment li {
+            float: left;
+        }
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <ul class="comment">
+        <li>☆</li>
+        <li>☆</li>
+        <li>☆</li>
+        <li>☆</li>
+        <li>☆</li>
+    </ul>
+    <script src="jquery-1.12.4/jquery.min.js"></script>
+    <script>
+        $(function() {
+            var $lis = $(".comment li");
+            var wjx_k = "☆";
+            var wjx_s = "★";
+            $lis.on("mouseenter", function() {
+                // prev()  ==> 上一个
+                // prevAll() ==>  当前元素的前面所有的元素
+                // nextAll() ==>  当前元素的后面所有的元素
+                // $(this).text(wjx_s);  // ==> $(this)
+                // $(this).text(wjx_s).prevAll().text(wjx_s)  ==> 返回$(this).prevAll();
+                // console.log($(this).text(wjx_s).prevAll().text(wjx_s));
+                // prevObject ： 属性， 返回上一次找到的jq对象
+                // end()  ==> 封装了 prevObject 属性
+
+                // 方法和属性混搭
+                // $(this).text(wjx_s).prevAll().text(wjx_s).prevObject.nextAll().text(wjx_k);
+                $(this).text(wjx_s).prevAll().text(wjx_s).end().nextAll().text(wjx_k);
+
+            });
+
+            $(".comment").on("mouseleave", function() {
+                $lis.text(wjx_k);
+
+                // 保留点击后的效果
+                $(".comment li.current").text(wjx_s).prevAll().text(wjx_s);
+            });
+
+            $lis.on("click", function() {
+                // current 是个独一无二的类名，就是用来做标记的
+                $(this).addClass("current").siblings().removeClass("current");
+            });
+        });
+    </script>
+</body>
+</html>
