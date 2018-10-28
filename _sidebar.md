@@ -15,3 +15,5 @@
 	- [webapi笔记](zh-cn/_webApi/webapi笔记)
 * **jQuery**
 	- [jquery笔记](zh-cn/_jquery/jquery笔记)
+* **PHP**
+	- [php笔记](zh-cn/_php/php笔记)
