@@ -555,3 +555,191 @@ foreach($arr as $k => $v) {
   echo $k . "=" . $v . "<br>";
 }
 ```
+
+
+
+## 函数
+
+> 注意，在php中函数不能重复声明
+
+php 中函数的语法与js中函数的语法基本一样，不同点在于
+
+1. 函数名大小写不敏感
+2. 函数的形参可以设置默认值
+
+```php
+<?php
+    header("content-Type:text/html;charset=utf-8");
+    function sayHello ($name="周杰伦") {
+        echo "大家好，我是$name";
+        echo "<br>";
+        [return 返回值;]
+    }
+    sayHello(); // 不传参数，会使用默认值
+    sayHello("大象"); // 传参数，默认值不生效
+?>
+```
+
+1. 在 php 中函数不能重复声明
+2. 函数体内的变量只在函数体内有效
+3. 函数体外的变量只在函数体外有效
+
+```php
+<?php  
+    $age = 18
+    function fn(){
+    	$name = '大象';
+    	echo $name;  // 有效
+    	echo $age;  // 无效
+	} 
+	fn();
+	echo $name;  // 无效
+    echo $age; // 有效
+?>
+```
+
+
+
+## 常量
+
+保存不会发生改变的数据(如：3.1415， 路径等)时，最好使用常量。
+
+ 常量的使用方法：
+
+```php
+define(常量名, 常量值, [是否区分大小写]);
+// 默认 false 区分大小写， true 不区分大小写
+define("PI", 3.1415, true);
+echo PI;
+echo pi;
+```
+
+**注意:**  一般在实际工作中，常量都用大写，**常量不能被重新赋值**
+
+
+
+## PHP内置函数
+
+### 数学函数
+
+- max(),min()   分别返回一组数的最大值及最小值；
+- abs() 返回绝对值。
+- floor() 向下取整。
+- ceil()  向上取整。
+- round() 四舍五入。
+- rand()  返回随机整数，可以取到两端的值。
+
+
+
+### 日期函数
+
+- `time()`  返回当前的时间戳 (1970到现在的时间的秒数)
+
+- `date(format,time)`  格式化一个本地时间或日期
+
+  格式：Y(年) m(月)  d(日)   H(时)  i(分)  s秒
+
+```php
+$time = time(); // 获取时间戳
+echo date('Y-m-d H:i:s',$time); // 格式化时间戳
+// Y, m, d, H, i, s 分别代表 年 月 日 时 分 秒
+```
+
+默认时区会不太正确,  我们在东八区, 比0时区会多八小时
+
+```php
+路径: D:\phpStudy\php\php-5.4.45
+在php.ini里加上找到date.timezone项，设置date.timezone = "PRC"，重启环境就ok了。
+PRC: 中华人民共和国
+```
+
+
+
+### 字符串函数
+
+- `str_replace(查找的值，替换的值，执行替换操作的字符)`    字符串替换（会把符合的值全部替换）
+- `trim(字符串);`  去除首尾空白字符
+- `explode(分割符，执行分割的字符串);`  使用一个字符分割一个字符串，返回一个数组(类似split)
+- `implode(连接符，执行连接的数组);`   将数组根据连接符拼接成字符串(类似join)
+- `substr(字符串，起始索引，截取长度);`  截取字符串，注意中文占3个字节长度
+- `strchr(字符串，标识字符);`   从左向右找标识字符，返回该字符后全部字符(包括该字符)
+- `strrchr(字符串，标识字符);`   从右向左找标识字符，返回该字符后全部字符(包括该字符) **主要用于获取后缀名**
+
+
+
+## 页面动态渲染
+
+- PHP本身支持与HTML混编
+
+- 混编的文件后缀必须为 .php， Apache 才会调用 PHP 解析
+
+- PHP与HTML混编时，服务器中的 PHP 引擎 只会执行php标签内部的PHP代码，非PHP的代码(PHP标签外部的内容)直接忽略，最后会将PHP的执行结果和非PHP代码 一起返回给浏览器,由浏览器进行解析
+
+- 一个php页面当中,可以写多个php语法结构,但是php语法结构 **不能嵌套**
+
+
+
+  ```php
+  <?php 
+      header('content-type:text/html;charset=utf-8');    
+      echo 2+3;
+      // php的引擎 只会执行php代码块中代码，代码块外面的代码会被忽略最后 服务器会将php执行的结果和代码块外面的内容一起返回给浏览器，由浏览器进行解析
+  ?>
+  // 在php语法结构外面， 可以写 html ，会直接在浏览器中渲染
+  <a href="http://www.baidu.com">百度一下</a>
+  ```
+
+
+
+## include 文件引入
+
+**介绍**：不同的页面中有相同的代码部分，可以将其分离为单个文件。需要调用时，**include 引入对应的文件即可调用**。提高代码的复用率。类似于 js 中 script 标签导入, 可以用于函数复用
+
+**语法**
+
+```javascript
+// 可以是html、php或其他类型的页面
+include | include_once   "文件的路径"
+```
+
+**include 与 include_once 区别**
+
+- include  可以重复引入文件
+- include_once  只引入一次，防止多次引入文件
+- 如果文件中有函数，include 重复引入会报错，include_once 不会报错
+
+
+
+## PHP 数据读写到文件(数据持久化)
+
+程序运行过程中，数据存储在内存中的，程序结束, 数据会销毁
+
+如果希望可以永久存储某些数据，可以将数据存储在硬盘上（存储在文件中） 
+
+将数据由内存存储到硬盘的过程，称为数据持久化；
+
+- `file_get_contents(path)`   根据路径读取文件内容, 返回一个字符串
+
+- `file_put_contents(path,$str)`  将一个字符串写入到一个文件中。(只能存储字符串)
+
+  ```php
+  file_put_contents(string $file, string $data[, constants flag]);
+  参数1: 文件路径
+  参数2: 要写入文件的字符串
+  参数3: 可选参数，默认不写，新内容覆盖原文件中的内容；FILE_APPEND 是向文件中追加内容
+  返回值: 写入文件的字符串长度(不用记)
+  ```
+
+使用 `file_put_contents` 存储数组的时候，会丢失数据
+
+```php
+$arr = ['zs', 'ls', 'ww'];
+$arr1 = ['name'=>'zs', 'age'=>18];
+file_put_contents("02-test.txt", $arr); // zslsww
+file_put_contents("02-test.txt", $arr1); // zs18
+```
+
+把一个数组，转成一个 json 格式的字符串
+
+- `json_encode($data)`   将PHP数组转成JSON格式字符串。
+- `json_decode($str,true)`  将 JSON 字符串, 转换为 PHP 数组。（不传true, 有可能转完之后是个对象, 传了true,一定是数组）
