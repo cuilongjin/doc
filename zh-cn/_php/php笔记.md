@@ -58,8 +58,6 @@ PS: web服务器又叫做http/httpd服务器
 
 
 
-
-
 ## 网络基础(重点)
 
 
@@ -743,3 +741,117 @@ file_put_contents("02-test.txt", $arr1); // zs18
 
 - `json_encode($data)`   将PHP数组转成JSON格式字符串。
 - `json_decode($str,true)`  将 JSON 字符串, 转换为 PHP 数组。（不传true, 有可能转完之后是个对象, 传了true,一定是数组）
+
+
+
+## 表单处理
+
+> 表单（form）：表单用于收集用户输入信息，并将数据提交给服务器。是一种常见的与服务端数据交互的一种方式
+
+1. action: 指定表单的提交地址
+2. method: 指定表单的提交方式，get/post，默认 get
+3. input 的数据想要提交到后台，必须指定 name 属性，后台通过 name 属性获取值
+4. 想要提交表单，不能使用 input:button 必须使用 input:submit
+
+
+
+### php 获取表单数据 
+
+```php
+// $_GET 是 PHP 系统提供的一个超全局变量，是一个数组，里面存放了表单通过 get 方式提交的数据
+// $_POST 是 PHP 系统提供的一个超全局变量，是一个数组，里面存放了表单通过 post 方式提交的数据
+```
+
+
+
+**get 与 post 的区别**
+
+- get 方式
+  数据会拼接在 url 地址的后面 ?username=pp&password=123456
+  地址栏有长度限制，因此 get 方式提交数据大小不会超过 4k
+- post 方式
+  数据不会在 url 中显示，相比 get 方式，post 更安全
+  提交的数据没有大小限制，可用于文件上传
+
+
+
+### 文件上传
+
+**html要求** 
+
+- 文件上传的提交方式必须是 post 方式
+
+- 需要给 form 指定 enctype="multipart/form-data"
+
+- 指定 name 属性，后台才能获取到
+
+**php 相关**
+
+- 文件上传时，通过 `$_FILES` 才能获取到，这是一个二维数组。
+
+  ```php
+    Array
+    (
+        [photo] => Array
+            (
+                [name] => 001.jpg   // 文件名字
+                [type] => image/jpeg  // 文件类型
+                // 上传图片保存的位置
+                [tmp_name] => C:\Users\Jepson\AppData\Local\Temp\phpF2A0.tmp   
+                [error] => 0     // 上传错误码, 错误码为 0 表示没有错误
+                [size] => 6000   // 文件大小, 单位字节, 大小 6kb 左右
+            )
+    )
+  ```
+
+  ​
+
+- 上传文件时，文件会临时保存在服务器上，如果文件最终没有保存，那么临时文件会被删除，保证服务器安全。
+
+- `sleep(10) ` 可以让代码延迟10秒钟才执行。
+
+- `move_uploaded_file($path, $newPath);` 可以转存临时文件，真正把文件存储起来
+
+```php
+  // 保存图片的完整代码
+  // 思路:
+  // 1. 在文件上传成功的情况下, 进行图片的保存   error == 0
+  // 2. 获取临时文件路径
+  // 3. 随机生成新的文件名, 注意文件中后缀名是不能改变的
+  // 4. 根据新的文件名, 转移临时文件
+
+  $file = $_FILES['photo'];
+
+  // 判断上传是否成功
+  if ( $file['error'] == 0 ) { // 上传成功
+    // 1. 获取临时文件路径
+    $ftemp = $file['tmp_name'];
+
+    // 2. 随机生成新的文件名, 后缀不能随便起, 要获取一下
+    $name = $file['name'];
+    $text = strrchr($name, '.');
+    // 为了防止重复, 生成随机的文件名以当前时间秒数+随机数组成
+    $newName = time().rand(10000,99990).$text;
+
+    // 3. 进行转存
+    move_uploaded_file($ftemp, "./upload/$newName");
+  }
+```
+
+
+
+## 学生信息管理系统1.0
+
+### 基本功能
+
+- 学生添加功能
+- 展示学生信息功能
+- 删除学生信息
+
+```php
+// array_splice(数组, 开始的下标, 截取长度) 将匹配到的数据截取掉，会改变原来的数组
+array_splice($arr, $_GET["index"], 1);
+
+// 将 $stuArr 添加到数组 $arr 中
+$arr[] = $stuArr;
+```
