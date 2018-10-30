@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 沙箱的其他写法
+
+        // 函数表达式的后面是可以直接跟()进行调用
+        var fn = function () {
+            alert(2);
+        }();
+
+        // 1. 前面的()的作用不是用来提升优先级的，在()中只能出现表达式，js引擎在解析的时候，把括号中的函数声明解析成函数表达式，后面就可以直接跟()进行调用了
+        (function() {
+            console.log(1);
+        })();
+
+        // 2. 将函数声明解析成了函数表达式
+        (function() {
+            alert(3);
+        }());
+
+        // 3  ==>  在压缩文件里面常见
+        // ! 也会把函数声明转换成函数表达式，（让函数声明参与运算）
+        !function(){
+            alert(4);
+        }();
+
+        // 其他写法
+        +function(){
+            alert(5);
+        }()
+
+        -function(){
+            alert(6);
+        }();
+
+
+        // 语法问题, function 是个关键字， 用来声明函数的，后面没有()
+        // function(){
+        //     alert(1);
+        // }();
+
+        // function fn(){
+        //     alert(1);
+        // }();
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 省去 new 操作
+        // 工厂函数将 new 封装
+
+        function Person(name, age){
+            this.name = name;
+            this.age = age;
+        }
+
+        /*var xm = new Person("小明", 20);
+        console.log(xm);
+        var xh = new Person("小红", 21);
+        console.log(xh);*/
+
+        // 上面要想得到一个实例对象，每次必须要 new 构造函数才能得到实例对象，把 new Person 给封装起来
+
+        // 工厂模式： 批量创建对象
+        // 工厂函数， 是个函数， 特征： return new 构造函数， 把创建的实例对象给返回出去
+        function $(name, age){
+            // Person 才是构造函数
+            return new Person(name, age); // 这个name， age 是实参
+        }
+
+        var xh = $("小华", 10);
+        console.log(xh); //
+
+        // 这里希望得到实例对象的话，已经可以省去new 操作得到实例对象
+        var xm = $("小明", 19);
+        console.log(xm);
+    </script>
+</body>
+</html>

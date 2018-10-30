@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div>这是div</div>
+    <div>这是div</div>
+    <script>
+    // 让 jq 实例对象有方法使用
+
+        (function (window, undefined) {
+
+            // jQuery 暂且理解成构造函数
+            var jQuery = function(selector){
+                var ele = document.querySelectorAll(selector);
+                [].push.apply(this, ele);
+            };
+
+            // jq的原型
+            // 由于jq的方法很多，考虑使用原型替换, 会造成 constructor 属性丢失
+
+            // jQuery.fn 就是 jQuery.prototype 的简写形式
+            jQuery.fn = jQuery.prototype = {
+                // 需要手动添加 constructor 属性
+                constructor: jQuery,
+
+                css: function(){
+                    console.log("css is ok");
+                },
+                width: function(){
+                    console.log("width is ok");
+                }
+            };
+
+
+            window.jQuery = window.$ = jQuery;
+        })(window);
+
+        // console.log($("div"));
+        var $div = new $("div"); // jq 的实例对象
+        console.log($div);
+
+        // $div.css();
+        // $div.width();
+
+        // var $ps = new $("p");
+        // console.log($ps);
+
+    </script>
+</body>
+</html>

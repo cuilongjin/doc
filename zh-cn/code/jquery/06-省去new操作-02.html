@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div>哈哈</div>
+    <div>哈哈</div>
+    <script>
+    // 省去new 操作，得到一个jq的实例对象
+
+        (function (window, undefined) {
+
+            // jQuery 是 工厂函数， 里面干啥？
+            var jQuery = function(selector){
+
+                // return new 构造函数；
+                // 在jq里面，真正的构造函数是init，而且init方法放在 jq 的原型上
+
+                // jQuery.fn.init ==> 是从jq的原型上拿init方法
+                return new jQuery.fn.init(selector); // init 何种调用模式， 构造函数模式
+            };
+
+            jQuery.fn = jQuery.prototype = {
+                constructor: jQuery,
+
+                init: function(selector){
+                    // 是真正的构造函数
+
+                    // 这两句代码 -- 获取元素
+                    var ele = document.querySelectorAll(selector);
+
+                    // this ==> init的实例对象
+                    [].push.apply(this, ele);
+                },
+
+                css: function(){
+                    console.log("css is ok");
+                }
+            };
+
+            // 把 init 的构造函数的 prototype 改成 jquery的原型
+            // 目的： 让init的实例对象可以访问jq原型上的方法
+            jQuery.fn.init.prototype = jQuery.fn;
+            window.jQuery = window.$ = jQuery;
+        })(window);
+
+        // 要想省去new操作，而且还要得到实例对象，在使用的时候没有new
+        var $div = $("div"); // init实例对象
+        console.log($div);
+
+        // 这样有问题，因为init 的实例对象上没有css方法（init原型上没有css方法）
+        $div.css();
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+		// jq的基本架构： 沙箱
+        //  减少全局污染
+
+        // 参数 window 的作用:
+        //  1. 减少对 window 的搜索过程
+        //  2. 有利于代码压缩
+
+        // 参数 undefined 的作用：
+        //  参数undefined 的值是 undefined
+        //  undefined 这个数据类型的值在ie678 中是可以被修改的，现在有undefined 形参在这，在沙箱里面去使用undefined的时候，就不会去引用外面被修改的undefined 的值。
+
+        /*(function(w){
+            // 理解形参： 理解成函数内的局部变量
+            // var window = window;
+
+            var fn = function(){
+            }
+            w.fn = fn;
+        })(window)*/
+
+        (function(window, undefined){
+            // console.log(undefined);
+
+            // jQuery 暂且理解成jq的构造函数
+            var jQuery = function () {
+
+            };
+
+            // 往外暴露
+            window.jQuery = window.$ = jQuery;
+        })(window);
+
+
+        // 在外面去使用 jQuery 去得到一个 jq 的实例对象
+        var  jq = new jQuery();  // ==> 得到一个jq的实例对象
+        console.log(jq);
+    </script>
+</body>
+</html>

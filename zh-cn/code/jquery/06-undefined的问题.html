@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        undefined = 13;
+
+        // undefined 是一种数据类型，值是 undefined
+        // undefined 这个数据类型的值 在 ie678 中，是可以被修改的
+
+        console.log(undefined); // 在IE678中会打印出 13
+
+        (function(undefined){
+            // var undefined = undefined;
+            console.log(undefined); // undefined
+        })();
+    </script>
+</body>
+</html>

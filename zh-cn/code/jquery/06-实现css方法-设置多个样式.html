@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>哈哈</div>
+    <div>哈哈</div>
+    <script>
+    // 实现 css 方法，设置多个样式
+
+        (function(window, undefined) {
+            var jQuery = function(selector) {
+                return new jQuery.fn.init(selector);
+            };
+            jQuery.fn = jQuery.prototype = {
+                constructor: jQuery,
+                init: function(selector) {
+                    var ele = document.querySelectorAll(selector);
+                    [].push.apply(this, ele);
+                },
+
+                css: function(name, value) {
+
+                    // this指向了$div
+                    if (arguments.length === 2) {
+                        for (var i = 0; i < this.length; i++) {
+
+                            // this[i] 为每个dom
+                            // this[i].style.name = value; // 这样相当于是给style添加name属性
+                            this[i].style[name] = value;
+                        }
+                    } else if (arguments.length === 1) {
+
+                        // arguments 的长度为1， 其实就是参数name
+                        if (typeof name == "object") { // 判断name是不是对象
+
+                            // 需要两层遍历
+                            // 遍历元素，给每一个元素都需要设置上样式
+                            for (var j = 0; j < this.length; j++) {
+
+                                // 遍历对象， 给每一个元素都设置上多个样式
+                                for (var k in name) {
+                                    this[j].style[k] = name[k];
+                                }
+                            }
+                        } else {
+
+                        }
+                    }
+                }
+            };
+
+            jQuery.fn.init.prototype = jQuery.fn;
+            window.jQuery = window.$ = jQuery;
+        })(window);
+
+        var $div = $("div");
+        $div.css({
+            color: "#f99",
+            fontSize: "30px",
+        });
+
+    </script>
+</body>
+
+</html>

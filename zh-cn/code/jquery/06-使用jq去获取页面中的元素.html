@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div>这是div</div>
+    <div>这是div</div>
+    <script>
+        // 使用jq去获取页面中的元素,得到的是个jq实例对象，是个伪数组
+
+        (function (window, undefined) {
+
+            // jQuery 暂且理解成构造函数
+            var jQuery = function(selector){
+                // console.log(selector);
+
+                // 1. 根据这个参数 selector 就可以去获取页面中的元素
+                var ele = document.querySelectorAll(selector);
+                // console.log(ele);
+
+                // 2. 把获取到的元素添加到jq的实例对象上
+                // this ==> jq的实例对象上
+
+                /*// 遍历 ele 中的每一项， 把每一项添加到this上
+                for(var i = 0; i < ele.length; i++){
+                    // ele[i]  ==> 每一项
+                    this[i] = ele[i];  // 把ele中的每一项添加到this 上
+                }
+                // 手动添加实例对象的length 属性
+                this.length = ele.length;*/
+
+
+                // 数组的push可以添加项，而且还可以维护 length 属性
+                // this.push();  ==> this 是jq的实例对象， 伪数组，不能使用push方法，考虑借用
+                // call  apply,  作用是一样的，区别在于参数
+                // apply 的第二个参数是个数组或者伪数组
+
+                // Array.prototype.push.apply(this, ele);
+
+                // 可以从空数组上面去获取到push方法
+                [].push.apply(this, ele);
+                // 相当于是：
+                // this.push(ele中的每一项)
+            };
+
+            window.jQuery = window.$ = jQuery;
+        })(window);
+
+        var $div = new $("div");
+        console.log($div);
+
+        var $ps = new $("p");
+        console.log($ps);
+    </script>
+</body>
+</html>
