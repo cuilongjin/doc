@@ -4,15 +4,12 @@
 
 ### 为什么要学 jQuery
 
-使用JS操作DOM的时候，会遇到以下的一些缺点：
+使用 JS 操作 DOM 的时候，会遇到以下的一些缺点：
 
-```javascript
-//1. 获取元素的方法太少且长，麻烦。
-//2. 遍历伪数组很麻烦，通常要嵌套一大堆的for循环。
-//3. 注册的事件会覆盖。
-//4. 有兼容性问题。
-//5. 实现动画很麻烦
-```
+> 1. 获取元素的方法太少且长，麻烦
+> 2. 遍历伪数组很麻烦，通常要嵌套一大堆的 for 循环。注册的事件会覆盖
+> 3. 有兼容性问题
+> 4. 实现动画很麻烦
 
 
 
@@ -39,29 +36,27 @@ $(document).ready(function () {
 });
 ```
 
-使用jQuery的优点
+**使用 jQuery 的优点**
 
-```javascript
-//1. 获取元素的方式非常的简单，而且非常的丰富
-//2. jQuery的隐式迭代特性，不再需要书写for循环语句。
-//3. 使用jQuery完全不用考虑兼容性问题。
-//4. jQuery提供了一系列动画相关的函数，使用非常方便。
-//5. 代码简单、粗暴。
-```
+> 1. 获取元素的方式非常的简单，而且非常的丰富
+> 2. jQuery 的隐式迭代特性，不再需要书写 for 循环语句
+> 3. 使用 jQuery 完全不用考虑兼容性问题
+> 4.  jQuery 提供了一系列动画相关的函数，使用非常方便
+> 5. 代码简单、粗暴
 
 **没有对比，就没有伤害，有了对比，处处戳中要害。**
 
 
 
-什么是 jQuery
+**什么是 jQuery**
 
 > jQuery 是一个快速的、轻量的、功能丰富的js库。
 
-jQuery的官网 [http://jquery.com/](http://jquery.com/) 
+jQuery 的官网 [http://jquery.com/](http://jquery.com/) 
 
-jQuery就是一个js库，使用jQuery的话，会比使用JavaScript更简单。
+jQuery 就是一个 js 库，使用 jQuery 的话，会比使用 JavaScript 更简单。
 
-js库：把一些常用到的方法写到一个单独的js文件，使用的时候直接去引用这js文件就可以了。（animate.js、common.js）
+js 库：把一些常用到的方法写到一个单独的 js 文件，使用的时候直接去引用这 js 文件就可以了。（animate.js、common.js）
 
 
 
@@ -82,16 +77,16 @@ js库：把一些常用到的方法写到一个单独的js文件，使用的时�
 
 关于压缩版和未压缩版
 
-```javascript
-jquery-1.12.4.min.js:压缩版本，适用于生产环境，因为文件比较小，去除了注释、换行、空格等东西，采用了代码混淆，基本没有可阅读性。
-jquery-1.12.4.js:未压缩版本，适用于学习与开发环境，源码清晰，易阅读。
-```
+* `jquery.min.js`: 压缩版本，适用于生产环境，因为文件比较小，去除了注释、换行、空格等东西，采用了代码混淆，基本没有可阅读性。
+* `jquery.js`: 未压缩版本，适用于学习与开发环境，源码清晰，易阅读。
+
+
 
 ### 入口函数
 
 入口函数的好处：
 
-1. 等待文档加载完成，不论代码是写在body、head中都可以正常去获取到元素
+1. 等待文档加载完成，不论代码是写在 body、head 中都可以正常去获取到元素
 2. 形成了一个沙箱，防止全局变量污染。
 
 两种写法：
@@ -117,22 +112,22 @@ windows.onload = function(){
 
 
 
-jQuery入口函数与js入口函数的对比
+jQuery 入口函数与 js 入口函数的对比
 
-* JavaScript 的入口函数要等到页面中所有资源（包括图片、文件等外部资源）加载完成才开始执行。jQuery 的入口函数只会等待文档树加载完成就开始执行，并不会等待图片、文件的加载。所以 jQuery 的入口函数要比js入口函数先执行
-* window.onload 存在覆盖问题。jq的入口函数不存在覆盖问题
+* JavaScript 的入口函数要等到页面中所有资源（包括图片、文件等外部资源）加载完成才开始执行。jQuery 的入口函数只会等待文档树加载完成就开始执行，并不会等待图片、文件的加载。所以 jQuery 的入口函数要比 js 入口函数先执行
+* window.onload 存在覆盖问题；jq 的入口函数不存在覆盖问题
 
 
 
 ### jQuery 使用步骤
 
-1. 引包（引入js文件）
+* 引包（引入js文件）
 
 ```html
 <script src="jquery.js"></script>
 ```
 
-2. 写上入口函数
+* 写上入口函数
 
 ```javascript
 $(document).ready(function () {
@@ -144,7 +139,7 @@ $(function(){
 });
 ```
 
-3. 在入口函数内部实现功能
+* 在入口函数内部实现功能
 
 ```javascript
 $("#btnShowDiv").click(function () {
@@ -167,28 +162,28 @@ jQuery === $ // true
 
 **作用**：根据参数的不同， 作用是不同的
 
-​	参数是个函数  `$(function(){}); `         作用是入口函数
+* 参数是个函数  `$(function(){}); ` 作用是入口函数
 
-​	参数是个dom对象   `$(document);  `        作用是dom 转jq
+* 参数是个dom对象  `$(document);  ` 作用是dom 转jq
 
-​	参数是选择器    `$("body"); `             作用是获取元素
+* 参数是选择器  `$("body"); ` 作用是获取元素
 
-​	参数是个html字符串 `$("<a>123</a>");`    作用是创建节点
+* 参数是个html字符串 `$("<a>123</a>");`  作用是创建节点
 
 
 
 ### jQuery 对象与 DOM 对象(重点)
 
-基本概念：
+**基本概念：**
 
-1. `DOM对象`：使用 JavaScript 中的方法获取页面中的元素返回的对象就是 Dom 对象。
-2. `jQuery对象`：jquery 对象就是使用 jquery 的方法获取页面中的元素返回的对象。
-3. jQuery 对象其实就是 DOM 对象的包装集（包装了 DOM 对象的集合），是一个**伪数组**。
+1. `DOM 对象`：使用 JavaScript 中的方法获取页面中的元素返回的对象就是 Dom 对象。
+2. `jQuery 对象`：jquery 对象就是使用 jquery 的方法获取页面中的元素返回的对象。
+3. jQuery 对象其实就是 DOM 对象的包装集（包装了 DOM 对象的集合），是一个 **伪数组**。
 
-jQuery 对象与 DOM 对象的区别：
+**jQuery 对象与 DOM 对象的区别：**
 
-1. DOM 对象与 jQuery 对象的方法不能混用。dom 对象不能使用 jq 对象的方法，jq对象也不能使用 dom 对象的属性和方法。
-2. DOM 对象可以和 jQuery 对象相互转化。
+1. DOM 对象与 jQuery 对象的方法不能混用。dom 对象不能使用 jq 对象的方法，jq 对象也不能使用 dom 对象的属性和方法。
+2. DOM 对象可以和 jQuery 对象可以相互转化。
 
 
 
@@ -205,9 +200,9 @@ var $obj = $(domObj);
 // 通过 $()  来获取到的元素返回的对象就是jq对象
 
 var $li = $(“li”);
-//第一种方法,通过下标取出（推荐使用）
+// 第一种方法,通过下标取出（推荐使用）
 $li[0]
-//第二种方法
+// 第二种方法
 $li.get(0)
 ```
 
@@ -245,13 +240,13 @@ jQuery 选择器有很多，基本兼容了 CSS1 到 CSS3 所有的选择器，�
 
 > 这类选择器都带冒号 `:`
 
-| 名称         | 用法                               | 描述                                                      |
-| ------------ | ---------------------------------- | :-------------------------------------------------------- |
-| :eq（index） | $(“li:eq(2)”).css(“color”, ”red”); | 获取到的li元素中，选择索引号为2的元素，索引号index从0开始 |
-| :odd         | $(“li:odd”).css(“color”, ”red”);   | 获取到的li元素中，选择索引号为奇数的元素                  |
-| :even        | $(“li:even”).css(“color”, ”red”);  | 获取到的li元素中，选择索引号为偶数的元素                  |
-| :first       | $(“li:first”).css(“color”, ”red”); | 获取到的li元素中的第一个                                  |
-| :last        | $(“li:last”).css(“color”, ”red”);  | 获取到的li元素中的最后一个                                |
+| 名称           | 用法                               | 描述                                                    |
+| -------------- | ---------------------------------- | :------------------------------------------------------ |
+| `:eq（index）` | $(“li:eq(2)”).css(“color”, ”red”); | 获取 li 元素中，选择索引号为2的元素，索引号index从0开始 |
+| `:odd`         | $(“li:odd”).css(“color”, ”red”);   | 获取 li 元素中，选择索引号为奇数的元素                  |
+| `:even`        | $(“li:even”).css(“color”, ”red”);  | 获取 li 元素中，选择索引号为偶数的元素                  |
+| `:first`       | $(“li:first”).css(“color”, ”red”); | 获取 li 元素中的第一个                                  |
+| `:last`        | $(“li:last”).css(“color”, ”red”);  | 获取 li 元素中的最后一个                                |
 
 【案例：隔行变色】
 
@@ -259,20 +254,20 @@ jQuery 选择器有很多，基本兼容了 CSS1 到 CSS3 所有的选择器，�
 
 ### 筛选选择器(方法)
 
-> 筛选选择器的功能与过滤选择器有点类似，但是用法不一样，`筛选选择器`主要是方法。
+> 筛选选择器的功能与过滤选择器有点类似，但是用法不一样，`筛选选择器` 主要是方法。
 
-| 名称               | 用法                        | 描述                               |
-| ------------------ | --------------------------- | :--------------------------------- |
-| children(selector) | $(“ul”).children(“li”)      | 获取当前元素的所有子元素中的li元素 |
-| find(selector)     | $(“ul”).find(“li”);         | 获取当前元素中的后代元素中的li元素 |
-| siblings(selector) | $(“#first”).siblings(“li”); | 查找兄弟节点，不包括自己本身。     |
-| parent()           | $(“#first”).parent();       | 查找父亲                           |
-| parents()          | $(“#first”).parents("");    | 查找所有祖宗（参数 指定具体祖宗）  |
-| eq(index)          | $(“li”).eq(2);              | 相当于`$(“li:eq(2)”)`,index从0开始 |
-| next()             | $(“li”).next()              | 找下一个兄弟                       |
-| nextAll()          | $(“li”).nextAll()           | 找后面所有的兄弟                   |
-| prev()             | $(“li”).prev()              | 找上一个兄弟                       |
-| prevAll()          | $(“li”).prevAll()           | 找前面所有的兄弟                   |
+| 名称                 | 用法                        | 描述                               |
+| -------------------- | --------------------------- | :--------------------------------- |
+| `children(selector)` | $(“ul”).children(“li”)      | 获取当前元素的所有子元素中的li元素 |
+| `find(selector)`     | $(“ul”).find(“li”);         | 获取当前元素中的后代元素中的li元素 |
+| `siblings(selector)` | $(“#first”).siblings(“li”); | 查找兄弟节点，不包括自己本身。     |
+| `parent()`           | $(“#first”).parent();       | 查找父亲                           |
+| `parents()`          | $(“#first”).parents("");    | 查找所有祖宗（参数 指定具体祖宗）  |
+| `eq(index)`          | $(“li”).eq(2);              | 相当于`$(“li:eq(2)”)`,index从0开始 |
+| `next()`             | $(“li”).next()              | 找下一个兄弟                       |
+| `nextAll()`          | $(“li”).nextAll()           | 找后面所有的兄弟                   |
+| `prev()`             | $(“li”).prev()              | 找上一个兄弟                       |
+| `prevAll()`          | $(“li”).prevAll()           | 找前面所有的兄弟                   |
 
 ```javascript
 //【案例：下拉菜单】
@@ -285,14 +280,15 @@ jQuery 选择器有很多，基本兼容了 CSS1 到 CSS3 所有的选择器，�
 
 ### 补充
 
-#### mouseover 与 mouseenter
+#### `mouseover` 与 `mouseenter`
 
-> mouseover 和 mouseoverenter 都有鼠标经过的意思，但是在注册鼠标经过事件的时候，推荐使用`mouseenter`
+* mouseover 和 mouseoverenter 都有鼠标经过的意思，但是在注册鼠标经过事件的时候，推荐使用`mouseenter`
 
 [mouseenter 与 mouseover 的不同](http://www.w3school.com.cn/tiy/t.asp?f=jquery_event_mouseenter_mouseover)
 
-1. mouseover 与 mouseout 是一对事件，当鼠标经过当前元素或者当前元素的子元素的时候，会触发【事件冒泡】。
-2. mouseenter 与 mouseleave 是一对事件，只有当鼠标经过当前元素时，事件会触发，鼠标经过子元素，mousenter 事件是不会触发的。
+* mouseover 与 mouseout 是一对事件，当鼠标经过当前元素或者当前元素的子元素的时候，会触发【事件冒泡】。
+
+* mouseenter 与 mouseleave 是一对事件，只有当鼠标经过当前元素时，事件会触发，鼠标经过子元素，mousenter 事件是不会触发的。
 
 
 
@@ -304,7 +300,7 @@ jQuery 选择器有很多，基本兼容了 CSS1 到 CSS3 所有的选择器，�
 
 #### 区分 jQuery 与 Javascript
 
-JavaScript是一门编程语言，jQuery仅仅是用JavaScript实现的一个JavaScript库，目的是简化我们的开发。
+JavaScript 是一门编程语言，jQuery 仅仅是用 JavaScript 实现的一个 JavaScript 库，目的是简化我们的开发。
 
 
 
