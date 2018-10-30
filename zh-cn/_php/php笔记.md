@@ -857,3 +857,348 @@ $arr[] = $stuArr;
 ```
 
 
+
+## HTTP协议
+
+**协议：**
+
+> 协议，就是事先的一种约定、规则、规范、标准
+
+ **常见协议**
+
+- HTTP、HTTPS 超文本传输协议 
+- FTP 文件传输协议
+- SMTP 简单邮件传输协议
+
+**HTTP 协议**
+
+HTTP 协议即超文本传输协议,  是一个 [浏览器端] 和 [服务器端] 请求和响应的标准
+
+- 常用请求方法  GET, POST
+- 请求 (request)：`请求行、请求头、请求主体`。
+- 响应 (response)：`状态行、响应头、响应主体`。
+
+
+
+### 请求和请求报文
+
+​	请求由浏览器发起，其规范格式为：请求行、请求头、请求主体。	
+
+**get 请求的请求报文**
+
+```javascript
+// --------------------------请求行--------------------------------
+// GET 请求方式
+// /day02/01.php?username=pp&password=123456    请求路径+参数（注意点）
+// HTTP/1.1 HTTP的版本号
+GET /day03/01.php?username=pp&password=123456 HTTP/1.1
+
+//--------------------------请求头--------------------------------
+// Host:主机地址
+Host: www.study.com
+// HTTP1.1版本默认开启，建立过连接后，TCP连接不会断开，下次连接可以继续使用（底层，不用管）
+Connection: keep-alive
+// chrome浏览器自己增加的，不用管
+Upgrade-Insecure-Requests: 1
+// 浏览器的代理字符串（版本信息）
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+// 浏览器端可以接受的类型。
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,`*/*`;q=0.8
+// 从哪个页面发出的请求
+Referer: http: // www.study.com/day02/01-login.html
+// 检查浏览器支持的压缩方式
+Accept-Encoding: gzip, deflate, sdch
+// 浏览器支持的语言，优先中文。
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+
+// ----------------------------请求主体-------------------------------------
+// get 请求没有请求体，因为要传递的数据已经拼接到了请求主头中
+```
+
+
+
+**POST 请求的请求报文** 
+
+```javascript
+// -----------------------请求行---------------------------------------------
+POST /day02/01.php HTTP/1.1
+
+// -----------------------请求头--------------------------------------------
+Host: www.study.com
+Connection: keep-alive
+// 传递的参数的长度
+Content-Length: 29
+Cache-Control: max-age=0
+Origin: http: // www.study.com
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
+// 内容类型：表单数据，如果是post请求，必须指定这个属性。
+Content-Type: application/x-www-form-urlencoded
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,`*/*`;q=0.8
+Referer: http: // www.study.com/day02/01-login.html
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+
+// ------------------------请求体------------------------------------------
+username=pp&password=123456
+```
+
+
+
+**`GET` 请求与 `POST` 请求的对比** 
+
+- GET 请求没有请求体，因为 GET 请求的参数拼接到地址栏中了
+- POST 请求有请求体，就是传递的参数。
+
+
+
+### 响应与响应报文
+
+​	响应由服务器发出，其规范格式为：响应行(状态行)、响应头、响应主体。
+
+```javascript
+// ---------------------响应行（状态行）-------------------------------
+// HTTP/1.1  HTTP版本
+// 200 响应的状态
+	// 200表示成功
+	// 302页面重定向
+	// 304表示文档未修改
+	// 404表示找不到资源
+	// 500表示服务端错误
+HTTP/1.1 200 OK
+
+// ----------------------响应头-----------------------------------------------
+Date: Thu, 22 Jun 2017 16:51:22 GMT // 服务器的时间
+Server: Apache/2.4.23 (Win32) OpenSSL/1.0.2j PHP/5.4.45  // 服务器的版本信息
+X-Powered-By: PHP/5.4.45  // 后台编程语言信息
+Content-Length: 18   // 服务器的响应主体长度
+// 内容类型，告诉浏览器该如何解析响应结果
+Content-Type: text/html;charset=utf-8
+
+// -----------------------响应主体------------------------------------------------
+用户登录成功
+```
+
+
+
+## Mysql数据库
+
+### 数据库概念
+
+专门用来存储、管理数据的仓库 英文：Database, DB。
+
+### 数据库的分类
+
+- 关系型数据库: 基于表，表与表之间可以存在关系，可以进行多表查询的存储方式，适合较为复杂的存储   
+
+  如: MySQL, SQL Server, oracle
+
+  表结构:  
+
+   每一行代表一条数据 --- **记录**
+
+   每一列都是一类数据 --- **字段**
+
+  | **订单编号** | **商品名称** | **价格** | **数量** |
+  | ------------ | ------------ | -------- | -------- |
+  | 100123       | 华为mate10   | 4999     | 2        |
+  | 100124       | 花裙子       | 499      | 1        |
+
+- | 订单编号 | 用户     | 配送地址            |
+  | -------- | -------- | ------------------- |
+  | 100123   | 隔壁老王 | 北京市京顺路99号    |
+  | 100124   | 隔壁老宋 | 北京市清华大学1号楼 |
+
+  ​
+
+- 非关系型数据库: 基于键值对的存储方式，数据之间没有耦合性，特点执行效率高
+
+  如：mongodb
+
+  ```js
+  // 类似对象的键值对形式
+  {
+      "username": "gblw",
+      "password": 123456,
+      "uid": 007
+  }
+  ```
+
+  ​
+
+### MySQL 数据库软件
+
+> MySQL 数据库软件中可以有多个数据库,每一个数据库中可以有多个表
+
+
+
+#### 可视化工具 navicat
+
+> MySQL 只是一个数据库软件，如果我们要创建数据库，或对数据库进行增删改查，刚开始可以用可视化工具来操作，让我们更加直观的了解数据库
+
+##### 安装 navicat
+
+##### 让 navicat 和 MySQL 建立连接
+
+点击左上角 连接 => MySQL => 常规 => 端口 3306 => 
+
+
+
+#### 数据库表的操作
+
+##### 数据库的数据类型
+
+> 也就是数据库中可以存储的数据类型(又叫做字段类型)
+
+**字段类型**
+
+- 整型 `int`
+
+  ​	存储如年龄，产品数量，编号等。
+
+- 小数类型  `float`  ,  `decimal `
+
+  > 重量，工资，奖金，价格等使用decimal类型，实现小数的精确存储,一般用来存储与钱有关的数字。3.333333331
+
+- 字符串型  `varchar(M)`，`char(M) `
+
+  - M 为该字段可以存储的最多字符数(字节) ，如varchar(10)最大可以存储10个字节
+
+  - varchar 一般用来存储长度变化比较大的字符串，如文章标题，商品名称	
+
+  - char 存储长度比较固定的字符串，如手机号，身份证号，序列号，邮编
+
+  - 此外可以使用text类型，存储较长的字符串，无需指定字符串的具体长度
+
+- 日期时间型 `datetime`,  `date(年月日)`，`time(时分秒)`
+
+**字段约束**
+
+字段约束: 字段数据的属性规则（特征）
+
+1. `not null` 不为空，可以限制字段值不能为空
+
+2. `default`  默认值，可以设置字段的默认值，在没有录入时自动使用默认值填充。
+
+3. `primary key`  主键 ：唯一标识，不能重复，不能为空 
+
+   设置字段为主键，主键字段的值不能重复，不能为空。而且一个数据表中只能设置一个字段为主键，作为每行记录的唯一身份信息（索引）。
+
+4. `auto_increment`  自动增长
+
+   设置字段为自动增长，默认从1开始自动分配编号。自增长字段必须为一个key（索引，数据结构，便于快速查找数据，相当于书的目录），一般与 primary key 结合使用。类型必须为整型。
+
+5. `unique key`  不能重复
+
+   唯一键，设置字段的值为唯一的，可以设置多个字段为唯一键。唯一键字段的值可以为空。
+
+   ​
+
+##### 创建数据表
+
+> 注意 创建表时，每个表必须有一个主键
+
+
+
+## SQL-操作数据库的语言
+
+> SQL：structured Query Language 结构化查询语言。
+
+- 通过这个语言可以对数据库进行增删改查
+
+SQL编写注意点:  注释用 `--` , 语句结束加分号 `;`
+
+
+
+### 基本用法：增删改查
+
+1. 插入数据 `insert`
+
+```sql
+-- insert into 表名 (字段列表) values (值列表)
+insert into book (name, age, sex) values ('zs','18','m');
+```
+
+1. 修改数据 `update`
+
+```sql
+-- update 表名 set 字段名称1=值1,字段名称2=值2,... where 条件
+-- 如果不加条件会修改表中所有对应的字段
+update book set name='ls', age='30' where id=10;
+```
+
+1. 删除数据 `delete`
+
+```sql
+-- delete from 表名 where 条件
+delete from book -- 会删除所有数据
+delete from book where id=10;
+```
+
+1. 查询数据 select
+
+```sql
+-- select 字段列表 from 表名
+select name, age from book -- 只查询表中 name 和 author 的信息 
+-- select * from 表名 where 条件  * 表示所有字段
+select * from book where id = 2;
+select * from book where name='zs' and age=20;
+```
+
+### 高级用法
+
+- `where` 条件
+
+  查询时，不添加 where 条件,  返回数据表所有行。需要添加限定条件，只返回需要的行。
+
+  ```sql
+  -- select  字段列表 from  表名 where 条件；
+  -- 条件 : =, >, <, >=, <=, and, or  
+  ```
+
+- `like` 模糊匹配  % 通配符
+
+  ```sql
+  -- 查找姓张的人
+  select * from 表名 where name like '张%';​
+  ```
+
+- `in` 语法：一次查询多个符合条件的数据
+
+  ```sql
+  -- select * from 表名 where 字段 in (value1,value2,value3);
+  select * from stu where name in ('zs', 'ls', 'ww'); -- 查找name值为zs, ls, ww 的数据
+  ```
+
+- `count()`  获取返回数据的总条数
+
+  ```sql
+  -- 查询满足条件数据的总条数	
+  -- select count(*) from 表名 where 条件
+  ```
+
+- 排序
+
+  ```sql
+  -- select * from 表名 order by  字段名称;   	  	默认升序
+  -- select * from 表名 order by  age;  -- 按照年龄来排序
+  -- select * from 表名 order by 字段名称 desc;      desc 表示降序
+  ```
+
+- `limit` 对结果集进行截取 一般用于取数据的前几条
+
+  ```sql
+  -- select *  from  表名  limit 截取的起始索引，截取的长度
+  ```
+
+- 联合查询（多个表联合查询）
+
+  ```sql
+  select 字段列表 from 表A join 表B on 表A.字段=表B.字段 
+  join 将表A和表B联合起来
+  on 根据什么字段把表A和表B联合起来
+  
+  select *  from  teacher  join class  on class.id=teacher.classid;  -- 老师表和班级表联合查询
+  select teacher.*, class.classname  from  teacher  join class  on class.id=teacher.classid;   -- 老师表和班级表联合查询,但只显示老师表的全部内容和班级表的名称
+  -- 注意: 多表联合查询时,字段要写明是那个表的字段 如  表.字段名
+  ```
