@@ -748,10 +748,10 @@ file_put_contents("02-test.txt", $arr1); // zs18
 
 > 表单（form）：表单用于收集用户输入信息，并将数据提交给服务器。是一种常见的与服务端数据交互的一种方式
 
-1. action: 指定表单的提交地址
-2. method: 指定表单的提交方式，get/post，默认 get
-3. input 的数据想要提交到后台，必须指定 name 属性，后台通过 name 属性获取值
-4. 想要提交表单，不能使用 input:button 必须使用 input:submit
+1. `action`: 指定表单的提交地址
+2. `method`: 指定表单的提交方式，get/post，默认 get
+3. `input` 的数据想要提交到后台，必须指定 name 属性，后台通过 name 属性获取值
+4. 想要提交表单，不能使用 `input:button` 必须使用 `input:submit`
 
 
 
@@ -766,10 +766,10 @@ file_put_contents("02-test.txt", $arr1); // zs18
 
 **get 与 post 的区别**
 
-- get 方式
-  数据会拼接在 url 地址的后面 ?username=pp&password=123456
+- `get` 方式
+  数据会拼接在 url 地址的后面 (?username=pp&password=123456)
   地址栏有长度限制，因此 get 方式提交数据大小不会超过 4k
-- post 方式
+- `post` 方式
   数据不会在 url 中显示，相比 get 方式，post 更安全
   提交的数据没有大小限制，可用于文件上传
 
@@ -779,11 +779,11 @@ file_put_contents("02-test.txt", $arr1); // zs18
 
 **html要求** 
 
-- 文件上传的提交方式必须是 post 方式
+- 文件上传的提交方式必须是 `post` 方式
 
-- 需要给 form 指定 enctype="multipart/form-data"
+- 需要给 `form` 指定 `enctype="multipart/form-data"`
 
-- 指定 name 属性，后台才能获取到
+- 指定 `name` 属性，后台才能获取到
 
 **php 相关**
 
@@ -852,6 +852,8 @@ file_put_contents("02-test.txt", $arr1); // zs18
 // array_splice(数组, 开始的下标, 截取长度) 将匹配到的数据截取掉，会改变原来的数组
 array_splice($arr, $_GET["index"], 1);
 
-// 将 $stuArr 添加到数组 $arr 中
+// 添加内容到数组：将 $stuArr 添加到数组 $arr 中
 $arr[] = $stuArr;
 ```
+
+
