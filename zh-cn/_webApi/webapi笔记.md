@@ -496,6 +496,32 @@ div.className = "box";
 
 
 
+>  **getComputedStyle 获取元素计算后的样式**
+>
+> 语法： `window.getComputedStyle( 获取的元素， 伪类)`
+>
+> ​	伪类  ==>  ::after ::before, 如果写上了伪类，表示要获取元素的伪类的样式，如果不需要获取的话，该参数写 null
+>
+> ​	返回值： 返回一个样式对象
+>
+> ```javascript
+> var div = document.querySelector("div");
+> // 获取元素自身的
+> var ret = window.getComputedStyle(div, null).fontSize;
+> console.log(ret); // 
+> var ret1 = window.getComputedStyle(div, null).backgroundColor;
+> console.log(ret1);
+> // 推荐：对于复合样式，需要获取什么样式，写具体的样式名，这样能更好的兼容更多浏览器
+> 
+> // 获取伪类的
+> var ret2 = window.getComputedStyle(div, "::after").width;
+> console.log(ret2);
+> ```
+>
+>
+
+​        
+
 ### 关于body的样式操作
 
 ```js
