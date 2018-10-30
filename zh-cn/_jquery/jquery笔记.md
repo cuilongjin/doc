@@ -1008,3 +1008,77 @@ $.fn.pluginName = function(){}
 
 - 制作基本的jQuery插件（jquery.bgc.js）
 - 制作手风琴插件
+
+
+
+## jQuery 架构
+
+看源码学习推荐看 1.7.0 版本，源码比较清晰
+
+### jq 的基本架构
+
+沙箱 ，减少全局污染
+
+```javascript
+(function(window, undefined){
+    // console.log(undefined);
+    var jQuery = function () {
+
+    };
+    // 往外暴露
+    window.jQuery = window.$ = jQuery;
+})(window);
+var  jq = new jQuery();  // ==> 得到一个jq的实例对象
+console.log(jq);
+```
+
+参数 `window` 的作用：
+
+- 减少对 window 的搜索过程
+- 有利于代码压缩
+
+参数 `undefined` 的作用： 
+
+- 参数 `undefined` 的值是 `undefined`
+- `undefined` 这个数据类型的值在ie678 中是可以被修改的，现在有 `undefined` 形参在这，在沙箱里面去使用 `undefined` 的时候，就不会去引用外面被修改的 `undefined` 的值。
+
+
+
+### 省去 new 操作
+
+```javascript
+// 省去new 操作，得到一个jq的实例对象
+(function (window, undefined) {
+    // jQuery 是 工厂函数， 里面干啥？
+    var jQuery = function(selector){
+        // return new 构造函数；
+        // 在 jq 里面，真正的构造函数是 init，而且 init 方法放在 jq 的原型上
+        // jQuery.fn.init ==> 是从 jq 的原型上拿 init 方法
+        return new jQuery.fn.init(selector); // init 何种调用模式， 构造函数模式
+    };
+
+    jQuery.fn = jQuery.prototype = { // 原型替换
+        constructor: jQuery,
+        init: function(selector){ // init 是真正的构造函数
+            // 获取元素
+            var ele = document.querySelectorAll(selector);
+            // this ==> init的实例对象
+            [].push.apply(this, ele);
+        },
+
+        css: function(){
+            console.log("css is ok");
+        }
+    };
+
+    window.jQuery = window.$ = jQuery;
+})(window);
+
+// 把 init 的构造函数的 prototype 改成 jquery 的原型
+// 目的： 让 init 的实例对象可以访问 jq 原型上的方法
+jQuery.fn.init.prototype = jQuery.fn;
+
+var $div = $("div"); // init实例对象
+console.log($div);
+$div.css();
+```
