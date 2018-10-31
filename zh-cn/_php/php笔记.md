@@ -1177,7 +1177,7 @@ select * from book where name='zs' and age=20;
   -- select count(*) from 表名 where 条件
   ```
 
-- 排序
+- `order` 排序
 
   ```sql
   -- select * from 表名 order by  字段名称;   	  	默认升序
@@ -1194,7 +1194,7 @@ select * from book where name='zs' and age=20;
 - 联合查询（多个表联合查询）
 
   ```sql
-  select 字段列表 from 表A join 表B on 表A.字段=表B.字段 
+  select 字段列表 from 表A join 表B on 表A.字段=表B.字段 where 条件
   join 将表A和表B联合起来
   on 根据什么字段把表A和表B联合起来
   
@@ -1202,3 +1202,191 @@ select * from book where name='zs' and age=20;
   select teacher.*, class.classname  from  teacher  join class  on class.id=teacher.classid;   -- 老师表和班级表联合查询,但只显示老师表的全部内容和班级表的名称
   -- 注意: 多表联合查询时,字段要写明是那个表的字段 如  表.字段名
   ```
+
+
+
+## PHP 操作数据库
+
+### 连接数据库基本步骤
+
+1. 连接数据库
+2. 准备sql语句
+3. 执行sql语句
+4. 获取执行的结果并分析
+5. 关闭数据库
+
+### 操作数据库常用 API
+
+- `mysqli_connect(IP, 用户名，密码，数据库名)，端口号`  连接数据库  
+
+- `mysqli_query($link, $sql) ` 执行SQL语句
+
+- `mysqli_error($link); ` 返回错误描述
+
+- `mysqli_close($link);`  关闭连接
+
+- `mysqli_fetch_assoc($res);` 从结果集中取得一行作为关联数组返回
+
+- `mysqli_num_rows($res);` 返回结果集的行数
+
+  ​
+
+### sql 操作
+
+- 使用 PHP 发送 SQL 语句前，可以先打印 SQL 语句，检查语句的正确性。
+- 修改数据库的数据时, 使用变量拼接SQL语句=，字段的值为字符串类型时，需要在变量的两侧使用单、双引号包裹。可以将所有的字段外面都使用双引号包含。
+
+```php
+// 1. 连接数据库
+// mysqli_connect(ip地址, 用户名, 密码, 数据库的名称, 端口号);
+// 执行结果
+//    1. 连接成功, 返回一个数据库连接对象
+//    2. 连接失败, 返回 false
+// @ 表示错误抑制符, 可以抑制错误的输出
+$link = @ mysqli_connect('127.0.0.1', 'root', 'root', 'study', 3306);
+// var_dump($link);
+
+// 如果数据库连接失败
+if ( !$link ) {
+    echo "数据库连接失败"；
+    return false;
+    
+	// 程序结束, die 方法, 终止当前程序执行, 输出一段语句
+	die("数据库连接失败");  
+}
+echo "数据库连接成功<br>";
+
+// 2. 准备 sql 语句: 删除一条数据
+$sql = "delete from stu where id = 14";
+$name = "gblw";
+$age = 31;
+$sq2 = "insert into stu (name, age) values ('$name', $age)";
+// 如果语句中含有拼接的变量，需要用单引号包裹
+
+// 3. 让数据库执行 sql 语句, 并分析结果
+// mysqli_query(数据库连接对象, 要执行的sql语句)
+// 非查询语句：执行成功返回 true, 执行失败返回 false
+
+// 4. 根据结果不同做逻辑判断
+if ( mysqli_query( $link, $sql ) ) {
+    // 如果删除的数据不存在，也会返回 true，
+    echo "删除成功";
+}else {
+    // sql 语句错误，才会返回 false
+    echo "删除失败";
+    // mysqli_error 可以查看错误消息
+    echo mysqli_error($link);
+}
+
+// 查询语句： 成功返回结果集, 失败返回 false
+// 数据查询不到也会返回结果集，只是数据条数为 0，sql 语句有错误才会返回 false
+$res2 = mysqli_query( $link, $sq2 );
+// $res2 是返回的结果集,是一个对象，表面上看没有我们要的数据,如果我们想要数据,需要调用mysqli_fetch_assoc($res2)去获取
+// 结果集中 field_count 表示字段数，num_rows 表示查询到的数据条数
+// 注意: mysqli_fetch_assoc($res2)执行一次,只会从结果集中拿一条数据出来(执行几次就拿出几条数据)
+
+// 4. 根据结果不同做逻辑判断
+if ( !$res ) {
+    echo mysqli_error( $link );
+    die('数据库查询失败');
+}
+
+// mysqli_fetch_assoc 查询成功, 从结果集中取数据, 以关联数组的形式返回
+// 一次只取一条数据, 如果没取到, 返回 null
+$arr = [];
+while( $row = mysqli_fetch_assoc( $res ) ) {
+    // 将值推到数组中
+    $arr[] = $row;
+}
+// 也可以采用 for 循环遍历
+// mysqli_num_rows($res) 方法返回获取到的数据条数 ，
+for($i = 0; $i < mysqli_num_rows($res); $i++){
+    // echo $i;
+    $arr[] =  mysqli_fetch_assoc($res);
+}
+// echo '<pre>';
+// print_r($arr);
+// echo '</pre>';
+
+// 5. 关闭数据库连接 (挂电话)
+mysqli_close( $link );
+```
+
+
+
+### 数据库工具函数的封装
+
+> 为了提高代码的复用性，把数据增删改的操作封装成一个方法
+
+```php
+  // 定义常量
+  define( 'HOST', '127.0.0.1' );
+  define( 'UNAME', 'root' );
+  define( 'PWD', 'root' );
+  define( 'DB', 'test02' );
+  define( 'PORT', 3306 );
+
+  // 非查询语句封装
+  // 封装一个执行非查询语句的方法, 提高代码的复用性
+  // 参数: $sql 要执行的 sql 语句
+  // 返回值: true / false
+  function my_exec( $sql ) {
+    // 1. 连接数据库
+    $link = @ mysqli_connect( HOST, UNAME, PWD, DB, PORT);
+
+    if( !$link ) {
+      echo '数据库连接失败';
+      return false;
+    }
+
+    // 2. 准备 sql 语句, 就是传递过来的 $sql
+
+    // 3. 执行 sql 语句, 分析结果
+    if ( mysqli_query( $link, $sql ) ) {
+      // 执行成功
+      mysqli_close( $link ); // 关闭数据库
+      return true;
+    }
+    else {
+      // 执行失败
+      mysqli_close( $link ); // 关闭数据库
+      return false;
+    }
+
+  }
+
+  // 查询语句的封装
+  // 参数: $sql 要执行的 sql 语句
+  // 返回值: 
+  //    (1) 成功, 返回数据(二维数组)
+  //    (2) 失败, 返回 false
+  function my_query( $sql ) {
+
+    // 1. 建立连接
+    $link = @ mysqli_connect( HOST, UNAME, PWD, DB, PORT );
+    if ( !$link ) {
+      echo "数据库连接失败";
+      return false;
+    }
+
+    // 2. 准备 sql 语句 $sql
+    // 3. 执行 sql 语句, 分析结果
+    $res = mysqli_query( $link, $sql );  // 结果集 或者 false
+
+    if ( !$res ) {
+      echo "获取数据失败<br>";
+      echo mysqli_error($link);
+      mysqli_close( $link );
+      return false;
+    }
+
+    // 得到结果集, 将结果集的所有内容取出到数组中
+    $arr = [];
+    while ( $row = mysqli_fetch_assoc($res) ) {
+      $arr[] = $row;
+    }
+
+    mysqli_close( $link );
+    return $arr; // 返回结果数组
+  }
+```
