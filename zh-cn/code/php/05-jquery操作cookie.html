@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="jquery-1.12.4/jquery.min.js"></script>
+	<script src="jquery.cookie.js"></script>
+	<script>
+		// jquery.cookie.js 插件操作 cookie
+
+		// 设置 cookie
+		// $.cookie("键", "值", {expires: 1}); // 默认有效期为一个会话周期
+		$.cookie("tel", "11111", {expires: 1});
+
+		// 获取 cookie
+		// $.cookie("键");
+		console.log($.cookie("tel"));
+
+		// 删除 cookie
+		// $.removeCookie("键"); // 删除指定cookie
+		$.removeCookie("tel");
+	</script>
+</body>
+</html>
