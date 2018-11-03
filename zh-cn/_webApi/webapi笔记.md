@@ -956,7 +956,7 @@ clearInterval(timerId) // 清除上面的定时器
 
 ### 常用属性和方法
 
-- location.href : 控制地址栏的地址
+- location.href : 控制地址栏的地址，实现页面跳转
 
 ```javascript
 document.onclick = function () {
@@ -965,6 +965,16 @@ document.onclick = function () {
 ```
 
 [案例 : 注册成功，3秒后跳转]
+
+
+
+> **页面跳转：**
+>
+> `location.href = "url地址"`
+>
+> `location.assign("url地址")`
+>
+> `location.replace("url地址")`  (不记录历史)
 
 
 
