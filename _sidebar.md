@@ -17,3 +17,5 @@
 	- [jquery笔记](zh-cn/_jquery/jquery笔记)
 * **PHP**
 	- [php笔记](zh-cn/_php/php笔记)
+* **AJAX**
+	- [ajax笔记](zh-cn/_ajax/ajax笔记)
