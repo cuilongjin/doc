@@ -665,6 +665,16 @@ PRC: 中华人民共和国
 
 
 
+### 补充
+
+ `in_array(查找的内容, 数组)`   如果查找到返回 true ，查找不到返回 false
+
+```php
+result = in_array($uname, $arr);
+```
+
+
+
 ## 页面动态渲染
 
 - PHP本身支持与HTML混编
