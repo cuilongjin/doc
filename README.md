@@ -11,12 +11,14 @@ zh-cn
 ├─_webApi
 ├─_jquery
 ├─_php
+├─_ajax
 ├─code
 │ ├─html css
 │ ├─javascript
 │ ├─webapi
 │ ├─jquery
-│ └─php
+│ ├─php
+│ └─ajax
 ├─demo
 └─参考手册
 ```
