@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text" id="txt"><span id="tip"></span>
+
+	<script>
+		//需求: 当input失去焦点的时候,获取里面的内容,发送给服务器.
+    	//如果服务器返回yes, 证明有这个用户名了,就提示该用户名已注册(红色), 如果返回no,证明用户名可用(绿色)
+
+    	// 给input注册失去焦点事件
+    	var txt = document.querySelector("input");
+    	txt.onblur = function() {
+
+    		// 发送 ajax 请求
+    		var xhr = new XMLHttpRequest();
+    		xhr.open("get", "unamehave.php?uname=" + txt.value.trim());
+    		xhr.send(null);
+
+    		// 监听事件
+    		xhr.onreadystatechange = function() {
+    			if(xhr.readyState == 4) {
+    				if(xhr.status == 200) {
+
+    					var res = xhr.responseText;
+    					if(res === "yes") {
+    						tip.innerText = "该用户名已被注册";
+    						tip.style.color = "red";
+    					} else {
+    						tip.innerText = "该用户名可用";
+    						tip.style.color = "green";
+    					}
+    				}
+    			}
+    		};
+
+    	};
+	</script>
+</body>
+</html>

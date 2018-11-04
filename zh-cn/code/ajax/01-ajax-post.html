@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 实例化 xmlhttprequest 对象
+        var xhr = new XMLHttpRequest();
+
+        // 设置请求行
+        xhr.open("post", "01-ajax-post.php");
+
+        // 设置请求头
+        // post请求必须这是请求头，因为post有请求体,请求头就是告诉服务器请求体中数据的格式是什么样子的
+        xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+
+        // 设置请求体 键值对的形式
+        xhr.send("name=zs&age=18");
+    </script>
+</body>
+</html>

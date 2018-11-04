@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	用户名：<input type="text" id="txt">
+	密码：<input type="password" id="pd">
+	<button id="btn">登陆</button>
+	<script>
+	//需求: 点击登录按钮,把用户名和密码发送给服务器,服务器返回验证结果,如果登录成功,就跳转到home.html.如果失败,就提示用户失败
+
+	// 注册点击事件
+
+	btn.onclick = function() {
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("post", "login.php");
+		xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+		xhr.send("uname=" + txt.value.trim() + "&psw=" + pd.value.trim());
+
+		xhr.onreadystatechange = function() {
+
+			if(xhr.readyState == 4) {
+
+				if(xhr.status == 200) {
+					var res = xhr.responseText;
+					console.log(res);
+					if(res === "yes") {
+						// 需要跳转
+						location.href = "home.html";
+					} else {
+						// 提示
+						alert("用户名或密码错误");
+					}
+				}
+			}
+		};
+	};
+
+	</script>
+</body>
+</html>

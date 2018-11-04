@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        console.log(xhr.readyState);
+
+        xhr.open("post", "01-ajax-post.php");
+        console.log(xhr.readyState);
+
+        xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+        xhr.send("name=ww");
+
+        // 监听 readystate 变化 ，只会监听 2， 3， 4， 的状态变化
+        xhr.onreadystatechange = function() {
+            console.log(xhr.readyState);
+
+            // 判断是否响应完成
+            if(xhr.readyState == 4) {
+
+                // 判断是否响应成功
+                if(xhr.status == 200) {
+
+                    // 获取响应头
+                    console.log(xhr.getAllResponseHeaders());
+
+                    // 获取响应头中指定的信息
+                    console.log(xhr.getResponseHeader("content-type"));
+
+                    // 获取响应体
+                    console.log(xhr.responseText);
+                }
+            }
+        };
+
+        console.log("onreadystatechange 后边的代码， 不会被请求阻塞");
+    </script>
+</body>
+</html>
