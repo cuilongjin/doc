@@ -667,11 +667,28 @@ PRC: 中华人民共和国
 
 ### 补充
 
- `in_array(查找的内容, 数组)`   如果查找到返回 true ，查找不到返回 false
+**查找数组中是否含有指定内容**
 
 ```php
+// in_array(查找的内容, 数组)   如果查找到返回 true ，查找不到返回 false
 result = in_array($uname, $arr);
+// 可用来判断用户名是否已存在数据库中
 ```
+
+
+
+**从数组中随机获取数据**
+
+```php
+// array_rand(被操作的数据, 数据长度) 返回一个随机的下标
+$arr = array_rand($results, 2); // 返回一个数组，随机两个下标
+$index = array_rand($results, 1); // 返回一个随机的下标
+$results[$index]; // 用来随机获取数组中的一项
+```
+
+
+
+
 
 
 
@@ -814,13 +831,13 @@ file_put_contents("02-test.txt", $arr1); // zs18
     )
   ```
 
-  ​
-
 - 上传文件时，文件会临时保存在服务器上，如果文件最终没有保存，那么临时文件会被删除，保证服务器安全。
 
 - `sleep(10) ` 可以让代码延迟10秒钟才执行。
 
 - `move_uploaded_file($path, $newPath);` 可以转存临时文件，真正把文件存储起来
+
+- `unlink(filename,context)` 删除文件，若成功，则返回 true，失败则返回 false
 
 ```php
   // 保存图片的完整代码
