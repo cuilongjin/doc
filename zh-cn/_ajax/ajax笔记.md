@@ -230,3 +230,288 @@ xhr.onreadystatechange = function () {
 【用户登录案例】
 
 【聊天机器人案例】
+
+
+
+## 数据交互
+
+> 浏览器端只是负责用户的交互和数据的收集以及展示，真正的数据都是存储在服务器端的。
+>
+> 我们现在通过ajax的确可以返回一些简单的数据（一个字符串），但是在实际开发过程中，肯定会会设计到大量的复杂类型的数据传输，比如数组、对象等，但是每个编程语言的语法都不一样。
+>
+> 因此我们会采用通过的数据交换格式（ `XML` 、`JSON` ）来进行数据的交互。
+
+
+
+### XML(了解即可)
+
+**什么是XML**
+
+- XML 指可扩展标记语言（EXtensible Markup Language）
+- XML 是一种标记语言，很类似 HTML
+- XML 的设计宗旨是传输数据，而非显示数据
+- XML 标签没有被预定义。您需要自行定义标签。
+
+**语法规范**
+
+- 第一行必须是版本信息
+- 必须有一个根元素（有且仅有一个）
+- 标签不可有空格、不可以数字或.开头、大小写敏感
+- 不可交叉嵌套，都是双标签，如果是单标签，必须闭合
+- 属性双引号（浏览器自动修正成双引号了）
+- 特殊符号要使用实体
+- 注释和HTML一样
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<students>
+    <student>
+        <name>张三</name>
+        <age>18</age>
+        <gender>男</gender>
+        <desc>路人甲</desc>
+    </student>
+    <student>
+        <name>李四</name>
+        <age>20</age>
+        <gender>男</gender>
+        <desc>路人乙</desc>
+    </student>
+</students>
+```
+
+**php 获取 xml 文件的内容**
+
+```php
+// 注意: 如果需要返回 xml 数据, 需要将 content-type 改成 text/xml, 不然浏览器以 text/html 解析
+header( 'content-type:text/xml;charset=utf-8' );
+// file_get_content 用于获取文件的内容
+// 参数: 文件的路径
+$result = file_get_content( "data.xml" );
+echo $result;
+```
+
+**js 解析 xml**
+
+```javascript
+// 获取服务端返回的xml数据，需要使用 xhr.responseXML，这是一个 document 对象，可以使用 DOM 中的方法查找元素。
+var data = xhr.responseXML;
+// 获取所有的学生
+var students = data.querySelectorAll("student");
+```
+
+缺点：虽然可以描述和传输复杂数据，但是其解析过于复杂,  并且体积较大，所以实现开发已经很少使用了。
+
+
+
+### JSON 数据
+
+`JSON ` (JavaScript Object Notation, JS 对象标记) 是一种轻量级的数据交换格式。它基于 ECMAScript 规范，采用独立于编程语言的文本格式来存储和表示数据。
+
+- 数据在键值对中
+- 数据由逗号分隔(最后一个 键值对 不能带逗号)
+- 花括号保存对象，方括号保存数组
+- 键使用双引号
+
+```javascript
+var obj = {a: 'Hello', b: 'World'}; // 这是一个对象
+
+// 这是一个 JSON 字符串，本质是一个字符串
+var json = '{"a": "Hello", "b": "World"}';
+```
+
+**JSON 数据在不同语言进行传输时，类型为字符串，不同的语言各自也都对应有解析方法，解析完成后就能很方便的使用了**
+
+
+
+#### php 处理 json
+
+- php关联数组 ==>  json   ( json_encode )
+
+```php
+// php的关联数组
+$obj = array(
+  "a" => "hello",
+  "b" => "world",
+  "name" => "鹏鹏"
+);
+// json字符串
+$json = json_encode( $obj );
+echo $json;
+```
+
+- json ==> php对象/关联数组	( json_decode )
+
+```php
+$json = '{"a": "Hello", "b": "World"}'; // json字符串
+// 第一个参数：json字符串
+// 第二个参数：
+// false，将json转换成对象(默认)
+// true：将json转换成数组(推荐)
+$obj = json_decode($json,true);
+echo $obj['a'];
+
+// 通过json文件获取到的内容就是一个json字符串。
+$data = file_get_contents("data.json");
+// 将json转换成数组
+$result = json_decode($data, true);
+print_r($result);
+```
+
+
+
+#### JS 处理 json
+
+- ` JSON.stringify(obj)` ：JS对象 ==> JSON字符串
+
+```javascript
+var obj = {a: 'Hello', b: 'World'}
+var result = JSON.stringify(obj); // '{"a": "Hello", "b": "World"}'
+```
+
+- ` JSON.parse(obj)`  ：JSON字符串 ==> JS对象
+
+```javascript
+var json = '{"a": "Hello", "b": "World"}';
+var obj = JSON.parse(json); // {a: 'Hello', b: 'World'}
+```
+
+【案例：获取表格数据.html】
+
+
+
+## 兼容性处理 (了解, 不用处理)
+
+现在一般最多兼容到 IE8,  这里以后见到了知道是在处理兼容性就行了
+
+```javascript
+var xhr = null;
+if(XMLHttpRequest){
+  //现代浏览器 IE7+
+  xhr = new  XMLHttpRequest();
+}else{
+  //老版本的 Internet Explorer （IE5 和 IE6）使用 ActiveX 对象：
+  xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+```
+
+
+
+## 封装 ajax 工具函数
+
+> 每次发送ajax请求，其实步骤都是一样的，重复了大量代码，我们完全可以封装成一个工具函数。
+
+```javascript
+//1. 创建xhr对象
+//2. 设置请求行
+//3. 设置请求头
+//3. 设置请求体
+//4. 监听响应状态
+//5. 获取响应内容
+```
+
+### 参数提取
+
+| 参数名   | 参数类型 | 描述           | 传值                      | 默认值                                                |
+| -------- | -------- | -------------- | ------------------------- | ----------------------------------------------------- |
+| type     | string   | 请求方式       | get/post                  | 只要不传post，就是get                                 |
+| url      | string   | 请求地址       | 接口地址                  | 如果不传地址，不发送请求                              |
+| async    | boolean  | 是否异步       | true/fase                 | 只要不传false，那就是true，异步请求                   |
+| data     | object   | 请求数据       | `{key:value,key1:value2}` | 需要把这个对象拼接成参数的格式 uname=hucc&upass=12345 |
+| dataType | string   | 返回的数据类型 | xml/json/text             | text                                                  |
+| success  | function | 响应成功时调用 | -                         | -                                                     |
+| error    | function | 响应失败时调用 | -                         | -                                                     |
+
+
+
+### 参数检测
+
+```javascript
+// 要求参数obj必须传递，否则直接不发送请求
+if(!obj || typeof obj !== "object"){
+  return;
+}
+// 如果type传递的是post，那就发送post请求，否则发送get请求
+var type = obj.type == "post"?"post":'get';
+var url = obj.url;
+if(!url){
+  return;
+}
+// 只有当async传递了false，才会发送同步请求，不然只发送异步请求
+var async = obj.async == false? false:true;
+```
+
+
+
+### 完整版本
+
+```javascript
+var $ = {
+  ajax: function (options) {
+    // 如果options参数没有传递，直接返回。
+    if (!options || typeof options !== "object") {
+      return;
+    }
+    
+    // 处理默认参数
+    // 如果参数不是post，那就默认为get
+    var type = options.type == "post" ? "post" : "get";
+    // 如果没有传url，那就传当前地址
+    var url = options.url || location.pathname;
+    // 如果参数不是false，那就默认是true，发异步请求
+    var async = options.async == false ? false : true;
+    
+    var params = this.getParams(options.data);
+    
+    var xhr = new XMLHttpRequest();
+    
+    // 设置请求行
+    if (type == "get") {
+      url = url + "?" + params;
+    }
+    xhr.open(type, url, async);
+    
+    // 设置请求头
+    if (type == "post") {
+      xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    }
+    // 设置请求参数
+    xhr.send(params);
+    
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          /*根据响应头的content-type属性指定方法接收到的内容*/
+          var contentType = xhr.getResponseHeader('content-type');
+          var data = null;
+          if (contentType.indexOf('json') > -1) {
+            data = JSON.parse(xhr.responseText);
+          } else if (contentType.indexOf('xml') > -1) {
+            data = xhr.responseXML;
+          } else {
+            data = xhr.responseText;
+          }
+          /*执行成功函数*/
+          options.success && options.success(data);
+        } else {
+          options.error && options.error(xhr.responseText);
+        }
+      }
+    }
+  },
+  getParams: function (obj) {
+    // 将obj对象转换成参数
+    // 将对象转换成参数列表
+    if (!obj) {
+      return null;
+    }
+    var arr = [];
+    for (var k in obj) {
+      arr.push(k + "=" + obj[k]);
+    }
+    return arr.join("&");
+  }
+}
+```
+
+【登录案例】
