@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<body>
+	<button id="btn">点击获取数据</button>
+	<table border="1" id="tb">
+		<tr>
+			<th>姓名</th>
+			<th>年龄</th>
+			<th>性别</th>
+		</tr>
+		<!-- <tr>
+			<th>zs</th>
+			<th>18</th>
+			<th>男</th>
+		</tr> -->
+	<script>
+		// 获取数据并渲染在表格中
+		var btn = document.querySelector("#btn");
+		var tb = document.querySelector("table");
+		btn.onclick = function() {
+
+			// 发送ajax请求
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", "demo.php");
+			xhr.send();
+
+			xhr.onreadystatechange = function() {
+
+				if(xhr.readyState == 4) {
+					if(xhr.status == 200) {
+						var res = xhr.responseText;
+
+						var arr = JSON.parse(res);
+						// console.log(arr);
+
+						//声明变量不赋值,默认是undefined.拼接字符串会把undefined拼接上,所以一定要复制为空字符串
+						var str = "";
+
+						// item: 对应的每一次回调函数调用,数组中对应项的值
+						// index: 每一项数据对应的下标
+						// arr: 就是遍历的数组本身
+						arr.forEach(function(item, index, arr) {
+							// console.log(item, index, arr);
+
+							str += "<tr>";
+
+							for(var k in item) {
+								str += "<td>" + item[k] + "</td>";
+							}
+							str += "</tr>";
+						});
+						// console.log(str);
+
+						tb.innerHTML += str;
+					}
+				}
+			};
+		};
+	</script>
+</body>
+
+</html>

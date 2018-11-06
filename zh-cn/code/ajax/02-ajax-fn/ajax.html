@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">按钮</button>
+	<script>
+		// 封装ajax请求
+		btn.onclick = function() {
+
+			// ajax 函数参数是一个对象
+			ajax({
+
+				// 请求地址
+				url: "ajax.php",
+
+				// 请求方式，不写默认为get
+				type: "post",
+
+				// 上传的参数，以对象的形式
+				data: {
+					name: "zs",
+					age: 18,
+					sex: "男",
+					desc: "张三"
+				},
+
+				// 成功的回调函数
+				success: function(res) {
+					console.log(res);
+				},
+
+				// 失败的回调函数
+				error: function() {
+					alert("请求失败");
+				},
+
+				// 希望后台返回给我们的数据 值：json/ xml / text
+				// 如果后台返回的是json,dateType值是json,那么在成功的回调函数中，形参接收的就已经是js对象了
+				// 如果后台返回的是json，dateType值是xml，形参接收的就已经是DOM对象了
+				// 如果不是以上两种,那就依然接收到的数普通文本
+
+				dateType: "json"
+			});
+
+			function ajax(option) {
+
+				var xhr = new XMLHttpRequest();
+
+				// 判断传入的是不是对象，不是对象直接return
+				if(!option || typeof option !== "object") {
+					return;
+				}
+
+				// 判断有没有写url地址，如果没写直接return
+				var url = option.url;
+				if(!url) {
+					return;
+				}
+
+				// 如果type属性没有传传值默认为get请求
+				var type = option.type === "post" ? "post" : "get";
+
+				// 把option.data对象中的数据拼接成键值对的字符串
+				var data = getData(option.data);
+				// console.log(data);
+
+				// 设置请求行
+				// 如果是get请求，并且要上传参数，需要把参数拼接到url后面
+				if(type === "get") {
+					url += "?" + data;
+					data = null;
+				}
+
+				option.beforeSend();
+
+				xhr.open(type, url);
+
+				// 如果是post请求需要设置请求头
+				if(type === "post") {
+					xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+				}
+
+				// 设置请求体
+				xhr.send(data);
+
+				// 响应
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4) {
+						if(xhr.status == 200) {
+
+							//判断一下,如果dataType的值是json,就转成js对象.如果是xml,就返回dom对象,其他都是普通文本
+							if(option.dateType === "json") {
+								var result = JSON.parse(xhr.responseText);
+
+							} else if(option.dataType === "xml") {
+								var result = xhr.responseXML;
+
+							} else {
+								var result = xhr.responseText;
+							}
+
+							// 如果没有传入success参数不会报错
+							option.success && option.success(result);
+
+						} else {
+							option.error && option.error();
+						}
+					}
+				};
+			}
+		};
+
+		// 封装一个函数，要求传入一个对象，然后把对象拼接成键值对的字符串返回出来
+		function getData(obj) {
+
+			// 判断是不是对象
+			if(!obj || typeof obj !== "object") {
+				return;
+			}
+
+			var arr = [];
+			for(var k in obj) {
+				arr.push(k + "=" + obj[k]);
+			}
+			return arr.join("&");
+		}
+	</script>
+</body>
+</html>

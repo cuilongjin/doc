@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// js 操作 json
+		console.log(JSON);
+		// 把js对象转换成json格式字符串
+
+		var obj = {
+			name: "zs",
+			age: 18
+		};
+
+		var str = JSON.stringify(obj);
+		console.log(str); // {"name":"zs","age":18}
+
+		// 把json格式字符串转换成js对象
+		obj1 = JSON.parse(str);
+		console.log(obj1);
+
+		var arr = ["a", "b", "c"];
+		var arr1 = [arr];
+		var arr2 = [obj, obj];
+		console.log(arr1);
+
+		console.log(JSON.stringify(arr2));
+	</script>
+</body>
+</html>
