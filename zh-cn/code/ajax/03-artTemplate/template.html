@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <table border="1" id="tb">
+        <tr>
+            <th>id</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+        </tr>
+    </table>
+    <!-- 使用模板引擎:
+	1. 引入对应的template-web.js文件
+	2. 准备模板
+	3. 准备数据
+	4. 调用template方法 template('模板的名称', 数据) 返回拼接好的字符串 -->
+    <script src="template-web.js"></script>
+    <!-- type属性要写成text/html. 告诉js引擎这里面不是js代码 -->
+    <script type="text/html" id="tmp">
+        <!-- 由于传入的对象有一个list属性,list属性中存储的是具体的数据 list是一个数组需要遍历list -->
+		<!-- listd的每一项又是对象，获取到list里面的对象 默认使用$value ,索引默认是$index -->
+		<!-- 可以自定义, 前面是数组中的每一项, 后面是对应的小标 -->
+
+		<!-- each 方法遍历 -->
+		{{each list v i}}
+		<tr>
+			<td>{{i}}</td>
+			<td>{{v.name}}</td>
+			<td>{{v.age}}</td>
+
+			<!-- 还可以写分支语句 -->
+			{{if "m" === v.sex}}
+				<td>男</td>
+			{{else if "f" === v.sex}}
+				<td>女</td>
+			{{else}}
+				<td>其他</td>
+			{{/if}}
+		</tr>
+		{{/each}}
+	</script>
+    <script>
+	    var arr = [{
+	            name: 'ls',
+	            age: 45,
+	            sex: 'm'
+	        }, {
+	            name: '哈哈',
+	            age: 30,
+	            sex: 'v'
+	        },
+	        {
+	            name: '嘻嘻',
+	            age: 30,
+	            sex: 'f'
+	        }
+	    ];
+
+	    // template 方法第二个参数必须是对象，所以要用对象将数组包裹
+	    var obj = {
+	    	list: arr
+	    };
+
+	    // 调用template方法
+	    var htmlstr = template("tmp", obj);
+	    // console.log(htmlstr);
+	    tb.innerHTML += htmlstr;
+
+    </script>
+</body>
+
+</html>

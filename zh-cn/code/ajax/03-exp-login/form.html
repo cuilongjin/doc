@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./form.css">
+</head>
+
+<body>
+	<form>
+		用户名： <input type="text" name="username" id="txt">
+		密码： <input type="password" name="password" id="psw">
+		<input type="button" value="登录" id="btn">
+	</form>
+	<script src="../jquery-1.12.4/jquery.min.js"></script>
+	<script>
+		$("#btn").on("click", function() {
+
+			$.ajax({
+				url: "login.php",
+				data: {
+					username: $("#txt").val().trim(),
+					password: $("#psw").val().trim()
+				},
+				dataType: "json",
+				success: function(res) {
+
+					if(res.code === "ok") {
+						// 登陆成功
+						location.assign("person.html?nickname=" + res.nickname + "&desc=" + res.desc);
+					} else {
+						// 登陆失败
+						alert(res.message);
+					}
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<span>欢迎您</span>
+	<h1 id="nn"></h1>
+	<h3 id="desc"><h3>
+	<img src="ha.gif" alt="">
+
+	<script>
+		// 通过location.search方法可以获取到浏览器地址栏中url中的查询字符串
+		console.log(location.search);
+
+		// 切割
+		var arr = location.search.split("&");
+		console.log(arr);
+
+		// 浏览器地址栏中中文乱码,实际上是因为浏览器自动对地址栏的中文做了编码,所以看起来是乱码, 对应的我们解码即可
+      	// decodeURI() 可以解码浏览器地址栏中中文乱码
+      	console.log(decodeURI(arr[0].split("=")[1]));
+      	console.log(decodeURI(arr[1].split("=")[1]));
+
+      	nn.innerText = decodeURI(arr[0].split("=")[1]);
+      	desc.innerText = decodeURI(arr[1].split("=")[1]);
+
+	</script>
+</body>
+</html>
