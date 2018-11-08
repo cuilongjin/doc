@@ -309,9 +309,9 @@ var students = data.querySelectorAll("student");
 `JSON ` (JavaScript Object Notation, JS 对象标记) 是一种轻量级的数据交换格式。它基于 ECMAScript 规范，采用独立于编程语言的文本格式来存储和表示数据。
 
 - 数据在键值对中
-- 数据由逗号分隔(最后一个 键值对 不能带逗号)
+- 数据由逗号分隔(最后一个 键值对不能带逗号)
 - 花括号保存对象，方括号保存数组
-- 键使用双引号
+- 键和值使用双引号
 
 ```javascript
 var obj = {a: 'Hello', b: 'World'}; // 这是一个对象
@@ -515,3 +515,311 @@ var $ = {
 ```
 
 【登录案例】
+
+
+
+## jQuery 中的 ajax方法
+
+> jQuery为我们提供了更强大的Ajax封装
+
+### $.ajax
+
+参数列表
+
+| 参数名称   | 描述             | 取值                | 示例                              |
+| ---------- | ---------------- | ------------------- | --------------------------------- |
+| url        | 接口地址         |                     | url:"02.php"                      |
+| type       | 请求方式         | get/post            | type:"get"                        |
+| timeout    | 超时时间         | 单位毫秒            | timeout:5000                      |
+| dataType   | 服务器返回的格式 | json/xml/text(默认) | dataType:"json"                   |
+| data       | 发送的请求数据   | 对象                | data:{name:"zs", age:18}          |
+| beforeSend | 调用前的回调函数 | function(){}        | beforeSend:function(){ alert(1) } |
+| success    | 成功的回调函数   | function (data) {}  | success:function (data) {}        |
+| error      | 失败的回调函数   | function (error) {} | error:function(data) {}           |
+| complete   | 完成后的回调函数 | function () {}      | complete:function () {}           |
+
+
+
+使用示例：
+
+```javascript
+$.ajax({
+  type:"get", // 请求类型
+  url:"02.php", // 请求地址
+  data:{name:"zs", age:18}, // 请求数据
+  dataType:"json", // 希望接受的数据类型
+  timeout:5000, // 设置超时时间
+  beforeSend:function () {
+    // alert("发送前调用");
+    // jq的ajax方法中beforeSend函数中如果执行了return false,那么请求就不发送了
+  },
+  success:function (res) {
+  	// 如果有 dataType:"json"，或后台有header(content-type: text/json)，res就是已经转换好的js对象
+    // alert("成功时调用");
+    console.log(data);
+  },
+  error:function (error) {
+    // alert("失败时调用");
+    console.log(error);
+  },
+  complete:function () {
+    // alert("请求完成时调用"); // 不管成功失败都会执行
+  }
+});
+```
+
+【案例：登录案例.html】
+
+
+
+## 接口化开发
+
+请求地址即所谓的接口，通常我们所说的接口化开发，其实是指一个接口对应一个功能， 并且严格约束了**请求参数** 和**响应结果** 的格式，这样前后端在开发过程中，可以减少不必要的讨论， 从而并行开发，可以极大的提升开发效率，另外一个好处，当网站进行改版后，服务端接口进行调整时，并不影响到前端的功能。
+
+
+
+### 获取短信验证码
+
+【案例：register】
+
+**需求文档(产品)** 
+
+```javascript
+总需求：点击获取验证码按钮，向服务端发送请求, 调用服务器端短信接口, 服务器端根据传参, 调用第三方短信接口, 给手机发送验证码
+
+需求1：格式校验
+(1) 手机号码不能为空   如果为空提示"手机号不能为空"
+(2) 手机号码格式必须正确, 提示"请输入正确的手机号码"
+  
+需求2：点击发送时，按钮显示为"发送中",并且不能重复提交请求
+
+需求3：根据不同的响应结果，进行响应。
+(1)如果接口调用成功
+   如果响应代码为100，倒计时
+   如果响应代码为101，提示手机号重复
+(2)如果接口调用失败，告诉用户"服务器繁忙，请稍候再试"
+```
+
+**接口文档**
+
+```javascript
+接口说明：获取短信验证码
+接口地址：getCode.php
+请求方式：get
+接口传参：mobile 手机号
+返回类型  json
+接口返回：{
+			"code":"101", 
+			"msg":"手机号码存在", 
+			"mobile":"18511249258"
+		}
+参数说明: code 当前业务逻辑的处理成功失败的标识  100:成功   101:手机号码存在
+		 msg  当前系统返回给前端提示
+		 mobile  当前的手机号码
+```
+
+
+
+### 注册接口
+
+【案例：register】
+
+**表单序列化** serialize
+
+jquery提供了一个`serialize()`方法序列化表单，说白就是将表单中带有name属性的所有参数拼成一个格式为`name=value&name1=value1`这样的字符串。方便我们获取表单的数据。
+
+```javascript
+//serialize将表单参数序列化成一个字符串。必须指定name属性
+//name=pp&pass=123456&repass=123456&mobile=15751776629&code=1234
+$('form').serialize();
+```
+
+jquery的ajax方法，data参数能够直接识别表单序列化的数据
+
+```javascript
+$.post({
+  url:"register.php",
+  data:$('form').serialize(),
+  dataType:'json',
+  success:function (info) {
+    console.log(info);
+  }
+});
+```
+
+
+
+**需求文档**
+
+```javascript
+注册功能
+总需求：点击注册按钮，向服务端发送请求
+
+需求1:表单校验
+    1.1 用户名不能为空，否则提示"请输入用户名"
+    1.2 密码不能为空，否则提示"请输入密码"
+    1.3 确认密码必须与密码一直，否则提示"确认密码与密码不一致"
+    1.4 手机号码不能为空，否则提示"请输入手机号码";
+    1.5 手机号码格式必须正确，否则提示"手机号格式错误"
+    1.6 短信验证码必须是4位的数字，否则提示"验证码格式错误"
+      
+需求2：点击注册按钮时，按钮显示为"注册中...",并且不能重复提交请求
+
+需求3：根据不同响应结果，处理响应
+	3.1 接口调用成功
+        100 提示用户注册成功，3s后跳转到首页
+        101 提示用户"用户名已经存在"
+        102 提示用户"验证码错误"
+    3.2 接口调用失败，提示"服务器繁忙，请稍后再试",恢复按钮的值
+```
+
+**接口文档**
+
+```javascript
+接口说明：注册
+接口地址：register.php
+请求方式：post
+接口传参：name:用户名 pass:密码 code:验证码  mobile:手机号
+返回类型  json
+接口返回：{
+			"code":"100",
+			"msg":"注册成功",
+			"name":"Jepson"
+		}
+参数说明:
+      code 当前业务逻辑的处理成功失败的标识  100:成功  101:用户存在 102:验证码错误
+      msg  当前系统返回给前端提示
+      name: 注册的用户名
+```
+
+
+
+## 模板引擎
+
+> 是为了使用户界面与业务数据（内容）分离而产生的，它可以生成特定格式的文档，用于网站的模板引擎就会生成一个标准的HTML文档。
+
+### 为什么要使用模板引擎
+
+我们通过ajax获取到数据后，需要把数据渲染到页面，在学习模板引擎前，我们的做法是大量的拼接字符串，对于结构简单的页面，这么做还行 ，但是如果页面结构很复杂，使用拼串的话**代码可阅读性非常的差，而且非常容易出错，后期代码维护也是相当的麻烦。** 
+
+总结来说拼串渲染两大缺点：
+
+1. js中大量充斥着 html 结构拼串代码， 很冗余， 可读性差
+2. 字符串拼接很麻烦， 且维护起来也很麻烦， 容易出错
+
+### 常见的模板引擎
+
+BaiduTemplate：http://tangram.baidu.com/BaiduTemplate/
+velocity.js：https://github.com/shepherdwind/velocity.js/
+ArtTemplate：https://github.com/aui/artTemplate
+
+artTemplate是使用最广泛，效率最高的模板引擎，需要大家掌握。
+
+
+
+### artTemplate
+
+[github地址](https://github.com/aui/art-template)
+
+[中文api地址](https://aui.github.io/art-template/docs/)
+
+#### artTemplate 的基本使用
+
+**1. 引入模板引擎的 js文件** 
+
+```javascript
+<script src="template-web.js"></script>
+```
+
+**2. 准备模板** 
+
+```html
+<!--
+  指定了type为text/html后，这一段script标签并不会解析，也不会显示。
+-->
+<script type="text/html" id="myTmp">
+  <p>姓名：隔壁老王</p>
+  <p>年龄：18</p>
+  <p>技能：查水表</p>
+  <p>描述：年轻力气壮</p>
+</script>
+```
+
+**3. 准备数据**
+
+```javascript
+//3. 准备数据,数据是后台获取的，可以随时变化
+var json = {
+  userName:"隔壁老王",
+  age:18,
+  skill:"查水表",
+  desc:"年轻气壮"
+}
+```
+
+**4. 将模板与数据进行绑定**
+
+```javascript
+//第一个参数：模板的id
+//第二个参数：数据
+//返回值：根据模板生成的字符串。
+var html = template("myTmp", json);
+console.log(html);
+```
+
+**5. 修改模板**
+
+```html
+<script type="text/html" id="myTmp">
+  <p>姓名：{{userName}}</p>
+  <p>年龄：{{age}}</p>
+  <p>技能：{{skill}}</p>
+  <p>描述：{{desc}}</p>
+</script>
+```
+
+
+
+**6. 将数据显示到页面**
+
+```javascript
+var div = document.querySelector("div");
+div.innerHTML = html;
+```
+
+
+
+#### artTemplate 标准语法
+
+**if 语法**
+
+```html
+{{if gender='男'}}
+  <div class="man">
+{{else}}
+  <div class="woman">
+{{/if}}
+```
+
+**each 语法**
+
+```html
+<!--
+  1. {{each data}}  可以通过$value 和 $index获取值和下标
+  2. {{each data v i}}  自己指定值为v，下标为i
+-->
+{{each data v i}}
+<li>
+  <a href="{{v.url}}">
+    <img src="{{v.src}}" alt="">
+    <p>{{v.content}}</p>
+   </a>
+ </li>
+{{/each}}
+```
+
+```javascript
+//如果返回的数据是个数组，必须使用对象进行包裹，因为在{{}}中只写书写对象的属性。
+var html = template("navTmp", {data:info});
+```
+
