@@ -823,3 +823,67 @@ div.innerHTML = html;
 var html = template("navTmp", {data:info});
 ```
 
+
+
+## 瀑布流案例
+
+### 封装jQuery瀑布流插件
+
+```javascript
+// 特点分析：
+// 1. 跟以前将的瀑布流不一样的是，这次的瀑布流固定版心为1200px
+// 2. 瀑布流固定摆放5列，每一列的宽度固定为232px。
+// 思路分析：
+// 1. 计算每一列之间的缝隙
+// 2. 初始化一个数组，用户存储每一列的高度 [0,0,0,0,0]
+// 3. 查找数组的最小列，每次都把图片定位到最小列的位置
+// 4. 更新数组最小列的高度（加上定位过来的图片的高度）
+```
+
+
+
+代码参考：
+
+```javascript
+$.fn.waterfall = function () {
+  var $box = $(this);
+  var $item = $box.children();
+  var boxWidth = $box.width();//父盒子的宽度
+  var itemWidth = 232;//每个盒子固定宽度为232
+  var columns = 5;//固定摆放5列
+  var gap = (boxWidth - columns * itemWidth) / (columns - 1);//缝隙的宽度 10
+  var arr = [0, 0, 0, 0, 0]; //初始化数组
+  $item.each(function () {
+    //查找最小列
+    var min = arr[0];
+    var minIndex = 0;
+    for (var i = 0; i < arr.length; i++) {
+      if (min > arr[i]) {
+        min = arr[i];
+        minIndex = i;
+      }
+    }
+    //设置位置
+    $(this).css({
+      left: minIndex * (itemWidth + gap),
+      top: min
+    });
+    //更新数组
+    arr[minIndex] = min + $(this).outerHeight() + gap;
+  });
+}
+```
+
+
+
+### 瀑布流完整版
+
+```javascript
+// 需求分析：
+// 1. 页面刚开始，没有任何一张图片。因此需要从通过ajax获取图片
+// 2. 使用模版引擎将获取到的数据渲染到页面
+// 3. 因为图片路径是从服务端获取的，加载需要时间，需要等待图片加载完成后才能使用瀑布流进行布局。
+// 4. 给window注册scroll事件，当触底时，需要动态的加载图片。
+// 5. 加载时，显示加载中的提示信息，并且要求不能重复发送ajax请求
+// 6. 当服务端返回图片数量为0时，提示用户没有更多数据。
+```
