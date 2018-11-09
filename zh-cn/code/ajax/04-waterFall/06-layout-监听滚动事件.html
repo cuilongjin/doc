@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>封装jquery插件</title>
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: "Microsoft Yahei";
+	}
+
+	.box {
+		position: relative;
+		width: 1200px;
+		margin: 0 auto;
+	}
+
+	.item {
+		width: 232px;
+		position: absolute;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+		overflow:hidden;
+	}
+
+	.item > img {
+		width: 100%;
+		display: block;
+	}
+
+	.item > p {
+		margin: 0;
+		padding: 10px;
+		background: #eee;
+	}
+
+	.btn {
+		width: 280px;
+		height: 40px;
+		margin: 30px auto;
+		text-align: center;
+		line-height: 40px;
+		background-color: #CCC;
+		border-radius: 6px;
+		font-size: 24px;
+		cursor: pointer;
+	}
+
+	.loading {
+		background-color: transparent;
+	}
+</style>
+</head>
+
+<body>
+	<div class="box">
+
+	</div>
+
+<div class="btn">加载更多</div>
+
+<script src="js/jquery-1.12.4.js"></script>
+<script src="js/template-web.js"></script>
+<script type="text/html" id="tmp">
+
+	{{each items v i}}
+
+		<div class="item">
+			<img src="{{v.path}}" alt="" width="{{v.width}}" height="{{v.height}}">
+			<p>{{v.text}}</p>
+		</div>
+	{{/each}}
+</script>
+<script>
+	var $box = $(".box");
+	// waterFall();
+
+	var page = 1;
+	var pageSize = 10;
+	$(".btn").on("click", function() {
+
+		if($(".btn").hasClass("loading")) {
+			return;
+		}
+
+		$('.btn').text('正在请求...').addClass('loading');
+
+		$.ajax({
+			url: "data.php",
+			type: "get",
+			data: {
+				page: page,
+				pageSize: pageSize
+			},
+			dataType: "json",
+			success: function(res) {
+				console.log(res);
+
+				// 判断有无数据
+				if(!res.items.length > 0) {
+
+					$(".btn").text("没有更多数据了").addClass("loading");
+					return;
+				}
+
+				$('.btn').text('加载更多').removeClass('loading');
+
+				page = res.page;
+				var htmlstr = template("tmp", res);
+				$box.append(htmlstr);
+				waterFall();
+			}
+		});
+	});
+
+	$(".btn").trigger("click");
+
+	$(window).scroll(function() {
+		// 监听浏览器的滚动事件
+
+		// 获取浏览器可视区高度
+		var clientHeight = $(window).height();
+
+		// 网页卷曲的高度
+		var scrollHeight = $(window).scrollTop();
+
+		// 获取最后一个盒子距离顶部的距离
+		var lastTop = $(".item:last-child").offset().top;
+
+		if(clientHeight + scrollHeight > lastTop) {
+			$(".btn").trigger("click");
+			// console.log("1");
+		}
+	});
+
+
+
+
+	function waterFall() {
+		var $items = $box.children();
+
+		// 计算盒子的宽度和间隔
+		var boxWidth = $box.width();
+		var itemWidth = $items.width();
+		var gap = (boxWidth - itemWidth * 5) / 4;
+		// console.log($gap);
+
+		var arr = [0, 0, 0, 0, 0];
+		$items.each(function(index, item) {
+
+				var min = arr[0];
+				var minIndex = 0;
+
+				arr.forEach(function(ite, i) {
+					if(min > ite) {
+						min = ite;
+						minIndex = i;
+					}
+				});
+
+				$(this).css({
+					top: min + gap,
+					left: minIndex * (itemWidth + gap)
+				});
+				arr[minIndex] = min + gap + $(this).height();
+		});
+
+		//渲染完毕之后,通过js给父盒子设置一下高度
+
+		var height = Math.max.apply(null, arr);
+		// console.log(height);
+		$box.height(height);
+	}
+</script>
+</body>
+</html>
