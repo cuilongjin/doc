@@ -775,7 +775,7 @@ file_put_contents("02-test.txt", $arr1); // zs18
 
 > 表单（form）：表单用于收集用户输入信息，并将数据提交给服务器。是一种常见的与服务端数据交互的一种方式
 
-1. `action`: 指定表单的提交地址
+1. `action`: 指定表单的提交地址（如果提交到当前页面，action 可以为空）
 2. `method`: 指定表单的提交方式，get/post，默认 get
 3. `input` 的数据想要提交到后台，必须指定 name 属性，后台通过 name 属性获取值
 4. 想要提交表单，不能使用 `input:button` 必须使用 `input:submit`
