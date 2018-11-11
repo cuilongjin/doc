@@ -16,7 +16,7 @@
 
 ### 请求与请求报文
 
-**get请求的请求报文详解** 
+**get请求的请求报文详解**
 
 ```javascript
 //--------------------------请求行--------------------------------
@@ -40,7 +40,7 @@ Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
 
 
 
-**POST请求的请求报文** 
+**POST请求的请求报文**
 
 ```javascript
 //-----------------------请求行---------------------------------------------
@@ -66,7 +66,7 @@ Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
 username=pp&password=123456
 ```
 
-**GET请求与POST请求的对比** 
+**GET请求与POST请求的对比**
 
 - GET请求没有请求体，因为GET请求的参数拼接到地址栏中了
 
@@ -76,25 +76,25 @@ username=pp&password=123456
 ### 响应与响应报文
 
 ```javascript
-//---------------------状态行（响应行）-------------------------------
-//HTTP/1.1  HTTP版本
-//200 响应的状态
-	//200表示成功
-	//304表示读缓存
-	//404表示找不到资源
-	//500表示服务端错误
+// ---------------------状态行（响应行）-------------------------------
+// HTTP/1.1  HTTP版本
+// 200 响应的状态
+	// 200表示成功
+	// 304表示读缓存
+	// 404表示找不到资源
+	// 500表示服务端错误
 HTTP/1.1 200 OK
 
-//----------------------响应头-----------------------------------------------
+// ----------------------响应头-----------------------------------------------
 Date: Thu, 22 Jun 2017 16:51:22 GMT
 Server: Apache/2.4.23 (Win32) OpenSSL/1.0.2j PHP/5.4.45
 X-Powered-By: PHP/5.4.45
 Content-Length: 18
 Keep-Alive: timeout=5, max=100
 Connection: Keep-Alive
-//内容类型，告诉浏览器该如何解析响应结果
+// 内容类型，告诉浏览器该如何解析响应结果
 Content-Type: text/html;charset=utf-8
-//-----------------------响应体------------------------------------------------
+// -----------------------响应体------------------------------------------------
 hello world
 ```
 
@@ -452,7 +452,7 @@ var $ = {
     if (!options || typeof options !== "object") {
       return;
     }
-    
+
     // 处理默认参数
     // 如果参数不是post，那就默认为get
     var type = options.type == "post" ? "post" : "get";
@@ -460,24 +460,24 @@ var $ = {
     var url = options.url || location.pathname;
     // 如果参数不是false，那就默认是true，发异步请求
     var async = options.async == false ? false : true;
-    
+
     var params = this.getParams(options.data);
-    
+
     var xhr = new XMLHttpRequest();
-    
+
     // 设置请求行
     if (type == "get") {
       url = url + "?" + params;
     }
     xhr.open(type, url, async);
-    
+
     // 设置请求头
     if (type == "post") {
       xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
     }
     // 设置请求参数
     xhr.send(params);
-    
+
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4) {
         if (xhr.status == 200) {
@@ -582,7 +582,7 @@ $.ajax({
 
 【案例：register】
 
-**需求文档(产品)** 
+**需求文档(产品)**
 
 ```javascript
 总需求：点击获取验证码按钮，向服务端发送请求, 调用服务器端短信接口, 服务器端根据传参, 调用第三方短信接口, 给手机发送验证码
@@ -590,7 +590,7 @@ $.ajax({
 需求1：格式校验
 (1) 手机号码不能为空   如果为空提示"手机号不能为空"
 (2) 手机号码格式必须正确, 提示"请输入正确的手机号码"
-  
+
 需求2：点击发送时，按钮显示为"发送中",并且不能重复提交请求
 
 需求3：根据不同的响应结果，进行响应。
@@ -609,8 +609,8 @@ $.ajax({
 接口传参：mobile 手机号
 返回类型  json
 接口返回：{
-			"code":"101", 
-			"msg":"手机号码存在", 
+			"code":"101",
+			"msg":"手机号码存在",
 			"mobile":"18511249258"
 		}
 参数说明: code 当前业务逻辑的处理成功失败的标识  100:成功   101:手机号码存在
@@ -662,7 +662,7 @@ $.post({
     1.4 手机号码不能为空，否则提示"请输入手机号码";
     1.5 手机号码格式必须正确，否则提示"手机号格式错误"
     1.6 短信验证码必须是4位的数字，否则提示"验证码格式错误"
-      
+
 需求2：点击注册按钮时，按钮显示为"注册中...",并且不能重复提交请求
 
 需求3：根据不同响应结果，处理响应
@@ -700,7 +700,7 @@ $.post({
 
 ### 为什么要使用模板引擎
 
-我们通过ajax获取到数据后，需要把数据渲染到页面，在学习模板引擎前，我们的做法是大量的拼接字符串，对于结构简单的页面，这么做还行 ，但是如果页面结构很复杂，使用拼串的话**代码可阅读性非常的差，而且非常容易出错，后期代码维护也是相当的麻烦。** 
+我们通过ajax获取到数据后，需要把数据渲染到页面，在学习模板引擎前，我们的做法是大量的拼接字符串，对于结构简单的页面，这么做还行 ，但是如果页面结构很复杂，使用拼串的话**代码可阅读性非常的差，而且非常容易出错，后期代码维护也是相当的麻烦。**
 
 总结来说拼串渲染两大缺点：
 
@@ -725,13 +725,13 @@ artTemplate是使用最广泛，效率最高的模板引擎，需要大家掌握
 
 #### artTemplate 的基本使用
 
-**1. 引入模板引擎的 js文件** 
+**1. 引入模板引擎的 js文件**
 
 ```javascript
 <script src="template-web.js"></script>
 ```
 
-**2. 准备模板** 
+**2. 准备模板**
 
 ```html
 <!--
@@ -887,3 +887,336 @@ $.fn.waterfall = function () {
 // 5. 加载时，显示加载中的提示信息，并且要求不能重复发送ajax请求
 // 6. 当服务端返回图片数量为0时，提示用户没有更多数据。
 ```
+
+
+
+## 同源与跨域
+
+### 同源
+
+#### 同源策略的基本概念
+
+> 1995年，同源政策由 Netscape 公司引入浏览器。目前，所有浏览器都实行这个政策。
+> 同源策略：最初，它的含义是指，A网页设置的 Cookie，B网页不能打开，除非这两个网页"同源"。所谓"同源"指的是"三个相同"：协议相同、域名相同、端口相同
+
+
+
+#### 同源策略的目的
+
+> 同源政策的目的，是为了保证用户信息的安全，防止恶意的网站窃取数据。
+
+#### 同源策略的限制范围
+
+> 随着互联网的发展，“同源策略”越来越严格，目前，如果非同源，以下三种行为都将收到限制。
+
+1. Cookie、LocalStorage 和 IndexDB 无法读取。
+2. DOM 无法获得。
+3. AJAX 请求不能发送。
+
+虽然这些限制是很有必要的，但是也给我们日常开发带来不好的影响。比如实际开发过程中，往往都会把服务器端架设到一台甚至是一个集群的服务器中，把客户端页面放到另外一个单独的服务器。那么这时候就会出现不同源的情况，如果我们知道两个网站都是安全的话，我们是希望两个不同源的网站之间可以相互请求数据的。这就需要使用到 **跨域** 。
+
+
+
+### 跨域
+
+#### jsonp( 无兼容性问题 )
+
+> `JSONP(JSON with Padding)` 可用于解决主流浏览器的跨域数据访问的问题。
+>
+> 原理：服务端返回一个定义好的 js 函数的调用，并且将服务器的数据以该函数参数的形式传递过来，这个方法需要前后端配合
+
+- `script` 标签是不受同源策略的限制的，它可以载入任意地方的 JavaScript 文件。类似的还有`img`和`link`标签
+
+
+
+##### jsonp 演化过程1
+
+php 文件
+
+```php
+header("content-type:text/html;charset=utf-8");
+echo "alert(1111)";
+```
+
+html 文件
+
+```html
+<script src="http://www.api.com/testjs.php"></script>
+```
+
+原理：其实src的路径是什么文件不重要，无论引入js文件还是php文件，最后返回给浏览器的都是字符串，因此我们script标签是可以引入一个php文件的。
+
+
+
+##### jsonp 演化过程2
+
+php 文件
+
+```php
+header("content-type:text/html;charset=utf-8");
+echo "var a = 118;";
+```
+
+html 文件
+
+```html
+<script src="http://www.api.com/testjs.php"></script>
+<script>
+    // a打印出来了118
+    console.log(a);
+</script>
+```
+
+**我们现在做到了一件事情，从不同源的php文件中获取到了数据**
+
+缺点：获取数据的 script 标签必须写在使用的 script 标签的前面，必须保证先有数据才能对数据进行渲染。
+
+
+
+##### jsonp 演化过程3
+
+php 代码
+
+```php
+header("content-type:text/html;charset=utf-8");
+$arr = array(
+    "name"=>"zs",
+    "age"=>18
+);
+$result = json_encode($arr);
+// 这是一段js函数的调用的代码，$result就是我们想要的数据
+echo "func($result)";
+```
+
+js 代码
+
+```html
+<script>
+    function func(data) {
+        console.log(data);
+    }
+</script>
+<script src="http://www.api.com/testjs.php"></script>
+```
+
+缺点：后端必须知道前端声明的方法的名字，后端才能调用。
+
+
+
+##### jsonp 演化过程4
+
+php代码
+
+```php
+header("content-type:text/html;charset=utf-8");
+$arr = array(
+    "name"=>"zs",
+    "age"=>18
+);
+$result = json_encode($arr);
+// 这是一 段js函数的调用的代码，$result就是我们想要的数据
+echo $_GET['callback']."($result)";
+```
+
+javascript代码
+
+```javascript
+function fun(data) {
+	console.log(data);
+}
+var button = document.querySelector("button");
+button.onclick = function () {
+	var script = document.createElement("script");
+	script.src = "http://www.api.com/testjs.php?callback=fun";
+	document.body.appendChild(script);
+}
+```
+
+
+
+1. jsonp 的原理就是 **借助了 script 标签 src 请求资源时，不受同源策略的限制**。
+2. 在服务端返回一个函数的调用，将数据当前调用函数的实参
+3. 在浏览器端，需要程序要声明一个全局函数，通过形参就可以获取到服务端返回的对应的值
+
+
+
+#### jquery 对于 jsonp 的封装
+
+!> jsonp 仅支持 get 请求
+
+```javascript
+// 使用起来相当的简单，跟普通的get请求没有任何的区别，只需要把 dataType 固定成 jsonp 即可
+$.ajax({
+    type:"get",
+    url:"http://www.Jepson.com/testjs.php",
+    dataType:"jsonp",
+    data:{
+        uname:"zs",
+        upass:"123456"
+    },
+    success:function (info) {
+        console.log(info);
+    }
+});
+```
+
+
+
+## XMLHttpRequest2.0
+
+> XMLHttpRequest 是一个 javascript 内置对象，使得 Javascript 可以进行异步的HTTP通信。2008年2月，就提出了XMLHttpRequest Level 2 草案。
+
+老版本的XMLHttpRequest的缺点：
+
+1. 仅支持传输文本数据，无法传输二进制文件，比如图片视频等。
+2. 传输数据时，没有进度信息，只能提示完成与否。
+3. 受到了"同源策略"的限制
+
+
+
+新版本的功能：
+
+1. 可以设置 timeout 超时时间
+2. 可以使用 formData 对象管理表单数据
+3. 允许请求不同域名下的数据（跨域）
+4. 支持上传二进制文件
+5. 可以获取数据传输的进度信息
+
+
+
+**注意：我们现在使用 new XMLHttpRequest 创建的对象就是2.0对象了，我们之前学的是1.0的语法，现在学习一些2.0的新特性即可。**
+
+
+
+### timeout 设置超时
+
+```javascript
+xhr.timeout = 3000; // 设置超时时间
+xhr.ontimeout = function(){
+  alert("请求超时");
+}
+```
+
+
+
+### formData 管理表单数据
+
+formData 对象类似于 jquery 的 serialize 方法，用于管理表单数据
+
+使用特点：
+
+1. 实例化一个 formData 对象， new FormData(form); form 就是表单元素
+2. formData 对象可以直接作为 xhr.send(formData) 的参数。注意此时数据是以二进制的形式进行传输。
+3. formData 有一个 append 方法，可以添加参数。formData.append("id", "1111");
+4. 这种方式只能以 **post** 形式传递，不需要设置请求头，浏览器会自动为我们设置一个合适的请求头。
+
+
+
+代码示例：
+
+```javascript
+// 1. 使用formData必须发送post请求
+    xhr.open("post", "02-formData.php");
+
+// 2. 获取表单元素
+var form = document.querySelector("#myForm");
+// 3. 创建form对象，可以直接作为send的参数。
+var formData = new FormData(form);
+
+// 4. formData可以使用append方法添加参数
+formData.append("id", "1111");
+
+// 5. 发送，不需要指定请求头，浏览器会自动选择合适的请求头
+xhr.send(formData);
+```
+
+
+
+### 文件上传
+
+> 以前，文件上传需要借助表单进行上传，但是表单上传是同步的，也就是说文件上传时，页面需要提交和刷新，用户体验不友好，xhr2.0中的formData对象支持文件的异步上传。
+
+```javascript
+var formData = new FormData();
+// 获取上传的文件，传递到后端
+var file = document.getElementById("file").files[0];
+console.dir(file);
+formData.append("file", file);
+xhr.send(formData);
+```
+
+
+
+### 显示文件进度信息
+
+ xhr2.0 还支持获取上传文件的进度信息，因此我们可以根据进度信息可以实时的显示文件的上传进度。
+
+1. 需要注册 `xhr.upload.onprogress = function(e){}` 事件，用于监听文件上传的进度。注意：需要在send之前注册。
+2. 上传的进度信息会存储事件对象 e 中
+3. `e.loaded` 表示已上传的大小；`e.total` 表示整个文件的大小
+
+
+
+代码参考：
+
+```javascript
+xhr.upload.onprogress = function (e) {
+
+  inner.style.width = (e.loaded/e.total*100).toFixed(2)+"%";
+  span.innerHTML = (e.loaded/e.total*100).toFixed(2)+"%";
+}
+// toFixed(2) 保留两位小数
+
+xhr.send(formData);
+```
+
+默认上传文件限制 8M，需要配置 php.ini，允许 php上传大文件。
+
+
+
+### 跨域资源共享(CORS) ( 兼容性IE10+ )
+
+#### cors的使用
+
+> 新版本的XMLHttpRequest对象，可以向不同域名的服务器发出HTTP请求。这叫做["跨域资源共享"](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing)（Cross-origin resource sharing，简称CORS）。
+
+跨域资源共享（CORS）的前提
+
+- 浏览器支持这个功能( 兼容性IE10+ )
+- 服务器必须允许这种跨域。
+
+服务器允许跨域的代码：
+
+```php
+// 允许所有的域名访问这个接口
+header("Access-Control-Allow-Origin:*");
+// 允许www.study.com这个域名访问这个接口
+header("Access-Control-Allow-Origin:http://www.study.com");
+```
+
+
+
+#### CORS 的具体流程（了解）
+
+1. 浏览器发送跨域请求
+
+2. 服务器端收到一个跨域请求后，在响应头中添加Access-Control-Allow-Origin Header资源权限配置。发送响应
+
+3. 浏览器收到响应后，查看是否设置了`header('Access-Control-Allow-Origin:请求源域名或者*');`
+
+   如果当前域已经得到授权，则将结果返回给浏览器，否则浏览器忽略此次响应。
+
+结论：
+
+1. **跨域行为是浏览器行为，响应是回来了, 只是浏览器安全机制做了限制,  对于跨域响应内容进行了忽略。**
+2. **服务器与服务器之间是不存在跨域的问题的**
+
+
+
+#### jsonp 与 cors 的对比
+
+- jsonp兼容性好，老版本浏览器也支持，但是jsonp仅支持get请求，发送的数据量有限。使用麻烦
+- cors需要浏览器支持cors功能才行。但是使用简单，**只要服务端设置允许跨域，对于客户端来说，跟普通的get、post请求并没有什么区别。**
+- 跨域的安全性问题：**因为跨域是需要服务端配合控制的** ，也就是说不论 jsonp 还是 cors，如果没有服务端的允许，浏览器是没法做到跨域的。
+
+【案例：图灵机器人】
