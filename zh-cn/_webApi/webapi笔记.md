@@ -990,16 +990,15 @@ document.onclick = function () {
 
 - location 的其他值
 
-```js
-http://www.bbb.com:8080/index.html?id=666&psd=123#xxx   
-- location.hash  //哈希值 其实就是锚点     ==> #xxx
-- location.host  //服务器 服务器名+端口号  => www.bbb.com:8080
-- location.hostname //服务器名            =>  www.bbb.com
-- location.pathname //路径名             => index.html
-- location.port //端口                   => 8080
-- location.protocol //协议               => http 
-- location.search //参数                 => ?id=666&psd=123
-```
+  > `http://www.bbb.com:8080/index.html?id=666&psd=123#xxx`
+  >
+  > - location.hash  //哈希值 其实就是锚点     ==> #xxx
+  > - location.host  //服务器 服务器名+端口号  => www.bbb.com:8080
+  > - location.hostname //服务器名            =>  www.bbb.com
+  > - location.pathname //路径名             => index.html
+  > - location.port //端口                   => 8080
+  > - location.protocol //协议               => http 
+  > - **location.search** //参数                 => ?id=666&psd=123
 
 
 
