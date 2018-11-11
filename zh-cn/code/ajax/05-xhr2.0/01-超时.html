@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">按钮</button>
+    <script>
+    btn.onclick = function() {
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', 'ajax.php');
+        xhr.send(null);
+
+        // 超时
+        xhr.timeout = 3000;
+        xhr.ontimeout = function() {
+            // 超时会触发
+            alert('请求超时了');
+        };
+    };
+    </script>
+</body>
+
+</html>

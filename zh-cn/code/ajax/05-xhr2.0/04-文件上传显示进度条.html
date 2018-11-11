@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .outer {
+            width: 400px;
+            height: 50px;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+        .inner {
+            height: 100%;
+            width: 1%;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file" id="fileInp">
+    <div class="outer">
+        <div class="inner">
+            <span>0%</span>
+        </div>
+    </div>
+    <script>
+    var fileInp = document.getElementById("fileInp");
+    var inner = document.querySelector(".inner");
+    var span = document.querySelector("span");
+
+    // 简单演示展示进度条的 属性和事件
+    // change事件
+    fileInp.onchange = function() {
+        // console.log(1);
+        var xhr = new XMLHttpRequest();
+        xhr.open('post', 'file.php');
+        var formdata = new FormData();
+        formdata.append('file', fileInp.files[0]);
+
+        // 监听文件上传的事件
+        // 注意: 这个upload.onprogress事件监听的代码,必须写在send之前,
+        // 否则不会触发
+        xhr.upload.onprogress = function(e) {
+            // 上传文件的过程中会一直触发
+            // e.loaded //已经上传了多少
+            // e.total  //文件总共有多少
+            // console.log('已经上传:' + e.loaded);
+            // console.log('文件总共:' + e.total);
+            // console.log('=================================');
+            // toFixed(2) 保留小数点后两位
+            // console.log((e.loaded / e.total * 100).toFixed(2) + '%');
+            span.innerText = (e.loaded / e.total * 100).toFixed(2) + '%';
+            inner.style.width = (e.loaded / e.total * 100).toFixed(2) + '%';
+        };
+
+        xhr.send(formdata);
+    };
+
+
+    // fileInp.onchange = function() {
+    //   console.dir( fileInp );
+    //   // 获取文件对象
+    //   var file = fileInp.files[0];
+
+    //   // 异步文件上传
+    //   var xhr = new XMLHttpRequest();
+    //   xhr.open( "post", "file.php" );
+    //   var formData = new FormData();
+    //   formData.append( "file", file );
+
+    //   xhr.upload.onprogress = function(e){
+    //       inner.style.width = (e.loaded / e.total * 100) +'%';
+    //       span.innerText = (e.loaded / e.total * 100) +'%';
+    //   }
+    //   xhr.send( formData );
+
+    //   xhr.onreadystatechange = function() {
+    //     if ( xhr.readyState === 4 ) {
+    //       if ( xhr.status === 200 ) {
+    //         console.log( xhr.responseText );
+    //       }
+    //     }
+    //   }
+
+    // }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file">
+    <button id="btn">按钮</button>
+    <script>
+    btn.onclick = function() {
+
+        // 要是用formdata必须用post方式
+        var xhr = new XMLHttpRequest();
+        xhr.open('post', 'file.php');
+
+        // 利用formdata上传文件
+        // 此时利用formdata是为了上传文件,不是操作表单,所以不用传递form对象
+        var formdata = new FormData();
+        // 需要找到上传的那个文件的文件对象
+        // 对应的上传文件的标签的dom对象身上有一个files属性,是个伪数组,0下标的位置就是我们要的那个文件对象
+        var file = document.querySelector('input').files[0];
+        // console.dir(document.querySelector('input').files);
+        // 把文件对象添加到formdata中
+        formdata.append('file', file);
+
+        xhr.send(formdata);
+    };
+    </script>
+</body>
+
+</html>

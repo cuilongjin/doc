@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <form id="f">
+        <input type="text" name="uname">
+        <input type="password" name="psw">
+        <input type="button" value="按钮" id="btn">
+    </form>
+    <script>
+    btn.onclick = function() {
+
+        //要是用formdata必须用post方式
+        var xhr = new XMLHttpRequest();
+        xhr.open('post', 'ajax.php');
+        //虽然是post请求,但是我们用了formdata,所以不用设置请求头,浏览器会自动设置
+        // 使用formdata的步骤:
+        // 1. 实例化formdata对象
+        var f = document.getElementById('f');
+        var formdata = new FormData(f);
+
+        //如果要发送给服务器的数据除了表单的之后,还有一些其他的数据的话,可以使用
+        // formdata.append('键', 值) 方法,添加到formdata中
+        formdata.append('id', 12);
+        formdata.append('desc', '哈哈哈');
+
+        // 2.发送请求的时候,把form对象传递到send的小括号中
+        xhr.send(formdata);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    console.log(xhr.responseText);
+                }
+            }
+        };
+    };
+    </script>
+</body>
+</html>
