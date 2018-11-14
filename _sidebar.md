@@ -19,3 +19,5 @@
 	- [php笔记](zh-cn/_php/php笔记)
 * **AJAX**
 	- [ajax笔记](zh-cn/_ajax/ajax笔记)
+* **Other**
+	- [遍历总结](zh-cn/_other/遍历总结)

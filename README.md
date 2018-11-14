@@ -12,6 +12,7 @@ zh-cn
 ├─_jquery
 ├─_php
 ├─_ajax
+├─_other
 ├─code
 │ ├─html css
 │ ├─javascript
