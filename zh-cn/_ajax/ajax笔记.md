@@ -1101,11 +1101,13 @@ xhr.ontimeout = function(){
 
 ### formData 管理表单数据
 
-formData 对象类似于 jquery 的 serialize 方法，用于管理表单数据
+formData 对象类似于 jquery 的 serialize 方法，序列化表单，实现表单的异步提交
 
-使用特点：
+!>  但 serialize 方法无法实现文件上传
 
-1. 实例化一个 formData 对象， new FormData(form); form 就是表单元素
+使用：
+
+1. 实例化一个 formData 对象， new FormData(form); form 就是表单元素，DOM对象
 2. formData 对象可以直接作为 xhr.send(formData) 的参数。注意此时数据是以二进制的形式进行传输。
 3. formData 有一个 append 方法，可以添加参数。formData.append("id", "1111");
 4. 这种方式只能以 **post** 形式传递，不需要设置请求头，浏览器会自动为我们设置一个合适的请求头。
@@ -1130,11 +1132,15 @@ formData.append("id", "1111");
 xhr.send(formData);
 ```
 
+如果要获取 `formData` 中的数据，可以使用 `formData.get('')` 获取
+
 
 
 ### 文件上传
 
-> 以前，文件上传需要借助表单进行上传，但是表单上传是同步的，也就是说文件上传时，页面需要提交和刷新，用户体验不友好，xhr2.0中的formData对象支持文件的异步上传。
+> 以前，文件上传需要借助表单进行上传，但是表单上传是同步的，也就是说文件上传时，页面需要提交和刷新，用户体验不友好，xhr2.0 中的 formData 对象支持文件的异步上传。
+
+
 
 ```javascript
 var formData = new FormData();
@@ -1143,7 +1149,50 @@ var file = document.getElementById("file").files[0];
 console.dir(file);
 formData.append("file", file);
 xhr.send(formData);
+
+
+$('#upload').on('change', function () {
+    // FormData 用于管理表单数据的
+    var  form = document.querySelector("#form1");
+    var  formData = new FormData(form);
+
+    // 发送给服务器 
+    var  xhr = new XMLHttpRequest();
+    xhr.open('post','upload.php');
+    xhr.send(formData); // 直接发送 formData 
+
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            var r = xhr.responseText;
+        }
+    }
+})
+
+// jquery
+$('#upload').on('change', function () {
+    // 准备要上传的数据
+    var formData = new FormData();
+	// 如果 formData 中有文件对象了，就不需要再添加了
+    formData.append('file', this.files[0]);
+    // 发送 AJAX 请求，上传文件
+    $.ajax({
+        url: 'upload.php',  
+        contentType: false, // 设置编码类型
+        processData: false, // 设置传递值方式
+        data: formData,
+        type: 'post',
+        success: function (res) {
+            if (res.success) {
+
+            } 
+        }
+    })
+})
 ```
+
+!> 如果使用 `$.ajax` 发送 ， 需要添加如下两项参数
+​	`contentType: false,`  设置编码类型
+​	`processData: false,`  设置传递值方式
 
 
 
