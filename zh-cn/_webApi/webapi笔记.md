@@ -350,6 +350,10 @@ link.onclick = function() {
 在DOM对象中，disabled的属性是一个布尔类型的属性，值只有true或者false
 ```
 
+!> reset() 方法可把表单中的元素重置为它们的默认值
+
+
+
 【案例：禁用文本框.html】
 
 【案例：随机下拉框选中.html】
