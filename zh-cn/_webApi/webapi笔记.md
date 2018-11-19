@@ -238,32 +238,27 @@ document.querySelectorAll(".box");
 
 
 
-
-
 ## 事件学习
 
 ### 焦点事件
 
-- `onfocus`  :  当前元素 `获得焦点` 时触发事件
-- `onblur`  :  当前元素 `失去焦点` 时触发事件
+- `focus`  :  获得焦点
+- `blur`  :  失去焦点
 
 ### 鼠标事件
 
-* `onclick` : 单击事件
-* `ondblclick` ：双击事件
-* `onmouseover` :  当 `鼠标在元素上方` 时触发事件
-* `onmouseout` :  当 `鼠标离开` 时触发事件
-* `onmousedown` ：当 `鼠标按下` 时触发事件
-* `onmouseup`  ：放当 `鼠标抬起/鼠标释` 时触发事件
-* `onmousemove` ：放当 `鼠标移动` 时触发事件
+- `click` : 单击
+- `dblclick` ：双击
+- `mouseover/mouseout` :  进入/离开元素
+- `mouseenter/mouseleave` :  进入/离开元素
+- `mousedown` ：按下
+- `mouseup`  ：抬起/释放
+- `mousemove` ：移动
 
 ### 键盘事件
 
-* `onkeydown` 和 `onkeypress` ：当 `键盘按下` 时触发
-
-* `onkeyup`： 当 `键盘释放` 时触发
-
-
+- `keydown/keypress` ：按下
+- `keyup`： 释放
 
 
 
