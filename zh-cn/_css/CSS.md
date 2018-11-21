@@ -134,9 +134,9 @@ tages: css
 
 
 
-# 4. CSS选择器（重点）
+# 4. CSS 选择器（重点）
 
-## 4.1 CSS基础选择器
+## 4.1 CSS 基础选择器
 
 ### 4.1.1 标签选择器
 
@@ -183,7 +183,7 @@ tages: css
   - 一个class可以出现多次，一个元素可以有多个class，**各个类名中间用空格隔开**
 
 
-### 4.1.3 id选择器
+### 4.1.3 id 选择器
 
 id 选择器使用 `#` 进行标识，后面紧跟id名
 
@@ -192,7 +192,7 @@ id 选择器使用 `#` 进行标识，后面紧跟id名
 - id选择器
 
 ```
-	#id名 {属性1:属性值1; 属性2:属性值2; 属性3:属性值3;}
+#id名 {属性1:属性值1; 属性2:属性值2; 属性3:属性值3;}
 ```
 
 - 注意
@@ -209,15 +209,15 @@ id 选择器使用 `#` 进行标识，后面紧跟id名
 - 其基本语法格式如下：
 
 ```
-  { 属性1:属性值1; 属性2:属性值2; 属性3:属性值3; }
+{ 属性1:属性值1; 属性2:属性值2; 属性3:属性值3; }
 ```
 
 例如下面的代码，使用通配符选择器定义CSS样式，清除所有HTML标记的默认边距。
 
 ```css
 * {
-  margin: 0;                    /* 定义外边距*/
-  padding: 0;                   /* 定义内边距*/
+  margin: 0;   /* 定义外边距*/
+  padding: 0;  /* 定义内边距*/
 }
 ```
 
@@ -227,7 +227,7 @@ id 选择器使用 `#` 进行标识，后面紧跟id名
 
 
 
-## 4.2 CSS复合选择器
+## 4.2 CSS 复合选择器
 
 ### 4.2.1 后代选择器（重点）
 
@@ -255,7 +255,7 @@ id 选择器使用 `#` 进行标识，后面紧跟id名
 白话：  
 
 ```css
- 比如:  .demo > h3 {color: red;}   说明  h3 一定是demo 亲儿子  demo 元素包含着h3
+比如:  .demo > h3 {color: red;}   说明 h3 一定是 demo 亲儿子  demo 元素包含着h3
 ```
 
 
@@ -264,14 +264,14 @@ id 选择器使用 `#` 进行标识，后面紧跟id名
 
 - 由两个选择器构成，找到的标签必须满足：既有标签一的特点，也有标签二的特点。
 
-- 两个选择器之间**不能有空格**，如h3.special。
+- 两个选择器之间 **不能有空格**，如h3.special。
 
 **记忆技巧：**
 
 交集选择器 是 并且的意思。  即...又...的意思
 
 ```css
-比如:   p.one   选择的是类名为 .one  的 p 标签  
+比如: p.one   选择的是类名为 .one  的 p 标签  
 ```
 
 用的相对来说比较少，不太建议使用。
@@ -292,59 +292,83 @@ id 选择器使用 `#` 进行标识，后面紧跟id名
 
 
 
+
+
 ### 4.2.5 伪类选择器
 
 伪类选择器实质上是让设计师可以根据元素特定的状态，设置不同的视觉效果。具体有`:link`、`:visited`、`:hover`、`:active`、`:focus`、`:focus-within`、`:target`、`:root`和`:checked`。
 
-|                      |                        |                                                              |
-| -------------------- | ---------------------- | ------------------------------------------------------------ |
-| a:link               |                        | 用于设置链接初始状态时的样式                                 |
-| a:visited            |                        | 用于设置链接被点击过后的样式    设置font-size不起作用        |
-| a:hover              |                        | 用于设置鼠标悬停在链接上方时，链接的样式                     |
-| a:active             |                        | 用于设置鼠标按键按下，但未释放时，链接的样式                 |
-|                      |                        |                                                              |
-| :first-child         | p:first-child          | 选择属于父元素的第一个子元素的每个`<p>`元素（选中第一行li元素） |
-| :last-child          | p:last-child           | 选择属于父元素的最后一个子元素的每个`<p>`元素（选中最后一行li元素） |
-| :nth-child(2)        | p:nth-child(2)         | 选择属于其父元素的第二个子元素的每个 `<p>` 元素              |
-| :nth-child(even)     | p:nth-child(even)      | 选择偶数项的`<p>`元素                                        |
-| :nth-child(3n+1)     | p:nth-child(3n+1)      | 选择正向3n+1项(n从0开始)的`<p>`元素                          |
-| nth-last-child(3n+1) | p:nth-last-child(3n+1) | 选择反向3n+1项(n从0开始)的`<p>`元素                          |
-| :only-child          | p:only-child           | 选择属于其父元素的唯一子元素的每个 `<p>` 元素                |
-| :only-of-type        | p:only-of-type         | 选择属于其父元素唯一的 `<p>` 元素的每个 `<p>` 元素           |
-| :first-of-type       | dd:first-of-type       | 选择属于其父元素的首个 `<dd>` 元素                           |
-| :last-of-type        | dt:last-of-type        | 选择属于其父元素的最后一个 `<dt>` 元素                       |
-| :nth-of-type(2)      | p:nth-of-type(2)       | 选择属于其父元素第二个 `<p>` 元素的每个 `<p>` 元素           |
-|                      |                        |                                                              |
-| :enabled             | input:enabled          | 选择每个启用的 `<input>` 元素                                |
-| :disabled            | input:disabled         | 选择每个禁用的 `input>` 元素                                 |
-| :checked             | input:checked          | 选择每个被选中的 `<input>` 元素                              |
-|                      |                        |                                                              |
-| :focus               |                        | 用于设置元素处于focus状态下的样式。                          |
-| :focus-within        |                        | 用于设置当子元素处于focus状态时，该元素的样式。              |
-| :empty               | p:empty                | 选择没有子元素的每个 `p>` 元素（包括文本节点）               |
-| :target              | `#news:target`         | 选择当前活动的 `#news` 元素                                  |
-| :root                |                        | 选择文档的根元素                                             |
-| :not(p)              |                        | 选择非 `<p>` 元素的每个元素                                  |
-| :placeholder-shown   |                        | 用于设置元素placeholder显示时的样式                          |
-|                      |                        |                                                              |
-| 伪元素               |                        |                                                              |
-| ::selection          | ::selection            | 选择被用户选取的元素部分                                     |
-| ::first-letter       | p::first-letter        | 选择每个 `<p>` 元素的首字母。                                |
-| ::first-line         | p::first-line          | 选择每个 `<p>` 元素的首行                                    |
-| ::before             | p::before              | 在每个 `<p>` 元素的内容之前插入内容                          |
-| ::after              | p::after               | 在每个 `<p>` 元素的内容之后插入内容                          |
-|                      |                        |                                                              |
-| 属性选择器           |                        |                                                              |
-| [attribute\]         | [disabled]             | 选择带有disabled 属性所有元素。                              |
-| [attribute=value\]   | [target=_blank]        | 选择 target="_blank" 的所有元素。                            |
-| [attribute~=value\]  | [title~=flower]        | 选择 title 属性包含单词 "flower" 的所有元素。                |
-| [attribute\|=value\] | [lang\|=en]            | 选择 lang 属性值以 "en" 开头的所有元素。                     |
-| :lang(language)      | p:lang(it)             | 选择带有以 "it" 开头的 lang 属性值的每个 \<p> 元素           |
-| [attribute^=value\]  | a[src^="https"]        | 选择其 src 属性值以 "https" 开头的每个 \<a> 元素             |
-| [attribute$=value\]  | a[src$=".pdf"]         | 选择其 src 属性以 ".pdf" 结尾的所有 `<a>` 元素               |
-| [attribute*=value\]  | a[src*="abc"]          | 选择其 src 属性中包含 "abc" 子串的每个 `<a>` 元素            |
+|                      |                         |                                                              |
+| -------------------- | ----------------------- | ------------------------------------------------------------ |
+| a:link               |                         | 用于设置链接初始状态时的样式                                 |
+| a:visited            |                         | 用于设置链接被点击过后的样式    设置font-size不起作用        |
+| a:hover              |                         | 用于设置鼠标悬停在链接上方时，链接的样式                     |
+| a:active             |                         | 用于设置鼠标按键按下，但未释放时，链接的样式                 |
+|                      |                         |                                                              |
+| :first-child         | li:first-child          | 选择属于其父元素的第一个子元素(不一定是li元素)               |
+| :last-child          | li:last-child           | 选择属于其父元素的最后一个子元素                             |
+| :nth-child(2)        | li:nth-child(2)         | 选择属于其父元素的第二个子元素                               |
+| :nth-child(even)     | li:nth-child(even)      | 选择属于其父元素的偶数项的子元素                             |
+| :nth-child(3n+1)     | li:nth-child(3n+1)      | 选择属于其父元素的正向3n+1项(n从0开始)的子元素               |
+| nth-last-child(3n+1) | li:nth-last-child(-n+5) | 选择属于其父元素的反向-n+5项(n从0开始)的子元素<br>(即选择最后五个li元素) |
+| :only-child          | li:only-child           | 选择属于其父元素的唯一子元素的每个 `<li>` 元素               |
+| :only-of-type        | li:only-of-type         | 选择属于其父元素唯一 `<li>` 元素的每个 `<li>` 元素           |
+| :first-of-type       | li:first-of-type        | 选择属于其父元素的第一个`<li>` 元素                          |
+| :last-of-type        | li:last-of-type         | 选择属于其父元素的最后一个 `<li>` 元素                       |
+| :nth-of-type(2)      | li:nth-of-type(2)       | 选择属于其父元素的第二个 `<li>` 元素                         |
+|                      |                         |                                                              |
+| :enabled             | input:enabled           | 选择每个启用的 `<input>` 元素                                |
+| :disabled            | input:disabled          | 选择每个禁用的 `input>` 元素                                 |
+| :checked             | input:checked           | 选择每个被选中的 `<input>` 元素                              |
+|                      |                         |                                                              |
+| :focus               |                         | 用于设置元素处于focus状态下的样式。                          |
+| :focus-within        |                         | 用于设置当子元素处于focus状态时，该元素的样式。              |
+| :empty               | p:empty                 | 选择没有子元素的每个 `<p>` 元素（包括文本节点）              |
+| :target              | `#news:target`          | 选择当前活动的 `#news` 元素                                  |
+| :root                |                         | 选择文档的根元素                                             |
+| :not(p)              | li:not(:last-of-type)   | 选择最后一个li之外其他所有li                                 |
+| :placeholder-shown   |                         | 用于设置元素placeholder显示时的样式                          |
+|                      |                         |                                                              |
+| 伪元素               |                         |                                                              |
+| ::selection          | ::selection             | 选择被用户选取的元素部分                                     |
+| ::first-letter       | p::first-letter         | 选择每个 `<p>` 元素的首字母。                                |
+| ::first-line         | p::first-line           | 选择每个 `<p>` 元素的首行                                    |
+| ::placeholder        | input::placeholder      | 选择input内部的占位符，给其设置样式                          |
+| ::before             | div::before             | 在每个 `<div>` 元素的内容之前插入内容                        |
+| ::after              | div::after              | 在每个 `<div>` 元素的内容之后插入内容                        |
+|                      |                         |                                                              |
+| 属性选择器           |                         |                                                              |
+| [attribute\]         | [disabled]              | 选择带有disabled 属性所有元素。                              |
+| [attribute=value\]   | [target=_blank]         | 选择 target="_blank" 的所有元素。                            |
+| [attribute~=value\]  | [title~=flower]         | 选择 title 属性包含单词 "flower" 的所有元素。                |
+| [attribute\|=value\] | [lang\|=en]             | 选择 lang 属性值以 "en" 开头后续以-分隔的所有元素。          |
+| :lang(language)      | p:lang(it)              | 选择带有以 "it" 开头的 lang 属性值的每个 `<p>` 元素          |
+| [attribute^=value\]  | a[src^="https"]         | 选择其 src 属性值以 "https" 开头的每个 `<a>` 元素            |
+| [attribute$=value\]  | a[src$=".pdf"]          | 选择其 src 属性以 ".pdf" 结尾的所有 `<a>` 元素               |
+| [attribute*=value\]  | a[src*="abc"]           | 选择其 src 属性中包含 "abc" 子串的每个 `<a>` 元素            |
 
-`#nav==[id=nav]` 选择 id=nav 的所有元素
+`#nav == [id=nav]` 选择 id=nav 的所有元素
+
+
+
+> `li:last-child` 是选择li元素的父元素下的最后一个子元素，不一定是 li
+>
+> `li:last-of-type`  是选择li元素的父元素的最后一个 li 元素
+>
+> `li:not(:last-of-type)`  选择最后一个li之外其他所有li
+>
+> `::before` `::after` 必须指定 content 属性，否则无效；生成的伪元素默认是行内样式；生成的伪元素无法被找到，更不能被 hover 等；一般用来清除浮动(只有::after可以)或添加小图标
+
+
+
+关于单冒号和双冒号问题：
+
+```
+关于:before与::before的区别
+:before是css2中伪元素的写法，但是呢，在css3中严格规定，伪类采用单冒号，伪元素需要使用双冒号。为了兼容旧的代码，当浏览器碰到了:before之后，会自动的转换成::before。
+如果需要兼容老的浏览器，比如IE678，推荐使用:before
+如果不需要兼容老的浏览器，比如移动端，推荐使用::before
+```
 
 
 
@@ -370,16 +394,6 @@ a:hover {   /* :hover 是链接伪类选择器 鼠标经过 */
 ```
 
 
-
-### 4.2.6 复合选择器总结
-
-| 选择器         | 作用                     | 特征                 | 使用情况 | 隔开符号及用法                          |
-| -------------- | ------------------------ | -------------------- | -------- | --------------------------------------- |
-| 后代选择器     | 用来选择元素后代         | 是选择所有的子孙后代 | 较多     | 符号是**空格** .nav a                   |
-| 子代选择器     | 选择 最近一级元素        | 只选亲儿子           | 较少     | 符号是**>**   .nav>p                    |
-| 交集选择器     | 选择两个标签交集的部分   | 既是 又是            | 较少     | **没有符号**  p.one                     |
-| 并集选择器     | 选择某些相同样式的选择器 | 可以用于集体声明     | 较多     | 符号是**逗号** .nav, .header            |
-| 链接伪类选择器 | 给链接更改状态           |                      | 较多     | 重点记住 a{} 和 a:hover  实际开发的写法 |
 
 
 
