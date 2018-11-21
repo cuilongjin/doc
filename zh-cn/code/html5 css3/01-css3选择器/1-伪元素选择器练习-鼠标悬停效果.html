@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      width: 320px;
+      height: 320px;
+      margin: 100px auto;
+      position: relative;
+    }
+
+    div::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(0,0,0,0);
+      /* 过渡，一个元素只要有过渡，他的属性变化就不是立即的，而是有动画 */
+      transition: all 1s;
+    }
+
+    /* 注意：before和after生成的不是一个元素，生成的一个伪元素，这个伪元素虽然能看到 */
+    /* 但是不能找到，也不能hover， 不能给before或者after添加hover */
+    div:hover::after {
+      background-color: rgba(0, 0, 0, .5);
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <img src="imgs/pic.jpg" alt="">
+  </div>
+</body>
+</html>

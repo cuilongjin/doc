@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    ul {
+      width: 600px;
+      height: 40px;
+      margin: 100px auto;
+    }
+
+    li {
+      float: left;
+      width: 100px;
+      height: 40px;
+      border: 1px solid #000;
+      box-sizing: border-box;
+      text-align: center;
+      line-height: 40px;
+      position: relative;
+    }
+
+    .new::before {
+      content: '';
+      position: absolute;
+      width: 36px;
+      height: 23px;
+      top: 0;
+      right: 0;
+      background-image: url('imgs/icon.png');
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li><a href="#">导航</a></li>
+    <li><a href="#">导航</a></li>
+    <li><a href="#">导航</a></li>
+    <li class="new"><a href="#">导航</a></li>
+    <li><a href="#">导航</a></li>
+    <li><a href="#">导航</a></li>
+  </ul>
+</body>
+</html>
