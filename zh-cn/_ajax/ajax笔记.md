@@ -1,6 +1,6 @@
 # 前言
 
-我们使用php动态渲染页面时，有很多比较麻烦的地方。
+我们使用 php 动态渲染页面时，有很多比较麻烦的地方。
 
 - 在前端写好页面以后，需要后台进行修改，意味这后端程序员也需要懂前端的知识，其实渲染的工作应该交给前端来做。
 - 前端没有写好页面的话，后端无法开始工作，需要等待前端的页面完成之后才能开始工作，拖延项目的进度。
@@ -10,13 +10,13 @@
 
 ## http 协议回顾
 
-> HTTP协议，即超文本传输协议(Hypertext transfer protocol)。是一种详细规定了浏览器和服务器之间互相通信的规则
+> HTTP 协议，即超文本传输协议(Hypertext transfer protocol)。是一种详细规定了浏览器和服务器之间互相通信的规则
 >
-> HTTP协议规定了**请求** 和**响应** 的标准
+> HTTP 协议规定了 **请求** 和 **响应** 的标准
 
 ### 请求与请求报文
 
-**get请求的请求报文详解**
+**get 请求的请求报文详解**
 
 ```javascript
 //--------------------------请求行--------------------------------
@@ -35,12 +35,12 @@ Accept-Encoding: gzip, deflate, sdch
 Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
 
 //----------------------------请求体-------------------------------------
-//get请求没有请求体，但是参数会拼接到请求行中
+// get 请求没有请求体，但是参数会拼接到请求行中
 ```
 
 
 
-**POST请求的请求报文**
+**POST 请求的请求报文**
 
 ```javascript
 //-----------------------请求行---------------------------------------------
@@ -49,13 +49,13 @@ POST /day02/01.php HTTP/1.1
 //-----------------------请求头--------------------------------------------
 Host: www.study.com
 Connection: keep-alive
-//传递的参数的长度。
+// 传递的参数的长度。
 Content-Length: 29
 Cache-Control: max-age=0
 Origin: http://www.study.com
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36
-//内容类型：表单数据，如果是post请求，必须指定这个属性。
+// 内容类型：表单数据，如果是post请求，必须指定这个属性。
 Content-Type: application/x-www-form-urlencoded
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,`*/*`;q=0.8
 Referer: http://www.study.com/day02/01-login.html
@@ -183,7 +183,7 @@ xhr.send( "name=Jepson&age=18" );
 注意点 :
 
 - post 请求，设置请求行时，不拼接参数列表
-- post 必须设置请求头中的 content-type 为 `application/x-www-form-urlencoded`， 标记请求体解析方式
+- post 必须设置请求头中的 content-type 为 `application/x-www-form-urlencoded`，  标记请求体解析方式
 - post 请求需要将参数列表设置到请求体中
 
 
@@ -237,7 +237,7 @@ xhr.onreadystatechange = function () {
 
 > 浏览器端只是负责用户的交互和数据的收集以及展示，真正的数据都是存储在服务器端的。
 >
-> 我们现在通过ajax的确可以返回一些简单的数据（一个字符串），但是在实际开发过程中，肯定会会设计到大量的复杂类型的数据传输，比如数组、对象等，但是每个编程语言的语法都不一样。
+> 我们现在通过 ajax 的确可以返回一些简单的数据（一个字符串），但是在实际开发过程中，肯定会会设计到大量的复杂类型的数据传输，比如数组、对象等，但是每个编程语言的语法都不一样。
 >
 > 因此我们会采用通过的数据交换格式（ `XML` 、`JSON` ）来进行数据的交互。
 
@@ -256,7 +256,7 @@ xhr.onreadystatechange = function () {
 
 - 第一行必须是版本信息
 - 必须有一个根元素（有且仅有一个）
-- 标签不可有空格、不可以数字或.开头、大小写敏感
+- 标签不可有空格、不可以数字或 . 开头、大小写敏感
 - 不可交叉嵌套，都是双标签，如果是单标签，必须闭合
 - 属性双引号（浏览器自动修正成双引号了）
 - 特殊符号要使用实体
@@ -294,7 +294,7 @@ echo $result;
 **js 解析 xml**
 
 ```javascript
-// 获取服务端返回的xml数据，需要使用 xhr.responseXML，这是一个 document 对象，可以使用 DOM 中的方法查找元素。
+// 获取服务端返回的 xml 数据，需要使用 xhr.responseXML，这是一个 document 对象，可以使用 DOM 中的方法查找元素。
 var data = xhr.responseXML;
 // 获取所有的学生
 var students = data.querySelectorAll("student");
@@ -455,54 +455,58 @@ var $ = {
 
     // 处理默认参数
     // 如果参数不是post，那就默认为get
-    var type = options.type == "post" ? "post" : "get";
-    // 如果没有传url，那就传当前地址
-    var url = options.url || location.pathname;
+    var type = options.type === "post" ? "post" : "get";
+    // 如果没有传url，直接返回
+    var url = option.url;
+      if(!url) {
+          return;
+      }
     // 如果参数不是false，那就默认是true，发异步请求
     var async = options.async == false ? false : true;
-
-    var params = this.getParams(options.data);
+	// 把option.data对象中的数据拼接成键值对的字符串
+    var data = this.getData(options.data);
 
     var xhr = new XMLHttpRequest();
 
     // 设置请求行
-    if (type == "get") {
-      url = url + "?" + params;
+    // 如果是get请求，并且要上传参数，需要把参数拼接到url后面
+    if (type === "get") {
+      url += "?" + data;
+      data = null;
     }
+
     xhr.open(type, url, async);
 
     // 设置请求头
-    if (type == "post") {
+    if (type === "post") {
       xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
     }
     // 设置请求参数
-    xhr.send(params);
+    xhr.send(data);
 
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4) {
         if (xhr.status == 200) {
-          /*根据响应头的content-type属性指定方法接收到的内容*/
-          var contentType = xhr.getResponseHeader('content-type');
-          var data = null;
-          if (contentType.indexOf('json') > -1) {
-            data = JSON.parse(xhr.responseText);
-          } else if (contentType.indexOf('xml') > -1) {
-            data = xhr.responseXML;
-          } else {
-            data = xhr.responseText;
-          }
-          /*执行成功函数*/
-          options.success && options.success(data);
+          	//判断一下,如果dataType的值是json,就转成js对象.如果是xml,就返回dom对象,其他都是普通文本
+            if(options.dateType === "json") {
+                var result = JSON.parse(xhr.responseText);
+            } else if(option.dataType === "xml") {
+                var result = xhr.responseXML;
+            } else {
+                var result = xhr.responseText;
+            }
+          	/*执行成功函数*/
+          	options.success && options.success(result);
         } else {
-          options.error && options.error(xhr.responseText);
+          	options.error && options.error();
         }
       }
     }
   },
-  getParams: function (obj) {
+  getData: function (obj) {
     // 将obj对象转换成参数
     // 将对象转换成参数列表
-    if (!obj) {
+    if (!obj || typeof obj !== "object") {
       return null;
     }
     var arr = [];
@@ -629,8 +633,8 @@ $.ajax({
 jquery提供了一个`serialize()`方法序列化表单，说白就是将表单中带有name属性的所有参数拼成一个格式为`name=value&name1=value1`这样的字符串。方便我们获取表单的数据。
 
 ```javascript
-//serialize将表单参数序列化成一个字符串。必须指定name属性
-//name=pp&pass=123456&repass=123456&mobile=15751776629&code=1234
+// serialize 方法将表单参数序列化成一个字符串。必须指定 name 属性
+// name=pp&pass=123456&repass=123456&mobile=15751776629&code=1234
 $('form').serialize();
 ```
 
