@@ -705,7 +705,6 @@ background-image : url("demo1.png"), url("demo2.png"); /*demo1在demo2上层*/
 > 	}
 > ```
 >
->
 
 
 
@@ -749,7 +748,7 @@ background-position : position || position
   - 如果position 后面是精确坐标， 那么第一个是 x ，第二的一定是y
   - 如果指定的两个值是 精确单位和方位名字混合使用，则第一个值是x坐标，第二个值是y坐标
   - 如果指定两个值都是方位名字，则两个值前后顺序无关，比如left  top和top  left效果一致
-  - 如果只指定了一个方位名词，另一个值默认**居中对齐**。如果只指定一个数值,那该数值一定是x坐标，另一个默认**垂直居中**
+  - 如果只指定了一个方位名词，另一个值默认**居中对齐**。如果只指定一个数值，那该数值一定是x坐标，另一个默认**垂直居中**
   - 可设置像素值或百分比（图片百分比位置和容器百分比位置对应重合，50% 50% 等价于 center center 即居中）
   - right 10px top 20px  表示距离右边10px 距离上边 20px
 
@@ -782,31 +781,47 @@ background-attachment : scroll | fixed | inherit
 
 
 
-### 5.3.7 origin属性
+### 5.3.7 origin 属性
 
-`background-origin`设置背景参考的盒模型即设置（0.0）坐标位置
+`background-origin`设置背景零点参考的盒模型即设置（0.0）坐标位置
 
- border-box   padding-box（默认值）   content-box
+* border-box
+
+* padding-box（默认值）
+
+* content-box
 
 
 
-### 5.3.8 clip属性
+### 5.3.8 clip 属性
 
 `background-clip`设置背景裁剪参考的盒模型
 
-border-box   padding-box   content-box （默认值）
+* border-box （默认值）背景区域 ： border + padding + content
+
+* padding-box   背景区域 ：padding + content
+
+* content-box   背景区域 ：content
+
+* text(需要加-webkit-前缀)   背景区域 ：文字
 
 
 
 ### 5.3.9 背景属性简写
 
-**背景简写属性:**
+!> **背景简写属性:**
 
-bg-image|| bg-position/bg-size ||repeat-style|| bg-attachment ||bg-origin||  bg-clip(origin和clip只设置一个值时 则他俩为同一个值)  ||bg-color
+!> background: bg-image|| bg-position/bg-size ||repeat-style|| bg-attachment ||bg-origin||  bg-clip(origin和clip只设置一个值时 则他俩为同一个值)  ||bg-color
 
 
 
-### 5.3.10 背景透明(CSS3)
+> 多重背景
+>
+> background 设置背景的时候，可以设置多个背景图片，使用逗号隔开。注意颜色只能设置一次，并且通常来说，颜色都是在最后面进行设置。
+>
+> background是一个合写的属性，如果在 background 之前设置了background相关的样式，会被覆盖掉。
+
+### 5.3.10 背景透明
 
 - 语法：
 
@@ -815,12 +830,12 @@ background: rgba(0, 0, 0, 0.3);
 ```
 
 - 只作用于颜色，不会影响文本和背景图片
-- 最后一个参数是alpha 透明度  取值范围 0~1之间
+- 最后一个参数是 alpha 透明度  取值范围 0~1之间
 - 我们习惯把0.3 的 0 省略掉  这样写  background: rgba(0, 0, 0, .3);
 - 注意：  背景半透明是指盒子背景半透明， 盒子里面的内容不受影响
 - 因为是CSS3 ，所以 低于 ie9 的版本是不支持的。
 
->  **opacity**属性 设置整个标签的透明度，取值范围 `0~1`之间
+>  **opacity** 属性 设置整个标签的透明度，取值范围 `0~1`之间
 
 
 
