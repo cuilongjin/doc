@@ -20,6 +20,6 @@
 * **AJAX**
 	- [ajax笔记](zh-cn/_ajax/ajax笔记)
 * **H5C3**
-	- [ajax笔记](zh-cn/_h5c3/css3)
+	- [css3](zh-cn/_h5c3/css3)
 * **Other**
 	- [遍历总结](zh-cn/_other/遍历总结)
