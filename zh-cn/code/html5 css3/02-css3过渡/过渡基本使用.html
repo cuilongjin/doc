@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background-color: yellow;
+      margin: 100px auto;
+      /* 设置过渡的属性 */
+      transition-property: all;
+      /* 设置过度的持续时间 */
+      transition-duration: 1s;
+      /* 设置过度的延迟时间 */
+      transition-delay: 1s;
+      /* 动画效果 */
+      /* ease: 平滑  linear：匀速  steps： 分布动画 */
+      transition-timing-function: steps(5);
+
+    }
+    div:hover {
+      background-color: red;
+      width: 300px;
+      height: 300px;
+    }
+
+  </style>
+</head>
+<body>
+  <div></div>
+</body>
+</html>

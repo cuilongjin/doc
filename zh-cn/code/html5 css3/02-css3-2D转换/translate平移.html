@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div:nth-child(1) {
+      width: 200px;
+      height: 200px;
+      background-color: skyblue;
+      transition: 1s;
+    }
+    div:nth-child(1):hover {
+      transform: translateX(100px);
+      transform: translateY(100px);
+      transform: translate(100px, 100px);
+      transform: translate(50%, 50%);
+    }
+
+    /* 让盒子绝对居中 */
+    div:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      background-color: skyblue;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <div class="box"></div>
+</body>
+</html>

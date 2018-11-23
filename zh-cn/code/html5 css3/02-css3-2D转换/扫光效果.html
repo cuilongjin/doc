@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: black;
+    }
+    div {
+      width: 200px;
+      height: 200px;
+      /* border: 1px solid #000; */
+      position: relative;
+      overflow: hidden;
+      margin: 100px auto;
+      background-color: pink;
+    }
+    div::after {
+      content: '';
+      width: 30px;
+      height: 200px;
+      position: absolute;
+      background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, .5),
+        rgba(255, 255, 255, 0)
+      );
+      transform: skew(-45deg);
+      left: -120px;
+
+    }
+    div:hover::after {
+      left: 300px;
+      /* 回来不需要动画 */
+      transition: .5s linear;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+</body>
+</html>

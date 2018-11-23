@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 50px auto;
+    }
+    div:nth-child(1) {
+      background-image: radial-gradient(
+        150px at 50px 50px,
+        rgba(0, 0, 0, .3),
+        rgba(0, 0, 0, .7)
+      );
+    }
+    div:nth-child(2) {
+      background: rgba(0, 0, 0, .7);
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <div></div>
+</body>
+</html>
