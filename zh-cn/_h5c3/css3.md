@@ -189,8 +189,6 @@ transform: scale(0.5); /* 让宽度和高度同时变化 */
 
 - scale 缩放时内部内容也会缩放
 
-- 
-
 - > 可以通过 transition-origin 设定旋转原点 （可以是数值或方位词top、left...)
 
 ## translate 平移
@@ -220,6 +218,8 @@ transform: rotate(-360deg); // 逆时针旋转360度
 - 正值顺时针转，负值逆时针转
 - 可以通过 transition-origin 设定旋转原点
 
+> rotate 旋转会让坐标轴也跟着旋转
+
 ## skew 斜切(变形)
 
 > skew 在实际开发中，是用的最少的一个属性。一般来说，x 和 y 只会倾斜其中的一个
@@ -244,10 +244,111 @@ transform-origin: 40px 40px;
 
 ## 转换合写问题
 
+> transform 属性只能写一个，如果写了多个会覆盖
+>
+> transform 属性的值可以写多个， 用空格隔开即可
+
 ```javascript
-transform:translateX(800px) scale(1.5) rotate(360deg) ;
-//1. transform属性只能写一个，如果写了多个会覆盖
-//2. transform属性可以连写，但是顺序对效果影响的，因为它会在第一个效果的基础上执行第二个效果，然后执行第三个效果（通常会把rotate放后面）
-//3. 如果对transform进行过度效果的时候，初始状态和结束状态一一对应
+transform:translateX(800px) scale(1.5) rotate(360deg);
+// 1. transform属性可以连写，但是顺序对效果影响的，因为它会在第一个效果的基础上执行第二个效果，然后执行第三个效果（通常会把rotate放后面）
+// 2. 如果对transform进行过度效果的时候，初始状态和结束状态一一对应
 ```
+
+【案例：盾牌打散与合并效果.html】
+
+
+
+# 3D 转换
+
+> transform:不仅可以2D转换，还可以进行3D转换。
+
+思考：2D与3D的区别？
+
+## 坐标轴
+
+> 用X、Y、Z分别表示空间的3个维度，三条轴互相垂直。**注意+Y是向下的。**
+
+![img](images/zbz.png)
+
+
+
+## perspective 透视
+
+> 电脑显示屏是一个2D的平面，因为我们看不出来旋转的方向，通过 perspective 属性，可以定义3D 元素距视图的距离，单位是 px。
+>
+> 说白了，设置了perspective属性后，就有了进大远小的效果了，在视觉上，让我们能看出来3d的效果。
+>
+> 注意：当为元素定义 perspective 属性时，其子元素会获得透视效果，而不是元素本身。
+
+```css
+perspective：500px;
+```
+
+
+
+对于我们眼睛来说，离我们越近的房子，我们会感觉到这个房子越大，离我们越远的房子，就会感觉越小，其实房子的大小都是一样的，只是在视觉上的一种不同。
+
+![img](images/per3.png)
+
+## rotate 旋转
+
+```javascript
+transform: rotate(45deg); // 让元素在平面2D中旋转，相当于沿着Z轴旋转
+transform: rotateX(45deg); // 让元素沿着X轴转45度
+transform: rotateY(45deg); // 让元素沿着Y轴转45度
+transform: rotateZ(45deg); // 让元素沿着Z轴转45度
+```
+
+【3D旋转.html】
+
+## translate 平移
+
+```css
+/* 沿着X轴的正方向移动45px */
+transform: translateX(45px);
+/* 沿着Y轴的正方向移动45px */
+transform: translateY(45px);
+/* 沿着Z轴的正方向移动45px */
+transform: translateZ(45px);
+```
+
+【3D平移.html】
+
+【立方体.html】
+
+## transform-style
+
+> transform-style 属性规定如何在 3D 空间中呈现被嵌套的元素。注意这个属性只能给父元素添加
+
+```css
+flat: 默认值，2d显示
+preserve-3d: 3d显示
+```
+
+transform-style 与 perspective 区别
+
+- 透视：透视只是相当于设置了一个距离，辅助我们查看3D效果的工具
+- preserve-3d: 给父盒子添加，让子元素保留3D的位置，说白了，只有设置了preserve-3d，这个元素才能被称之为3d元素
+- 一个3d元素可以没有perspective，但是不能没有transform-style
+
+
+
+【3D导航案例.html】
+
+【切割轮播图案例】
+
+【3D相册案例】
+
+
+
+## 过渡结束事件
+
+```javascript
+// 给最后一个ul添加过渡结束事件（节流阀）
+uls[uls.length - 1].addEventListener('transitionend', function() {
+	isCanAnimate = true
+})
+```
+
+
 
