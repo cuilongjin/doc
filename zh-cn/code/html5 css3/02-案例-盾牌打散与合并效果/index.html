@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body {
+      background: green;
+    }
+    div {
+      width: 500px;
+      margin: 50px auto;
+    }
+  </style>
+</head>
+<body>
+  <button>打散</button>
+  <button>合并</button>
+  <div>
+    <img src="imgs/shield_1_01.png" alt="">
+    <img src="imgs/shield_1_02.png" alt="">
+    <img src="imgs/shield_1_03.png" alt="">
+    <img src="imgs/shield_1_04.png" alt="">
+    <img src="imgs/shield_1_05.png" alt="">
+    <img src="imgs/shield_1_06.png" alt="">
+    <img src="imgs/shield_1_07.png" alt="">
+    <img src="imgs/shield_1_08.png" alt="">
+    <img src="imgs/shield_1_09.png" alt="">
+  </div>
+  <script>
+    var btn = document.querySelectorAll('button')
+    var imgs = document.querySelectorAll('img')
+    btn[0].onclick = function() {
+      for(var i = 0; i < imgs.length; i++) {
+        var deg = parseInt(Math.random() * 361)-180
+        var x = parseInt(Math.random() * 801) - 400
+        var y = parseInt(Math.random() * 101) - 50
+        imgs[i].style.transition = '1s'
+        imgs[i].style.transform = `rotate(${deg}deg) translate(${x}px, ${y}px)`
+      }
+    }
+
+    btn[1].onclick = function() {
+      for(var i = 0; i < imgs.length; i++) {
+        imgs[i].style.transition = '1s'
+        imgs[i].style.transform = `rotate(0deg) translate(0px, 0px)`
+      }
+    }
+  </script>
+</body>
+</html>
