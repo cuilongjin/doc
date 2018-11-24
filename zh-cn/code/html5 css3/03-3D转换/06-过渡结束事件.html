@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      transition: 1s;
+    }
+    div:hover {
+      transform: rotate(360deg)
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <script>
+    var div = document.querySelector('div')
+    div.addEventListener('transitionend', function() {
+      console.log('呵呵')
+    })
+  </script>
+</body>
+</html>

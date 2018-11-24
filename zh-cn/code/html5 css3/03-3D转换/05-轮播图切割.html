@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .box {
+      width: 500px;
+      height: 300px;
+      margin: 100px auto;
+      position: relative;
+    }
+    ul {
+      width: 20%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      float: left;
+
+    }
+    ul:nth-child(2) li {
+      background-position: -100px 0px;
+    }
+
+    ul:nth-child(3) li {
+      background-position: -200px 0px;
+    }
+
+    ul:nth-child(4) li {
+      background-position: -300px 0px;
+    }
+
+    ul:nth-child(5) li {
+      background-position: -400px 0px;
+    }
+    li {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    li:nth-child(1) {
+      background-color: aqua;
+      transform: translateZ(150px)
+    }
+
+    li:nth-child(2) {
+      background-color: fuchsia;
+      transform: rotateX(90deg) translateZ(150px);
+    }
+
+    li:nth-child(3) {
+      background-color: yellow;
+      transform: rotateX(180deg) translateZ(150px);
+    }
+
+    li:nth-child(4) {
+      background-color: tomato;
+      transform: rotateX(270deg) translateZ(150px);
+    }
+    button {
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      line-height: 100px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    button:nth-of-type(1) {
+      left: -100px;
+    }
+    button:nth-of-type(2) {
+      right: -100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+    <button>上一页</button>
+    <button>下一页</button>
+  </div>
+
+  <script>
+    var prev = document.querySelector('button:nth-of-type(1)')
+    var next = document.querySelector('button:nth-of-type(2)')
+    var uls = document.querySelectorAll('ul')
+    var count = 0
+    var isCanAnimate = true;
+    prev.addEventListener('click', function() {
+      if(!isCanAnimate) return
+      isCanAnimate = false
+      count++
+      for(var i = 0; i < uls.length; i++) {
+        uls[i].style.transition = `1s ${i * .2}s`
+        uls[i].style.transform = `rotateX(${90 * count}deg) `
+      }
+    })
+    next.addEventListener('click', function() {
+      if(!isCanAnimate) return
+      isCanAnimate = false
+      count--
+      for(var i = 0; i < uls.length; i++) {
+        uls[i].style.transition = `1s ${i * .2}s`
+        uls[i].style.transform = `rotateX(${90 * count}deg) `
+      }
+    })
+
+    // 给最后一个ul注册过渡结束事件
+    uls[uls.length - 1].addEventListener('transitionend', function() {
+      isCanAnimate = true
+    })
+
+  </script>
+</body>
+</html>

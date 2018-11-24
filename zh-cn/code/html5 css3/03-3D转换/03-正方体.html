@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    ul {
+      width: 200px;
+      height: 200px;
+      margin: 100px auto;
+      /* background-color: aqua; */
+      position: relative;
+      transform-style: preserve-3d;
+      transition: 5s;
+      transform: rotateX(45deg) rotateY(45deg);
+    }
+    ul:hover {
+      transform: rotateX(405deg) rotateY(405deg);
+    }
+    li {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* transition: 5s; */
+    }
+    li:nth-child(1) {
+      background-color: skyblue;
+      transform: translateZ(100px);
+    }
+    li:nth-child(2) {
+      background-color: orange;
+      transform: rotateX(90deg) translateZ(100px);
+    }
+    li:nth-child(3) {
+      background-color: skyblue;
+      transform: rotateX(180deg) translateZ(100px);
+    }
+    li:nth-child(4) {
+      background-color: yellow;
+      transform: rotateX(270deg) translateZ(100px);
+    }
+    li:nth-child(5) {
+      background-color:deeppink;
+      transform: rotateY(-90deg) translateZ(100px);
+    }
+    li:nth-child(6) {
+      background-color:pink;
+      transform: rotateY(90deg) translateZ(100px);
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</body>
+</html>
