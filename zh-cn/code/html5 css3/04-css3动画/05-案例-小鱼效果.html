@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: skyblue;
+    }
+    div {
+      width: 174px;
+      height: 126px;
+      background: url('./fish-12-126.png');
+      animation: dou 1s infinite steps(12), you 5s infinite linear;
+    }
+    @keyframes dou {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 0 -1512px;
+      }
+    }
+    @keyframes you {
+      from {
+        transform: translateX(0) rotate(0);
+      }
+      25% {
+        transform: translateX(800px) rotate(0);
+      }
+      50% {
+        transform: translateX(800px) rotate(180deg);
+      }
+      75% {
+        transform: translateX(0) rotate(180deg);
+      }
+      to {
+        transform: translateX(0) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+</body>
+</html>

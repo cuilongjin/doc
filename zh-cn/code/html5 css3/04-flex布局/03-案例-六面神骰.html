@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    body {
+      perspective: 1000px;
+      background: skyblue;
+    }
+    ul {
+      width: 200px;
+      height: 200px;
+      margin: 100px auto;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotate 5s infinite linear;
+    }
+    ul:hover {
+      animation-play-state: paused;
+    }
+    @keyframes rotate {
+      from {
+        transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+      }
+      25% {
+        transform: rotateZ(90deg) rotateX(90deg) rotateY(90deg);
+      }
+      50% {
+        transform: rotateZ(180deg) rotateX(180deg) rotateY(180deg);
+      }
+      755% {
+        transform: rotateZ(270deg) rotateX(270deg) rotateY(270deg);
+      }
+      to {
+        transform: rotateZ(360deg) rotateX(360deg) rotateY(360deg);
+      }
+
+    }
+    li {
+      position: absolute;
+      padding: 40px 20px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background: #fff;
+      display: flex;
+    }
+    li:nth-child(6) {
+      transform: rotateY(-90deg) translateZ(100px);
+    }
+    li:nth-child(5) {
+      transform: rotateY(90deg) translateZ(100px);
+    }
+    li:nth-child(4) {
+      transform: rotateX(270deg) translateZ(100px);
+    }
+    li:nth-child(3) {
+      transform: rotateX(180deg) translateZ(100px);
+    }
+    li:nth-child(2) {
+      transform: rotateX(90deg) translateZ(100px);
+    }
+    li:nth-child(1) {
+      transform: rotateX(0deg) translateZ(100px);
+    }
+    li:nth-child(1),
+    li:nth-child(2),
+    li:nth-child(3){
+      justify-content: space-around;
+      align-items: center;
+    }
+    li span {
+      display:block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: red;
+    }
+    li:nth-child(3) span:nth-child(1){
+      align-self: flex-start;
+    }
+    li:nth-child(3) span:nth-child(3){
+      align-self: flex-end;
+    }
+    li:nth-child(4),
+    li:nth-child(5),
+    li:nth-child(6) {
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-content: space-around;
+    }
+    li:nth-child(4) span,
+    li:nth-child(5) span,
+    li:nth-child(6) span{
+      margin: 0 20px;
+      align-content: space-around;
+    }
+    li:nth-child(5) span:nth-child(3) {
+      margin: 0 35px;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>
+      <span></span>
+    </li>
+    <li>
+      <span></span>
+      <span></span>
+    </li>
+    <li>
+      <span></span>
+      <span></span>
+      <span></span>
+    </li>
+    <li>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </li>
+    <li>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </li>
+    <li>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </li>
+  </ul>
+</body>
+</html>
