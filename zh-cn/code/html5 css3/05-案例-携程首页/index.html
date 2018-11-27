@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    img {
+      width: 100%;
+      /* 去除底部白边 */
+      display: block;
+    }
+    .box {
+      width: 100%;
+      max-width: 640px;
+      /* height: 1000px; */
+      margin: 0 auto;
+      text-align: center;
+      /* background-color: pink; */
+    }
+    .banner img {
+      width: 100%;
+    }
+    .one,
+    .two,
+    .three,
+    .four {
+      width: 100%;
+      height: 90px;
+      border-radius: 5px;
+      margin-top: 10px;
+      display: flex;
+    }
+    .one {
+      background-color: #ff697a;
+    }
+    .two {
+      background-color: #3d98ff;
+    }
+    .three {
+      background-color: #00ff00;
+    }
+    .four {
+      background-color: #ff9911;
+    }
+    .left {
+      flex: 1;
+    }
+    .right {
+      flex: 2;
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    li {
+      width: 50%;
+      height: 45px;
+      line-height: 45px;
+      border-left: 1px solid #fff;
+      border-bottom: 1px solid #fff;
+      box-sizing: border-box;
+    }
+    li:nth-child(n + 3) {
+      border-bottom: none;
+    }
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
+    .active {
+      display: flex;
+    }
+    .active img {
+      flex: 1;
+    }
+    .footer ul {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+    .footer a {
+      color: #000;
+    }
+    .footer li {
+      width: 33.33%;
+      border: none;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="banner">
+      <img src="./images/banner.jpg" alt="">
+    </div>
+    <div class="one">
+      <div class="left"></div>
+      <div class="right">
+        <ul>
+          <li><a href="">海外酒店</a></li>
+          <li><a href="">团购</a></li>
+          <li><a href="">特价酒店</a></li>
+          <li><a href="">民宿客栈</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="two">
+      <div class="left"></div>
+      <div class="right">
+        <ul>
+          <li><a href="">海外酒店</a></li>
+          <li><a href="">团购</a></li>
+          <li><a href="">特价酒店</a></li>
+          <li><a href="">民宿客栈</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="three">
+      <div class="left"></div>
+      <div class="right">
+        <ul>
+          <li><a href="">海外酒店</a></li>
+          <li><a href="">团购</a></li>
+          <li><a href="">特价酒店</a></li>
+          <li><a href="">民宿客栈</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="four">
+      <div class="left"></div>
+      <div class="right">
+        <ul>
+          <li><a href="">海外酒店</a></li>
+          <li><a href="">团购</a></li>
+          <li><a href="">特价酒店</a></li>
+          <li><a href="">民宿客栈</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="active">
+      <img src="./images/extra_1.png" alt="">
+      <img src="./images/extra_2.png" alt="">
+    </div>
+    <div class="footer">
+      <ul>
+        <li><a href="">电话预定</a></li>
+        <li><a href="">下载客户端</a></li>
+        <li><a href="">我的</a></li>
+      </ul>
+      <p>网站地图 | ENGLISH | 电脑版</p>
+      <p>©2015 携程旅行</p>
+    </div>
+  </div>
+</body>
+</html>
