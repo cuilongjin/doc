@@ -23,3 +23,6 @@
 	- [css3](zh-cn/_h5c3/css3)
 * **Other**
 	- [遍历总结](zh-cn/_other/遍历总结)
+* **Tool**
+	- [编码规范及配置ESLint](zh-cn/_Tool/编码规范及配置ESLint)
+	- [Sublime插件及快捷键](zh-cn/_Tool/Sublime插件及快捷键)
