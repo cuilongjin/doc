@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div data-user-name="zs" data-id="100" data-desc="呵呵"></div>
+  <script src="./jquery-1.12.4.js"></script>
+  <script>
+
+    // jquery并没有把 data-id 当成自定义属性来用
+
+    var dataId = $('div').attr('data-id')
+    console.log(dataId) // 100
+
+    // 在jq中，封装了另一个方法， data方法,内部使用了缓存来实现，
+    var a = $('div').data()
+    console.log(a)// {desc: "呵呵" id: 100 userName: "zs"}
+    console.log(a.id) // 100
+  </script>
+</body>
+</html>

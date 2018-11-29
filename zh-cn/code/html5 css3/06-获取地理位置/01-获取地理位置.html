@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    navigator.geolocation.getCurrentPosition(function (position) {
+      // 成功的毁掉函数
+      // 谷歌浏览器进行了限制，看不到，可以再IE浏览器下查看
+      console.log(position)
+      console.log(position.coords)
+      // latitude 31.036944929689276
+      // longitude 121.60820237162598
+    }, function (err) {
+      // 失败的回调函数
+      console.log(err)
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      width: 300px;
+      height: 40px;
+      background-color: orange;
+      border-radius: 5px;
+      margin: 0 auto;
+      text-align: center;
+      line-height: 40px;
+      color: #fff;
+      transition: 1s;
+    }
+
+    .show {
+      opacity: 1;
+    }
+    .hide {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="hide">你当前处于没有网络的异次元</div>
+  <script>
+    var div = document.querySelector('div')
+    var isOnline = navigator.onLine
+    console.log(isOnline)
+    if (isOnline) {
+      div.classList.add('hide')
+      div.classList.remove('show')
+    } else {
+      div.classList.add('show')
+      div.classList.remove('hide')
+    }
+
+    // 有网
+    window.addEventListener('online', function () {
+      // console.log('online')
+      div.classList.remove('show')
+      div.classList.add('hide')
+    })
+    // 没网
+    window.addEventListener('offline', function () {
+      // console.log('offline')
+      div.classList.remove('hide')
+      div.classList.add('show')
+    })
+  </script>
+</body>
+</html>

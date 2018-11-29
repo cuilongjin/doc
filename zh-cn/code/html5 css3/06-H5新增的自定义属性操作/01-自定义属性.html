@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 对于标签固有的属性， 可以通过box.xxx -->
+  <!-- 对于自定义属性，在DOM中没有这个属性，无法通过box.xxx -->
+  <div class="aa" id="box" title="哈哈" data-product-id="100" data-my-name-is-jim-green="哈哈" data-user-name="zs" data-id="100" data-skill="eat"></div>
+  <script>
+    // 这几个方法是用来操作标签的属性（包括自定义属性） getAttribute setAttribute removeAttribute
+
+    var box = document.querySelector('#box')
+    var result = box.getAttribute('data-skill')
+    console.log(result)
+
+    // H5规定，以后但凡给标签增加自定义属性，都应该用data-开头 (规范)
+    // H5给所有的DOM对象增加了一个dataset的属性，这个属性中会包含所有data-开头的属性
+
+    console.log(box.dataset)
+    console.log(box.dataset.skill)
+    console.log(box.dataset.id)
+    console.log(box.id)
+    // 设置
+    box.dataset.aaBb = 'cc'
+    console.log(box.dataset.aaBb)
+
+    // 自定义属性的注意点
+    // html中属性是忽略大小写的, 如果你碰到需要大写的自己，你应该用-进行分隔
+    console.log(box.dataset.username)
+    console.log(box.dataset.myNameIsJimGreen)
+    console.log(box.dataset.productId)
+  </script>
+</body>
+</html>

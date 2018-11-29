@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .imgBox {
+      width: 121px;
+      height: 140px;
+      margin: 50px auto 0;
+      border: 1px solid #000;
+    }
+
+    .infoBox {
+      width: 300px;
+      height: 50px;
+      margin: 10px auto;
+      border: 1px solid #000;
+    }
+
+    .btn_wrap {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="imgBox">展示图片</div>
+  <div class="infoBox">展示文字介绍</div>
+  <div class="btn_wrap">
+    <button data-desc="不知妻美" data-img-url="images/lqd.jpg">刘强东</button>
+    <button data-desc="悔创阿里" data-img-url="images/my.jpg">马云</button>
+    <button data-desc="用钱创造快乐，没钱玩你XX" data-img-url="images/mht.jpg">马化腾</button>
+    <button data-desc="定个小目标" data-img-url="images/wjl.jpg">王健林</button>
+  </div>
+  <script src="./jquery-1.12.4.js"></script>
+  <script>
+    var imgBox = document.querySelector('.imgBox')
+    var infoBox = document.querySelector('.infoBox')
+    var btns = document.querySelectorAll('button')
+    // console.log(btns[1].dataset)
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        // alert(1)
+        imgBox.style.background = 'url(' +this.dataset.imgUrl+')'
+        // imgBox.style.background = `url(${this.dataset.imgUrl})`
+
+        infoBox.innerText = this.dataset.desc
+      })
+    }
+
+
+    /* 如果用jq怎么写？？ */
+    // var btns = $('button')
+    // btns.on('click', function () {
+    //   $('.imgBox').css({
+    //     'background': 'url(' +$(this).data().imgUrl+')'
+    //   })
+    //   $('.infoBox').text($(this).data().desc)
+    // })
+  </script>
+</body>
+</html>

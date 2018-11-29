@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <button data-color="red">红</button>
+  <button data-color="yellow">黄</button>
+  <button data-color="blue">蓝</button>
+  <script>
+    var btns = document.querySelectorAll('button')
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        document.body.style.background = this.dataset.color
+        localStorage.setItem('color', this.dataset.color)
+      })
+    }
+    var color = localStorage.getItem('color')
+    if (color) {
+      document.body.style.background = color
+    }
+  </script>
+</body>
+</html>
