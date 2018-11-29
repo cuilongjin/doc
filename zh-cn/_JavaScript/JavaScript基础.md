@@ -18,7 +18,7 @@ tages:JavaScript
 
 ```html
 <script>
-  alert('Hello World!');
+  alert('Hello World!')
 </script>
 ```
 
@@ -31,10 +31,9 @@ tages:JavaScript
 **注意：**
 
 1. script 可以放在很多地方,但是我们一般规范写在body的最后面；
-
 2. 使用 src 引入的标签不能再在标签内写js代码 (写了不会执行)
 
-   !> 通过 `src` 请求到的 `js` 文件，会被解析到 `script` 标签内，并且覆盖原 `script` 标签内的 `js` 代码
+!> 通过 `src` 请求到的 `js` 文件，会被解析到 `script` 标签内，并且覆盖原 `script` 标签内的 `js` 代码
 
 !> script 标签的 src 属性可以写任何路径或文件，并不仅仅只能写 js 文件
 
@@ -46,7 +45,7 @@ tages:JavaScript
 
   ```js
   // 这是单行注释， 单行注释只能写一行代码
-  //  快捷键： ctrl + /  
+  // 快捷键： ctrl + /  
   ```
 
 - 多行注释 :
@@ -67,37 +66,37 @@ tages:JavaScript
 - **alert : 警告框**
 
   ```js
-  //alert会弹出一个警告框
+  // alert会弹出一个警告框
   alert("hello world");
   ```
 
 - **confirm : 确认框**
 
   ```js
-  //confirm弹出一个确定框
+  // confirm弹出一个确定框
   confirm("我帅吗？");
   ```
 
 - **prompt : 输入框**
 
   ```js
-  //prompt:弹出一个输入框，可以输入值
+  // prompt:弹出一个输入框，可以输入值
   prompt("请输入你的真是年龄");
   ```
 
 - **document.write : 网页中写入内容**
 
   ```js
-  //可以识别标签
+  // 可以识别标签
   document.write("hello world");
   document.write("<h1>hello world</h1>");
-  document.write(Date());//输出当前时间
+  document.write(Date()); // 输出当前时间
   ```
 
 - **console.log：控制台输出**
 
   ```js
-  //F12打开控制台，在console中可以看到打印的信息
+  // F12打开控制台，在console中可以看到打印的信息
   console.log("hello word");
   ```
 
@@ -106,16 +105,16 @@ tages:JavaScript
 # 变量 
 
 ```javascript
-//var 声明变量
+// var 声明变量
 var age;
-age = 12; //先声明,后赋值
-var age = 12; //同时声明+赋值
-var age,name,sex; //直接声明变量,可一次声明多个，用逗号隔开
-height=100; //不声明变量，直接赋值(不会报错，但是不推荐)
-console.log(heightt); //不声明变量，也不赋值变量，直接使用（会报错）v
+age = 12; // 先声明,后赋值
+var age = 12; // 同时声明+赋值
+var age,name,sex; // 直接声明变量,可一次声明多个，用逗号隔开
+height=100; // 不声明变量，直接赋值(不会报错，但是不推荐)
+console.log(height); // 不声明变量，也不赋值变量，直接使用（会报错）v
 
 function add (num1,num2){ 
-	return num1+num2;//把两个数字加起来
+	return num1 + num2; // 把两个数字加起来
 }
 /*
 var student = {
@@ -126,15 +125,14 @@ var student = {
 
 
 
-* 变量**命名要求**(变量是[标识符][1]的一种)
-  1.以字母、下划线或美元符号（\$）开头
-  2.由字母、下划线、美元符号（\$）和数字组成
-  3.标识符**区分大小写**
-  4.标识符不能使用关键字和保留字
-  5.如果重新声明 JavaScript 变量，该变量的值不会丢失
+* 变量**命名要求**（变量是[标识符][1]的一种）
 
-  >var car="yellow";
-   var car;  //car 的值依然是 "yellow"
+  1. 以字母、下划线或美元符号（\$）开头
+  2. 由字母、下划线、美元符号（\$）和数字组成
+  3. 标识符**区分大小写**
+  4. 标识符不能使用关键字和保留字
+  5. 如果重新声明 JavaScript 变量，该变量的值不会丢失 `var car="yellow" var car`  car 的值依然是 "yellow"
+
 
 
 >关键字 (有特殊意义的一些单词)
@@ -147,18 +145,15 @@ var student = {
 
 交换两个变量的值
 
-var a = 10;
-var b = 20;
-
-1. 交换两个变量的值  **(必须掌握)**
+1. 使用临时变量  **(必须掌握)**
 
    ```js
-   var temp = a;
-   	a = b;
-   	b = temp;
+   var temp = a
+   	a = b
+   	b = temp
    ```
 
-2. 不使用临时变量，交换两个数值变量的值  **(了解)**
+2. 不使用临时变量  **(了解)**
 
    ```js
    a = a+b;
@@ -199,10 +194,10 @@ var num = 0xA; // 10 (十六进制)
 > `NaN` `Infinity`
 
 ```javascript
-var num = 1/0; // Infinity (无穷大)
+var num = 1/0 // Infinity (无穷大)
 ```
 
-> 通过isNaN()可以判断是否是一个数字，返回false的时候，表示是一个数字
+> 通过 `isNaN(num)` 可以判断是否是一个数字，返回 false 的时候，表示是一个数字
 
 
 
@@ -210,8 +205,8 @@ var num = 1/0; // Infinity (无穷大)
 
 ```javascript
 // 在进行浮点数运算的时候，可能会出现精度丢失的问题
-0.1 + 0.2 = 0.30000000000000004;
-0.2 + 0.2 = 0.4;
+0.1 + 0.2 = 0.30000000000000004
+0.2 + 0.2 = 0.4
 // 尽量少用浮点数进行运算，不要让浮点数进行比较
 
 // 解决办法 : 根据小数点后面的位数量 乘以对应的整数
@@ -222,7 +217,7 @@ var num = 1/0; // Infinity (无穷大)
 
 ## String
 
-只要是在**单引号或双引号**内的就是String类型
+只要是在**单引号或双引号**内的就是 `String` 类型
 
 ```javascript
 var name1 = "hello"
@@ -256,11 +251,11 @@ typeof y; // Object
 >所有非 0 数都是 true，0 是 false
 
 ```javascript
-var sex = true;
-if(sex){
-	document.write('男');
-}else{
-	document.write('女');
+var sex = true
+if (sex) {
+	document.write('男')
+} else {
+	document.write('女')
 }
 ```
 
@@ -269,12 +264,12 @@ if(sex){
 ## Array
 
 ```javascript
-var car = new Array();
-cat[0] = "yellow";
-cat[1] = "red";
-cat[2] = "blue";
-
-var cat = ["yellow","red","blue"];
+var car = new Array()
+cat[0] = "yellow"
+cat[1] = "red"
+cat[2] = "blue"
+// 或
+var cat = ["yellow","red","blue"]
 ```
 
 >关键词 `new` 用于声明新变量的类型
@@ -283,34 +278,34 @@ var cat = ["yellow","red","blue"];
 
 ## Object
 
-由花括号分隔，属性和方法的容器；对象的属性以名称和值对的形式 (name : value) 来定义；属性由逗号分隔。对象的方法定义了一个函数，并作为对象的属性存储。对象方法通过添加 `()` 调用
+由花括号分隔，属性和方法的容器；对象的属性以名称和值对的形式 (name :  value) 来定义；多个属性由逗号分隔。对象的方法定义了一个函数，并作为对象的属性存储。对象方法通过添加 `()` 调用
 
 ```javascript
-var cat = new Object();
-cat.name = "kitty";
-cat.age = "2";
+var cat = new Object()
+cat.name = "kitty"
+cat.age = "2"
 cat.eat = function(){ }
-
+// 或
 var cat = {
-	name:'kitty',
-	age:2,
-	eat:function(){
+	name: 'kitty',
+	age: 2,
+	eat: function(){
 	}
-};
+}
 ```
 
 对象属性有两种访问方式：
 
 ```javascript
-name = cat.name;
-name = cat["name"];
+name = cat.name
+name = cat["name"]
 ```
 
 对象方法的访问：
 
 ```javascript
-eat = cat.eat(); // 输出函数执行结果
-eat = cat.eat; // 输出函数表达式
+eat = cat.eat() // 输出函数执行结果
+eat = cat.eat // 输出函数表达式
 ```
 
 
@@ -320,7 +315,7 @@ eat = cat.eat; // 输出函数表达式
 只有一个值：`null`，表示对象不存在
 
 ```javascript
-var cat = null; // 将cat的值清空
+var cat = null // 将cat的值清空
 ```
 
 
@@ -329,38 +324,38 @@ var cat = null; // 将cat的值清空
 
 只有一个值：`undefined`
 
-* 以声明未赋值的变量
+* 已声明未赋值的变量
 
 ```javascript
-var a;
-console.log(a); // undefined
+var a
+console.log(a) // undefined
 ```
 
 * 没有明确返回值的变量
 
 ```javascript
 // 获取对象不存在的属性
-var obj = {a:1,b:2};
-console.log(obj.c); //undefined
+var obj = {a:1, b:2}
+console.log(obj.c) // undefined
 
 // 数组下标不存在
-var arr = ["zs", "ls", "ww"];
+var arr = ["zs", "ls", "ww"]
 //           0    1     2      下标从零开始，长度为3
-arr[5]; // undefined
+arr[5] // undefined
 
 // 函数没有返回值
 function getSum(a, b) {
-        console.log(a + b);
+        console.log(a + b)
     }
-// getSum(20, 30); // 50
-var result = getSum(20, 30);
-console.log(result); // undefined
+// getSum(20, 30) // 50
+var result = getSum(20, 30)
+console.log(result) // undefined
 
 // 函数参数没有传入
 function f(i) {
-    console.log(i);
+    console.log(i)
 	}
-f(); // undefined
+f() // undefined
 ```
 
 
@@ -370,26 +365,26 @@ f(); // undefined
 > 是一个操作符而不是函数，圆括号可以使用，但不是必需的
 
 ```javascript
-var num;
-typeof (num); // undefined
-typeof (num1); // undefined
+var num
+typeof (num) // undefined
+typeof (num1) // undefined
 // 对未初始化和未声明的变量执行 typeof 操作符都返回 undefined 值
 
-var num = 1;
-typeof num; // number
+var num = 1
+typeof num // number
 
-var num = '1';
-typeof num; // string
+var num = '1'
+typeof num // string
 
-var flag = true;
-typeof flag; // bollean
+var flag = true
+typeof flag // bollean
 
-typeof true; // boolean
+typeof true // boolean
 
-typeof null; // object //null 被认为是一个空的对象引用
+typeof null // object ==> null 被认为是一个空的对象引用
 
-var cat = {name:'kitty'};
-typeof cat; // object
+var cat = {name: 'kitty'}
+typeof cat // object
 ```
 
 
@@ -398,136 +393,131 @@ typeof cat; // object
 
 ## 转换成字符串
 
-1. 调用 toString() 方法 （显式转换）
+1. 调用 `toString()` 方法 （显式转换）
 
    ```js
-   var a = 1;
-   var result = a.toString();
-   console.log(typeof result);  //string
-   console.log(typeof a);  // number
+   var a = 1
+   var result = a.toString()
+   console.log(typeof result) // string
+   console.log(typeof a) // number
    ```
 
    null 、undefined 没有 toString() 方法
 
-2. 调用String()构造函数（显式转换）
+2. 调用 `String()` 构造函数（显式转换）
 
    ```javascript
-   var str1 = String(a);
-   console.log(typeof str1); // string
+   var str1 = String(a)
+   console.log(typeof str1) // string
    ```
 
 3. 直接和字符串做加法运算(推荐方法) （隐式因式转换）
 
    ```javascript
-   var str2 = a + "";
-   console.log(typeof str2); // string
+   // 任意数据类型的变量和字符串做加法运算结果都是字符串
+   var str2 = a + ''
+   console.log(typeof str2) // string
    
    var b = true
-   console.log(typeof (b + "")); //string
-   // 任意数据类型的变量和字符串做加法运算结果都是字符串
+   console.log(typeof (b + '')) // string
    ```
 
 
 
 ## 转换成数值
 
-1.  Number(a) 
+1.  `Number(a)`
 
 ```javascript
-var num1= Number("123");
-var num2= Number("123c");
-console.log(typeof num1); // number
-console.log(typeof num2); // NaN
-// 如果字符串不能转换成合法数字，转换结果为NaN
+var num1= Number("123")
+var num2= Number("123c")
+console.log(typeof num1) // number
+console.log(typeof num2) // NaN
+// 如果字符串不能转换成合法数字，转换结果为 NaN
 ```
 
-2. 使用 parseInt()
+2. 使用 `parseInt()`
 
 ```javascript
-var num2 = parseInt("12.3");
-console.log(typeof num2); // number
-console.log(num2); //12 只保留整数
+var num2 = parseInt("12.3")
+console.log(typeof num2) // number
+console.log(num2) // 12 只保留整数
 
-var num3 = parseInt("15xyz");
-var num4 = parseInt("15x6yz");
-console.log(typeof num3); // number
-console.log(num3); // 15
-console.log(num4); // 15
-//如果字符串里有非法的数字，会逐个转换，直到遇到无法转化的字符串为止
+var num3 = parseInt("15xyz")
+var num4 = parseInt("15x6yz")
+console.log(typeof num3) // number
+console.log(num3) // 15
+console.log(num4) // 15
+// 如果字符串里有非法的数字，会逐个转换，直到遇到无法转化的字符串为止
 
 ```
 
-3. 使用 parseFloat() 完成
+3. 使用 `parseFloat()` 完成
 
 ```javascript
-var num3 = parseFloat("12.34");
-console.log(typeof num3);  // number
-console.log(num3);  // 12.34 可以保留小数位
+var num3 = parseFloat("12.34")
+console.log(typeof num3) // number
+console.log(num3) // 12.34 可以保留小数位
 ```
 
 4. 让字符串和数字做除了加法以外的运算（隐式转换）
 
 ```javascript
-var d = "345";
-var num4 = +d; // 前面加 + （正）号也可以转换
-//num4 = d - 0;
-//numb4 = d * 1;
-//num4 = d / 1 ;
-console.log(typeof num4); // number
-console.log(num4); // 345
+var d = "345"
+var num4 = +d // 前面加 + （正）号也可以转换
+// num4 = d - 0
+// numb4 = d * 1
+// num4 = d / 1 
+console.log(typeof num4) // number
+console.log(num4) // 345
 ```
 
 
 
 ## 转换成布尔值
 
-1. 使用 Boolean() 完成
+1. 使用 `Boolean()` 完成
 
 ```javascript
-var a = 45;
-var result1 = Boolean(a);
-console.log(typeof result1);  // boolean
-console.log(result1);  // true
+var a = 45
+var result1 = Boolean(a)
+console.log(result1) // true
 // 对于数字类型来说：一般的数字都转换成为true，0、NaN 会被转换成为false
 
-var str = "hello";
-//var str = "";
-//var str = " ";
-var result2 = Boolean(str);
-console.log(typeof result2); // boolean
-console.log(result2);  // true
-//字符串中只有空的字符串会被转换成为 false
+var str = "hello"
+// var str = ""
+// var str = " "
+var result2 = Boolean(str)
+console.log(result2) // true
+// 字符串中只有空的字符串会被转换成为 false
 
-var result3 = Boolean(undefined);
-console.log(typeof result3);  // boolean
-console.log(result3);  // false
+var result3 = Boolean(undefined)
+console.log(result3) // false
 
-var result4 = Boolean(null);
-console.log(typeof result4);  // boolean
-console.log(result4);  // false
+var result4 = Boolean(null)
+console.log(result4) // false
 
-var b = false;
-var result5 = Boolean(b);
-console.log(typeof result5);  // boolean
-console.log(result5);  // false
+var b = false
+var result5 = Boolean(b)
+console.log(result5) // false
 ```
 
-**0,NaN,空字符串，undefined,null,false会被转换成为false**
+**0, NaN, 空字符串，undefined, null, false 会被转换成为 false**
 
  
 
-2. 使用 !!
+2. 使用 `!!`
 
 ```javascript
-console.log(typeof !!a); // boolean
-console.log(!!a); // true
+console.log(typeof !!a) // boolean
+console.log(!!a) // true
 ```
 
 
 
 3. 自动转换
 
-```
+```javascript
 if("") {
     console.log("哈哈");
 }
@@ -561,44 +551,44 @@ if("") {
 > `+` 、`-` 、`*` 、`/` 、`%`
 
 ```javascript
-var num = 5 + 6; // 11
-var num = 5 % 2; // 1 取余数
-var num = 5 % (-2); // 1
-var num = (-5) % 2; // -1 只与左边值的符号有关
+var num = 5 + 6 // 11
+var num = 5 % 2 // 1 取余数
+var num = 5 % (-2) // 1
+var num = (-5) % 2 // -1 只与左边值的符号有关
 
-var num = "5" + 6 + 7; // "567" 数字与字符串相加，返回字符串
-var num = 5 + 6 + "7"; // "117"
-var num = "" +5 + 6 + "7"; // "567" 字符串 + 数字得到字符串
-var num = "" +5 + 6 + 7; // "567"
+var num = "5" + 6 + 7 // "567" 数字与字符串相加，返回字符串
+var num = 5 + 6 + "7" // "117"
+var num = "" + 5 + 6 + "7" // "567" 字符串 + 数字得到字符串
+var num = "" + 5 + 6 + 7 // "567"
 
-var num = 5 + true; // 6  返回数值，false 转成 0，true 转成 1
+var num = 5 + true // 6  返回数值，false 转成 0，true 转成 1
 
-var num = "1" + true;// "1true" 字符串与布尔值相加,布尔值转化成字符串
+var num = "1" + true // "1true" 字符串与布尔值相加,布尔值转化成字符串
 ```
 
 ## 赋值操作符
 
-> `a = a + 1` 即 `a++`,`a--` 即 `a = a - 1`
+> `a =  a  +  1` 即 `a++`, `a =  a - 1` 即 `a--`
 > `a = a + 5` 可简写成 `a += 5`，类似的还有 `a -= 5`、`a *= 5`、`a /= 5`、`x %= y`
 >
 > 赋值运算符左边不能是常量或表达式
 
 ```javascript
-var age = 10;
-var num = age++; // num=10 age=11 (先将变量中的值取出做赋值操作,再自身+1)
+var age = 10
+var num = age++ // num = 10 age = 11 (先将变量中的值取出做赋值操作,再自身+1)
 
-var age = 10;
-var num = ++age; // num=11 age=11 (先自身+1,然后再将+1后的结果赋值)
+var age = 10
+var num = ++age // num = 11 age = 11 (先自身+1,然后再将+1后的结果赋值)
 
-var num = 5;
-console.log(num++); //5
-console.log(++num); //7
+var num = 5
+console.log(num++) // 5
+console.log(++num) // 7
 
-var x = 3;
-var y = x++ + ++x + x * 10; // x=3
-//y = 3 + ++x + x * 10  // x=4
-//y = 3 + 5 + x * 10 // x=5
-//y = 58
+var x = 3
+var y = x++ + ++x + x * 10 // x = 3
+// y = 3 + ++x + x * 10  // x = 4
+// y = 3 + 5 + x * 10 // x = 5
+// y = 58
 ```
 
 ## 关系操作符
@@ -610,8 +600,8 @@ var y = x++ + ++x + x * 10; // x=3
 > `in` `instanceof`
 
 ```javascript
-var result = 6 > 4;
-alert(result); // true 输出Boolean类型
+var result = 6 > 4
+alert(result) // true 输出Boolean类型
 ```
 
 运算符的结果类型为 `Boolean`
@@ -620,51 +610,52 @@ alert(result); // true 输出Boolean类型
 
   在比较前先执行类型转换
 
-    * 如果有一个操作数是**布尔值**，则在比较相等性前先将其转换为**数值**---false转换为0，true转换为1；  
-    * 如果一个操作数是**字符串**，另一个操作数是**数值**，则在比较相等性前将字符串转换为**数值**；
+    * 如果有一个操作数是**布尔值**，则在比较相等性前先将其转换为**数值**---false转换为0，true转换为1  
+    * 如果一个操作数是**字符串**，另一个操作数是**数值**，则在比较相等性前将字符串转换为**数值**
     * 如果两个值都是字符串，则按照字符串的字符编码进行逐位比较
-    * 如果一个操作数是对象，另一个不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面的规则比较；
+    * 如果一个操作数是对象，另一个不是，则调用对象的valueOf()方法，用得到的基本类型值按照前面的规则比较
     * 如果两个操作数都是对象，则比较它们是否指向同一个对象
-    * **null和undefined是相等的**；  
-    * 在比较相等性之前，不能将null和undefined转换为其他任何值;  
-    * 如果有一个操作符是NaN，则相等操作符返回false，不相等操作符返回true；即使两个操作数都是NaN,也一样；  
+    * **null 和 undefined 是相等的**
+    * 在比较相等性之前，不能将 null 和 undefined 转换为其他任何值
+    * 如果有一个操作符是NaN，则相等操作符返回false，不相等操作符返回true；即使两个操作数都是NaN，也一样
 
 
 * `===` 全等、`！===` 不全等
-  两个操作数在未经转换的情况下相等返回true，不相等返回false;
+  两个操作数在未经转换的情况下相等返回true，不相等返回false
+
 ```javascript
-0 == false;//true
-1 == true;//true
-2 == true;//false
+0 == false // true
+1 == true // true
+2 == true // false
 
-false == "0"; // true
-'' == 0;//true
-'4' == 4;//true
+false == "0" // true
+'' == 0 // true
+'4' == 4 // true
 
-null == undefined;//true
-undefined == 0;//false
-null == 0;//false
+null == undefined // true
+undefined == 0 // false
+null == 0 // false
 
-"NaN" == NaN;//false
-5 == NaN;//false
-NaN == NaN;//false
-NaN != NaN;//true
+"NaN" == NaN // false
+5 == NaN // false
+NaN == NaN // false
+NaN != NaN // true
 
-[] != [];// true
-[] == [];// false
-[] == ![];// true
-{} == {};// false
-1 == [];// false
-1 == [1];// true
+[] != [] // true
+[] == [] // false
+[] == ![] // true
+{} == {} // false
+1 == [] // false
+1 == [1] // true
 
--0 === 0; // true
-"4" === 4;//false
-undefined === null;//false
+-0 === 0 // true
+"4" === 4 // false
+undefined === null // false
 ```
 
 * `in`
 
-  判断对象是否拥有给定属性
+  判断对象是否能够访问到该属性
 
 * `instanceof`
 
@@ -679,38 +670,38 @@ undefined === null;//false
 * `!` 对 Boolean 值取反
 
 ```javascript
-var flag = true;
-alert(!flag);//false
+var flag = true
+alert(!flag) // false
 
-alert(!0);  //true
-alert(![]);  //false
-alert(!“”);  //true
-alert(!![]);  //true
-alert(!!1);  //true
+alert(!0) // true
+alert(![]) // false
+alert(!“”) // true
+alert(!![]) // true
+alert(!!1) // true
 ```
 
 * `&&` 如果第一个值转换成boolean值之后为true， 则输出第二个值；如果第一个值转换成boolean值之后为false，则输出第一个值，且第二个值不在执行。（取第一个为false的值，如果都为true ，则输出最后一个值。）
 
 ```javascript
-var result = true && 3; //3
-var result = 1&&3; //3
-var result = [] && ""; //""
-var result = false && 3; //false
-var result = "" && 3; //""
-var result = null && true; //null
+var result = true && 3 // 3
+var result = 1 && 3 // 3
+var result = [] && "" // ""
+var result = false && 3 // false
+var result = "" && 3 // ""
+var result = null && true // null
 
-var num = 0;
-var result = "" && num++; //""   num = 0 
+var num = 0
+var result = "" && num++ // ""   num = 0 
 ```
 
 `&&` 使用場景
 
 ```javascript
 function animate(fn){
-    fn && fn();
+    fn && fn()
 }
 // 不传参数不会报错
-animate();
+animate()
 ```
 
 
@@ -718,29 +709,29 @@ animate();
 * `||` 如果第一个值转换成boolean值之后为true， 则输出第一个值，且第二个值不在执行；如果第一个值转换成boolean值之后为false，则输出第二个值，以此类推，（取第一个为true的值，如果都为false ，则输出最后一个值。）
 
 ```javascript
-var result = true || 3; //true
-var result = 1 || 3; //1
-var result = [] || ""; //[]
-var result = false || 0; //0
-var result = "" || 3; //3
-var result = numm || true; //true
+var result = true || 3 // true
+var result = 1 || 3 // 1
+var result = [] || "" // []
+var result = false || 0 // 0
+var result = "" || 3 // 3
+var result = numm || true // true
 
-var num = 0;
-var result = 3 || num++; //3  num=0
+var num = 0
+var result = 3 || num++ // 3  num=0
 ```
 
 `||` 使用场景
 
 ```javascript
 // 1.兼容性问题：
-var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
 
 // 2. 函数的参数默认值
 function sum(n){
-    n = n || 10; // 给形参 n 设置默认值
-    console.log(n + 10);
+    n = n || 10 // 给形参 n 设置默认值
+    console.log(n + 10)
 }
-sum();
+sum()
 ```
 
 
@@ -761,7 +752,7 @@ sum();
 
 * 逻辑运算符  先 &&  后 ||
 
-* 赋值运算符
+* 赋值运算符 =
 
 
 
@@ -788,14 +779,14 @@ if (age >= 18) {
 // 语法
 if (条件) {
     // 当条件为 true 时执行的代码
-}else {
+} else {
     // 当条件不为 true 时执行的代码
 }
 
 var age = 10;
 if (age >= 18) {
     console.log('可以玩吃鸡')
-}else {
+} else {
     console.log('不可以玩吃鸡')
 }
 ```
@@ -805,9 +796,9 @@ if (age >= 18) {
 ```js
 if (条件1) {
   // 当条件1为  true 时执行的代码
-}else if (条件2){
+} else if (条件2) {
   // 当条件2 为true 时执行的代码
-}else {
+} else {
   // 当条件1和 条件2 都不为true 时执行的代码
 }
 ```
@@ -818,10 +809,10 @@ if (条件1) {
 
 ```js
 条件 ? 表达式1 : 表达式2
-1. 如果`条件`的值为true，会返回表达式1的值
+1. 如果 `条件` 的值为true，会返回表达式1的值
 2. 如果`条件`的值为false，会返回表达式2的值
-//求两个数的最大值
-var max = n1 > n2 ? n1 : n2;
+// 求两个数的最大值
+var max = n1 > n2 ? n1 : n2
 ```
 
 
@@ -831,18 +822,18 @@ var max = n1 > n2 ? n1 : n2;
 > if..else适用于范围的判断，switch..case适用于具体的值的判断
 
 ```js
-//语法
+// 语法
 switch (变量) {
   case 值1:
-    语句1;
-    break;
+    语句1
+    break
   case 值2:
-    语句2;
-    break;
+    语句2
+    break
   …
   default:
-    默认语句;
-    break;
+    默认语句
+    break
 }
 ```
 
@@ -861,10 +852,10 @@ switch (变量) {
 基本语法 :
 
 ```js
-//当循环条件为true时，执行循环体，
-//当循环条件为false时，结束循环。
+// 当循环条件为true时，执行循环体，
+// 当循环条件为false时，结束循环。
 while(循环条件){
-  //循环体：需要循环执行的语句
+  // 循环体：需要循环执行的语句
 }
 ```
 
@@ -873,13 +864,13 @@ while(循环条件){
 ```js
 // 计算1-100之间所有数的和  (讲)
 // 初始化变量
-var i = 1;
-var sum = 0;
-while(i <= 100){//判断条件
-  sum += i;//循环体
-  i++;//自增，修改循环条件（不能省略）
+var i = 1
+var sum = 0
+while(i <= 100){ // 判断条件
+  sum += i // 循环体
+  i++ // 自增，修改循环条件（不能省略）
 }
-console.log(sum);
+console.log(sum)
 ```
 
 
@@ -894,20 +885,20 @@ console.log(sum);
 
 ```js
 do {
-    //循环体;
-}while(条件)
+    // 循环体
+} while(条件)
 ```
 
 代码示例 :
 
 ```js
-//初始化变量
-var i = 1;
-var sum = 0;
-do{
-  sum += i;//循环体
-  i++;//自增
-}while(i <= 100);//循环条件
+// 初始化变量
+var i = 1
+var sum = 0
+do {
+  sum += i // 循环体
+  i++ // 自增
+}while(i <= 100) // 循环条件
 ```
 
 
@@ -916,13 +907,13 @@ do{
 
 ![](images/for.png)
 
-for循环语法：
+for 循环语法：
 
 ```js
-//1. for循环使用分号分隔
-//2. for循环有2个分号，两个分号不能少
-for(初始化语句;判断语句;自增语句){
-  //循环体
+// 1. for循环使用分号分隔
+// 2. for循环有2个分号，两个分号不能少
+for (初始化语句;判断语句;自增语句) {
+  // 循环体
 }
 ```
 
@@ -933,37 +924,37 @@ for(初始化语句;判断语句;自增语句){
 3. 自增或者自减
 4. 循环体
 
-for循环代码示例：
+for 循环代码示例：
 
 ```js
-//打印1-5之间所有数
+// 打印1-5之间所有数
 for ( var i = 1;i<=5;i++ ) {
-    console.log(i);
+    console.log(i)
 }
 ```
 
 思考1：
 
 ```javascript
-//1 求1-100之间所有数的和、平均值
-//2 求1-100之间所有数的乘积
-//3 计算1-100之间能3整除的数的和
+// 1 求1-100之间所有数的和、平均值
+// 2 求1-100之间所有数的乘积
+// 3 计算1-100之间能3整除的数的和
 ```
 
 思考2：
 
 ```javascript
-//1 计算1-100之间不能被7整除的数的和
-//2 求1-100之间所有偶数的和
-//3 同时求1-100之间所有偶数和奇数的和
+// 1 计算1-100之间不能被7整除的数的和
+// 2 求1-100之间所有偶数的和
+// 3 同时求1-100之间所有偶数和奇数的和
 ```
 
 思考3（双重for循环）：
 
 ```javascript
-//1  网页打印5*5方形★阵  document.write();
-//2  网页打印直角三角形
-//3  网页打印9*9乘法表
+// 1  网页打印5*5方形★阵  document.write();
+// 2  网页打印直角三角形
+// 3  网页打印9*9乘法表
 ```
 
 
@@ -974,7 +965,7 @@ for ( var i = 1;i<=5;i++ ) {
 
 
 
-## break和continue
+## break 和 continue
 
 > **break**:    结束/中止循环（可以用在switch语句和循环语句中）
 >
@@ -989,15 +980,15 @@ for ( var i = 1;i<=5;i++ ) {
 思考1 :
 
 ```js
-//输出结果是什么？ 1 2 3 4 6
-for(var i = 1; i <=10; i++) {
-  if(i == 5){
-    continue;
+// 输出结果是什么？ 1 2 3 4 6
+for (var i = 1; i <=10; i++) {
+  if (i == 5) {
+    continue
   }
-  if(i == 7){
-    break;
+  if (i == 7) {
+    break
   }
-  console.log(i);
+  console.log(i)
 }
 ```
 
@@ -1007,8 +998,8 @@ for(var i = 1; i <=10; i++) {
 
 1. 循环有很多种，但是以后用得最多的是for循环
 2. 当不明确循环次数的时候，可以使用while循环
-3. 当无论如何都要执行一次代码的时候，可以使用do..while循环。
-4. 循环可以相互替代。
+3. 当无论如何都要执行一次代码的时候，可以使用do..while循环
+4. 循环可以相互替代
 
 
 
@@ -1021,7 +1012,7 @@ for(var i = 1; i <=10; i++) {
 
 ```js
 // 为什么要有数组?
-// 1. 我们知道,,一个变量能够存储一个值, 当我们想要存储多个值的时候, 就可以使用数组。比如存储一个班级里面所有学生的名字;
+// 1. 我们知道,一个变量能够存储一个值, 当我们想要存储多个值的时候, 就可以使用数组。比如存储一个班级里面所有学生的名字;
 // 2. 使用数组可以对多个相同类型的值统一的管理,存储起来方便,操作的时候,也会很方便;
 ```
 
@@ -1032,19 +1023,19 @@ for(var i = 1; i <=10; i++) {
 1. 通过 **构造函数** 创建数组
 
    ```js
-   var arr = new Array(); // 创建了一个空数组
-   var arr = new Array(4); // 创建了一个数组，长度为4,里面全是空值
-   var arr = new Array("4"); // 创建了一个数组，长度为1,内容为字符串 "4"
-   var arr = new Array(2,3); // 创建了一个数组，里面存放了2个数字
+   var arr = new Array() // 创建了一个空数组
+   var arr = new Array(4) // 创建了一个数组，长度为4,里面全是空值
+   var arr = new Array("4") // 创建了一个数组，长度为1,内容为字符串 "4"
+   var arr = new Array(2,3) // 创建了一个数组，里面存放了2个数字
    ```
 
 2. 通过 **数组字面量** 创建数组
 
    ```js
-   var arr1 = []; // 创建一个空数组
-   var arr2 = [4]; // 创建了一个数组，长度为1,内容为数字 4
-   var arr2 = [2,3]; // 创建一个包含2个数值的数组，多个数组项以逗号隔开
-   var arr3 = ["2","b"]; // 创建一个包含两个字符串的数组
+   var arr1 = [] // 创建一个空数组
+   var arr2 = [4] // 创建了一个数组，长度为1,内容为数字 4
+   var arr2 = [2,3] // 创建一个包含2个数值的数组，多个数组项以逗号隔开
+   var arr3 = ["2","b"] // 创建一个包含两个字符串的数组
    ```
 
 
@@ -1054,31 +1045,30 @@ for(var i = 1; i <=10; i++) {
 - 数组的长度 : 跟字符串一样,数组有一个length 属性,, 指数组中存放的元素的个数 ; 
 
   ```js
-  var arr = [];  // 空数组 长度为 0
+  var arr = [] // 空数组 长度为 0
   
-  var arr = [1,3,5];
-  arr.length; // 长度就是3
+  var arr = [1,3,5]
+  arr.length // 长度就是3
   
-  arr.length = 0; //设置length属性改变数组中元素的个数
+  arr.length = 0 // 设置length属性改变数组中元素的个数
   ```
 
 - 数组的下标（又称索引） : 因为数组有序的，有序的就应该有自己的序号，而这个序号就是每个元素对应的下标，**下标从0 开始 , 到 arr.length-1 结束**
 
   ```javascript
   // 数组取值，如果下标不存在，则返回 undefined
-  var arr = ["zs", "ls", "ww"];
-  //           0    1     2      下标从零开始，长度为3
-  arr[0]; // zs
-  arr[2]; // ww
-  arr[5]; // undefined
+  var arr = ["zs", "ls", "ww"]
+  arr[0] // zs
+  arr[2] // ww
+  arr[5] // undefined
   
   // 数组的赋值
-  // 格式：数组名[下标] = 值;
+  // 格式：数组名[下标] = 值
   // 如果下标有对应的值，会把原来的值覆盖，如果下标不存在，会给数组新增一个元素。
-  var arr = ["red", "green", "blue"];
-  arr[0] = "yellow"; // 把red替换成了yellow
-  arr[3] = "pink";   // 给数组新增加了一个pink的值
-  // 如果下标有跨度,,中间全是empty 不合法
+  var arr = ["red", "green", "blue"]
+  arr[0] = "yellow" // 把red替换成了yellow
+  arr[3] = "pink"   // 给数组新增加了一个pink的值
+  // 如果下标有跨度,中间全是empty 不合法
   
   // 在数组末尾添加新的元素
   arr[arr.length] = 值
@@ -1095,7 +1085,7 @@ for(var i = 1; i <=10; i++) {
 
 ```js
 for(var i =0; i < arr.length; i++) {
-	//数组遍历的固定结构
+	// 数组遍历的固定结构
 }
 ```
 
@@ -1105,37 +1095,37 @@ for(var i =0; i < arr.length; i++) {
 
 ```js
 // 将数组中的数从小到大排列
-var arr = [1,4,6,7,9,3,5,8];
-// var arr = [1,2,3,4,5,6,7,8];
-var numi = 0;
-var numj = 0;
+var arr = [1,4,6,7,9,3,5,8]
+// var arr = [1,2,3,4,5,6,7,8]
+var numi = 0
+var numj = 0
 for (var j = 0; j < arr.length -1; j++) {
-    numj += 1;
-    var flag = true;
+    numj += 1
+    var flag = true
     for (var i = 0; i < arr.length - 1 -j; i++) {
-        // document.write("(" + arr[i] + "," + arr[i + 1] + ")");
-        numi += 1;
+        // document.write("(" + arr[i] + "," + arr[i + 1] + ")")
+        numi += 1
         // 两两比较，如果前面的大于后面的，交换位置
         if (arr[i] > arr[i + 1]) {
-            flag = false;
-            var temp;
-            temp = arr[i];
-            arr[i] = arr[i + 1];
-            arr[i + 1] = temp;
-            // document.write("交换了");
+            flag = false
+            var temp
+            temp = arr[i]
+            arr[i] = arr[i + 1]
+            arr[i + 1] = temp
+            // document.write("交换了")
         }
     }
-    // document.write("，arr=（" + arr + "）");
+    // document.write("，arr=（" + arr + "）")
     // document.write("<br>")
     // 如果一趟下来，一次交换都没有做，说明就已经排好序，就不需要继续比
     if (flag) {
-        break;
+        break
     }
-    // console.log(arr);
+    // console.log(arr)
 }
-console.log(arr);
-console.log(numi);
-console.log(numj);
+console.log(arr)
+console.log(numi)
+console.log(numj)
 ```
 
 
