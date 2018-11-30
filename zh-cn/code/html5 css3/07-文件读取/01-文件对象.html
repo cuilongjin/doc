@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <input type="file">
+  <script>
+    var input = document.querySelector('input')
+    input.onchange = function () {
+      console.dir(this)
+      console.log(this.files) // filelist 对象
+      var file = this.files[0] // file对象
+      console.log(file)
+
+      var fr = new FileReader
+      console.log(fr)
+      fr.readAsText(file)
+      fr.onload = function () {
+        console.log(fr.result)
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+      margin: 100px auto;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <script>
+    // requestFullScreem() 还没有标准化，使用时需要加私有前缀
+
+    var div = document.querySelector('div')
+    div.addEventListener('click', function () {
+      fullScreen(this)
+    })
+
+    function fullScreen (ele) {
+      if (ele.requestFullScreen) {
+        ele.requestFullScreem()
+      } else if (ele.webkitRequestFullScreen) {
+        ele.webkitRequestFullScreen()
+      } else if (ele.mozRequestFullScreen) {
+        ele.mozRequestFullScreen()
+      }
+    }
+  </script>
+</body>
+</html>
