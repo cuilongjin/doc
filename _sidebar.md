@@ -22,7 +22,7 @@
 * **H5C3**
 	- [css3](zh-cn/_h5c3/css3)
 	- [html5](zh-cn/_h5c3/html5)
-	* **移动web**
+* **移动web**
 	- [移动web](zh-cn/_移动web/移动web)
 * **Other**
 	- [遍历总结](zh-cn/_other/遍历总结)
