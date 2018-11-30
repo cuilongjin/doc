@@ -271,7 +271,116 @@ clear() // 清空所有存储内容（谨慎使用）
 
 * sessionStorage 的方法和 localStorage 的方法相同
 
-
-
-
 【案例-换肤效果】
+
+
+
+# 自定义播放器
+
+全屏切换API：
+
+```javascript
+// requestFullScreen 这个方法还没有标准化，需要添加私有前缀
+video.requestFullScreen()
+video.webkitRequestFullScreen()
+video.mozRequestFullScreen()
+```
+
+video/audio 属性：
+
+- currentTime: 设置或返回音频/视频中的当前播放位置（以秒计）
+- duration: 返回当前音频/视频的长度（以秒计）
+- autoplay: 默认 false 设置或返回是否在加载完成后随即播放音频/视频
+- volume: 设置或返回音频/视频的音量
+- paused: 设置或返回音频/视频是否暂停， true 指示音频/视频已暂停
+
+方法：
+
+- load()： 重新加载音频/视频元素
+
+- play()： 开始播放音频/视频
+
+- pause()： 暂停当前播放的音频/视频
+
+事件：
+
+- timeupdate:  播放进度更改时触发
+
+参考文档
+http://www.w3school.com.cn/tags/html_ref_audio_video_dom.asp
+
+推荐：https://www.awesomes.cn/repo/videojs/video-js
+
+
+
+# 文件读取
+
+> 通过 FileReader 对象我们可以读取本地存储的文件（用户通过input:file上传的文件），可以使用 File 对象来指定所要读取的文件或数据。其中File对象可以是来自用户在一个` <input> `元素上选择文件后返回的FileList 对象，也可以来自由拖放操作生成的  DataTransfer
+
+## files
+
+对于file类型的input框，在这个DOM对象中，存在一个 files 属性，这个属性是 FileList 对象，是一个伪数组，里面存储着上传的所有文件，当 input 框指定了 multiple 属性之后，就可以上传多个文件了。
+
+也就是说，通过files这个属性，我们就可以获取到所有上传的文件。
+
+
+
+## file 对象
+
+File对象中包含了文件的最后修改时间、文件名、文件类型等信息。
+
+## FileReader对象
+
+FileReader是一个HTML5新增的对象，用于读取文件（必须通过input:file上传）
+
+```javascript
+var file = input.files[0]
+// 创建一个fileReader对象
+var fr = new FileReader
+// 读取文件的两个方法
+fr.readAsText(file) 以文本的方式读取文件 ,文本文件
+fr.readAsDataURL(file) 以DataURL形式读取文件，图片，视频
+// 文件读取完成事件：
+fr.onload = function(){
+    // 当文件读取完成，可以通过result属性获取结果
+    console.log(fr.result)
+}
+```
+
+案例：图片预览
+
+```javascript
+// 1. FileReader 是异步的
+var file = document.getElementById('file')
+var box = document.getElementById('box')
+file.addEventListener('change', function () {
+  console.dir(this) // file 中files 属性里面存储了所有上传的文件
+  // 这个data就是我们上传的那个文件
+  var data = file.files[0]
+  // 1. 创建一个文件读取器
+  var fr = new FileReader()
+  // 2. 让文件读取器读取整个文件
+  fr.readAsDataURL(data)
+  // 3. 等待文件读取完
+  // onload：文件读取完成后，就会触发
+  fr.onload = function () {
+    // 通过 fr.result 就可以获取到最终的结果
+    var img = document.createElement('img')
+    img.src = fr.result
+    box.innerHTML = ''
+    box.appendChild(img)
+  }
+})
+```
+
+
+
+```javascript
+// 2. URL.createObjectURL(file)  缺点： 1. 试验中  2. 同步（阻塞）
+var file = document.getElementById("file")
+file.addEventListener('change', function () {
+    var data = this.files[0]
+    var result = URL.createObjectURL(data)
+    img.src = result
+})
+```
