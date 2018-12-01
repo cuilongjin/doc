@@ -1146,25 +1146,25 @@ console.log(numj)
 
 ```js
 // 函数声明
-function 函数名() {
+function 函数名 () {
     // 函数体
 }
 
 // 函数表达式
 
-var 函数名 = function(){
+var 函数名 = function () {
     //函数体
 }
 
 // 函数调用
-函数名();
+函数名()
 
 ```
 
 特点：
 
-1. 函数声明的时候,函数体并不会执行,函数体只有在调用的时候,才会执行；
-2. 可多次调用；
+1. 函数声明的时候，函数体并不会执行，函数体只有在调用的时候才会执行
+2. 可多次调用
 
 练习：
 
@@ -1179,7 +1179,7 @@ var 函数名 = function(){
 ## 函数的参数(arguments)
 
 - **形参 ( 形式参数 )** : 在函数声明时, 设置的参数。作用是占位置 。
-- **实参 ( 实际参数 )** : 在函数调用时,传入的参数。 作用 : 函数调用时，会把实参的值赋值给形参，这样形参就有了值，在函数体里，可以直接使用形参!
+- **实参 ( 实际参数 )** : 在函数调用时传入的参数。 作用 : 函数调用时，会把实参的值赋值给形参，这样形参就有了值，在函数体里，可以直接使用形参!
 
 **语法 :**
 
@@ -1203,27 +1203,27 @@ function 函数名(形参1, 形参2, 形参...){
 ```javascript
 // 实参个数大于形参个数
 
-function getSum(a, b) {
-    // return a + b; // 3
+function getSum (a, b) {
+    // return a + b // 3
     // 任意多个数相加, 并没有调用形参，即可以省略不写
     console.log(arguments)
-    var sum = 0;
+    var sum = 0
     for (var i = 0; i < arguments.length; i++) {
-    sum += arguments[i];
+    sum += arguments[i]
     }
-    return sum; 
+    return sum
 }
 var result = getSum(1, 2, 5)
-console.log(result); // 8
+console.log(result) // 8
 
 // 实参个数小于形参个数
 
 function getSum1(a, b, c, d) {
-    console.log(d); // undefined
-    return a + b + c + d;
+    console.log(d) // undefined
+    return a + b + c + d
 }
 var result1 = getSum1(1, 2, 5)
-console.log(result1); // NaN
+console.log(result1) // NaN
 ```
 
 
@@ -1235,14 +1235,14 @@ console.log(result1); // NaN
 返回值语法：
 
 ```javascript
-//声明一个带返回值的函数
-function 函数名(形参1, 形参2, 形参...){
-  //函数体
-  return 返回值;
+// 声明一个带返回值的函数
+function 函数名 (形参1, 形参2, 形参...) {
+  // 函数体
+  return 返回值
 }
 
-//可以通过变量来接收这个返回值
-var 变量 = 函数名(实参1, 实参2, 实参3);
+// 可以通过变量来接收这个返回值
+var 变量 = 函数名(实参1, 实参2, 实参3)
 ```
 
 函数返回值注意事项：
@@ -1250,14 +1250,14 @@ var 变量 = 函数名(实参1, 实参2, 实参3);
 - **return 语句代表一个函数的结束，后面不能再有语句（语句不会执行）**
 - 函数可以没有返回值，函数如果没有return，那么返回结果是 **undefined**
 - 函数的参数可以有多个，但是返回值只能有 **1** 个
-- `return;`  在函数包含判断语句时，可以用来直接停掉一个函数的执行
+- `return`  在函数包含判断语句时，可以用来直接停掉一个函数的执行
 
 **练习：**
 
 ```js
-//1. 求两个数的最大值,并且返回。
-//2. 求三个数的最大值,并且返回。
-//3. 求一个数组的最大值和最小值，并且返回。
+// 1. 求两个数的最大值,并且返回。
+// 2. 求三个数的最大值,并且返回。
+// 3. 求一个数组的最大值和最小值，并且返回。
 ```
 
 
@@ -1268,26 +1268,26 @@ var 变量 = 函数名(实参1, 实参2, 实参3);
 
 ```js
 // 求阶乘
-function getJc(n) {
+function getJc (n) {
     var sum = 1
     for (var i = 1; i <= n; i++) {
-        sum *= i;
+        sum *= i
     }
-    return sum;
+    return sum
 }
-var result = getJc(5);
-console.log(result);
+var result = getJc(5)
+console.log(result)
 
-//求阶乘和
-function getJcSum(n) {
-    var sum1 = 0;
+// 求阶乘和
+function getJcSum (n) {
+    var sum1 = 0
     for (var j = 1; j <= n; j++) {
-        sum1 += getJc(j);
+        sum1 += getJc(j)
     }
-    return sum1;
+    return sum1
 }
-var result1 = getJcSum(5);
-console.log(result1);
+var result1 = getJcSum(5)
+console.log(result1)
 ```
 
 
@@ -1300,11 +1300,11 @@ console.log(result1);
 
 ```javascript
 function fn1(fn) {
-  fn();
+  fn()
 }
 fn1(function(){
-   console.log("哈哈");
-});
+   console.log("哈哈")
+})
 ```
 
 ### 函数可以作为返回值
@@ -1312,12 +1312,12 @@ fn1(function(){
 > 在js高级中，闭包会使用到
 
 ```javascript
-function fn1() {
+function fn1 () {
     return function(){
-      console.log("呵呵");
+      console.log("呵呵")
     }
 }
-fn1()();// 呵呵
+fn1()() // 呵呵
 ```
 
 
@@ -1330,8 +1330,8 @@ fn1()();// 呵呵
 
 ```javascript
 (function fn(){
-  console.log("我可以自己执行哦");
-})();
+  console.log("我可以自己执行哦")
+})()
 ```
 
 ### 匿名函数
@@ -1341,8 +1341,8 @@ fn1()();// 呵呵
 ```js
 // 匿名自调用函数 ,用完一次就没了
 (function () {
-	console.log("哈哈");
-})();
+	console.log("哈哈")
+})()
 ```
 
 匿名函数如何使用：
@@ -1369,17 +1369,17 @@ fn1()();// 呵呵
 
 
 ```javascript
-var num = 11;
+var num = 11
 function fn() {
-  var num1 = 22;
-  num2 = 33;
-  num = 33;
-  console.log(num1);
+  var num1 = 22
+  num2 = 33
+  num = 33
+  console.log(num1)
 }
-fn();
-console.log(num);
-// console.log(num1);
-console.log(num2);
+fn()
+console.log(num)
+// console.log(num1)
+console.log(num2)
 ```
 
 变量的查找规则：
@@ -1391,28 +1391,28 @@ console.log(num2);
 
 
 ```javascript
-var num = 10;
-var num1 = 10;
+var num = 10
+var num1 = 10
 
 function test(){
-    var num = 20;
-    num = 30;  // num 在局部声明过，只能修改局部的num值
-    num1 = 20; // 修改全局的 num1 值
-    var num2 = 40; 
-    num3 = 50; // 隐式全局
-    console.log(num);  // 30
-    console.log(num1);  // 20
-    console.log(num2);  // 40
-    console.log(num3);  // 50
+    var num = 20
+    num = 30  // num 在局部声明过，只能修改局部的num值
+    num1 = 20 // 修改全局的 num1 值
+    var num2 = 40
+    num3 = 50 // 隐式全局
+    console.log(num)  // 30
+    console.log(num1)  // 20
+    console.log(num2)  // 40
+    console.log(num3)  // 50
 }
-test();
-console.log(num); // 10
+test()
+console.log(num) // 10
 
-console.log(num1); // 20
+console.log(num1) // 20
 // 如果 text 函数没执行过，则num1值为 10
 
-console.log(num3); // 50
-console.log(num2); // 报错
+console.log(num3) // 50
+console.log(num2) // 报错
 ```
 
 
@@ -1444,65 +1444,65 @@ function fn(){
     console.log(a); // undefined
 }
 fn();
-var a = 1;
+var a = 1
 
 // 2.
-var n = 45;
+var n = 45
 function fn5() {
-    console.log(n); // undefined
-    n = 20;
-    console.log(n); // 20
-    var n = 0;
-    console.log(n); // 0
+    console.log(n) // undefined
+    n = 20
+    console.log(n) // 20
+    var n = 0
+    console.log(n) // 0
 }
-fn5();
-console.log(n); // 45
+fn5()
+console.log(n) // 45
 
 // 3.
-console.log(b); // 函数体
-var b = 23;
+console.log(b) // 函数体
+var b = 23
 function b() {
-    console.log(b);
+    console.log(b)
 }
-console.log(b); //23
-// b(); // 报错
+console.log(b) // 23
+// b() // 报错
 
 // 4.
-console.log(c); // 函数体
-c(); // 嘿嘿
+console.log(c) // 函数体
+c() // 嘿嘿
 var c = function (){
-    comsole.log("哈哈");
+    comsole.log("哈哈")
 }
 
 function c() {
     console.log("嘿嘿");
 }
 
-//5.
-console.log(fn1); // 函数体
-fn1();
+// 5.
+console.log(fn1) // 函数体
+fn1()
 function fn1(){
-    console.log("哈哈"); //哈哈
+    console.log("哈哈") // 哈哈
 }
-console.log(fn2); // undefined
-// fn2(); // 报错
+console.log(fn2) // undefined
+fn2() // 报错
 var fn2 = function () {
-    console.log("嘿嘿");
+    console.log("嘿嘿")
 }
 // 对于函数表达式，函数的调用必须在表达式声明之后
-fn2(); // 嘿嘿
+fn2() // 嘿嘿
 
 // 6.
 // 只有用 var 声明的变量才会预解析
-// console.log(d); // 报错
-d = 5;
-console.log(e);
-// console.log(f); // 报错
-var e = f = 10;
-console.log(f); // 10
+console.log(d) // 报错
+d = 5
+
+// 7.
+console.log(e)
+console.log(f) // 报错
+var e = f = 10
+console.log(f) // 10
 ```
-
-
 
 
 
@@ -1521,11 +1521,11 @@ console.log(f); // 10
 // 求斐波那契数列 Fibonacci 中第n个数
 function fn(n) {
     if (n == 1 || n == 2) {
-        return 1;
+        return 1
     }
-    return fn(n - 1) + fn(n - 2);
+    return fn(n - 1) + fn(n - 2)
 }
-console.log(fn(12));
+console.log(fn(12))
 ```
 
 
@@ -1536,7 +1536,6 @@ console.log(fn(12));
 
 ## 函数的断点调试
 
-```js
 1. 跳到下个断点, 如果后面没有断点了,那么代码直接执行完
 2. 单步调试 : 下一步  没有断点的话,函数就直接跳过
 3. 单步调试 : 进入函数
@@ -1544,7 +1543,8 @@ console.log(fn(12));
 5. 单步调试 : 下一步  不管有没有断点,都会一步一步的走,纯碎的下一步
 6. 让所有的断点失效
 7. 自动根据错误断点
-```
+
+
 
 
 
@@ -1559,30 +1559,6 @@ console.log(fn(12));
 
 
 ![](images/调用栈.png)
-
-测试代码 : 
-
-```js
-function sum2() {
-
-    console.log('你愁啥');
-    console.log('瞅你咋地');
-}
-
-
-function sum1(num1,num2) {
-
-    var num = num1 + num2;
-    console.log('哈哈');
-    console.log('嘿嘿');
-    num = 10;
-    sum2();
-    return num;
-}
-
-var res =   sum1(2,4);
-console.log(res);
-```
 
 
 
@@ -1624,9 +1600,7 @@ var obj = {
 
 
 
-## this的基本概念
-
-
+## this 的基本概念
 
 
 
@@ -1639,7 +1613,7 @@ var obj = {
 > 字面量 : 直接量，通过看数值，直接看出来类型的
 
 ```js
-var p = {};
+var p = {}
 var p = {
     name : 'zs',
     age:18,
@@ -1655,7 +1629,7 @@ var p = {
 
 ```javascript
 var p =  new Object(); // 创建一个空的对象
-var p =  new Object({name :'xx'});
+var p =  new Object({name :'xx'})
 ```
 
 **设置对象的属性**
@@ -1664,13 +1638,13 @@ var p =  new Object({name :'xx'});
 // 设置对象的属性 语法  对象名.属性 = 值
 // 如果对象有这个属性，修改这个属性
 // 如果对象没有这个属性，添加这个属性
-var obj = new Object();
-obj.name = 'zs';
-obj.age = 18;
-obj.gender = '男';
+var obj = new Object()
+obj.name = 'zs'
+obj.age = 18
+obj.gender = '男'
 // 添加方法
 obj.sayHi = function () {
-    console.log('大家好,我是' + obj.name);
+    console.log('大家好,我是' + obj.name)
 }
 ```
 
@@ -1685,24 +1659,24 @@ obj.sayHi = function () {
 ### 使用工厂函数创建对象
 
 ```js
-  //定义一个函数，用于创建学生对象
-  //工厂函数：
-  function createStudent(name, age, sex) {
+// 定义一个函数，用于创建学生对象
+// 工厂函数：
+function createStudent(name, age, sex) {
     // 创建空对象
-    var stu = {};
+    var stu = {}
     // 设置对象属性
-    stu.name = name;
-    stu.age = age;
-    stu.sex = sex;
+    stu.name = name
+    stu.age = age
+    stu.sex = sex
     stu.sayHi = function() {
-      console.log("大家好,我是"+this.name);
+        console.log("大家好,我是" + this.name)
     }
     // 返回对象
-    return stu;
-  }
+    return stu
+}
 
-  var stu1 = createStudent("zs", 18, "男");
-  stu1.sayHi();
+var stu1 = createStudent("zs", 18, "男")
+stu1.sayHi()
 ```
 
 
@@ -1720,37 +1694,31 @@ obj.sayHi = function () {
 > 构造函数 ，是一种特殊的函数。主要用来在创建对象时初始化对象， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。
 
 ```js
-  //所有创建出来的对象都有：
-    //name
-    //age
-    //hobboy
-  function Teacher(name, age) {
-    //构造函数内部的this指向的是新创建的那个对象
-    this.name = name;
-    this.age = age;
-  }
+function Teacher(name, age) {
+    // 构造函数内部的this指向的是新创建的那个对象
+    this.name = name
+    this.age = age
+}
 
-  var tea = new Teacher("zs", 18);
-  console.log(tea);
+var tea = new Teacher("zs", 18)
+console.log(tea)
 ```
 
 
 
 1. 构造函数首字母要大写（推荐做法）。
-2. 构造函数要和 new 一起使用才有意义。
-3. 构造函数的作用是用于实例化一个对象，即给对象添加属性和方法。
+2. 构造函数要和 new 一起使用才有意义
+3. 构造函数的作用是用于实例化一个对象，即给对象添加属性和方法
 
-**new在执行时会做四件事情** 
+**new 在执行时会做四件事情** 
 
 ```js
-new会做4件事情
-//1. new会创建一个新的空对象，类型是Teacher
-//2. new 会让this指向这个新的对象
-//3. 执行构造函数  目的：给这个新对象加属性和方法
-//4. new会返回这个新对象
+1. new 会创建一个新的空对象，类型是Teacher
+2. new 会让 this 指向这个新的对象
+3. 执行构造函数  目的：给这个新对象加属性和方法
+4. new 会返回这个新对象
 
-构造函数的作用(实例化对象)：
-  给创建出来的对象增加属性和方法。
+构造函数的作用(实例化对象)：给创建出来的对象增加属性和方法。
 ```
 
 
@@ -1765,47 +1733,47 @@ constructor.name 获取对象的具体类型
 
 关于typeof
 
-- typeof 用于查看基本的数据类型， number string boolean undefined
+- 用于查看基本的数据类型， number string boolean undefined
 
-- typeof 如果查看复杂数据类型，返回的都是 object 类型。
+- null 比较特殊，结果是 object
 
-- typeof null比较特殊，结果是object
+- 如果查看复杂数据类型，返回的都是 object 类型。
 
-- typeof 函数的结果是 function
+- 函数的结果是 function
 
   ```js
   // typeof 判断
   // 简单类型
-  var num1 = 12; // number
-  var num2 = 'abc'; // string
-  var num3 = true; // boolean
-  var num4 = undefined; // underfined
-  var num5 = null; //object类型
+  var num1 = 12 // number
+  var num2 = 'abc' // string
+  var num3 = true // boolean
+  var num4 = undefined // underfined
+  var num5 = null // object
   // 复杂类型 (引用类型)
   va fn = function () {} // function
-  var arr = []; // object
-  var obj = {}; // object
+  var arr = [] // object
+  var obj = {} // object
   
   // 方式2 : instanceof 判断
-  var arr = [];
+  var arr = []
   var obj = {}
   var fn = function () {}
-  console.log( arr instanceof Array); // true
-  console.log( obj instanceof Object);// true
-  console.log( fn instanceof Function);// true
+  console.log( arr instanceof Array) // true
+  console.log( obj instanceof Object) // true
+  console.log( fn instanceof Function) // true
   
   // 方式3 : constructor.name
   // 原型的构造函数
-  console.log(arr.constructor.name); //Array
-  console.log(obj.constructor.name); //Object
-  console.log(fn.constructor.name); //Function
+  console.log(arr.constructor.name) // Array
+  console.log(obj.constructor.name) // Object
+  console.log(fn.constructor.name) // Function
   // 自定义构造函数
   function Teacher(name, age) {
-      this.name = name;
-      this.age = age;
+      this.name = name
+      this.age = age
   }
-  var tea = new Teacher("zs", 18);
-  console.log(tea.constructor.name); // Teacher
+  var tea = new Teacher("zs", 18)
+  console.log(tea.constructor.name) // Teacher
   ```
 
 
