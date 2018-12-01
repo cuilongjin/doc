@@ -1780,16 +1780,16 @@ constructor.name 获取对象的具体类型
 
 ## 操作对象的属性
 
-`.` 语法    ----- 对象名.属性名 ( 看似变量,不是字符串 )
+`.` 语法    ----- 对象名.属性名 ( 看似变量，不是字符串 )
 
-`[]` 语法   ----  对象名 [ 属性字符串 ]  (字符串) ,也叫关联数组的方式
+`[]` 语法   ----  对象名 [ 属性字符串 ]  (字符串) ，也叫关联数组的方式
 
 ```js
 // 获取对象属性的语法：
 	// 对象.属性：对象的属性
     // 1. 如果有这个属性，直接返回属性值
     // 2. 如果没有这个属性，返回undefined
-	// 3. 如果是方法。可以调用
+	// 3. 如果是方法，可以调用
 // 设置对象的属性的语法
     // 对象.属性 = 值
     // 1. 如果对象有这个属性，修改这个属性
@@ -1799,16 +1799,16 @@ var obj = {
     name : 'zs'
 }
 
-console.log (obj.name) //ok
+console.log (obj.name) // ok
 console.log (obj[name]) // X
 console.log (obj.'name') // X
 
-obj.age = 18; // 增加 age 属性为 18
-obj.name = 'ls'; // 修改name属性为 ls
+obj.age = 18 // 增加 age 属性为 18
+obj.name = 'ls' // 修改name属性为 ls
 
-var key = 'name';
+var key = 'name'
 console.log (obj.key) // X
-console.log (obj[key]) //ok
+console.log (obj[key]) // ok
 console.log (obj['name']) // ok
 ```
 
@@ -1822,16 +1822,16 @@ console.log (obj['name']) // ok
 
 ```javascript
 // 删除对象属性
-delete obj.name; // 删除obj的name属性
-console.log(delete obj.name); // 如果删除成功，返回true，删除失败，返回false
+delete obj.name // 删除obj的name属性
+console.log(delete obj.name) // 如果删除成功，返回true，删除失败，返回false
 
 // var 声明的全局变量不能被删除
-var num = 12;
-str = "hello";
-console.log(delete window.num); // false 删除失败
-console.log(delete window.str); // true 删除成功
-console.log(num); // 12
-console.log(str); // 报错 str is not undefined
+var num = 12
+str = "hello"
+console.log(delete window.num) // false 删除失败
+console.log(delete window.str) // true 删除成功
+console.log(num) // 12
+console.log(str) // 报错 str is not undefined
 ```
 
 
@@ -1844,21 +1844,21 @@ console.log(str); // 报错 str is not undefined
 // 遍历对象
 for (var key in obj) {
     // 键
-    console.log(key);
+    console.log(key)
     // 值
-    console.log(obj[key]);
-    console.log(key + "==" + obj[key]);
+    console.log(obj[key])
+    console.log(key + "==" + obj[key])
 }
 
 // 判断一个属性是否是对象的一个属性
 // console.log("name" in obj) 返回布尔值
 if ("name" in obj) {
-    console.log('是');
+    console.log('是')
 }
 
 // 获取对象里的所有属性
 // 结构 :   Object.keys(对象)  返回一个包含所有属性的数组
-var keys = Object.keys(obj);
+var keys = Object.keys(obj)
 ```
 
  
@@ -1871,111 +1871,112 @@ var keys = Object.keys(obj);
 
 - 引用类型（复杂数据类型）
 
-> `Object` `Array` `function` `自定义的对象` `Object`
+> `Object` `Array` `function` `自定义的对象` 
 
 ```javascript
-var num1 = 123;
-var num2 = num1;
-num2 = 456;
-console.log(num1);//123
+var num1 = 123
+var num2 = num1
+num2 = 456
+console.log(num1) // 123
 
-var obj1 = {a:1};
-var obj2 = obj1; // obj1和obj2，均指向了同一个对象
-obj2.a = 3; // 对obj2的任何操作
-console.log(obj1.a);//3 // 同时也会影响到 obj1
+var obj1 = {a:1}
+var obj2 = obj1 // obj1和obj2，均指向了同一个对象
+obj2.a = 3 // 对obj2的任何操作
+console.log(obj1.a) // 3  同时也会影响到 obj1
 ```
 
 
 
-原始数据类型和引用数据类型，主要是根据内存存储方式来区分的。
+原始数据类型和引用数据类型，主要是根据内存存储方式来区分的
 
 - 原始类型储存在栈（Stack）中，存的是**值本身**（值类型），进行赋值的时候，赋值的是值本身
-- 引用类型储存在堆（Heap）中，并非储存变量真实数值而是**引用**，也叫**地址**，进行赋值的时候，赋值的是地址，而不是数据本身
+- 引用类型储存在堆（Heap）中，并非储存变量真实数值而是**引用**（也叫**地址**），进行赋值的时候，赋值的是地址，而不是数据本身
 
 
 
 ```javascript
-//1
+// 1.
 // a -> x
-function fn(a, b) {
+function fn (a, b) {
   // 相当于
-  //  var a = 10;
-  //  var b = 20;
+  //  var a = 10
+  //  var b = 20
   // 函数的参数 其实就是函数内部的局部变量
-  a = a + 1;
-  b = b + 1;
-  console.log(a); // 11
-  console.log(b); // 21
+  a = a + 1
+  b = b + 1
+  console.log(a) // 11
+  console.log(b) // 21
 }
 
-var x = 10;
-var y = 20;
-fn(x, y); 
-console.log(x); // 10
-console.log(y); // 20
+var x = 10
+var y = 20
+fn(x, y)
+console.log(x) // 10
+console.log(y) // 20
 
-//2
+// 2.
 var p = {
   name:"zs",
   age:18
 }
-function fn(person) {
-  person.name = 'ls';
-  console.log(person.name);  // ls
+function fn (person) {
+  person.name = 'ls'
+  console.log(person.name) // ls
 }
-fn(p); 
-console.log(p.name); // ls
+fn(p)
+console.log(p.name) // ls
 
-//3
+// 3.
+function Person (name, age, salary) {
+   this.name = name
+   this.age = age
+   this.salary = salary
+ }
+ function f1 (person) {
+   person.name = "ls"
+   console.log(person.name) // ls
+ }
+ var p = new Person("zs", 18, 1000) // 创建一个新对象
+ console.log(p.name) // zs
+ f1(p)
+ console.log(p.name) // ls
+
+// 4.
 function Person(name, age, salary) {
-   this.name = name;
-   this.age = age;
-   this.salary = salary;
+   this.name = name
+   this.age = age
+   this.salary = salary
  }
  function f1(person) {
-   person.name = "ls";
-   console.log(person.name); // ls
- }
- var p = new Person("zs", 18, 1000);//创建一个新对象
- console.log(p.name); // zs
- f1(p);
- console.log(p.name); //ls
-
-//4
-function Person(name, age, salary) {
-   this.name = name;
-   this.age = age;
-   this.salary = salary;
- }
- function f1(person) {
-   person.name = "ls";
+   person.name = "ls"
+   // person 指向新的对象
    person = {
      name : 'ww'
    }
-   console.log(person.name); // ww
+   console.log(person.name) // ww
  }
- var p = new Person("zs", 18, 1000); // 创建一个新对象
- console.log(p.name); // zs
- f1(p);
- console.log(p.name); // ls
+ var p = new Person("zs", 18, 1000) // 创建一个新对象
+ console.log(p.name) // zs
+ f1(p)
+ console.log(p.name) // ls
 ```
 
 
 
 ## object.valueOf()
 
-返回值为该对象的原始值，如果对象没有原始值，则`valueOf`将返回对象本身
+返回值为该对象的原始值，如果对象没有原始值，则 `valueOf`将返回对象本身
 
-| **对象** | **返回值**                                               |
-| -------- | -------------------------------------------------------- |
-| Array    | 返回数组对象本身。                                       |
-| Boolean  | 布尔值。                                                 |
-| Date     | 存储的时间是从 1970 年 1 月 1 日午夜开始计的毫秒数 UTC。 |
-| Function | 函数本身。                                               |
-| Number   | 数字值。                                                 |
-| Object   | 对象本身。这是默认情况。                                 |
-| String   | 字符串值。                                               |
-|          | Math 和 Error 对象没有 valueOf 方法。                    |
+| **对象** | **返回值**                                             |
+| -------- | ------------------------------------------------------ |
+| Array    | 返回数组对象本身                                       |
+| Boolean  | 布尔值                                                 |
+| Date     | 存储的时间是从 1970 年 1 月 1 日午夜开始计的毫秒数 UTC |
+| Function | 函数本身                                               |
+| Number   | 数字值                                                 |
+| Object   | 对象本身 （这是默认情况）                              |
+| String   | 字符串值                                               |
+|          | Math 和 Error 对象没有 valueOf 方法                    |
 
 
 
@@ -1983,13 +1984,11 @@ function Person(name, age, salary) {
 
 > JS内置对象就是指Javascript自带的一些对象，供开发者使用，这些对象提供了一些常用的的功能。
 >
-> 常见的内置对象有Math、String、Array、Date等
+> 常见的内置对象有 Math、String、Array、Date 等
 
 - 跳转到定义`ctrl+左键`
 - [火狐开发者网站MDN](https://developer.mozilla.org/zh-CN/)
 - [W3School网站](http://www.w3school.com.cn/jsref/)
-- 离线文档
-- 笔记
 
 ## 如何学习一个方法？
 
@@ -1998,9 +1997,9 @@ function Person(name, age, salary) {
 3. 返回值意义和**类型**
 4. demo进行测试
 
-## Math对象
+## Math 对象
 
-> Math对象中封装很多与数学相关的属性和方法。
+> 
 
 - 属性PI
 
@@ -2009,105 +2008,107 @@ function Person(name, age, salary) {
 - 最大值/最小值
 
   ```
-  Math.max();
-  Math.min();
+  Math.max()
+  Math.min()
   ```
 
-- 取整（★）
+- 取整
 
   ```javascript
-  Math.ceil();//天花板，向上取整
-  Math.floor();//地板，向下取整
-  Math.round();//四舍五入，如果是.5，则取更大的那个数
+  Math.ceil() // 向上取整
+  Math.floor() // 向下取整
+  Math.round() // 四舍五入，如果是.5，则取更大的那个数
   ```
 
-- 随机数（★）
+- 随机数
 
   ```javascript
-  Math.random();//返回一个[0,1)之间的数，能取到0，取不到1
+  Math.random() // 返回一个[0,1)之间的数，能取到0，取不到1
   // [0~N]随机数 parseInt(Math.random * (N+1))
-  // [4~9]=>[0~5]+4
+  // [4~9] ==> [0~5]+4
   ```
 
 - 绝对值
 
   ```javascript
-  Math.abs();//求绝对值
+  Math.abs() // 求绝对值
   ```
 
 - 次幂和平方
 
   ```javascript
-  Math.pow(num, power);//求num的power次方
-  Math.sqrt(num);//对num开平方
+  Math.pow(num, power) // 求num的power次方
+  Math.sqrt(num) // 对num开平方
   ```
 
 - 练习
 
 ```javascript
   随机生成一个rgb颜色？
-  function randomRGB(){
-    var colorA = parseInt( Math.random() * 256 );
-    var colorB = parseInt( Math.random() * 256 );
-    var colorC = parseInt( Math.random() * 256 );
-    return 'rgb('+ colorA + "," + colorB + ',' + colorC +')';
+  function randomRGB () {
+    var colorA = parseInt( Math.random() * 256 )
+    var colorB = parseInt( Math.random() * 256 )
+    var colorC = parseInt( Math.random() * 256 )
+    return 'rgb('+ colorA + "," + colorB + ',' + colorC +')'
   }
 ```
 
 
 
-## Date对象
+## Date 对象
 
-> Date对象用来处理日期和时间
+> Date 对象用来处理日期和时间
 
 - 创建一个日期对象
 
   ```javascript
-  var date = new Date();// 使用构造函数创建一个当前时间的对象
-  var date = new Date("2017-03-22");//创建一个指定时间的日期对象2017/3/22 上午8:00:00
-  var date = new Date("2017-03-22 00:52:34");//创建一个指定时间的日期对象
-  var date = new Date(2017, 2, 22, 0, 52, 34); // 2017/3/22
-  var date = new Date(1523199394644);//参数：毫秒值
+  // 不传参数：创建一个当前时间的对象
+  var date = new Date()
   
-  Date构造函数的参数
-  1. 毫秒数 1498099000356		new Date(1498099000356)
-  2. 日期格式字符串  '2015-5-1'	 new Date('2015-5-1')
-  3. 年、月、日……				 var date = new Date(2017, 2, 22, 0, 52, 34);月份从0开始
+  // 日期格式字符串：创建一个指定时间的日期对象
+  var date = new Date("2018-12-02") // （默认上午8:00:00）
+  var date = new Date("2018-12-02 00:02:05")
+  
+  // 日期以逗号分隔：注意月份从0开始
+  var date = new Date(2018, 11, 02, 0, 02, 05) // 2018/12/02
+  
+  // 时间戳
+  var date = new Date(1543680125000)
   ```
 
 - 日期格式化(了解)
 
   ```javascript
-  date.toString();// 默认的日期格式 ，包括日期和时间
-  date.toLocalString();// 本地风格的日期格式（兼容性）
-  date.toDateString(); // 只显示日期
-  date.toLocalDateString();
-  date.toTimeString(); // 只显示时间
-  date.toLocalTimeString();
+  date.toString() // 默认的日期格式 ，包括日期和时间
+  date.toLocalString() // 本地风格的日期格式（兼容性）
+  date.toDateString() // 只显示日期
+  date.toLocalDateString()
+  date.toTimeString() // 只显示时间
+  date.toLocalTimeString()
   ```
 
 - 获取日期的指定部分
 
   ```javascript
-  getMilliseconds();//获取毫秒值
-  getSeconds();//获取秒
-  getMinutes();//获取分钟
-  getHours();//获取小时
-  getDay();//获取星期，0-6    0：星期天
-  getDate();//获取日，即当月的第几天
-  getMonth();//返回月份，注意从0开始计算，这个地方坑爹，0-11
-  getFullYear();//返回4位的年份  如 2016
+  getMilliseconds() // 获取毫秒值
+  getSeconds() // 获取秒
+  getMinutes() // 获取分钟
+  getHours() // 获取小时
+  getDay() // 获取星期，0-6    0：星期天
+  getDate() // 获取日，即当月的第几天
+  getMonth() // 返回月份，注意月份从0开始
+  getFullYear() // 返回4位的年份  如 2018
   
-  //思考：
-  //封装一个函数，返回当前的时间，格式是：yyyy-MM-dd HH:mm:ss
+  // 思考：
+  // 封装一个函数，返回当前的时间，格式是：yyyy-MM-dd HH:mm:ss
   ```
 
 - 时间戳
 
   ```javascript
-  var date = +new Date();//1970年01月01日00时00分00秒起至现在的总毫秒数
-  //思考
-  //如何统计一段代码的执行时间？
+  var date = +new Date() //1970年01月01日00时00分00秒起至现在的总毫秒数
+  // 思考
+  // 如何统计一段代码的执行时间？
   ```
 
 
