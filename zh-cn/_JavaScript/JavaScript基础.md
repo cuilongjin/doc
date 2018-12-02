@@ -67,7 +67,7 @@ tages:JavaScript
 
   ```js
   // alert会弹出一个警告框
-  alert("hello world");
+  alert('hello world')
   ```
 
 - **confirm : 确认框**
@@ -106,19 +106,19 @@ tages:JavaScript
 
 ```javascript
 // var 声明变量
-var age;
-age = 12; // 先声明,后赋值
-var age = 12; // 同时声明+赋值
-var age,name,sex; // 直接声明变量,可一次声明多个，用逗号隔开
-height=100; // 不声明变量，直接赋值(不会报错，但是不推荐)
-console.log(height); // 不声明变量，也不赋值变量，直接使用（会报错）v
+var age
+age = 12 // 先声明,后赋值
+var age = 12 // 同时声明+赋值
+var age,name,sex // 直接声明变量,可一次声明多个，用逗号隔开
+height=100 // 不声明变量，直接赋值(不会报错，但是不推荐)
+console.log(height) // 不声明变量，也不赋值变量，直接使用（会报错）v
 
 function add (num1,num2){ 
-	return num1 + num2; // 把两个数字加起来
+	return num1 + num2 // 把两个数字加起来
 }
 /*
 var student = {
-	name:"小明"
+	name:'小明'
 }
 */
 ```
@@ -131,7 +131,7 @@ var student = {
   2. 由字母、下划线、美元符号（\$）和数字组成
   3. 标识符**区分大小写**
   4. 标识符不能使用关键字和保留字
-  5. 如果重新声明 JavaScript 变量，该变量的值不会丢失 `var car="yellow" var car`  car 的值依然是 "yellow"
+  5. 如果重新声明 JavaScript 变量，该变量的值不会丢失 `var car='yellow'; var car`  car 的值依然是 'yellow'
 
 
 
@@ -245,8 +245,8 @@ typeof y; // Object
 ## Boolean
 
 布尔型，只有 `true` 和 `false` 两个值，且是小写 
-* true :  `1`、`2`、`1.1`、`-1`、`"0"`、`"1"`、`[]`、`Infinity` 
-* false :  `0`、`""`、`null`、`NaN`、`undefined`
+* true :  `1`、`2`、`1.1`、`-1`、`'0'`、`'1'`、`[]`、`Infinity` 
+* false :  `0`、`''`、`null`、`NaN`、`undefined`
 
 >所有非 0 数都是 true，0 是 false
 
@@ -1706,7 +1706,7 @@ console.log(tea)
 
 
 
-1. 构造函数首字母要大写（推荐做法）。
+1. 构造函数首字母要大写（推荐做法）
 2. 构造函数要和 new 一起使用才有意义
 3. 构造函数的作用是用于实例化一个对象，即给对象添加属性和方法
 
@@ -1718,7 +1718,7 @@ console.log(tea)
 3. 执行构造函数  目的：给这个新对象加属性和方法
 4. new 会返回这个新对象
 
-构造函数的作用(实例化对象)：给创建出来的对象增加属性和方法。
+构造函数的作用(实例化对象)：给创建出来的对象增加属性和方法
 ```
 
 
@@ -1857,7 +1857,7 @@ if ("name" in obj) {
 }
 
 // 获取对象里的所有属性
-// 结构 :   Object.keys(对象)  返回一个包含所有属性的数组
+// 结构: Object.keys(对象)  返回一个包含所有属性的数组
 var keys = Object.keys(obj)
 ```
 
@@ -1899,8 +1899,8 @@ console.log(obj1.a) // 3  同时也会影响到 obj1
 // a -> x
 function fn (a, b) {
   // 相当于
-  //  var a = 10
-  //  var b = 20
+  // var a = 10
+  // var b = 20
   // 函数的参数 其实就是函数内部的局部变量
   a = a + 1
   b = b + 1
@@ -1965,7 +1965,7 @@ function Person(name, age, salary) {
 
 ## object.valueOf()
 
-返回值为该对象的原始值，如果对象没有原始值，则 `valueOf`将返回对象本身
+返回值为该对象的原始值，如果对象没有原始值，则  `valueOf` 将返回对象本身
 
 | **对象** | **返回值**                                             |
 | -------- | ------------------------------------------------------ |
@@ -2066,11 +2066,12 @@ function Person(name, age, salary) {
   var date = new Date()
   
   // 日期格式字符串：创建一个指定时间的日期对象
-  var date = new Date("2018-12-02") // （默认上午8:00:00）
-  var date = new Date("2018-12-02 00:02:05")
+  // - 在 safari 下不识别，推荐用 /
+  var date = new Date("2018/12/02")
+  var date = new Date("2018/12/02 00:02:05")
   
   // 日期以逗号分隔：注意月份从0开始
-  var date = new Date(2018, 11, 02, 0, 02, 05) // 2018/12/02
+  var date = new Date(2018, 11, 2, 0, 2, 5) // 2018/12/02 
   
   // 时间戳
   var date = new Date(1543680125000)
@@ -2106,7 +2107,7 @@ function Person(name, age, salary) {
 - 时间戳
 
   ```javascript
-  var date = +new Date() //1970年01月01日00时00分00秒起至现在的总毫秒数
+  var date = +new Date() // 1970年01月01日00时00分00秒起至现在的总毫秒数
   // 思考
   // 如何统计一段代码的执行时间？
   ```
@@ -2123,27 +2124,27 @@ function Person(name, age, salary) {
   // 语法：arr.join(separator)
   // 作用：将数组的值拼接成字符串
   
-  var arr = [1,2,3,4,5];
-  arr.join(); // 不传参数，默认按 [,] 进行拼接
-  arr.join("");
-  arr.join("-"); // 按 [-] 进行拼接
+  var arr = [1,2,3,4,5]
+  arr.join() // 不传参数，默认用逗号进行拼接，返回拼接好的字符串
+  arr.join('')
+  arr.join('-') // 用 [-] 进行拼接
   ```
 
 - 数组的增删操作
 
   ```javascript
-  arr.push(); // 从后面添加一个或多个元素，逗号隔开，返回新数组的 length
-  arr.pop(); // 从数组的后面删除元素，返回删除的那个元素
-  arr.unshift(); // 从数组的前面的添加元素，返回新数组的 length
-  arr.shift(); // 从数组的最前面删除元素，返回删除的那个元素
-  arr.push(array1); // 把 arr1 当成一个整体放到 arr 里
+  arr.push() // 从后面添加一个或多个元素，逗号隔开，返回新数组的 length
+  arr.pop() // 从数组的后面删除元素，返回删除的那个元素
+  arr.unshift() // 从数组的前面的添加元素，返回新数组的 length
+  arr.shift() // 从数组的最前面删除元素，返回删除的那个元素
+  arr.push(arr1) // 把 arr1 当成一个整体放到 arr 里
   // 练习1
-  var arr = ["刘备"];
-  // 添加数据后变成：["赵云","马超","刘备","关羽","张飞"]
-  // 删除数据后变成：["关羽","张飞"]
+  var arr = ['刘备']
+  // 添加数据后变成：['赵云','马超','刘备','关羽','张飞']
+  // 删除数据后变成：['关羽','张飞']
   
   // 练习2
-  var arr = ["赵云","马超","刘备","关羽","张飞"];
+  var arr = ['赵云','马超','刘备','关羽','张飞']
   // 把数组的最后一个元素变成数组的第一个元素
   // 把数组的第一个元素变成数组的最后一个元素
   ```
@@ -2151,45 +2152,45 @@ function Person(name, age, salary) {
 - 数组的翻转与排序
 
   ```javascript
-  arr.reverse(); // 翻转数组
-  arr.sort(); // 数组的排序，按照首字符依次比较
+  arr.reverse() // 翻转数组
+  arr.sort() // 数组的排序，按照首字符依次比较
   
   // sort 方法可以传递一个函数作为参数，这个参数用来控制数组如何进行排序
   arr.sort(function(a, b){
     // 参数为true时，即返回值 > 0 时，交换位置
-    // return a - b; // 从小到大排序
-    return b - a;  // 从大到小排序
-  });
+    // return a - b // 从小到大排序
+    return b - a  // 从大到小排序
+  })
   ```
 
     ```javascript
-  //思考：
-  //将[3, 6, 1, 5, 10, 2,11]从小到大排列
-  //将字符串数组按照字符长度从小到大排列
-  //将学生数组按照年龄从小到大排列
+  // 思考：
+  // 将[3, 6, 1, 5, 10, 2,11]从小到大排列
+  // 将字符串数组按照字符长度从小到大排列
+  // 将学生数组按照年龄从小到大排列
     ```
 
 - 数组的拼接与截取
 
   ```javascript
   // concat：数组合并，返回一个新数组，原数组不受影响
-  var newArr = arr.concat(arr2); // 把 arr 和 arr2 中的所有元素放到 newArr 里
+  var newArr = arr.concat(arr2) // 把 arr 和 arr2 中的所有元素放到 newArr 里
   
   // slice: 数组切分，复制数组的一部分到一个新数组，并返回这个新数组，原数组不受影响
   // slice(begin, end) 包含 begin，不包含 end， begin 和 end 为下标
   // slice(begin) 只有一个参数时，为开始参数，截取到末尾
   // slice() 没有参数，全部截取
-  var newArr = arr.slice(begin, end);
+  var newArr = arr.slice(begin, end)
   
   // splice: 删除或者增加数组元素，修改原数组
   // start: 开始位置  deletedCount: 删除的个数（如果不删除为 0）items: 替换的内容
-  arr.slice(start, deletedCount, [items]);
+  arr.splice(start, deletedCount, [items]) // items 将作为 arr 的一项
   
   // 练习：
-  var arr = ["赵云","马超","刘备","关羽","张飞"];
-  // 截取["刘备","关羽"]
+  var arr = ['赵云','马超','刘备','关羽','张飞']
+  // 截取['刘备','关羽']
   // 在马超后面增加马腾
-  arr.splice(2, 0, "马腾")
+  arr.splice(2, 0, '马腾')
   // 删除关羽
   ```
 
@@ -2199,25 +2200,25 @@ function Person(name, age, salary) {
   // indexOf 方法返回数组中某个元素第一次出现的位置，如果找不到，返回 -1
   // 可以用来判断元素是否在数组中
   // fromIndex 表示从 fromIndex 下标开始查找
-  arr.indexOf(元素, [fromIndex]);
+  arr.indexOf(元素, [fromIndex])
   
-  // lastIndexOf() 从后面开始查找数组中元素出现位置,即查找某元素最后一次出现的位置，
+  // lastIndexOf() 从后面开始查找数组中元素出现位置,即查找某元素最后一次出现的位置
   // 如果找不到，返回 -1
-  arr.lastIndexOf(元素, [fromIndex]);
+  arr.lastIndexOf(元素, [fromIndex])
   ```
 
 - 清空数组
 
   ```javascript
-  // 1. arr.splice(0,arr.length); // 删除数组中所有的元素
-  // 2．arr.length = 0; // 直接修改数组的长度
-  // 3．arr = []; // 将数组赋值为一个空数组，推荐
+  // 1. arr.splice(0,arr.length) // 删除数组中所有的元素
+  // 2．arr.length = 0 // 直接修改数组的长度
+  // 3．arr = [] // 将数组赋值为一个空数组，推荐
   ```
 
 - 数组综合练习
 
   ```javascript
-  var arr = ["c", "a", "z", "a", "x", "a", "a", "z", "c", "x", "a", "x"]
+  var arr = ['c', 'a', 'z', 'a', 'x', 'a', 'a', 'z', 'c', 'x', 'a', 'x']
   // 1. 找到数组中第一个a出现的位置
   // 2. 找到数组中最后一个a出现的位置
   // 3. 找到数组中每一个a出现的位置
@@ -2233,15 +2234,15 @@ function Person(name, age, salary) {
 
 ```javascript
 // 语法
-array.forEach (function(item, index, arr), thisArg)
+arr.forEach(function (item, index, arr) {}, thisArg)
 // item 必需。数组中正在处理的当前元素
 // index 可选。数组中正在处理的当前元素的索引
-// arr 可选。forEach()方法正在操作的数组，就是当前数组
+// arr 可选  forEach()方法正在操作的数组，就是当前数组
 // thisArg 可选。当执行回调函数时用作this的值
-var arr = ["zs", "ls", "ww"];
+var arr = ['zs', 'ls', 'ww']
 arr.forEach (function(item, index, arr) {
-    console.log(item);
-    console.log(this);
+    console.log(item)
+    console.log(this)
 })
 // 返回值: undefined
 // 不支持 return 操作输出，return 只用于控制循环是否跳出当前循环
@@ -2258,7 +2259,7 @@ var newArr = arr.map(function(item,index) {
 	// index 可选。数组中正在处理的当前元素的索引
 	// arr 可选。当前数组
     // 使用 return 操作输出，会循环数组每一项，并返回新的每一项组成的数组
- 	return item * 2;
+ 	return item * 2
 })
 // 不修改原数组
 // 返回一个新数组，新数组的每一项乘以2
