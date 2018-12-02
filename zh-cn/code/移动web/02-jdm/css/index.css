@@ -1,0 +1,218 @@
+.container {
+  max-width: 640px;
+  min-width: 320px;
+  /* height: 2000px; */
+  /* background-color: pink; */
+  margin: 0 auto;
+}
+
+/* 头部样式 */
+.header {
+  max-width: 640px;
+  width: 100%;
+  height: 40px;
+  position: fixed;
+  background:rgb(242, 48, 48, 0);
+  z-index: 99;
+}
+.header .logo {
+  width: 75px;
+  height: 40px;
+  padding: 8px 8px;
+  /* background-color: blue; */
+  background-position: left 0 top -107px;
+  background-clip: content-box;
+  background-origin: content-box;
+}
+.header .login {
+  width: 50px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  /* background-color: blue; */
+}
+.header .login a {
+  color: #fff;
+}
+.header .search {
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+  /* background-color: yellow; */
+}
+.header .search input {
+  width: 100%;
+  height: 30px;
+  margin-top: 5px;
+  border-radius: 15px;
+  padding-left: 40px;
+}
+.header .search .search_icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 9px;
+  top: 9px;
+  background-position: -60px -110px;
+}
+
+/* banner */
+.banner {
+  position: relative;
+  overflow: hidden;
+}
+.banner li {
+  float: left;
+}
+.banner .dot {
+  width: 200px;
+  height: 5px;
+  position: absolute;
+  text-align: center;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%)
+}
+.banner .dot span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 2px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+/* 导航 */
+
+.nav li {
+  width: 20%;
+  padding: 10px;
+  float: left;
+  text-align: center;
+}
+.nav li img {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+}
+
+/* 快报 */
+.news {
+  margin: 5px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.news .logo {
+  width: 90px;
+  height: 30px;
+  padding-left: 15px;
+  padding-top: 7px;
+  /* background-color: orange; */
+}
+.news .logo img {
+  width: 73px;
+  height: 16px;
+}
+.news .more {
+  width: 40px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  /* background-color: orange; */
+}
+.news .newList {
+  height: 30px;
+  line-height: 30px;
+  padding-left: 10px;
+  overflow: hidden;
+  /* background-color: pink; */
+}
+
+/* 秒杀 */
+.seckill .nav {
+  height: 30px;
+}
+.seckill .nav .title {
+  width: 90px;
+  height: 30px;
+  color: #f23030;
+  position: relative;
+  padding-left: 30px;
+  line-height: 30px;
+  /* background-color: orange; */
+}
+.seckill .nav .title i {
+  display: block;
+  width: 22px;
+  height: 22px;
+  background-position: -82px -109px;
+  position: absolute;
+  top: 4px;
+  left: 5px;
+}
+.seckill .nav .more {
+  width: 70px;
+  height: 30px;
+  line-height: 30px;
+  /* background-color: orange; */
+}
+.seckill .nav .time {
+  height: 30px;
+  overflow: hidden;
+  padding-top: 5px;
+  /* background-color: pink; */
+}
+.seckill .nav .time span:nth-child(odd) {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #000;
+}
+.seckill .product {
+  overflow: scroll;
+}
+.seckill .product ul {
+  width: 2000px;
+}
+.seckill .product li {
+  width: 87px;
+  text-align: center;
+  float: left;
+}
+.seckill .product a {
+  display: block;
+  border-right: 1px solid #ccc;
+}
+.seckill .product li:last-child a {
+  border: none;
+}
+.seckill .product img {
+  width: 60px;
+  height: 60px;
+  margin: 5px auto;
+}
+.seckill .product li .newPrice {
+  color: #f23030;
+  font-weight: 700;
+}
+.seckill .product li .price {
+  color: #000;
+  text-decoration: line-through;
+}
+
+/* 主会场 */
+.major li {
+  float: left;
+  width: 33.33%;
+}
+.other li {
+  float: left;
+  width: 50%;
+}
+.other li:nth-child(-n+3) {
+  width: 33.33%;
+}
