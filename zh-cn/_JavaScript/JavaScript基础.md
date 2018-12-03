@@ -25,7 +25,7 @@ tages:JavaScript
 - 第二种 : 引入一个js文件
 
 ```html
-<script src="main.js"></script>
+<script src=’main.js’></script>
 ```
 
 **注意：**
@@ -156,9 +156,9 @@ var student = {
 2. 不使用临时变量  **(了解)**
 
    ```js
-   a = a+b;
-   b = a-b;
-   a = a-b;
+   a = a+b
+   b = a-b
+   a = a-b
    ```
 
 
@@ -318,7 +318,7 @@ eat = cat.eat // 输出函数表达式
 var cat = null // 将cat的值清空
 ```
 
-
+* str.match()方法匹配不到返回 null
 
 ## Undefined
 
@@ -952,7 +952,7 @@ for ( var i = 1;i<=5;i++ ) {
 思考3（双重for循环）：
 
 ```javascript
-// 1  网页打印5*5方形★阵  document.write();
+// 1  网页打印5*5方形★阵  document.write()
 // 2  网页打印直角三角形
 // 3  网页打印9*9乘法表
 ```
@@ -1012,8 +1012,8 @@ for (var i = 1; i <=10; i++) {
 
 ```js
 // 为什么要有数组?
-// 1. 我们知道,一个变量能够存储一个值, 当我们想要存储多个值的时候, 就可以使用数组。比如存储一个班级里面所有学生的名字;
-// 2. 使用数组可以对多个相同类型的值统一的管理,存储起来方便,操作的时候,也会很方便;
+// 1. 我们知道,一个变量能够存储一个值, 当我们想要存储多个值的时候, 就可以使用数组。比如存储一个班级里面所有学生的名;
+// 2. 使用数组可以对多个相同类型的值统一的管理,存储起来方便,操作的时候,也会很方便
 ```
 
 
@@ -1042,7 +1042,7 @@ for (var i = 1; i <=10; i++) {
 
 ## 数组的长度与下标
 
-- 数组的长度 : 跟字符串一样,数组有一个length 属性,, 指数组中存放的元素的个数 ; 
+- 数组的长度 : 跟字符串一样,数组有一个length 属性,, 指数组中存放的元素的个数  
 
   ```js
   var arr = [] // 空数组 长度为 0
@@ -1190,7 +1190,7 @@ function 函数名(形参1, 形参2, 形参...){
 }
 
 // 带参数的函数调用
-函数名(实参1, 实参2, 实参3);
+函数名(实参1, 实参2, 实参3)
 
 // 在声明函数的时候，碰到不确定的值的时候，就可以定义成形参
 ```
@@ -1508,7 +1508,7 @@ console.log(f) // 10
 
 ## 递归函数（了解）
 
-> 递归函数：自己直接或者间接调用自己的函数; 
+> 递归函数：自己直接或者间接调用自己的函数 
 >
 > 注意 : 递归函数一定要留有出口，不然就是死循环了
 
@@ -2254,7 +2254,7 @@ arr.forEach (function(item, index, arr) {
 
 ```javascript
 // 语法
-var newArr = arr.map(function(item,index) {
+var newArr = arr.map(function (item, index) {
     // item 必需。数组中正在处理的当前元素
 	// index 可选。数组中正在处理的当前元素的索引
 	// arr 可选。当前数组
@@ -2271,12 +2271,12 @@ var newArr = arr.map(function(item,index) {
 
 ```javascript
 // 语法
-var newArr = arr.filter(function(item,index) {
+var newArr = arr.filter(function (item,index) {
     // item 必需。数组中正在处理的当前元素
 	// index 可选。数组中正在处理的当前元素的索引
 	// arr 可选。当前数组
     // 使用 return 操作输出，会循环数组每一项，并返回判断为 true 的每一项组成的数组
-    return item > 2 && item < 5; // return 后是判断条件
+    return item > 2 && item < 5 // return 后是判断条件
 })
 // 不修改原数组
 // 返回一个新数组，新数组的每一项乘以2
@@ -2289,8 +2289,8 @@ var newArr = arr.filter(function(item,index) {
 判断数组是否含有某值，输出 true 或 false
 
 ```javascript
-var new1 = arr.includes(5);
-console.log(new1);
+var new1 = arr.includes(5)
+console.log(new1)
 ```
 
 必须完全匹配才会返回 flase（实用性不如正则）
@@ -2301,12 +2301,12 @@ console.log(new1);
 
 ```javascript
 // 语法
-var newArr = arr.find(function(item,index) {
+var newArr = arr.find(function (item,index) {
     // item 必需。数组中正在处理的当前元素
 	// index 可选。数组中正在处理的当前元素的索引
 	// arr 可选。当前数组
     // 使用 return 操作输出，会循环数组每一项，当遍历循环到判断到一个为true则跳出循环，输出当前数组元素
-    return item > 2 && item < 5; // return 后是判断条件
+    return item > 2 && item < 5 // return 后是判断条件
 })
 // 不修改原数组
 // 返回一个数组元素
@@ -2324,24 +2324,24 @@ var new1 = arr.reduce(function(pre,next,index) {
     // index next项的序列
 	// arr 可选。当前数组
     // 使用 return 操作输出，
-    return pre + next; // 返回素组每一项的和
+    return pre + next // 返回素组每一项的和
 })
 // 不修改原数组
 ```
 
 ```javascript
 // 扁平化数组
-var arr2 = [[1,2,3],[4,5],[6,7]] ;
+var arr2 = [[1,2,3],[4,5],[6,7]]
 var new2 = arr2.reduce(function(pre,next,index){
-	return pre.concat(next);	// 前数组拼接后数组 .concat()
+	return pre.concat(next)	// 前数组拼接后数组 .concat()
 })
 ```
 
 ```javascript
 // 对象数组叠加计算
-var arr3 = [{price:1,count:1},{price:2,count:2},{price:3,count:3}];
+var arr3 = [{price:1,count:1},{price:2,count:2},{price:3,count:3}]
 var new3 = arr3.reduce(function(pre,next,index) {
-	return pre + next.price * next.count;
+	return pre + next.price * next.count
     
 	// 当需要操作第一项的时候，利用reduce(callbreak(){},往数组第一项前添加一项，如:0)
 }, 0)	//在原数组第一项添加为0，不改变原数组
@@ -2351,114 +2351,114 @@ var new3 = arr3.reduce(function(pre,next,index) {
 
 ## 基本包装类型
 
-> **简单数据类型是没有方法的**。为了方便操作基本数据类型，JavaScript还提供了三个特殊的引用类型：String/Number/Boolean。
+> **简单数据类型是没有方法的**。为了方便操作基本数据类型，JavaScript还提供了三个特殊的引用类型：String/Number/Boolean
 
-基本包装类型：把基本类型包装成复杂类型。
+基本包装类型：把基本类型包装成复杂类型
 
 ```javascript
-var str = “abc”;
-var result = str.indexOf(“a”);
-//发生了三件事情
-1. 把简单类型转换成复杂类型：var s = new String(str);
-2. 调用包装类型的indexOf方法：var result = s.indexOf(“a”);
+var str = ‘abc’
+var result = str.indexOf(‘a’)
+// 发生了三件事情
+1. 把简单类型转换成复杂类型：var s = new String(str)
+2. 调用包装类型的indexOf方法：var result = s.indexOf(‘a’)
 3. 销毁刚刚创建的复杂类型
 ```
 
-### Number对象
+### Number 对象
 
 > Number 对象是数字的包装类型，数字可以直接使用这些方法
 
 ```javascript
-num.toFixed(2); // 2表示保留2位小数
-num.toString(); // 转换成字符串
+num.toFixed(2) // 返回保留2位小数的新数的字符串格式
+num.toString() // 转换成字符串并返回
 ```
 
-### Boolean对象
+### Boolean 对象
 
-> Boolean 对象是布尔类型的包装类型。
+> Boolean 对象是布尔类型的包装类型
 
 ```javascript
-toString( );//转换成字符串
+toString() // 转换成字符串并返回
 ```
 
-**undefined和null没有包装类型，所以调用toString方法会报错**
+**undefined 和 null 没有包装类型，所以调用toString方法会报错**
 
-### String对象
+### String 对象
 
-> 字符串可以看成是一个字符数组（伪数组）。因此字符串也有长度，也可以进行遍历。String对象很多方法的名字和和Array的一样。可以少记很多的单词。
+> 字符串可以看成是一个字符数组（伪数组）。因此字符串也有长度，也可以进行遍历。String对象很多方法的名字和 Array 的一样。
 >
 > 操作字符串的方法**不会改变原来的字符串**，需要新字符串去接收
 
 - 查找指定字符串
 
   ```javascript
-  str.indexOf(""); // 获取某个字符串第一次出现的位置，如果没有，返回-1
-  str.lastIndexOf(""); // 从后面开始查找第一次出现的位置。如果没有，返回-1
+  str.indexOf(‘‘) // 获取某个字符串第一次出现的位置，如果没有，返回-1
+  str.lastIndexOf(’’) // 从后面开始查找第一次出现的位置。如果没有，返回-1
   
-  str.search(regexp); // 查找并输出索引位置,找不到输出-1
-  str.match(regexp); // 输出匹配到的第一个字符，匹配不到返回 null
-  str.match(regexp/g); //全部输出
+  str.search(regexp) // 查找并输出索引位置,找不到输出-1
+  str.match(regexp) // 输出匹配到的第一个字符，匹配不到返回 null
+  str.match(regexp/g) // 全部输出
   ```
 
 - 去除空白
 
   ```javascript
-  str.trim(); // 去除字符串两边的空格，内部空格不会去除
+  str.trim() // 去除字符串两边的空格，内部空格不会去除
   ```
 
 - 大小写转换
 
   ```javascript
-  //str.toUpperCase()：全部转换成大写字母
-  //str.toLowerCase()：全部转换成小写字母
+  // str.toUpperCase() 全部转换成大写字母
+  // str.toLowerCase() 全部转换成小写字母
   ```
 
 - 字符串拼接与截取
 
   ```javascript
-  //字符串拼接
-  //可以用concat，用法与数组一样，但是字符串拼串我们一般都用+
-  
-  //字符串截取的方法有很多，记得越多，越混乱，因此就记好用的就行
-  str.slice(start, end); // 从start开始，end结束，并且取不到end，没有end 则截取到末尾
+  // 字符串拼接
+  // 可以用concat，用法与数组一样，但是字符串拼串我们一般都用+
+  str.slice(start, end) // 从start开始，end结束，并且取不到end，没有end 则截取到末尾
   // 可以为负数，-1表示从后数第一个，一次为 -2、-3...
-  str.slice(-3); // 截取字符串后三位
-  str.substring(start, end); // 从start开始，end结束，并且取不到end
-  str.substr(start, length); // 从start开始，截取length个字符，没有length则截取到末尾
+  str.slice(-3) // 截取字符串后三位
+  str.substring(start, end) // 从start开始，end结束，并且取不到end
+  str.substr(start, length) // 从start开始，截取length个字符，没有length则截取到末尾
   ```
 
 - 字符串切割
 
   ```javascript
-  str.split(); // 将字符串分割成数组（很常用）
-  //功能和数组的join正好相反。
-  var str = "张三,李四,王五";
-  var arr = str.split(",");
+  // 将字符串分割成数组（很常用）
+  str.split()
+  // 功能和数组的join正好相反。
+  var str = ’zs,ls,ww’
+  var arr = str.split(’,’)
   ```
 
 - 字符串替换
 
   ```javascript
   str.replace(searchValue, replaceValue)
-  //参数：searchValue:需要替换的值    replaceValue:用来替换的值  默认只替换第一个
+  // 参数：searchValue:需要替换的值    replaceValue:用来替换的值  默认只替换第一个
   str.replace(/searchValue/g, replaceValue) // 全部替换
-  str.replace(/ /g, "") // 将全部空格去掉
+  str.replace(/ /g, ’’) // 将全部空格去掉
   ```
 
 - 访问
 
   ```javascript
-  str[i];
-  str.charAt(i);
+  str[i]
+  str.charAt(i)
+  // i 均为下标
   ```
 
 - 练习
 
   ```javascript
-  //1. 截取字符串"我爱中华人民共和国"，中的"中华"
-  //2. "abcoefoxyozzopp"查找字符串中所有o出现的位置
-  //3. 把字符串中所有的o替换成!
-  //4. 把一个字符串中所有的空格全部去掉
-  //5. 统计一个字符串中每个字符出现的次数
+  1. 截取字符串’我爱中华人民共和国’，中的’中华’
+  2. ’abcoefoxyozzopp’查找字符串中所有o出现的位置
+  3. 把字符串中所有的o替换成!
+  4. 把一个字符串中所有的空格全部去掉
+  5. 统计一个字符串中每个字符出现的次数
   ```
 
