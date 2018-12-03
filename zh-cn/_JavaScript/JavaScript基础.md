@@ -439,12 +439,12 @@ console.log(typeof num2) // NaN
 2. 使用 `parseInt()`
 
 ```javascript
-var num2 = parseInt("12.3")
+var num2 = parseInt(’12.3’)
 console.log(typeof num2) // number
 console.log(num2) // 12 只保留整数
 
-var num3 = parseInt("15xyz")
-var num4 = parseInt("15x6yz")
+var num3 = parseInt(’15xyz’)
+var num4 = parseInt(’15x6yz’)
 console.log(typeof num3) // number
 console.log(num3) // 15
 console.log(num4) // 15
@@ -455,7 +455,7 @@ console.log(num4) // 15
 3. 使用 `parseFloat()` 完成
 
 ```javascript
-var num3 = parseFloat("12.34")
+var num3 = parseFloat(’12.34’)
 console.log(typeof num3) // number
 console.log(num3) // 12.34 可以保留小数位
 ```
@@ -471,6 +471,36 @@ var num4 = +d // 前面加 + （正）号也可以转换
 console.log(typeof num4) // number
 console.log(num4) // 345
 ```
+
+
+
+### 补充
+
+> `parseInt()` 函数解析一个字符串参数，指定该字符串为指定基数的进制值，并返回一个10进制的整数，如果被解析参数的第一个字符无法被转化成数值类型，则返回 `NaN`
+
+```javascript
+// 语法
+parseInt(string, radix)
+// string 要被解析的值，如果参数不是一个字符串，则将其转换为字符串
+// radix 基数,表示进制，介于2和36之间的整数，默认为10
+parseInt('123', 5) // 将'123'看作5进制数，返回十进制数38
+
+[1, 2, 3].map(parseInt) // [1, NaN, NaN]
+// [1, 2, 3].map(parseInt(item, index))
+```
+
+
+
+> `parseFloat()` 函数解析一个字符串参数并返回一个浮点数，如果给定值不能被转换成数值，则会返回 NaN。
+
+```javascript
+// 语法
+parseFloat(value)
+// value 需要被解析成为浮点数的值
+parseFloat(’3.14‘) // 3.14
+```
+
+
 
 
 
