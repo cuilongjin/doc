@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <script>
+      // 1. 明确touch相关的4个事件
+      // touchstart  开始摸
+      // touchmove   滑动
+      // touchend    结束触摸
+      // touchcancel 系统取消的触摸，比如电话进来了
+
+      // 2. 需要明确触摸的时候手指的位置  需要先获取触摸的手指
+      // 每个事件对象中，有
+      // touches : 表示整个屏幕上所有的所有的手指
+      // targetTouches :  表示当前元素上所有的手指
+      // changedTouches：  表示发生改变的手指
+      // 一般情况，我们只考虑一个手指的情况
+
+      // touchend中，想要实时获取手指位置，不能通过touches或者是targetTouches,只能用changedTouches
+
+      // 3. 如何获取手指的位置
+      // clientX/clientY: 相对于可视区
+      // pageX/pageY ： 相对于整个页面
+      var div = document.querySelector('div')
+      div.addEventListener('touchstart', function (e) {
+        console.log(e.changedTouches[0])
+        console.log(e.touches[0].clientX, e.touches[0].clientY)
+        console.log('开始触摸....')
+      })
+      div.addEventListener('touchmove', function (e) {
+        console.log(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
+        // console.log('滑动....')
+      })
+      div.addEventListener('touchend', function (e) {
+        console.log(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
+        console.log('结束触摸...')
+      })
+      div.addEventListener('touchcancel', function () {
+        console.log('取消触摸...')
+      })
+
+      /*
+        1. touch相关的事件  touchstart touchend  touchmove touchcancel
+        2. 如果获取到手指:  touches  targetTouches  changedTouches(touchend)
+        3. 如果获取手指的位置： clientX/clientY  pageX/pageY
+      */
+    </script>
+  </body>
+</html>
