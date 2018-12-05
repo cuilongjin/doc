@@ -230,3 +230,266 @@ iPhone5的设备宽度只有320px，一张宽度为640px的图片在手机端访
 4. 等分布局
 ```
 
+
+
+# touch 事件
+
+移动端新增了4个与手指触摸相关的事件
+
+- `touchstart`: 手指放到屏幕上时触发
+- `touchmove`: 手指在屏幕上滑动式触发（会触发多次）
+- `touchend`: 手指离开屏幕时触发
+- `touchcancel`: 系统取消touch事件的时候触发，比如电话
+
+
+
+每个触摸事件被触发后，会生成一个event对象，event对象中`changedTouches`会记录手指滑动的信息。
+
+```javascript
+e.touches // 当前屏幕上的手指
+e.targetTouches // 当前dom元素上的手指。
+e.changedTouches // 触摸时发生改变的手指(重点)(如手指离开屏幕)
+```
+
+这些列表里的每次触摸由touch对象组成，touch对象里包含着触摸信息，主要属性如下
+
+```javascript
+// e.changedTouches[0].clientX
+clientX / clientY // 触摸点相对浏览器窗口的位置
+pageX / pageY     // 触摸点相对于页面的位置
+```
+
+
+
+【案例：jdm-滑动轮播图】
+
+【案例：jdm-区域滚动】
+
+
+
+## iscroll 插件使用
+
+https://github.com/cubiq/iscroll
+
+[iscroll参考文档](http://www.mamicode.com/info-detail-331827.html)
+
+**注意**：使用 iscroll 需要满足的条件
+
+1. 父盒子嵌套了子盒子（一个）
+   1. 如果有多个子盒子，所以我们需要使用一个盒子把所有的子盒子包裹起来
+   2. 如果有图片，我们需要保证图片加载完成，如果有浮动，需要清除浮动，为了保证子盒子的高度获取的是正确的
+2. 子盒子大小一定要超过父盒子的大小
+
+
+
+```javascript
+// 使用：box为父盒子
+var box = document.querySelector('.box')
+new IScroll(box, {
+    scrollX:false, // 横向滚动
+    scrollY:true // 纵向滚动
+  })
+```
+
+
+
+# zepto 框架
+
+> **Zepto**是一个轻量级的**针对现代高级浏览器的JavaScript库， **它与jquery**有着类似的api**。 如果你会用jquery，那么你也会用zepto。
+
+[github地址](https://github.com/madrobby/zepto)
+
+[中文文档](http://www.css88.com/doc/zeptojs_api/)
+
+## zepto 与 jquery 的区别
+
+- jquery 针对 pc 端，主要用于解决浏览器兼容性问题，zepto 主要针对移动端
+- zepto 比 jquery 轻量，文件体积更小
+- zepto 封装了一些移动端的手势事件
+
+
+
+## zepto 的基本使用
+
+zepto的使用与jquery基本一致，zepto是分模块的，需要某个功能，就需要引入某个zepto的文件
+
+```html
+<script src="zepto/zepto.js"></script>
+<script src="zepto/event.js"></script>
+<script src="zepto/fx.js"></script>
+<script>
+  $(function () {
+    $(".box").addClass("demo")
+
+    $("button").on("click", function () {
+      $(".box").animate({width:500}, 1000)
+    })
+  })
+</script>
+```
+
+
+
+## zepto 的定制
+
+安装Nodejs环境
+
+1、下载zepto.js
+
+2、解压缩
+
+3、cmd命令行进入解压缩后的目录
+
+4、执行`npm install`命令
+
+5、编辑make文件的`41行`，添加自定义模块并保存
+
+7、然后执行命令 `npm run-script dist`
+
+8、查看目录dist即构建好的zepto.js
+
+
+
+## zepto 手势事件
+
+zepto中根据`touchstart touchmove touchend`封装了一些常用的手势事件，这些事件都是基于touchstart touchmove touchend封装
+
+```javascript
+tap   // 轻触事件,用于替代移动端的click事件，因为click事件在老版本中会有300ms的延迟
+swipe //手指滑动时触发
+swipeLeft  //左滑
+swipeRight  //右滑
+swipeUp    //上滑
+swipeDown   //下滑
+```
+
+
+
+# 响应式
+
+## 什么是响应式布局
+
+> 响应式布局（respond layout）是Ethan Marcotte在2010年5月份提出的一个概念，简而言之，就是**一个网站能够兼容多个终端（手机、平板、pc电脑、手表）** ——而不是为每个终端做一个特定的版本。这个概念是为解决移动互联网浏览而诞生的
+
+**为什么要有响应式布局？** 
+
+- 在移动互联日益成熟的时候，在PC端开发的网页已经无法满足移动设备的要求
+- 通常的做法是针对移动端单独做一套特定的版本
+- 如果终端越来越多，那么需要开发的版本就会越来越多（大屏设备的普及）
+- **响应式布局** ：一个网站能够兼容多个终端（节约开发成本）
+
+**优点：** 
+
+面对不同分辨率设备灵活性强
+
+能够快捷解决多设备显示适应问题
+
+**缺点： **
+
+兼容各种设备工作量大，效率低下
+
+代码累赘，会出现隐藏无用的元素，加载时间加长
+
+其实这是一种折中性质的设计解决方案，多方面因素影响而达不到最佳效果
+
+一定程度上改变了网站原有的布局结构，会出现用户混淆的情况
+
+响应式开发现状：
+
+- 如果已经存在PC的网站了，那么一般不会使用响应式开发，而是针对移动端再开发一套系统（比如京东、淘宝）
+- 在**新建站点** 上采用响应式开发的越来越多
+- 在国内，响应式开发还不是特别的流行。但响应式开发是大势所趋，会越来越流行
+
+## 响应式开发与移动web开发的比较
+
+| 开发方式 | 移动web开发+pc开发                                 | 响应式开发                           |
+| -------- | -------------------------------------------------- | ------------------------------------ |
+| 引用场景 | 一般已经有了PC端网站，只需要端独开发移动端网站即可 | 针对一些新建网站，并且要求适配移动端 |
+| 开发     | 针对性强，开发效率高                               | 兼容各种终端，效率低                 |
+| 适配     | 只能适配移动端或者PC端，pad上体验比较差            | 可以适配各种终端                     |
+| 效率     | 代码简介，加载快                                   | 代码相对复杂，加载慢                 |
+
+
+
+# 媒体查询
+
+> 媒体查询（Media Query）是 CSS3 提出来的一个新的属性，通过媒体查询可以查询到 screen 的宽度，从而指定某个宽度区间的网页布局
+
+## 设备分类
+
+| 分类       | 宽度范围     |
+| ---------- | ------------ |
+| 大屏设备   | >1200px      |
+| 中屏设备   | 992px~1200px |
+| 小屏设备   | 768px~992px  |
+| 超小屏设备 | < 768px      |
+
+
+
+## 媒体查询的使用
+
+需求：
+
+```html
+<!--
+    大屏设备(>1200px)   版心：1170px   背景色：红色
+    中屏设备(992-1200)  版心：970px    背景色：蓝色
+    小屏设备(768-992)   版心：750px    背景色：黄色
+    超小屏设备(<768px)  版心：100%     背景色：绿色
+-->
+```
+
+响应式开发的原理：使用媒体查询实现不同终端的布局和样式的切换
+
+
+
+媒体查询语法：
+
+```css
+/* 查询屏幕 */
+/* screen 和第一个 and 可以省略 */
+@media screen and 条件 {
+}
+
+/* 条件的写法 */
+/* min-width: 只要屏幕宽度超过这个值的设备样式就能生效 */
+/* max-width: 只要屏幕宽度小于这个值的设备样式就能生效 */
+@media screen and (min-width: 1200px) {
+  .container {
+    width: 1170px;
+    background-color: red;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .container {
+    width: 970px;
+    background-color: blue;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .container {
+    width: 750px;
+    background-color: yellow;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    background-color: green;
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
