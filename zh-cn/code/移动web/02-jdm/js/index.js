@@ -118,7 +118,6 @@
 
   // 过渡结束事件
   ul.addEventListener('transitionend', function () {
-
     // 调整index
     if (index >= lis.length - 1) {
       index = 1
@@ -169,12 +168,10 @@
 
     // 滑动距离大于1/3 或滑动距离大于100 但时间小于120ms
     if (distance > lisWidth / 3 || distance > 100 && time < 120) {
-
       // 右移
       index--
     }
     if (distance < -lisWidth / 3|| distance < -100 && time < 120) {
-
       // 左移
       index++
     }

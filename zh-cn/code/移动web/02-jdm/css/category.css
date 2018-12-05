@@ -1,0 +1,97 @@
+html, body {
+  height: 100%;
+}
+.container {
+  width: 100%;
+  max-width: 640px;
+  height: 100%;
+  margin: 0 auto;
+  padding-top: 44px;
+  position: relative;
+}
+.header {
+  width: 100%;
+  height: 44px;
+  position: absolute;
+  top: 0;
+  background-image: linear-gradient(#fff, #ccc);
+}
+.header .back,
+.header .cate {
+  width: 44px;
+  height: 44px;
+  padding: 12px;
+  background-origin: content-box;
+  background-clip: content-box;
+}
+.header .back {
+  background-position: -20px 0;
+}
+.header .cate {
+  background-position: -60px 0;
+}
+.header .search {
+  height: 44px;
+  overflow: hidden;
+  padding-top: 5px;
+}
+.header .search input {
+  width: 100%;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+.content {
+  position: absolute;
+  top: 44px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+.content .nav {
+  width: 90px;
+  float: left;
+  height: 100%;
+}
+.content .nav li {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background-color: pink;
+  border-right: 1px solid #f23030;
+  border-bottom: 1px solid #f23030;
+}
+.content .nav li a {
+  color: #000;
+}
+.content .nav li.now {
+  background-color: #fff;
+  border-right: 1px solid transparent;
+}
+.content .nav li.now a {
+  color: #f23030;
+}
+.content .main {
+  padding: 10px;
+  overflow: hidden;
+  height: 100%;
+}
+.content .main>div {
+  overflow: hidden;
+}
+.content .main h3 {
+  font-size: 18px;
+}
+.content .main li {
+  width: 33.33%;
+  float: left;
+  margin: 0 auto;
+  text-align: center;
+}
+.content .main li img {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+}
