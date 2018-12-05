@@ -319,6 +319,7 @@ var cat = null // 将cat的值清空
 ```
 
 * str.match()方法匹配不到返回 null
+* 通过 document.querySelector、getElementById() 获取不到元素返回 null
 
 ## Undefined
 
