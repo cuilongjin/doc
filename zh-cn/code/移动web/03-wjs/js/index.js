@@ -1,35 +1,61 @@
-var gulp = require('gulp')
-var less = require('gulp-less')
-var minifyCSS = require('gulp-minify-css')
-var babel = require('gulp-babel')
-var livereload = require('gulp-livereload')
-// 编译less
-gulp.task('less', function () {
-  return gulp.src('./src/less/**.less')
-      .pipe(less())
-  // .pipe(minifyCSS())
-      .pipe(gulp.dest('dist/css'))
+// 轮播图基本功能
+$(function () {
+  var $banner = $('.banner')
+  var $img = $('.banner .item img')
+  $(window).on('resize', function () {
+    var $bannerWidth = $banner.width()
+    // console.log(bannerWidth)
+    /* if (bannerWidth < 600) {
+      img.each(function () {
+        $(this).attr('src', $(this).data('msrc'))
+      })
+    } else {
+      img.each(function () {
+        $(this).attr('src', $(this).data('psrc'))
+      })
+    } */
+    // 优化
+    $img.each(function () {
+      $(this).attr('src', $bannerWidth < 600 ? $(this).data('msrc') : $(this).data('psrc'))
+    })
+  })
+  $(window).trigger('resize')
 })
-// 监听less文件
-gulp.task('autoless', function () {
-  gulp.watch('./src/less/**.less', ['less'])
+
+// 轮播图滑动功能
+$(function () {
+  var $banner = $('.banner')
+  var $startX
+  $banner.on('touchstart', function (e) {
+    // console.log(e.originalEvent.touches[0].clientX)
+    $startX = e.originalEvent.touches[0].clientX
+  })
+  $banner.on('touchend', function (e) {
+    var $distance = e.originalEvent.changedTouches[0].clientX - $startX
+    // console.log($distance)
+    if ($distance > 100) {
+      $(this).carousel('prev')
+    }
+    if ($distance < -100) {
+      $(this).carousel('next')
+    }
+  })
 })
-// 编译es6
-gulp.task('babel', () => {
-  return gulp.src(['./src/js/**.js'])
-      .pipe(babel({presets: ['es2015']}))
-      .pipe(gulp.dest('dist/js'))
+
+// 动态计算product nav的宽度
+$(function () {
+  var $nav = $('.product .nav-tabs')
+  var $li = $('.product .nav-tabs li')
+  var $totalWidth = 0
+  $li.each(function () {
+    $totalWidth += $(this).width()
+  })
+  $nav.width($totalWidth)
+
+  // product nav 滑动
+  new IScroll('.nav-wrapper', {
+    scrollX: true,
+    scrollY: false
+  })
 })
-// 监听js文件
-gulp.task('autojs', function () {
-  gulp.watch('./src/js/**.js', ['babel'])
-})
-// 监听所有打包之后的文件变动，自动刷新页面
-gulp.task('watch', function () {
-  // Create LiveReload server
-  livereload.listen()
-  // Watch any files in dist/, reload on change
-  gulp.watch(['dist/**']).on('change', livereload.changed)
-})
-// 使用 gulp.task('default') 定义默认任务
-gulp.task('default', ['less', 'autoless', 'babel', 'autojs', 'watch'])
+

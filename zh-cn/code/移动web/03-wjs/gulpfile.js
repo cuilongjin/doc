@@ -13,7 +13,7 @@ gulp.task('html', function () {
 })
 
 gulp.task('watch', function () {
-  gulp.watch(['./*.html'], ['html'])
+  gulp.watch(['./*.html', './css/*.css', './js/*.js'], ['html'])
 })
 
 gulp.task('default', ['connect', 'watch'])
