@@ -1,6 +1,6 @@
-#Web Api 基本概念
+Web Api 基本概念
 
-**API**（Application Programming Interface,应用程序编程接口）,
+**API**（Application Programming Interface,应用程序编程接口）
 
 **API 是一些预先定义的方法，这些方法能够实现某些特定的功能**
 
@@ -15,45 +15,46 @@
 
 **ECMAScript - JavaScript的核心 **
 
-- ECMAScript是一套标准, 规范了语言的基本语法和数据类型;
+- ECMAScript是一套标准, 规范了语言的基本语法和数据类型
 - 与具体实现无关
 
 **DOM** - 文档对象模型
 - 一套操作页面元素的API
-- 通过DOM提供的API可以获取/操作网页上的元素。
+- 通过DOM提供的API可以获取/操作网页上的元素
 
 **BOM - 浏览器对象模型**
+
 - 一套操作浏览器功能的API
-- 通过BOM可以操作浏览器窗口, 比如刷新、控制浏览器跳转等;
+- 通过BOM可以操作浏览器窗口, 比如刷新、控制浏览器跳转等
 
 
 
 
-#DOM - 文档对象模型
+#DOM  文档对象模型
 
-## DOM基本概念
+## DOM 基本概念
 
-> DOM ( Document Object Model ) 文档对象模型,  是`W3C组织`推荐的一套操作网页元素的API。
+> DOM ( Document Object Model ) 文档对象模型，是`W3C组织`推荐的一套操作网页元素的API
 >
 
-DOM又称为文档树模型, 因为整个HTML文档是一个树形的结构
+DOM又称为文档树模型，因为整个HTML文档是一个树形的结构
 
 **DOM中常见的概念** : 
 
-- **文档 `document`** : 一个网页可以称为文档  ; (换句话说: 操作页面,其实就是操作document)
+- **文档 `document`** : 一个网页可以称为文档；（换句话说：操作页面，其实就是操作document）
 
    ```js
-   console.log(document);
-   // DOM 会把整个网页当成一个对象,我们操作这个网页, 只要操作这个document对象
+   console.log(document)
+   // DOM 会把整个网页当成一个对象，我们操作这个网页，只要操作这个document对象
    // DOM 会把网页中的所有的东西都当作对象
    ```
 
 - **节点`node`** : 网页中的所有内容都是节点 (标签、属性、文本)
 
    ```html
-   <ul class="box"> // ul:标签节点 class="box" : 属性节点
-       <!-- 这是一些测试 --> // 注释节点
-       <li>测试</li> // 测试:文本节点
+   <ul class="box">  ul: 标签节点 class="box": 属性节点
+       <!-- 这是一些测试 -->  注释节点
+       <li>测试</li>  测试:文本节点
        <li>测试</li>
        <li>测试</li>
    </ul>
@@ -61,92 +62,129 @@ DOM又称为文档树模型, 因为整个HTML文档是一个树形的结构
 
 - **元素 `element`** : 网页中的**标签节点**
 
-  ```html
-  ul : 元素
-  li : 元素
-  ```
 
 
+## 获取元素的方法
 
-## document.getElementById()
-
-**通过id 获取元素**
+* **document.getElementById()**
 
 ```javascript
+// 通过id 获取元素
 // 参数 : 字符串类型的id
-// 返回值 : 一个元素 一个对象
-var div = document.getElementById('div');
-console.dir(div); // 以对象的形式显示
-console.log(div); // 以内容的形式显示
+// 返回值 : 一个元素（dom对象）
+var div = document.getElementById('div')
+console.dir(div) // 以对象的形式显示
+console.log(div) // 以内容的形式显示
 ```
 
-> `getElementById()` 只能由 `document` 调用，如果通过其他元素调用会报错
+
+
+​	**关于`console.log()`和`console.dir()`的区别**
+
+​	`console.log()` ：打印一个元素的时候，是以标签的形式进行展示的
+
+​	`console.dir()` ：打印一个元素的时候，是以对象的形式进行展示的
 
 
 
-**关于`console.log`和`console.dir`的区别**
+* **getElementsByClassName()**
 
-- `console.log`打印一个元素的时候，是以标签的形式进行展示的
-- `console.dir`打印一个元素的时候，是以对象的形式进行展示的
+```javascript
+// 通过类名获取元素
+// 参数：字符串类型的类名
+// 返回值：伪数组
+document.getElementsByClassName("class")
 
-在DOM中，页面标签的属性和DOM对象的属性是一一对应的，因此我们可以通过修改DOM对象的属性来修改标签的属性。
+```
+
+
+
+* **getElementsByTagName()**
 
 ```js
-// img对象 和 img标签 一一对应的 
-// 以后想要操作img标签,,只需要操作 img对象即可 
-var img =  document.getElementById('img');
-// console.dir(img.id);
-// console.dir(img.src);
-// console.dir(img.title);
+// 通过标签名获取元素
+// 参数：标签名字符串
+// 返回值：伪数组
+var ps = document.getElementsByTagName('p')
+```
+
+
+
+* **getElementsByName()**
+
+```javascript
+// 通过name属性值获取元素
+// 参数 : name值
+// 返回值 : 伪数组
+var ps = document.getElementsByName("aa")
+```
+
+
+
+* **querySelector()**
+
+```js
+// 根据css选择器获取元素 (重点)
+// 参数：是一个css选择器
+// 返回值：只会返回一个对象，如果有很多个，会返回第一个
+document.querySelector("#box")
+```
+
+
+
+* **querySelectorAll()**
+
+```javascript
+// 根据css选择器获取元素 (重点)
+// 参数：是一个css选择器
+// 返回值：伪数组
+document.querySelectorAll(".box")
 ```
 
 
 
 **注意事项**
 
-- 如果 id 不存在,返回值为 null，试图给null设置属性会报错
-- 在DOM中, `document.getElementById('box')` 方法需要写在html内容的后面, 保证页面加载完成之后才能获取到内容
+- `getElementById()` 只能由 `document` 调用，如果通过其他元素调用会报错，其他方法可由已经获取到的dom对象调用
 
-```
-错误1 : 如果获取的是null,然后获取其属性
-Uncaught TypeError: Cannot read property 'title' of null
-错误2 : 方法写错Id=> ID错了   `getElementByID`
-Uncaught TypeError: document.getElementByID is not a function
-```
+* `querySelector `和 `getElementById`如果获取不到元素会返回 null；`getElementsByClassName` 、` getElementsByTagName` 、`getElementsByName` 、`querySelectorAll` 如果没有获取到元素也会返回一个伪数组，只不过伪数组长度为0
+* 伪数组不是数组，不能使用属性的方法，但是可以跟数组一样进行遍历和使用下标进行操作；伪数组不能直接注册事件，需要遍历后拿到标签再注册事件
+* 在DOM中, 获取元素操作需要写在html内容的后面，保证页面加载完成之后才能获取到内容
 
 
 
-## 认识事件
+## 事件学习
 
-> 事件：理解为浏览器的感知系统  ,  触发 --> 响应机制，javascript是基于事件驱动的。
->
+### 认识事件
+
+> 事件：理解为浏览器的感知系统  ,  触发 --> 响应机制，javascript是基于事件驱动的
 
 ```js
 // 点击事件
-//  结构 : 事件源.onclick = function() {..}
+// 结构 : 事件源.onclick = function () {..}
 ```
 
  事件三要素 :  事件源  + 事件名称 +  事件处理函数
 
--  事件源 : 给谁注册事件 ( 按钮  btn )
--  事件名称 : 注册了什么事件 ( click事件 )
--  事件处理函数 : 事件触发后要执行的代码(函数形式)
+- 事件源 : 给谁注册事件 ( 按钮  btn )
+- 事件名称 : 注册了什么事件 ( click事件 )
+- 事件处理函数 : 事件触发后要执行的代码(函数形式)
 
 注意：事件处理函数并不会立马执行，而是当事件触发的时候才会执行（浏览器会自动调用）
 
 注册事件的基本语法 :
 
 ```js
-var box = document.getElementById('box');
+var box = document.getElementById('box')
 //on:当  click:点击   当按钮被点击的时候触发
 box.onclick = function() {
-  console.log('代码会在box被点击后执行');  
-};
+  console.log('代码会在box被点击后执行')
+}
 ```
 
 
 
-## 两种按钮
+* 两种按钮
 
 ```html
 <button>点亮</button>
@@ -158,87 +196,6 @@ box.onclick = function() {
 ```
 
 
-
-## getElementsByClassName
-
-**通过类名获取元素**
-
-> 在 js 中 class 是关键字，因此对应的是 className 属性
-
-```javascript
-// 参数：字符串类型的类名
-// 返回值：伪数组
-document.getElementsByClassName("class")
-div.className = 'hg'; // 修改类名会把原类名直接覆盖掉
-```
-
-
-
-## getElementsByTagName
-
-**通过标签名获取元素**
-
-```js
-//参数：标签名字符串
-//返回值：一个伪数组，伪数组不是数组，不能使用属性的方法，但是可以跟数组一样进行遍历和使用下标进行操作。
-var ps = document.getElementsByTagName('p');
-```
-
-**注意**：返回值有没有获取到元素，都是一个伪数组，即便元素只有一个，伪数组不能直接注册事件,需要遍历后拿到标签再注册事件
-
->  `getElementsByTagName` 可由 `document` 和 其他 `element` 调用
-
-```html
-<div id="box"></div>
-    <p>111</p>
-    <div>222</div>
-<script>
-    var p = document.getElementsByTagName("p")[0];
-
-    var box = document.getElementById("box");
-    var p = box.getElementsByTagName("p")[0];
-    var div = box.getElementsByTagName("div")[0];
-</script>
-```
-
-
-
-## getElementsByName
-
-**通过name属性值获取元素**
-
-```javascript
-// 参数 : name值
-// 返回值 : 伪数组
-var ps = document.getElementsByName("aa");
-```
-
-
-
-## document.querySelector
-
-**根据css选择器获取元素 (重点)**
-
-```js
-//参数：是一个css选择器
-//返回值：只会返回一个对象，如果有很多个，会返回第一个
-document.querySelector("#box");
-
-```
-
-## document.querySelectorAll
-
-**根据css选择器获取元素 (重点)**
-
-```javascript
-//参数：是一个css选择器
-//返回值：会返回伪数组，不管有多少个，都会返回伪数组
-document.querySelectorAll(".box");
-```
-
-
-
-## 事件学习
 
 ### 焦点事件
 
@@ -264,46 +221,44 @@ document.querySelectorAll(".box");
 
 ### 事件中的this 
 
-> 当在事件中表示当前元素的时候，可以使用this
->
 > this 指向注册事件的事件源
 
 ```js
-var btn = document.getElementById("btn");
+var btn = document.getElementById("btn")
 btn.onclick = function() {
   // 给 btn 注册的事件，因此 this 表示 btn
-  this.value = "哈哈";
+  this.value = "哈哈"
 }
 ```
 
 练习： 
 
 ```html
-//1. 给多个按钮注册点击事件，点击的那个变成红色。 
+// 1. 给多个按钮注册点击事件，点击的那个变成红色
 .red {
-	background: red;
+	background: red
 }
 <button>1</button>
 <button>2</button>
 <script>
     // 给多个按钮注册点击事件，点击的那个变成红色，其他的恢复默认
-    var btns = document.getElementsByTagName("button");
-    for (var i = 0; i < btns.length; i++) { // i = 2
+    var btns = document.getElementsByTagName("button")
+    for (var i = 0; i < btns.length; i++) {
         btns[i].onclick = function () {
-            // console.log(i); // 点击按钮时打印 2
-            // btns[i].className = "red"; // 此时i = 2，报错
+            // console.log(i) // 点击按钮时打印 2
+            // btns[i].className = "red" // 此时i = 2，报错
 
             for (var i = 0; i < btns.length; i++) {
-                btns[i].className = "";  // 恢复默认样式 ，排他思想
+                btns[i].className = ""  // 恢复默认样式 ，排他思想
             }
-            this.className = "red"; // 给自己添加样式
+            this.className = "red" // 给自己添加样式
         }
     }
 </script>
 
-//2. 点击按钮，显示对应的图片  1-6
-  <input type="button" value="第一张" title="1">
-  <img id="img" src="images/1.jpg" alt="">
+// 2. 点击按钮，显示对应的图片  1-6
+<input type="button" value="第一张" title="1">
+<img id="img" src="images/1.jpg" alt="">
 ```
 
 
@@ -314,50 +269,48 @@ btn.onclick = function() {
 
 ```html
 <a id="link" href="http://www.baidu.com">这是a</a>
-var link = document.getElementById("link");
-link.onclick = function() {
-  alert("呵呵");
-  //阻止页面跳转
-  return false;
-}
+<script>
+    var link = document.getElementById("link")
+    link.onclick = function() {
+        alert("呵呵")
+        // 阻止页面跳转
+        return false
+    }
+</script>
 ```
 
 
 
 ## 属性操作
 
-> 学习目标：学会如果操作DOM对象的属性。
+* 在DOM中，页面标签的属性和DOM对象的属性是一一对应的，因此我们可以通过修改DOM对象的属性来修改标签的属性
 
-### 1.普通标签属性
+### 普通标签属性
 
-> 我们知道，在标签中存在的属性，在DOM对象中同样存在着对应的属性，只要修改了标签的属性或者DOM对象的属性，两边都会变化。常见的属性有：src、title、src、href、class、id等
+* 常见的属性有：src、title、src、href、class、id等
 
+  ```javascript
+  // 在 js 中 class 是关键字，因此对应的是 className 属性
+  div.className = 'hg' // 修改类名会把原类名直接覆盖掉
+  ```
 
+### 表单属性操作
 
-### 2.表单属性操作
+* 常见的表单属性有：disabled、type、value、checked、selected
 
-> 常见的表单属性有：disabled、type、value、checked、selected
-
-对于disabled、checked、selected三个属性来说，比较特殊。
-
-```js
-在标签中，只要指定了disabled属性，无论有值没值，都代表这个input是被禁用的。注意，标签的disabled仅仅是默认值。
-在DOM对象中，disabled的属性是一个布尔类型的属性，值只有true或者false
-```
+* 对于disabled、checked、selected三个属性来说，比较特殊。在DOM对象中，这些属性是一个布尔类型的属性，值只有 true 或者 false
 
 !> reset() 方法可把表单中的元素重置为它们的默认值
 
+【案例：禁用文本框】
 
+【案例：随机下拉框选中】
 
-【案例：禁用文本框.html】
-
-【案例：随机下拉框选中.html】
-
-【案例：表格全选案例.html】
+【案例：表格全选案例】
 
 
 
-### 3.标签的自定义属性
+### 标签的自定义属性
 
 > 我们之前讨论的属性，都是HTML规范中，标签本来就有的属性，对于标签自定义的一些属性，比较特殊。
 
@@ -367,24 +320,24 @@ link.onclick = function() {
 <div id="box" aa="bb"></div>
 ```
 
-在对应的DOM对象中是不存在的，在DOM对象中只会存在固定的那些属性。
+在对应的DOM对象中是不存在的，在DOM对象中只会存在固定的那些属性
 
 ```javascript
-var box = document.getElementById("box");
-console.log(box.aa); // undefined
+var box = document.getElementById("box")
+console.log(box.aa) // undefined
 ```
 
-**attribute方法**
+**attribute 方法**
 
-> attribute系列方法用于设置 标签的属性，不管是自定义的还是固有的属性。
+> attribute系列方法用于设置标签的属性，不管是自定义的还是固有的属性
 
 ```js
-//获取标签的属性
-box.getAttribute(属性名);
-//设置标签的属性
-box.setAttribute(属性名, 属性值);
-//移除标签的属性
-box.removeAttribute(属性名);
+// 获取标签的属性
+box.getAttribute(属性名)
+// 设置标签的属性
+box.setAttribute(属性名, 属性值)
+// 移除标签的属性
+box.removeAttribute(属性名)
 ```
 
 区别 :
@@ -393,22 +346,34 @@ box.removeAttribute(属性名);
  // 1. 直接给标签里只能添加固有的属性 title 等 标签+对象里都有显示
  // 2. 给标签添加自定义属性  => 标签上 ok  +  对象里 不ok
  // 3. 给对象添加自定义属性  => 标签里 不ok  + 对象里 ok
- //    自定义:  box.aa = bb;  只能给对象里添加,, 标签内是没有的
+ //    自定义:  box.aa = bb  只能给对象里添加,, 标签内是没有的
  //    获取 : box.aa
  // 3. 自定义 : setAttribute 设置, 标签+对象里都有显示,通过 getAttribute 获取 
 ```
 
 
 
-## tab栏案例 (重点)
+### tab 栏案例 (重点)
 
-**[案例1：获取当前元素的索引.html] (超级重要)**
+**[案例：获取当前元素的索引] (超级重要)**
 
-- 方式1 :  存 btns[i].setAttribute('index',i);   取: console.log(this.getAttribute('index'))
-- 方式2 :  存 btns[i].index = i;                 取: console.log(this.index);
-  区别在于 : 第一个显示在标签内  第二个不显示在标签内 推荐第二种
+```javascript
+// 方式1：
+// 存
+btns[i].setAttribute('index',i)
+// 取
+console.log(this.getAttribute('index'))
 
-**【案例：tab栏切换.html】**
+// 方式2：
+// 存
+btns[i].index = i
+// 取
+console.log(this.index)
+
+// 区别在于: 第一个显示在标签内  第二个不显示在标签内 推荐第二种
+```
+
+**【案例：tab栏切换】**
 
 
 
@@ -425,17 +390,17 @@ box.removeAttribute(属性名);
 
 
 ```js
-var div = document.getElementById('div');
+var div = document.getElementById('div')
 // 获取内容
 // 获取标签内容的时候，只会获取文本，标签扔掉了
-console.log(div.innerText); // 哈哈
+console.log(div.innerText) // 哈哈
 // 获取标签内容的时候，不管标签还是文本，都能获取到
-console.log(div.innerHTML); // <h1>哈哈</h1>
+console.log(div.innerHTML) // <h1>哈哈</h1>
 // 设置内容
 // 设置标签内容的时候，覆盖原来内容，对标签进行转义
-div.innerText = '<h1>嘿嘿</h1>'; // 只识别文本，标签会被转义
+div.innerText = '<h1>嘿嘿</h1>'
 // 设置内容的时候，覆盖原来内容，标签也能生效，浏览器能解析这个标签
-div.innerHTML = '<h1>嘿嘿</h1>'; // 能够识别标签，标签能够生效
+div.innerHTML = '<h1>嘿嘿</h1>'
 
 ```
 
@@ -451,9 +416,9 @@ div.innerHTML = '<h1>嘿嘿</h1>'; // 能够识别标签，标签能够生效
 ```js
 function getInnerText(element){
   if(typeof element.innerText === "string"){
-    return element.innerText;
+    return element.innerText
   } else {
-    return element.textContent;
+    return element.textContent
   }
 }
 ```
@@ -468,29 +433,29 @@ function getInnerText(element){
 >
 > 同样的DOM对象可以通过className操作样式  (嵌套样式)，也可以通过style属性操作样  (行内样式)。
 >
-> css : 嵌套样式   =>  js :  类名 div.className = 'red';
+> css : 嵌套样式   =>  js :  类名 div.className = 'red'
 >
-> css : 行内样式   =>  js :  style对象  div.style.color = 'red';
+> css : 行内样式   =>  js :  style对象  div.style.color = 'red'
 
 ### 样式属性
 
-- style 属性是一个对象, 里面存储了所有行内样式的键值对
+- style 属性是一个对象，里面存储了所有行内样式的键值对
 - style 属性只能获取和设置**行内样式**，嵌套样式通过 style 获取不到
-- 如果样式的名字带 `-` , 比如 background-color , 在 style 对象中, backgroundColor  =>  (因为 `-` 在js中不是一个合法的标识符)
-- style 设置的样式是行内样式，优先级要高于className设置的样式 
+- 如果样式的名字带 `-` , 比如 background-color , 在 style 对象中使用backgroundColor  =>  (因为 `-` 在js中不是一个合法的标识符)
+- style 设置的样式是行内样式，优先级要高于通过 className 设置的样式 
 
 ```js
 <div style="color:red;background-color:blue;">哈哈</div>
-var div = document.querySelector("div");
+var div = document.querySelector("div")
 // 获取样式
-console.log(div.style);
-console.log(div.style.color); // red
+console.log(div.style)
+console.log(div.style.color) // red
 
 // 设置样式
-div.style.width = "200px";
-div.style.height = "200px";
-div.style.fontSize = "100px";
-div.className = "box";
+div.style.width = "200px"
+div.style.height = "200px"
+div.style.fontSize = "100px"
+div.className = "box"
 ```
 
 
@@ -504,29 +469,29 @@ div.className = "box";
 > ​	返回值： 返回一个样式对象
 >
 > ```javascript
-> var div = document.querySelector("div");
+> var div = document.querySelector("div")
 > // 获取元素自身的
-> var ret = window.getComputedStyle(div, null).fontSize;
-> console.log(ret); // 
-> var ret1 = window.getComputedStyle(div, null).backgroundColor;
-> console.log(ret1);
+> var ret = window.getComputedStyle(div, null).fontSize
+> console.log(ret) // 
+> var ret1 = window.getComputedStyle(div, null).backgroundColor
+> console.log(ret1)
 > // 推荐：对于复合样式，需要获取什么样式，写具体的样式名，这样能更好的兼容更多浏览器
 > 
 > // 获取伪类的
-> var ret2 = window.getComputedStyle(div, "::after").width;
-> console.log(ret2);
+> var ret2 = window.getComputedStyle(div, "::after").width
+> console.log(ret2)
 > ```
 >
 >
 
 ​        
 
-### 关于body的样式操作
+### 关于 body 的样式操作
 
 ```js
-var  bd = document.querySelector('body');
-console.log(bd); // 通过 querySelector 获取 body 元素
-console.log(document.body); // 直接获取 body 元素
+var  bd = document.querySelector('body')
+console.log(bd) // 通过 querySelector 获取 body 元素
+console.log(document.body) // 直接获取 body 元素
 
 document.documentElement // 可以获取 html 元素
 document.head // 直接获取 head 元素
@@ -541,16 +506,16 @@ document.title // 获取的是 title 中的文本
 
 
 
-### 关于cssText  (了解)
+### 关于 cssText  (了解)
 
-> 使用cssText可以设置style的属性值
+> 使用 cssText 可以设置 style 的属性值
 
 ```javascript
 <div style="width:100px;height:100px">哈哈哈</div>
-//优点：可以一次性设置多个值
-//缺点：会覆盖其他值 不利于阅读
-var div = document.querySelector('div');
-div.style.cssText = 'background:red;color:yellow';
+// 优点：可以一次性设置多个值
+// 缺点：会覆盖其他值 不利于阅读
+var div = document.querySelector('div')
+div.style.cssText = 'background:red;color:yellow'
 ```
 
 
@@ -591,22 +556,22 @@ div.style.cssText = 'background:red;color:yellow';
     <li>导航4</li>
 </ul>
 <script>
-    var ul = document.querySelector('ul');
+    var ul = document.querySelector('ul')
 	// 获取ul所有的子节点（包括了元素节点和其他很多类型的节点，基本不常用）
-	console.log(ul.childNodes);
+	console.log(ul.childNodes)
     // 获取第一个子节点  (不常用)
-    console.log(ul.firstChild);
+    console.log(ul.firstChild)
     // 获取最后一个子节点  (不常用)
-    console.log(ul.lastChild);
+    console.log(ul.lastChild)
     
     // 获取所有的子元素，兼容性：IE678会把注释节点算上
-    console.log(ul.children);
+    console.log(ul.children)
     // 获取第一个子元素 有兼容性问题（IE678） 
-    console.log(ul.firstElementChild);
+    console.log(ul.firstElementChild)
     // 获取最后一个子元素 有兼容性问题（IE678） 
-    console.log(ul.lastElementChild);
+    console.log(ul.lastElementChild)
     // 获取第n个子元素 有兼容性问题（IE678）
-	console.log(ul.children[n]);  
+	console.log(ul.children[n])
 </script>
 ```
 
@@ -617,19 +582,19 @@ div.style.cssText = 'background:red;color:yellow';
 - `nextSibling` : 下一个兄弟节点  (基本不常用)
 - `nextElementSibling` : 下一个兄弟元素（IE678不兼容）
 - `previousSibling` : 上一个兄弟节点  (基本不常用)
-- `previousElementSibling`  : 上一个兄弟元素 有兼容性问题 可以封装一个兼容性方法 
+- `previousElementSibling` : 上一个兄弟元素 有兼容性问题 可以封装一个兼容性方法 
 
 ```html
 <p>导航1</p>
 <p class="p">导航2</p>
 <p>导航3</p>
 <script>
-    var p2 = document.querySelector(".p");
-    console.log(p2);
-    console.log(p2.nextSibling);
-    console.log(p2.nextElementSibling);
-    console.log(p2.previousSibling);
-    console.log(p2.previousElementSibling);
+    var p2 = document.querySelector(".p")
+    console.log(p2)
+    console.log(p2.nextSibling)
+    console.log(p2.nextElementSibling)
+    console.log(p2.previousSibling)
+    console.log(p2.previousElementSibling)
 </script>
 ```
 
@@ -643,24 +608,24 @@ div.style.cssText = 'background:red;color:yellow';
 - `parentElement` : 父元素
 
 ```
-div.parentNode; // 获取父节点
+div.parentNode // 获取父节点
 ```
 
 
 
 ### 添加节点 (重点)
 
-appendChild()  
+appendChild()
 
 **作用**：在子元素的最后添加一个元素
 
 **语法**：parent.appendChild(newChild)     
 
 ```js
-父元素.appendChild(新子元素);
+父元素.appendChild(新子元素)
 ```
 
-> **注意** : 如果添加的是页面中本来就存在的元素，是一个剪切的效果，原来的就不在了。
+> **注意** :  如果添加的是页面中本来就存在的元素，是一个剪切的效果，原来的就不在了
 
 ### insertBefore()
 
@@ -672,19 +637,19 @@ appendChild()
 
 ```javascript
 // 将元素添加到最后
-div.appendChild(p); // (常用)
-div.insertBefore(p, null);
+div.appendChild(p) // (常用)
+div.insertBefore(p, null)
 
 // 将元素添加到 s1 之前(常用)
-div.insertBefore(p, s1);
+div.insertBefore(p, s1)
 
 // 将元素添加到 s1 之后
 // 没有 insertAfter
-div.insertBefore(p, s1.nextElementSibling);
+div.insertBefore(p, s1.nextElementSibling)
 
 // 将元素添加到最前
-div.insertBefore(p, div.children[0]); // (常用)
-div.insertBefore(p, div.firstElementChild);
+div.insertBefore(p, div.children[0]) // (常用)
+div.insertBefore(p, div.firstElementChild)
 ```
 
 
@@ -698,15 +663,12 @@ div.insertBefore(p, div.firstElementChild);
 - false：默认值：是浅复制，只会复制标签节点本身，不会复制节点的孩子
 - true:   深度复制，会复制标签，还会复制标签的所有内容
 
-> 1. 克隆出来的节点跟原来的节点没有关系了，修改了也不会相互影响。
+> 1. 克隆出来的节点跟原来的节点没有关系了，修改了也不会相互影响
 > 2. 如果克隆的节点带了id，我们需要给id重新设置一个值，不让id冲突
 
 ```js
-var newNode = div.cloneNode(true);
-// false : 浅复制  只复制该元素
-// true : 深复制   不仅复制该元素 还复制其子元素
-
-console.log(newNode);
+var newNode = div.cloneNode(true)
+console.log(newNode)
 ```
 
 
@@ -717,11 +679,11 @@ console.log(newNode);
 
 可以生成新的节点，但是不推荐使用。如果页面已经加载完成了，再用document.write写内容的话，会把之前的页面给覆盖掉 
 
-> 原理：页面从上往下加载的时候，会开启一个文档流，当页面加载完，文档流就会关闭。document.write的本意就是在文档流上写入内容。如果页面没加载完成，文档流还是开着的，document.write直接在这个文档流上写东西，如果页面加载完成了，还是用document.write写东西，会重新开启一个新的文档流，往新的文档流上写东西，旧的文档流就被新的文档流覆盖了。
+> 原理：页面从上往下加载的时候，会开启一个文档流，当页面加载完，文档流就会关闭。document.write 的本意就是在文档流上写入内容。如果页面没加载完成，文档流还是开着的，document.write直接在这个文档流上写东西，如果页面加载完成了，还是用document.write写东西，会重新开启一个新的文档流，往新的文档流上写东西，旧的文档流就被新的文档流覆盖了。
 
 ```js
 window.onload = function () {
-  document.write('你妹')
+  document.write('呵呵')
 }
 ```
 
@@ -749,28 +711,28 @@ div.innerHTML = '<h1>哈哈</h1>'
 
 ```js
 var div = document.querySelector('div')
-var h1 = document.createElement('h1');
-console.log(h1);
-h1.style.background = 'red';
-h1.innerText = '哈';
-div.appendChild(h1);
+var h1 = document.createElement('h1')
+console.log(h1)
+h1.style.background = 'red'
+h1.innerText = '哈'
+div.appendChild(h1)
 ```
 
  
 
 ### 删除节点 (重点)
 
-语法：parent.removeChild(child);
+语法：parent.removeChild(child)
 
-解析 :  父元素.removeChild(子元素);
+解析 :  父元素.removeChild(子元素)
 
 功能：有父元素调用，删除里面的一个子元素。
 
 ```js
 //1 使用1 :
-div.removeChild(p);
+div.removeChild(p)
 //2 使用2 :
-p.parentNode.removeChild(p);
+p.parentNode.removeChild(p)
 ```
 
 **【案例 : 节点操作-删除节点】**
@@ -795,9 +757,9 @@ p.parentNode.removeChild(p);
 
 ### 替换节点
 
-语法：parentNode.replaceChild(newChild, oldChild);
+语法：parentNode.replaceChild(newChild,  oldChild)
 
-- `newChild ` 用来替换 `oldChild ` 的新节点，如果 `newChild` 已经存在于DOM树中，则它会被从原始位置删除。
+- `newChild ` 用来替换 `oldChild ` 的新节点，如果 `newChild` 已经存在于DOM树中，则它会被从原始位置删除
 
 
 
@@ -809,7 +771,7 @@ p.parentNode.removeChild(p);
 
 # BOM
 
-> BOM（Browser Object Model）：浏览器对象模型，提供了一套操作浏览器功能的工具。
+> BOM（Browser Object Model）：浏览器对象模型，提供了一套操作浏览器功能的工具
 
 ![](images/2.png)
 
