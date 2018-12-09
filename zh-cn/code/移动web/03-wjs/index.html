@@ -39,35 +39,37 @@
   </header>
 
   <!-- 导航栏 -->
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-          <i class="wjs_icon wjs_icon_logo"></i>
-          <i class="wjs_icon wjs_icon_word"></i>
-        </a>
-      </div>
+  <div class="wjs_nav">
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <i class="wjs_icon wjs_icon_logo"></i>
+            <i class="wjs_icon wjs_icon_word"></i>
+          </a>
+        </div>
 
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">我要投资</a></li>
-          <li><a href="#">我要借贷</a></li>
-          <li><a href="#">平台介绍</a></li>
-          <li><a href="#">新手专区</a></li>
-          <li><a href="#">最新动态</a></li>
-          <li><a href="#">微平台</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right hidden-sm">
-          <li><a href="#">个人中心</a></li>
-        </ul>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">我要投资</a></li>
+            <li><a href="#">我要借贷</a></li>
+            <li><a href="#">平台介绍</a></li>
+            <li><a href="#">新手专区</a></li>
+            <li><a href="#">最新动态</a></li>
+            <li><a href="#">微平台</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right hidden-sm">
+            <li><a href="#">个人中心</a></li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
 
   <!-- 轮播图 -->
   <div id="carousel-example-generic" class="carousel slide banner" data-ride="carousel">
@@ -170,7 +172,7 @@
           <i class="wjs_icon wjs_icon_clock"></i>
           <span>现在有 273 人在排队，累计预约交易成功 7571 次。 什么是预约投标？<a href="#">立即预约</a></span>
         </div>
-        <div class="pull-right">
+        <div class="pull-right hidden-xs">
           <a href="">
             <i class="wjs_icon wjs_icon_video"></i>
             <span>微金所企业宣传片</span>
@@ -363,6 +365,59 @@
       </div>
     </div>
 
+
+    <!-- 新闻部分 -->
+    <div class="new">
+      <div class="container">
+        <div class="col-md-2 col-md-offset-2">
+          <h3>全部新闻</h3>
+        </div>
+        <!-- Nav tabs -->
+        <div class="col-md-1">
+          <div class="line hidden-sm hidden-xs"></div>
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#home" data-toggle="tab"><i class="wjs_icon wjs_icon_news_01"></i></a></li>
+            <li><a href="#profile" data-toggle="tab"><i class="wjs_icon wjs_icon_news_02"></i></a></li>
+            <li><a href="#messages" data-toggle="tab"><i class="wjs_icon wjs_icon_news_03"></i></a></li>
+            <li><a href="#settings" data-toggle="tab"><i class="wjs_icon wjs_icon_news_04"></i></a></li>
+          </ul>
+
+        </div>
+
+        <!-- Tab panes -->
+        <div class="tab-content col-md-7 ">
+          <div class="tab-pane active" id="home">
+            <ul>
+              <li><a href="#">2016-09-22【微还款】一周还款公告2016年1月18日-1月24日</a></li>
+              <li><a href="#">2016-09-22【微还款】一周还款公告2016年1月18日-1月24日</a></li>
+              <li><a href="#">2016-09-22【微还款】一周还款公告2016年1月18日-1月24日</a></li>
+              <li><a href="#">2016-09-22【微还款】一周还款公告2016年1月18日-1月24日</a></li>
+              <li><a href="#">2016-09-22【微还款】一周还款公告2016年1月18日-1月24日</a></li>
+            </ul>
+          </div>
+          <div class="tab-pane" id="profile">...</div>
+          <div class="tab-pane" id="messages">...</div>
+          <div class="tab-pane" id="settings">...</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <h3>合作伙伴</h3>
+        <ul>
+          <li><a href="#"><i class="wjs_icon wjs_icon_partner01"></i></a></li>
+          <li><a href="#"><i class="wjs_icon wjs_icon_partner02"></i></a></li>
+          <li><a href="#"><i class="wjs_icon wjs_icon_partner03"></i></a></li>
+          <li><a href="#"><i class="wjs_icon wjs_icon_partner04"></i></a></li>
+          <li><a href="#"><i class="wjs_icon wjs_icon_partner05"></i></a></li>
+          <li><a href="#"><i class="wjs_icon wjs_icon_partner06"></i></a></li>
+          <li><a href="#"><i class="wjs_icon wjs_icon_partner07"></i></a></li>
+          <li><a href="#"><i class="wjs_icon wjs_icon_partner08"></i></a></li>
+          <li><a href="#"><i class="wjs_icon wjs_icon_partner09"></i></a></li>
+        </ul>
+      </div>
+    </footer>
 
   <script src="./lib/jquery/jquery-1.12.4.js"></script>
   <script src="./lib/bootstrap/js/bootstrap.js"></script>
