@@ -126,7 +126,7 @@ PPI值的越大说明单位尺寸里所能容纳的像素数量就越多，所�
 获取设备的像素比
 
 ```javascript
-window.devicePixelRatio  // 物理像素与独立像素的比值
+window.devicePixelRatio  // 物理像素与独立像素的比值 DPR
 ```
 
 ## 2倍图与3倍图（重要）
@@ -259,7 +259,7 @@ clientX / clientY // 触摸点相对浏览器窗口的位置
 pageX / pageY     // 触摸点相对于页面的位置
 ```
 
-
+!> 使用 jquery 注册 touch 类事件时，获取手指使用 `e.originalEvent.touchs[0]` ，因为 jq 对事件对象进行了封装
 
 【案例：jdm-滑动轮播图】
 
@@ -487,9 +487,34 @@ swipeDown   //下滑
 
 
 
+# bootstrap 框架
+
+**【项目：微金所】**
 
 
 
+# other
 
+```
+a {
+  /* 取消链接高亮, 移动端特有的样式  */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 
+/*单行溢出*/
+.one-txt-cut {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/*多行溢出*/
+.txt-cut {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+```
 
