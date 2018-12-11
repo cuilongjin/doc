@@ -1,0 +1,151 @@
+@color: #e92322;
+
+.container {
+  max-width: 640px;
+  min-width: 320px;
+  margin: 0 auto;
+  background-color: pink;
+}
+.header {
+  height: 44px;
+  background-image: linear-gradient(#fff, #ccc);
+  .back,
+  .menu {
+    width: 44px;
+    height: 44px;
+    padding: 12px;
+    background-origin: content-box;
+    background-clip: content-box
+  }
+  .back {
+    float: left;
+    background-position: -20px 0;
+  }
+  .menu {
+    float: right;
+    background-position: -60px 0;
+  }
+  .title {
+    overflow: hidden;
+    text-align: center;
+    line-height: 44px;
+    font-size: 20px;
+    height: 44px;
+  }
+}
+
+.tips {
+  height: 34px;
+  text-align: center;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  span {
+    line-height: 34px;
+    position: relative;
+    padding-left: 20px;
+    &::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: url("../images/safe_icon.png");
+      background-size: 18px;
+    }
+  }
+}
+
+.goods() {
+  border-bottom: 1px solid #ccc;
+  padding-left: 30px;
+  .good_icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-position: -180px -90px;
+    left: 5px;
+    top: 5px;
+  }
+}
+
+.goods {
+  margin-top: 10px;
+  .title {
+    height: 30px;
+    line-height: 30px;
+    background-color: #fff;
+    position: relative;
+    .goods();
+    .jd {
+      padding-left: 17px;
+      position: relative;
+      &::after {
+        content: "";
+        width: 15px;
+        height: 15px;
+        position: absolute;
+        background: url("../images/jd-sprites.png") 0 0/150px no-repeat;
+        background-size: 150px 150px;
+        top: 9px;
+        left: 0;
+      }
+    }
+    .tip {
+      padding-right: 10px;
+      color: @color;
+    }
+  }
+  .item {
+    height: 100px;
+    position: relative;
+    background-color: #fff;
+    .goods();
+    .good_img {
+      width: 80px;
+      height: 100px;
+      padding: 10px 0;
+    }
+    .good_info {
+      padding-left: 90px;
+      line-height: 20px;
+      .button {
+        height: 40px;
+        margin-top: 15px;
+        .number {
+          width: 92px;
+          border: 1px solid #ccc;
+          overflow: hidden;
+          span, input {
+            display: block;
+            float: left;
+            padding: 5px;
+            margin: 0;
+            line-height: 20px;
+            text-align: center;
+          }
+          span {
+            width: 20px;
+            background-color: #fff;
+          }
+          input {
+            width: 30px;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+          }
+        }
+        .delete {
+          width: 30px;
+          height: 40px;
+          padding: 10px 6px;
+          img:nth-child(1) {
+            width: 18px;
+          }
+          img:nth-child(2) {
+            width: 17px;
+          }
+        }
+      }
+    }
+  }
+}
