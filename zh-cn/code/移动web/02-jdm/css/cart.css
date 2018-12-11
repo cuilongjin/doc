@@ -1,8 +1,50 @@
 .container {
   max-width: 640px;
   min-width: 320px;
+  height: 1000px;
   margin: 0 auto;
   background-color: pink;
+  position: relative;
+}
+.mask {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: none;
+}
+.mask .content {
+  width: 300px;
+  height: 150px;
+  background-color: #fff;
+  padding: 10px;
+  margin: 200px auto;
+  border-radius: 5px;
+}
+.mask .content .tip {
+  width: 280px;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+  font-size: 20px;
+}
+.mask .content .cancel,
+.mask .content .confirm {
+  width: 120px;
+  height: 40px;
+  font-size: 18px;
+  border-radius: 5px;
+}
+.mask .content .confirm {
+  background-color: #e92322;
+  border: 1px solid #e92322;
+}
+.mask .content .cancel {
+  background-color: #fff;
+  border: 1px solid #ccc;
 }
 .header {
   height: 44px;
@@ -38,6 +80,7 @@
   border-bottom: 1px solid #ccc;
 }
 .tips span {
+  display: inline-block;
   line-height: 34px;
   position: relative;
   padding-left: 20px;
@@ -48,7 +91,7 @@
   height: 18px;
   position: absolute;
   left: 0;
-  top: 0;
+  top: 8px;
   background: url("../images/safe_icon.png");
   background-size: 18px;
 }
@@ -62,6 +105,7 @@
   position: relative;
   border-bottom: 1px solid #ccc;
   padding-left: 30px;
+  padding-right: 10px;
 }
 .goods .title .good_icon {
   width: 20px;
@@ -70,6 +114,9 @@
   background-position: -180px -90px;
   left: 5px;
   top: 5px;
+}
+.goods .title .good_icon.checked {
+  background-position: -180px -70px;
 }
 .goods .title .jd {
   padding-left: 17px;
@@ -95,6 +142,7 @@
   background-color: #fff;
   border-bottom: 1px solid #ccc;
   padding-left: 30px;
+  padding-right: 10px;
 }
 .goods .item .good_icon {
   width: 20px;
@@ -103,6 +151,9 @@
   background-position: -180px -90px;
   left: 5px;
   top: 5px;
+}
+.goods .item .good_icon.checked {
+  background-position: -180px -70px;
 }
 .goods .item .good_img {
   width: 80px;

@@ -3,9 +3,53 @@
 .container {
   max-width: 640px;
   min-width: 320px;
+  height: 1000px;
   margin: 0 auto;
   background-color: pink;
+  position: relative;
 }
+
+.mask {
+  width: 100%;
+
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: none;
+  .content {
+    width: 300px;
+    height: 150px;
+    background-color: #fff;
+    padding: 10px;
+    margin: 200px auto;
+    border-radius: 5px;
+    .tip {
+      width: 280px;
+      height: 80px;
+      text-align: center;
+      line-height: 80px;
+      font-size: 20px;
+    }
+    .cancel, .confirm {
+      width: 120px;
+      height: 40px;
+      font-size: 18px;
+      border-radius: 5px;
+    }
+    .confirm {
+      background-color: @color;
+      border: 1px solid @color;
+    }
+    .cancel {
+      background-color: #fff;
+      border: 1px solid #ccc;
+    }
+  }
+}
+
 .header {
   height: 44px;
   background-image: linear-gradient(#fff, #ccc);
@@ -40,6 +84,7 @@
   background-color: #fff;
   border-bottom: 1px solid #ccc;
   span {
+    display: inline-block;
     line-height: 34px;
     position: relative;
     padding-left: 20px;
@@ -49,7 +94,7 @@
       height: 18px;
       position: absolute;
       left: 0;
-      top: 0;
+      top: 8px;
       background: url("../images/safe_icon.png");
       background-size: 18px;
     }
@@ -59,6 +104,7 @@
 .goods() {
   border-bottom: 1px solid #ccc;
   padding-left: 30px;
+  padding-right: 10px;
   .good_icon {
     width: 20px;
     height: 20px;
@@ -66,6 +112,9 @@
     background-position: -180px -90px;
     left: 5px;
     top: 5px;
+    &.checked {
+      background-position: -180px -70px;
+    }
   }
 }
 
