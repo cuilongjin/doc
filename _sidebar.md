@@ -28,6 +28,9 @@
 	- [less](zh-cn/_移动web/less)
 * **Other**
 	- [遍历总结](zh-cn/_other/遍历总结)
+	- [防抖和节流](zh-cn/_other/防抖和节流)
 * **Tool**
 	- [编码规范及配置ESLint](zh-cn/_Tool/编码规范及配置ESLint)
 	- [Sublime插件及快捷键](zh-cn/_Tool/Sublime插件及快捷键)
+	- [gulp前端自动化环境](zh-cn/_Tool/gulp前端自动化环境)
+	- [Git基本使用](zh-cn/_Tool/Git)
