@@ -628,3 +628,13 @@ window.addEventListener('mousewheel', function(e) {
 | afterResize()                                                | 窗口大小发生改变后会触发的回调函数                           |
 | afterSlideLoad(anchor,index,  slideAnchor,slideIndex)        | 页面滚动到某一个幻灯片的时候会触发这个回调函数               |
 | afterSlideLeave(anchor,index,slideIndex,  diretion,nextSlideIndex) | 当离开某一个幻灯片的时候会触发一次这个回调函数。             |
+
+
+
+# other
+
+微调元素
+
+* margin-top: - ;
+* transform：translateY();
+*  position: relative; top: - ;
