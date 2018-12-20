@@ -215,29 +215,36 @@ navigator.geolocation.getCurrentPosition(function(position){
 
 
 
-#web存储（重点）
+# web存储（重点）
 
 > 在代码执行的时候，数据都是存储在内存中的，当页面关闭或者浏览器关闭的时候，内存就被释放掉了。数据只有存储在硬盘上，才不会被释放。
 
 ## cookie
 
-> 传统方式，我们以document.cookie进行存储，但是存储起来特别麻烦，并且，存储大小只有4k。每次请求都会带上cookie
+特点：
 
-cookie 是以字符串形式存在的，这个字符串有固定的格式：key=value;key1=value1;
+1. 大小 4k
+2. 生命周期，默认会话级别，但是可以设置过期时间
 
-在获取cookie内容时，一般需要通过正则或者字符串的方法进行处理，转换成对象，最终得到数据。
+3. cookie 中的数据可以在多个页面共享
+
+4. cookie 中的数据，在请求时会进行自动携带
+5. cookie 是以字符串形式存在的，这个字符串有固定的格式：key=value;key1=value1；在获取cookie内容时，一般需要通过正则或者字符串的方法进行处理，转换成对象，最终得到数据
+6. 一般用于存储 sessionId，可以实现登录状态保持 (会话保持)
+
+
 
 ```javascript
-document.cookie = "name=zhangsan";
-document.cookie = "age=18";
-document.cookie = "sex=23";
+document.cookie = 'name=zhangsan'
+document.cookie = 'age=18'
+document.cookie = 'sex=23'
 
 // 设置过期时间
-document.cookie = 'sex=12;max-age=3600';
+document.cookie = 'sex=12;max-age=3600'
 
 // 读取cookie
-var result = document.cookie;
-console.log(result);
+var result = document.cookie
+console.log(result)
 ```
 
 ## sessionStorage与localStorage
@@ -246,19 +253,15 @@ console.log(result);
 
 * window.sessionStorage 的特点
 
-```javascript
-1. 生命周期为一个会话周期
-2. 不能在多个窗口下共享数据。
+1. 生命周期默认为一个会话周期，且不能设置周期，一旦关闭浏览器, 就销毁了
+2. 不能在多个窗口下共享数据
 3. 大小为5M左右
-```
 
 * window.localStorage的特点
 
-```javascript
 1. 永久生效，除非手动删除
 2. 可以多个窗口共享
 3. 大小为5M左右
-```
 
 * localStorage 的方法
 
@@ -270,6 +273,14 @@ clear() // 清空所有存储内容（谨慎使用）
 ```
 
 * sessionStorage 的方法和 localStorage 的方法相同
+
+* localStorage 中只能以键值对的方式，存储字符串格式的数据
+
+* localStorage 存取复杂数据类型
+
+  先将复杂数据转换成 JSON字符串   JSON.stringify(obj/arr)在进行存储；使用时将 json字符串转换成复杂数据类型  JSON.parse( jsonStr )
+
+
 
 【案例-换肤效果】
 
