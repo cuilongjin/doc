@@ -10,11 +10,13 @@
 	- [JavaScript基础](zh-cn/_JavaScript/JavaScript基础)
 	- [JavaScript高级](zh-cn/_JavaScript/JavaScript高级)
 * **Linux**
-	- [linux 基础](zh-cn/_linux/linux 基础)
+	- [linux基础](zh-cn/_linux/linux基础)
 * **WebApi**
 	- [webapi笔记](zh-cn/_webApi/webapi笔记)
 * **jQuery**
 	- [jquery笔记](zh-cn/_jquery/jquery笔记)
+	- [jquery-fileupload插件](zh-cn/_jquery/jquery-fileupload插件的使用)
+	- [jquery中AJAX的全局事件](zh-cn/_jquery/jquery中AJAX的全局事件)
 * **PHP**
 	- [php笔记](zh-cn/_php/php笔记)
 * **AJAX**
@@ -29,6 +31,9 @@
 * **Other**
 	- [遍历总结](zh-cn/_other/遍历总结)
 	- [防抖和节流](zh-cn/_other/防抖和节流)
+	- [技术栈](zh-cn/_other/技术栈)
+	- [bootstrap-validator插件](zh-cn/_other/bootstrap-validator插件)
+	- [浏览器工作原理](zh-cn/_other/浏览器的工作原理/浏览器工作原理)
 * **Tool**
 	- [编码规范及配置ESLint](zh-cn/_Tool/编码规范及配置ESLint)
 	- [Sublime插件及快捷键](zh-cn/_Tool/Sublime插件及快捷键)
