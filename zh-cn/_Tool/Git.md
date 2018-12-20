@@ -612,3 +612,58 @@ git tag -d v1.0
 # 删除远程标签v1.0
 git push origin :refs/tags/v1.0
 ```
+
+
+
+# other
+
+* git add .` 的时候遇到 `warning: LF will be replaced by CRLF in ......` 
+
+```bash
+git config core.autocrlf
+git config --global core.autocrlf false
+
+# true：添加文件到git仓库时，git将其视为文本文件。他将把crlf变成lf
+# false：line-endings将不做转换操作。文本文件保持原来的样子
+# input：把crlf转成lf，当有人Check代码时还是lf方式。因此在window操作系统下，不要使用这个设置
+
+# CRLF (carriagereturnlinefeed)：表示句尾使用回车换行两个字符(即Windows编程时使用"\r\n"换行)
+# LF(line feed)：表示句尾只使用换行(Unix Style)
+# CR：表示只使用回车
+```
+
+
+
+* 合并pull两个不同的项目，出现 `fatal: refusing to merge unrelated histories`
+
+```bash
+git pull origin master ----allow-unrelated-histories
+```
+
+
+
+* Git 永久删除文件(包括历史记录)
+
+https://help.github.com/articles/removing-sensitive-data-from-a-repository/
+
+```bash
+# 在仓库的根目录执行
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch 文件路径' --prune-empty --tag-name-filter cat -- --all
+# 文件路径相对于git仓库根目录
+# 删除文件夹 添加 -r 命令
+
+# 以强制覆盖的方式推送修改后的 repo （不指定分支即所有分支）（重新上传 repo）
+git push origin --force --all
+
+# 强制推送 tags
+git push origin --force --tags
+
+# 清理和回收空间
+rm -rf .git/refs/original/
+git reflog expire --expire=now --all
+git gc --prune=now
+git gc --aggressive --prune=now
+```
+
+重新[绑定](https://git-scm.com/book/en/Git-Branching-Rebasing)，而不是合并创建的旧（受污染）存储库历史记录中的任何分支
+
