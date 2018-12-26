@@ -401,10 +401,10 @@ $("div").toggleClass("one");
 ```javascript
 // 第一个参数：需要设置的属性名
 // 第二个参数：对应的属性值
-attr(name, value);
+attr(name, value)
 // 用法举例
-$("img").attr("title", "哈哈");
-$("img").attr("alt", "哈哈");
+$('img').attr('title', '哈哈')
+$('img').attr('alt', '哈哈')
 ```
 
 > 设置多个属性
@@ -413,10 +413,10 @@ $("img").attr("alt", "哈哈");
 // 参数是一个对象，包含了需要设置的属性名和属性值
 attr(obj)
 // 用法举例
-$("img").attr({
-    title:"哎哟，不错哦",
-    alt:"哎哟，不错哦",
-    style:"opacity:.5"
+$('img').attr({
+    title: '哎哟，不错哦',
+    alt: '哎哟，不错哦',
+    style: 'opacity:.5'
 });
 ```
 
@@ -426,17 +426,17 @@ $("img").attr({
 // 传需要获取的属性名称，返回对应的属性值
 attr(name)
 // 用法举例
-var oTitle = $("img").attr("title");
-alert(oTitle);
+var oTitle = $('img').attr('title')
+alert(oTitle)
 ```
 
 > 移除属性
 
 ```javascript
-// 参数：需要移除的属性名，
-removeAttr(name);
+// 参数：需要移除的属性名
+removeAttr(name)
 //用法举例
-$("img").removeAttr("title");
+$('img').removeAttr('title')
 ```
 
 【案例：美女相册.html】
@@ -449,9 +449,9 @@ $("img").removeAttr("title");
 
 ```javascript
 // 设置属性
-$(“input:checked”).prop(“checked”,true);
+$('input:checked').prop('checked',true)
 // 获取属性
-$(“input:checked”).prop(“checked”); // 返回 true 或者 false
+$('input:checked').prop('checked') // 返回 true 或者 false
 ```
 
 【案例：表格全选案例.html】

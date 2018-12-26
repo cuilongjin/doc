@@ -102,36 +102,55 @@ div.classList.contains("classname");
 >
 > H5给所有的DOM对象增加了一个 `dataset` 的属性，这个属性中会包含所有 data- 开头的属性
 
+* html 5 中操作自定义属性 `dataset` 属性
+
 ```html
-<div id="demo" data-name="zs" data-age="10" data-user-name="ls">
+<div id="box" data-name="zs" data-age="10" data-user-name="ls">
 <script>
     var box = document.querySelector('#box')
-	console.log(box.dataset) 
+	console.log(box.dataset) // DOMStringMap {name: 'zs', age: '10', userName: 'ls'}
     console.log(box.dataset.name) // zs
     console.log(box.dataset['age']) // 10
-    console.log(box.userName) // ls 
-    box.dataset.aaBb = 'cc' // 在html结构中或添加 data-aa-bb=“cc”的自定义属性
+    console.log(box.dataset.userName) // ls
+    box.dataset.aaBb = 'cc' // 在html结构中或添加 data-aa-bb="cc" 的自定义属性
 </script>
 ```
 
-**注意：**html中属性是忽略大小写的，相当于是小写字母，
-
-如果需要大写，应使用中划线 `-` 进行分隔，在js中会转换成驼峰的形式，如`data-user-name ==> userName`
+**注意：**html中属性是忽略大小写的，相当于是小写字母，如果需要大写，应使用中划线 `-` 进行分隔，在js中会转换成驼峰的形式，如`data-user-name ==> userName`
 
 
 
-* jquery 中操作自定义属性 `data()`方法
+* jquery 中操作自定义属性
 
-```javascript
-// jquery并没有把 data-id 当成自定义属性来用
-var dataId = $('div').attr('data-id')
-console.log(dataId) // 100
+jquery并没有把 `data-` 当成自定义属性来用，jq中封装了 `data()` 方法
 
-// 在jq中，封装了另一个方法， data()方法,内部使用了缓存来实现，
-var a = $('div').data()
-console.log(a)// {desc: "呵呵" id: 100 userName: "zs"}
-console.log(a.id) // 100
+```html
+<div data-id="1" data-name="zs" id="box" data-a='{"b":"c"}'></div>
+<script>
+    console.log($('#box').data()) // {id: 1, name: "zs"}
+    // console.log($('#box').attr()) // error
+    console.log(box.dataset) // DOMStringMap{id: "1", name: "zs"}
+
+    console.log($('#box').data('id')) // 1 => 获取到自定义属性
+    $('#box').data('id', 2) // 并不会修改原标签中的自定义属性
+    console.log($('#box').data('id')) // 2 => html中data-id依然是1
+    console.log($('#box').attr('data-id')) // 1
+    console.log(box.dataset['id']) // 1 => 获取到的还是原来的 data-id
+
+    $('#box').attr('data-id', 3)
+    console.log($('#box').data('id')) // 3
+    console.log(box.dataset['id']) // 3
+
+    // 属性里使用json语法，但通过dataa()设置的不能解析成对象
+    $('#box').data('d', '{"e":"f"}')
+    console.log($('#box').data('a')) // {b: "c"} => 对象
+    console.log($('#box').data('d')) // '{"e":"f"}'
+    
+    $('#box').removeData() // 删除之前通过 data() 方法设置的数据
+</script>
 ```
+
+!> jq 的 data() 方法内部使用了缓存来实现，该方法设置的属性只能通过该方法获取，在html页面中看不到属性值，通过原生 dataset 属性也获取不到值
 
 
 
@@ -215,7 +234,7 @@ navigator.geolocation.getCurrentPosition(function(position){
 
 
 
-# web存储（重点）
+# web 存储（重点）
 
 > 在代码执行的时候，数据都是存储在内存中的，当页面关闭或者浏览器关闭的时候，内存就被释放掉了。数据只有存储在硬盘上，才不会被释放。
 
