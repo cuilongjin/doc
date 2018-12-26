@@ -25,3 +25,4 @@ $(document).ajaxStart(function () {
 5. `ajaxError`： 在一个 ajax 请求失败时触发（在error回调函数之后触发）
 6. `ajaxStop`： 在所有的 ajax 请求完成之后触发 all complete
 
+若$.ajax() global 参数设置为 false，则 ajax 全局事件不会被触发，global 参数默认为 true
