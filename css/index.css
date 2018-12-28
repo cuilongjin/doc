@@ -1,0 +1,38 @@
+/* 自定义样式 */
+.markdown-section pre>code[class] {
+  padding: 16px 0;
+}
+.markdown-section pre {
+  padding: 0 16px;
+}
+.markdown-section code {
+  font-size: 85%;
+}
+.markdown-section p {
+  margin: 16px 0;
+}
+.markdown-section h1, .markdown-section h2 {
+  margin: 30px 0 16px;
+  line-height: 1.25;
+  font-size: 24px;
+}
+.markdown-section h3 {
+  margin-top: 30px;
+  font-size: 1.4rem;
+}
+.markdown-section h4 {
+  margin-top: 30px;
+  font-size: 1.3rem;
+}
+.markdown-section h5 {
+  margin-top: 30px;
+  font-size: 1.2rem;
+}
+.markdown-section blockquote {
+  margin: 24px 0;
+  padding: 6px 0 6px 20px;
+  background-color: rgb(236, 248, 242);
+}
+.markdown-section blockquote p {
+  margin: 0;
+}
