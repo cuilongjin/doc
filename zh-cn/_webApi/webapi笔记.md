@@ -262,7 +262,7 @@ btn.onclick = function() {
 
 
 
-## 阻止a标签跳转
+## 阻止浏览器默认行为
 
 > 对于 a 标签来说，默认的行为就是进行页面跳转，如果不想让 a 标签进行跳转，可以在注册事件中使用`return false`
 
@@ -277,6 +277,15 @@ btn.onclick = function() {
     }
 </script>
 ```
+
+
+
+1. e.preventDefault() 只会阻止浏览器的默认行为，并不会停止函数执行
+2. return false后的代码不在执行
+3. 在jQuery中，`return false`在调用时会执行3个单独的操作：
+   1. `event.preventDefault()`
+   2. `event.stopPropagation()`
+   3. 停止回调执行并在调用时立即返回
 
 
 
@@ -1120,9 +1129,9 @@ function animate (element, target) {
 
 ```js
 // 给一个形参即可
-btn.onclick = function (event) {
-    // event 就是事件对象，里面包含了事件触发时的一些信息
-	console.log(event)
+btn.onclick = function (e) {
+    // e 就是事件对象，里面包含了事件触发时的一些信息
+	console.log(e)
 }
 ```
 
@@ -1131,17 +1140,17 @@ btn.onclick = function (event) {
 ```js
 btn.onclick = function(){
 	// IE678 通过 window.event 获取事件对象
-	console.log(window.event);
+	console.log(window.event)
 }
 ```
 
 **兼容性 :**
 
 ```js
-btn.onclick = function(event){
+btn.onclick = function(e){
   	// 只要用到了事件对象，就要记得处理浏览器兼容性
     // 低版本IE event 不存在为undefined
-	event = event || window.event
+	e = e || window.event
 }
 ```
 
@@ -1161,10 +1170,10 @@ btn.onclick = function(event){
 
 
 ```js
-document.onmousemove = function (event) {
-    console.log(event.clientX, event.clientY)
-    console.log(event.pageX, event.pageY)
-    console.log(event.screenX, event.screenY)
+document.onmousemove = function (e) {
+    console.log(e.clientX, e.clientY)
+    console.log(e.pageX, e.pageY)
+    console.log(e.screenX, e.screenY)
 }
 ```
 
@@ -1178,7 +1187,7 @@ document.onmousemove = function (event) {
 
 ```javascript
 // 键盘按下的那个键的键盘码
-event.keyCode
+e.keyCode
 ```
 
 
@@ -1293,15 +1302,28 @@ on 创建的事件默认为冒泡，无法修改
 
 #### 阻止事件冒泡  (掌握)
 
-**代码 :   event.stopPropagation()**
+**代码 :   e.stopPropagation()**
 
 ```js
 // 1. 因为是事件的冒泡，因事件引起，也要因事件停止
-father/son/sun.onclick = function (event) {
-    event.stopPropagation()
+father/son/sun.onclick = function (e) {
+    e.stopPropagation()
 }
 // 参数3：true => 捕获 ， false => 冒泡（默认）
 father/son/sun.addEventListener('click', function(){}, 参数3)
+```
+
+
+
+```javascript
+// 阻止事件冒泡的兼容性封装
+function stopPropagation(e) {
+    if (e && e.stopPropagation) {
+        e.stopPropagation() // 标准浏览器
+    } else {
+        window.event.cancelBubble = true // 兼容IE的方式来取消事件冒泡
+    }
+}
 ```
 
 
