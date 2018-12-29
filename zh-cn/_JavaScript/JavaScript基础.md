@@ -2302,15 +2302,41 @@ var newArr = arr.map(function (item, index) {
 
 ```javascript
 // 语法
-var newArr = arr.filter(function (item,index) {
-    // item 必需。数组中正在处理的当前元素
-	// index 可选。数组中正在处理的当前元素的索引
-	// arr 可选。当前数组
+var newArr = arr.filter(function (item, index) {
+    // 参数同 map
     // 使用 return 操作输出，会循环数组每一项，并返回判断为 true 的每一项组成的数组
     return item > 2 && item < 5 // return 后是判断条件
 })
 // 不修改原数组
-// 返回一个新数组，新数组的每一项乘以2
+// 返回一个新数组，新数组每一项满足 2<item< 5
+```
+
+
+
+> arr.some()
+
+```javascript
+// 语法
+var newArr = arr.some(function (item, index) {
+    // 参数同 map
+    // 返回布尔值，只要有一项满足条件就返回true，否则返回false
+    return item > 2 // return 后是判断条件
+})
+// 不修改原数组
+```
+
+
+
+> arr.every()
+
+```javascript
+// 语法
+var newArr = arr.every(function (item, index) {
+    // 参数同 map
+    // 返回布尔值，只有所有项都满足条件才返回true，否则返回false
+    return item > 2 // return 后是判断条件
+})
+// 不修改原数组
 ```
 
 
@@ -2332,15 +2358,28 @@ console.log(new1)
 
 ```javascript
 // 语法
-var newArr = arr.find(function (item,index) {
-    // item 必需。数组中正在处理的当前元素
-	// index 可选。数组中正在处理的当前元素的索引
-	// arr 可选。当前数组
+var newArr = arr.find(function (item, index) {
+	// 参数同 map
     // 使用 return 操作输出，会循环数组每一项，当遍历循环到判断到一个为true则跳出循环，输出当前数组元素
-    return item > 2 && item < 5 // return 后是判断条件
+    return item > 2 // return 后是判断条件
 })
 // 不修改原数组
-// 返回一个数组元素
+// 返回一个数组元素，如果全不满足返回 undefined
+```
+
+
+
+> arr.findIndex()
+
+```javascript
+// 语法
+var newArr = arr.find(function (item, index) {
+	// 参数同 map
+    // 使用 return 操作输出，会循环数组每一项，当遍历循环到判断到一个为true则跳出循环，输出当前数组元素的下标
+    return item > 2 // return 后是判断条件
+})
+// 不修改原数组
+// 返回一个数组元素的下标，如果全不满足返回 -1
 ```
 
 
@@ -2349,7 +2388,7 @@ var newArr = arr.find(function (item,index) {
 
 ```javascript
 // 语法
-var new1 = arr.reduce(function(pre,next,index) {
+var new1 = arr.reduce(function (pre, next, index) {
     // pre 第一次为数组第一项，之后为上一操作的结果
 	// next 数组的下一项
     // index next项的序列
@@ -2363,7 +2402,7 @@ var new1 = arr.reduce(function(pre,next,index) {
 ```javascript
 // 扁平化数组
 var arr2 = [[1,2,3],[4,5],[6,7]]
-var new2 = arr2.reduce(function(pre,next,index){
+var new2 = arr2.reduce(function (pre, next, index){
 	return pre.concat(next)	// 前数组拼接后数组 .concat()
 })
 ```
@@ -2371,7 +2410,7 @@ var new2 = arr2.reduce(function(pre,next,index){
 ```javascript
 // 对象数组叠加计算
 var arr3 = [{price:1,count:1},{price:2,count:2},{price:3,count:3}]
-var new3 = arr3.reduce(function(pre,next,index) {
+var new3 = arr3.reduce(function (pre, next, index) {
 	return pre + next.price * next.count
     
 	// 当需要操作第一项的时候，利用reduce(callbreak(){},往数组第一项前添加一项，如:0)
