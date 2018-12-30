@@ -14,42 +14,42 @@
 
 > Everything is object （万物皆对象）
 
-对象到底是什么，我们可以从两次层次来理解。
+对象到底是什么，我们可以从两次层次来理解
 
-**(1) 对象是具体事物的抽象。**
+**(1) 对象是具体事物的抽象**
 
-一本书、一辆汽车、一个人都可以是对象，当实物被抽象成对象，实物之间的关系就变成了对象之间的关系，从而就可以模拟现实情况，针对对象进行编程。
+一本书、一辆汽车、一个人都可以是对象，当实物被抽象成对象，实物之间的关系就变成了对象之间的关系，从而就可以模拟现实情况，针对对象进行编程
 
 问： 书是对象吗
 
 **(2)对象是无序键值对的集合，其属性可以包含基本值、对象或者函数**
 
-每个对象都是基于一个引用类型创建的，这些类型可以是系统内置的原生类型，也可以是开发人员自定义的类型。
+每个对象都是基于一个引用类型创建的，这些类型可以是系统内置的原生类型，也可以是开发人员自定义的类型
 
 ### 什么是面向对象？
 
-面向对象编程 —— Object Oriented Programming，简称 OOP ，是一种编程开发思想。
+面向对象编程 —— Object Oriented Programming，简称 OOP ，是一种编程开发思想
 
-在面向对象程序开发思想中，每一个对象都是功能中心，具有明确分工，可以完成接受信息、处理数据、发出信息等任务。
-因此，面向对象编程具有灵活、代码可复用、高度模块化等特点，容易维护和开发，比起由一系列函数或指令组成的传统的过程式编程（procedural programming），更适合多人合作的大型软件项目。
+在面向对象程序开发思想中，每一个对象都是功能中心，具有明确分工，可以完成接受信息、处理数据、发出信息等任务
+因此，面向对象编程具有灵活、代码可复用、高度模块化等特点，容易维护和开发，比起由一系列函数或指令组成的传统的过程式编程（procedural programming），更适合多人合作的大型软件项目
 
 **面向对象与面向过程：**
 
 - 面向过程就是亲历亲为，事无巨细，有条不紊，面向过程是解决问题的一种思维方式，（执行者的角度）
-  - 关注点在于解决问题的过程（先xx，然后xx，在xx）；
+  - 关注点在于解决问题的过程（先xx，然后xx，在xx）
 - 面向对象就是找一个对象，让她去做这件事情（指挥者的角度）
-  - 关注点在找到能解决问题的对象上。
+  - 关注点在找到能解决问题的对象上
 - 面向对象不是面向过程的替代，而是面向过程的封装
 
 **面向对象的特性：**
 
 - 封装性
-  - 将功能的具体实现，全部封装到对象的内部，外界使用对象时，只需要关注对象提供的方法如何使用，而不需要关心对象的内部具体实现，这就是封装。
+  - 将功能的具体实现，全部封装到对象的内部，外界使用对象时，只需要关注对象提供的方法如何使用，而不需要关心对象的内部具体实现，这就是封装
 - 继承性
-  - 在js中，继承的概念很简单，一个对象没有的一些属性和方法，另外一个对象有，拿过来用，就实现了继承。
-  - **注意：在其他语言里面，继承是类与类之间的关系，在js中，是对象与对象之间的关系。**
+  - 在js中，继承的概念很简单，一个对象没有的一些属性和方法，另外一个对象有，拿过来用，就实现了继承
+  - **注意：在其他语言里面，继承是类与类之间的关系，在js中，是对象与对象之间的关系**
 - [多态性]
-  - 多态是在强类型的语言中才有的。js是弱类型语言，所以JS不支持多态
+  - 多态是在强类型的语言中才有的；js 是弱类型语言，所以 js 不支持多态
 
 ## 创建对象的方式
 
@@ -58,15 +58,15 @@
 我们可以直接通过 `new Object()` 创建：
 
 ```javascript
-//在js中，对象有动态特性，可以随时的给一个对象增加属性或者删除属性。
+// 在js中，对象有动态特性，可以随时的给一个对象增加属性或者删除属性。
 var person = new Object()
-person.name = 'zs';
-person.age = 18;
+person.name = 'zs'
+person.age = 18
 person.sayName = function () {
-  console.log(this.name);
+  console.log(this.name)
 }
 ```
-缺点：麻烦，每个属性都需要添加。
+缺点：麻烦，每个属性都需要添加
 
 ### 对象字面量创建
 
@@ -75,7 +75,7 @@ var person = {
   name: 'zs',
   age: 18,
   sayName: function () {
-    console.log(this.name);
+    console.log(this.name)
   }
 }
 ```
@@ -91,7 +91,7 @@ function createPerson (name, age) {
     name: name,
     age: age,
     sayName: function () {
-      console.log(this.name);
+      console.log(this.name)
     }
   }
 }
@@ -99,27 +99,27 @@ function createPerson (name, age) {
 然后生成实例对象：
 
 ```javascript
-var p1 = createPerson('zs', 18);
-var p2 = createPerson('ls', 18);
+var p1 = createPerson('zs', 18)
+var p2 = createPerson('ls', 18)
 ```
-缺点：没有解决对象识别的问题，创建出来的对象都是Object类型的。
+缺点：没有解决对象识别的问题，创建出来的对象都是Object类型的
 
 ### 继续改进：自定义构造函数
 
-构造函数是一个函数，用于实例化对象，需要配合new操作符使用。
+构造函数是一个函数，用于实例化对象，需要配合new操作符使用
 
 ```javascript
 function Person (name, age) {
-  this.name = name;
-  this.age = age;
+  this.name = name
+  this.age = age
   this.sayName = function () {
-    console.log(this.name);
+    console.log(this.name)
   }
 }
-var p1 = new Person('zs', 18);
-p1.sayName(); // zs
-var p2 = new Person('ls', 23);
-p2.sayName(); // ls
+var p1 = new Person('zs', 18)
+p1.sayName() // zs
+var p2 = new Person('ls', 23)
+p2.sayName() // ls
 ```
 
 
@@ -130,15 +130,15 @@ p2.sayName(); // ls
 
 ```javascript
 function Person (name, age) {
-    this.name = name;
-    this.age = age;
+    this.name = name
+    this.age = age
     this.sayHello = function () {
-        console.log('hello' + this.name);
+        console.log('hello' + this.name)
     }
 }
-var p1 = new Person('zs', 18);
-var p2 = new Person('ls', 16);
-console.log(p1.sayHello == p2.sayHello); // false
+var p1 = new Person('zs', 18)
+var p2 = new Person('ls', 16)
+console.log(p1.sayHello == p2.sayHello) // false
 ```
 
 
@@ -146,27 +146,27 @@ console.log(p1.sayHello == p2.sayHello); // false
 
 ```javascript
 function sayHello() {
-  console.log('hello ' + this.name);
+  console.log('hello ' + this.name)
 }
 function Person (name, age) {
-  this.name = name;
-  this.age = age;
-  this.sayHello = sayHello;
+  this.name = name
+  this.age = age
+  this.sayHello = sayHello
 }
 
-var p1 = new Person('zs', 18);
-var p2 = new Person('ls', 16);
-console.log(p1.sayHello === p2.sayHello); // true
+var p1 = new Person('zs', 18)
+var p2 = new Person('ls', 16)
+console.log(p1.sayHello === p2.sayHello) // true
 ```
-缺点：会暴漏很多的函数，容易造成全局变量污染。
+缺点：会暴漏很多的函数，容易造成全局变量污染
 
 
 
 >  术语：
 >
-> 1. 实例（实例对象）： 通过构造函数创建出来的对象，叫做实例，实例可以有多个
-> 2. 实例化： 构造函数创建对象的过程
-> 3. 成员： 对象的属性和方法
+> 1. 实例（实例对象）：通过构造函数创建出来的对象，叫做实例，实例可以有多个
+> 2. 实例化：构造函数创建对象的过程
+> 3. 成员：对象的属性和方法
 
 
 
@@ -174,23 +174,23 @@ console.log(p1.sayHello === p2.sayHello); // true
 
 ### 原型基本概念
 
-Javascript 规定，每一个函数都有一个 `prototype` 属性，属性值是 一个对象，这个对象就叫做原型（原型对象），这个对象的所有属性和方法，都会被构造函数的实例继承。
+Javascript 规定，每一个函数都有一个 `prototype` 属性，属性值是 一个对象，这个对象就叫做原型（原型对象），这个对象的所有属性和方法，都会被构造函数的实例继承
 
-这也就意味着，我们可以把所有对象实例需要共享的属性和方法直接定义在 `prototype` 对象上。
+这也就意味着，我们可以把所有对象实例需要共享的属性和方法直接定义在 `prototype` 对象上
 
 ```javascript
 function Person (name, age) {
-  this.name = name；
-  this.age = age；
+  this.name = name
+  this.age = age
 }
 
-console.log(Person.prototype)；
+console.log(Person.prototype)
 Person.prototype.sayName = function () {
-  console.log(this.name)；
+  console.log(this.name)
 }
-var p1 = new Person(...)；
-var p2 = new Person(...)；
-console.log(p1.sayName === p2.sayName)； // true
+var p1 = new Person(...)
+var p2 = new Person(...)
+console.log(p1.sayName === p2.sayName) // true
 ```
 
 这时所有实例的 `sayName()` 方法，其实都是同一个内存地址
@@ -215,31 +215,31 @@ console.log(p1.sayName === p2.sayName)； // true
 
 ### constructor 属性
 
-默认情况下，原型对象中只包含了一个属性：constructor，constructor 属性指向了当前原型对象的构造函数。
+默认情况下，原型对象中只包含了一个属性：constructor，constructor 属性指向了当前原型对象的构造函数
 
 ```javascript
-function Person(){
+function Person () {
 
 }
 
-console.log(Person.prototype);
-console.log(Person.prototype.constructor); // 构造函数本身
+console.log(Person.prototype)
+console.log(Person.prototype.constructor) // 构造函数本身
 
-var p = new Person();
-console.log(p);
+var p = new Person()
+console.log(p)
 // p 实例对象没有constructor 属性， 该属性来源于原型上
-console.log(p.constructor == Person.prototype.constructor); // true
+console.log(p.constructor == Person.prototype.constructor) // true
 ```
 
 
 
 ### 构造函数、实例、原型三者之间的关系
 
-构造函数：构造函数就是一个函数，配合 new 可以新建对象。
+构造函数：构造函数就是一个函数，配合 new 可以新建对象
 
-实例：通过构造函数实例化出来的对象我们把它叫做构造函数的实例。一个构造函数可以有很多实例。
+实例：通过构造函数实例化出来的对象我们把它叫做构造函数的实例。一个构造函数可以有很多实例
 
-原型：每一个构造函数都有一个属性`prototype`，函数的prototype属性值就是原型。通过构造函数创建出来的实例能够直接使用原型上的属性和方法。
+原型：每一个构造函数都有一个属性`prototype`，函数的 prototype 属性值就是原型。通过构造函数创建出来的实例能够直接使用原型上的属性和方法
 
 
 
@@ -249,17 +249,17 @@ console.log(p.constructor == Person.prototype.constructor); // true
 
 原型三角关系：
 
-* 构造函数和原型 关系 ：  配偶关系
-  * 构造函数（妈妈），通过 prototype 属性访问原型 （爸爸）
-  * 原型通过 constructor 属性访问到 构造函数
+* 构造函数和原型：配偶关系
+  * 构造函数（妈妈），通过 prototype 属性访问原型（爸爸）
+  * 原型通过 constructor 属性访问到构造函数
 
-* 构造函数 和 实例对象：  母子关系
+* 构造函数 和 实例对象：母子关系
   * 构造函数可以创建实例对象
   * 实例对象不能直接访问到构造函数      
 
-* 原型和 实例对象关系 : 父子关系
+* 原型 和 实例对象关系：父子关系
   * 实例对象可以直接访问到原型上的所有成员
-  * 实例对象可以间接的访问到构造函数(通过原型上的constructor 属性)
+  * 实例对象可以间接的访问到构造函数（通过原型上的constructor 属性）
 
 
 
@@ -274,20 +274,20 @@ console.log(p.constructor == Person.prototype.constructor); // true
 绘制对象的原型链结构：
 
 ```javascript
-var p = new Person();
-// p ==> Person.prototype  ==> Object.prototype ==> null;
-var o = new Object();
-// o ==> Object.prototype ==> null;
-var arr = new Array();
-// arr ==> Array.prototype ==> Object.prototype ==> null;
-var date = new Date();
-// date ==> Date.prototype ==> Object.prototype ==> null;
+var p = new Person()
+// p ==> Person.prototype  ==> Object.prototype ==> null
+var o = new Object()
+// o ==> Object.prototype ==> null
+var arr = new Array()
+// arr ==> Array.prototype ==> Object.prototype ==> null
+var date = new Date()
+// date ==> Date.prototype ==> Object.prototype ==> null
 
 // Math 是个内置对象，不是个构造函数
-// Math ==> Object.prototype ==> null;
+// Math ==> Object.prototype ==> null
 ```
 
-总结：Object.prototype是原型链的尽头，Object.prototype的原型是null。
+总结：Object.prototype 是原型链的尽头，Object.prototype 的原型是 null
 
 ![](images/proto.png)
 
