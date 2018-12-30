@@ -959,9 +959,10 @@ for 循环代码示例：
 
 ```js
 // 打印1-5之间所有数
-for ( var i = 1;i<=5;i++ ) {
+for ( var i = 1; i<=5; i++ ) {
     console.log(i)
 }
+console.log(i) // 6 即便循环已经结束了，我们依然可以访问 i 的值
 ```
 
 思考1：
