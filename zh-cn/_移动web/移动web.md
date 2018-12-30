@@ -615,29 +615,9 @@ function responsive () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # other
 
-```
+```css
 a {
   /* 取消链接高亮, 移动端特有的样式  */
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
