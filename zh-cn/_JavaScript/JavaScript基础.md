@@ -2469,6 +2469,11 @@ toString() // 转换成字符串并返回
   str.search(regexp) // 查找并输出索引位置,找不到输出-1
   str.match(regexp) // 输出匹配到的第一个字符，匹配不到返回 null
   str.match(regexp/g) // 全部输出
+  
+  str.startsWith(str1) // 判断 str 字符串是否以 str1 字符串开头，若符合返回 true
+  	// 等价于判断 str.indexOf(str1) === 0
+  str.endsWith(str1) // 判断 str 字符串是否以 str1 字符串结尾，若符合返回 true
+  	str.indexOf(str1) === str.length - str1.length
   ```
 
 - 去除空白
