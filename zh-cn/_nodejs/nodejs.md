@@ -368,20 +368,20 @@ const http = require('http')
 let server = http.createServer()
 
 // 3. 服务器处理请求
-server.on('request', function (request, response) {
+server.on('request', (req, res) => {
   console.log('我接收到请求了')
 })
 
 // 4. 启动服务器，监听某个端口
-server.listen(9999, function () {
+server.listen(9999, (err) => {
   console.log('服务器启动成功了, 请访问： http://localhost:9999')
 })
 ```
 
 详细说明
 
-1. 给服务器注册 request 事件，只要服务器接收到了客户端的请求，就会触发request事件
-2. request事件有两个参数，request表示请求对象，可以获取所有与请求相关的信息，response是响应对象，可以获取所有与响应相关的信息
+1. 给服务器注册 request 事件，只要服务器接收到了客户端的请求，就会触发 request 事件
+2. request事件有两个参数，req表示请求对象，可以获取所有与请求相关的信息，res是响应对象，可以获取所有与响应相关的信息
 3. 服务器监听的端口范围为：1-65535之间，推荐使用3000以上的端口，因为3000以下的端口一般留给系统使用
 
 ## request 对象详解
@@ -396,7 +396,7 @@ method：请求的方式
 rawHeaders：所有的请求头信息（数组的方式）
 url：请求的地址（url地址的路径部分）
 	请求 http://127.0.0.1:3000/index 获取到的是：/index
-	请求http://127.0.0.1:3000 获取到的是：/
+	请求 http://127.0.0.1:3000 获取到的是：/
 ```
 
 注意：在发送请求的时候，可能会出现两次请求的情况，这是因为谷歌浏览器会自动增加一个`favicon.ico`的请求
@@ -434,8 +434,8 @@ res.writeHead(statusCode, statusMessage, options)：设置响应头，同时可�
 - 根据 `req.url` 读取不同的页面内容，返回给浏览器
 
 ```javascript
-// 需求: 简单模仿apache服务器,浏览器发送127.0.0.1:8888/index.html
-// 对应的,就返回www文件夹下面的index.html的内容
+// 需求: 简单模仿apache服务器，浏览器发送127.0.0.1:8888/index.html
+// 对应的返回www文件夹下面的index.html的内容
 const fs = require('fs')
 const http = require('http')
 const path = require('path')
@@ -448,8 +448,8 @@ server.on('request', (req, res) => {
   if (req.url === '/' || req.url === '/i') {
     // 读取www下面的index.html
     let filename = path.join(__dirname, 'www', 'index.html')
-    fs.readFile( filename, 'utf-8', (err, data)=>{
-      if (err) return console.log('文件读取失败')
+    fs.readFile(filename, 'utf-8', (err, data) => {
+      if (err) console.log('文件读取失败')
       // 服务器响应文件
       res.statusCode = 200
       res.statusMessage = 'ok'
@@ -481,3 +481,394 @@ server.listen(8888, ()=>{
   console.log('服务器开启了')
 })
 ```
+
+
+
+## MIME类型
+
+- MIME(Multipurpose Internet Mail Extensions)多用途Internet邮件扩展类型 是一种表示文档性质和格式的标准化方式
+- 浏览器通常使用MIME类型（而不是文件扩展名）来确定如何处理文档；因此服务器将正确的MIME类型附加到响应对象的头部是非常重要的
+- [MIME 类型](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_Types)
+
+## mime模块
+
+- 作用：获取文件的MIME类型
+- 安装：`npm i mime`
+
+```js
+let mime = require('mime')
+
+// 获取路径对应的 MIME 类型
+mime.getType('txt') // 'text/plain'
+// 根据 MIME 获取到文件后缀名
+mime.getExtension('text/plain')  // 'txt'
+```
+
+
+
+
+
+# npm - Node 包管理工具
+
+## npm 的基本概念
+
+- node package manager
+- [npm官网](https://npmjs.com)
+- [npm中文文档](https://www.npmjs.com.cn/)
+
+```html
+1. npm 是node的包管理工具，
+2. 它是世界上最大的软件注册表，每星期大约有 30 亿次的下载量，包含超过 600000 个 包（package） （即，代码模块）。
+3. 来自各大洲的开源软件开发者使用 npm 互相分享和借鉴。包的结构使您能够轻松跟踪依赖项和版本。
+
+npm 由三个独立的部分组成：
+    网站
+    注册表（registry）
+    命令行工具 (CLI)
+```
+
+- 作用：通过`npm`来快速安装开发中使用的包
+- npm不需要安装，只要安装了node，就自带了`npm`
+
+## npm 基本使用
+
+### 初始化包
+
+```bash
+# 这个命令用于初始化一个包，创建一个package.json文件，我们的项目都应该先执行npm init
+npm init
+
+# 快速的初始化一个包， 不能是一个中文名
+npm init -y
+```
+
+### 安装包
+
+```bash
+# 安装指定的包名的最新版本到项目中
+npm install 包名
+
+# 安装指定包的指定版本
+npm install 包名@版本号
+
+# 简写
+npm i 包名
+```
+
+### 卸载包
+
+```bash
+# 卸载已经安装的包
+npm uninstall 包名
+```
+
+## package.json 文件
+
+package.json文件，包（项目）描述文件，用来管理组织一个包（项目），它是一个纯JSON格式的
+
+- 作用：描述当前项目（包）的信息，描述当前包（项目）的依赖项
+- 如何生成：`npm init`或者`npm init -y`
+- 作用
+  - 作为一个标准的包，必须要有`package.json`文件进行描述
+  - 一个项目的node_modules目录通常都会很大，不用拷贝node_modules目录，可以通过package.json文件配合`npm install`直接安装项目所有的依赖项
+- 描述内容
+
+```json
+{
+  "name": "03-npm",  // 描述了包的名字，不能有中文
+  "version": "1.0.0",  // 描述了包的的版本信息， x.y.z  如果只是修复bug，需要更新Z位。如果是新增了功能，但是向下兼容，需要更新Y位。如果有大变动，向下不兼容，需要更新X位。
+  "description": "", // 包的描述信息
+  "main": "index.js", // 入口文件（模块化）
+  "scripts": {  // 配置一些脚本，在vue的时候会用到，现在体会不到
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],  // 关键字（方便搜索）
+  "author": "",  // 作者的信息
+  "license": "ISC",  // 许可证，开源协议
+  "dependencies": {   // 重要，项目的依赖， 方便代码的共享  通过 npm install 
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.3.1"
+  }
+}
+```
+
+**注意：一个合法的package.json，必须要有 name 和 version 两个属性** 
+
+## 本地安装和全局安装
+
+有两种方式用来安装 npm 包：本地安装和全局安装。选用哪种方式来安装，取决于你如何使用这个包。 
+
+- 全局安装：如果你想将其作为一个命令行工具，那么你应该将其安装到全局。这种安装方式后可以让你在任何目录下使用这个命令。比如nrm, nodemon等命令
+- 本地安装：如果你自己的模块依赖于某个包，并通过 Node.js 的 `require` 加载，那么你应该选择本地安装，这种方式也是 `npm install` 命令的默认行为
+
+```bash
+# 全局安装，会把 npm 包安装到C:\Users\用户名\AppData\Roaming\npm目录下，作为命令行工具使用
+npm install -g 包名
+
+# 本地安装，会把 npm 包安装到当前项目的node_modules文件中，作为项目的依赖
+npm install 包名
+
+# 注意： 如果网速慢的话，会导致下载失败。 再重新下载之前,建议使用以下命令,清除刚才下载的缓存.否则有可能一直无法下载成功
+npm cache clean -f
+```
+
+
+
+## npm下载加速
+
+### nrm
+
+- nrm：npm registry manager（npm仓库地址管理工具）
+- 安装：`npm i -g nrm`
+
+```shell
+# 带*表示当前正在使用的地址
+
+# 查看仓库地址列表
+nrm ls
+
+# 切换仓库地址
+nrm use taobao
+```
+
+## nodemon 自动重启
+
+- 作用：监听到 js 文件修改后，自动重启node程序
+- 安装：`npm i -g nodemon`
+- 使用：`nodemon app.js` 运行node程序
+
+
+
+# hacknews案例
+
+- [Hacker News 示例](https://news.ycombinator.com/)
+- 路由（route）：就是一套映射规则，根据url地址分配到对应的处理程序
+
+## 功能划分
+
+- 1 新闻列表页 - /index    get
+- 2 新闻详情页 - /details  get
+- 3 新闻添加页 - /submit   get
+- 4 新闻添加请求 - /add    post
+
+## art-template 模板引擎
+
+- [文档](https://aui.github.io/art-template/zh-cn/docs/)
+- 安装
+
+```bash
+npm install art-template
+```
+
+- 核心方法
+
+```javascript
+// 基于模板路径渲染模板
+// 参数1：文件的路径
+// 参数2：数据
+// 返回值：返回渲染后的内容
+// template(filename, data)
+let html = template(path.join(__dirname, 'pages', 'index.html'), {name: '大吉大利，今晚吃鸡'})
+```
+
+**注意点：文件的路径必须是绝对路径**；会将整个html当做模板返回
+
+## url 模块
+
+- 说明：用于 URL 处理与解析
+- 注意：通过 url 拿到的查询参数都是字符串格式
+
+```js
+// 导入url模块
+var url = require('url')
+
+// 解析 URL 字符串并返回一个 URL 对象
+// 第一个参数：表示要解析的URL字符串
+// 第二个参数：是否将query属性（查询参数）解析为一个对象，如果为：true，则query是一个对象
+var ret = url.parse('http://localhost:3000/details?id=1&name=jack', true)
+console.log(ret.query) // {id: '1', name: 'jack'}
+```
+
+## querystring 模块
+
+- 用于解析与格式化 URL 查询字符串
+- 注意：只在专门处理查询字符串时使用
+
+```js
+// foo=bar&abc=xyz&abc=123
+var querystring = require('querystring')
+
+// 将查询参数转化为对象
+// 第一个参数: 要解析的 URL 查询字符串
+querystring.parse('foo=bar&abc=xyz') // {foo: 'bar', abc: 'xyz'}
+```
+
+## 服务端重定向
+
+- [HTTP 状态码说明](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status)
+- [301 和 302](http://shuai.be/archives/301-302-redirection/)
+- 说明：服务端可以通过HTTP状态码让浏览器中的页面重定向
+
+```js
+res.writeHead(302, {
+  'Location': '/'
+})
+res.end()
+```
+
+## POST 请求参数的处理
+
+- 说明：POST请求可以发送大量数据，没有大小限制
+
+```js
+// 接受POST参数
+var postData = []
+
+// data事件：用来接受客户端发送过来的POST请求数据
+var result = ''
+req.on('data', (chunk) => {
+  result += chunk
+})
+
+// end事件：当POST数据接收完毕时，触发
+req.on('end', () => {
+  cosnole.log(result)
+})
+```
+
+
+
+# 模块化
+
+前端模块化规范：
+
+- AMD: require.js   依赖前置  
+- CMD: sea.js  依赖就近
+- commonJS:  node.js 同步的
+- ES6 标准模块化规范
+
+## 基本概念
+
+> Node 应用由模块组成，采用 CommonJS 模块规范
+>
+> 每个文件就是一个模块，有自己的作用域
+
+## node 中模块分类
+
+- 核心模块
+  - 由 node 本身提供，不需要单独安装（npm），可直接引入使用
+- 第三方模块
+  - 由社区或个人提供，需要通过npm安装后使用
+- 自定义模块
+  - 由我们自己创建，比如：tool.js 、 user.js
+
+### 核心模块
+
+- fs：文件操作模块
+- http：网络操作模块
+- path：路径操作模块
+- url：解析地址的模块
+- querystring：解析参数字符串的模块
+
+```js
+// 引入模块
+let fs = require('fs')
+```
+
+### 第三方模块
+
+- 第三方模块是由 社区或个人 提供的
+- 比如：mime模块/art-template/jquery...
+- 基本使用：1 先通过npm下载 2 再引入 3 最后使用
+
+### 用户自定义模块
+
+- 由开发人员创建的模块（JS文件）
+- 基本使用：1 创建模块 2 引入模块
+- 注意：自定义模块的路径必须以 `./` 或 `../` 开头
+
+```js
+// 加载模块
+require('./a')     // 推荐使用，省略 .js 后缀
+require('./a.js')
+```
+
+## 模块的导入与导出
+
+### 模块导入
+
+- 通过`require('fs')`来加载模块
+- 如果是第三方模块，需要先使用 npm 进行下载
+- 如果是自定义模块，需要加上相对路径 `./` 或者 `../` ，可以省略 `.js` 后缀，如果文件名是 `index.js` 那么index.js 也可以省略
+- 模块可以被多次加载，但是只会在第一次加载
+
+### 模块导出
+
+- 在模块的内部，`module` 变量代表的就是当前模块，它的 `exports` 属性就是对外的接口，加载某个模块，加载的就是 `module.exports` 属性，这个属性指向一个空的对象
+
+```javascript
+// module.exports指向的是一个对象，我们给对象增加属性即可
+// module.exports.num = 123
+// module.exports.age = 18
+
+// 通过module.exports也可以导出一个值，但是多次导出会覆盖
+module.exports = '123'
+module.exports = () => {}
+module.exports = {}
+```
+
+
+
+### module.exports 与 exports
+
+- exports 不是 module.exports 的缩写，exports 是单独存在的 
+
+- exports 和 module.exports 默认指向同一个对象
+
+- 模块最终导出的一定是 module.exports 中的数据
+
+- 结论: 
+
+  - 1 直接添加属性两者皆可
+
+  - 2 赋值对象时，只能使用 `module.exports`
+
+    ​
+
+```js
+console.log( module.exports === exports ) // ==> true
+
+// 等价操作
+module.exports.num = 123
+exports.num = 123
+
+// 赋值为新对象
+exports = {}
+module.exports = {}
+// 模块导出的是 module.exports 指向的对象
+```
+
+### nodejs 中 require 加载模块的规则:
+
+> require('mime') 以mime为例	
+
+1. 如果加载的模块是一个路径，表示加载的自定义模块，根据路径查找对应的js文件
+2. 如果加载的模块是一个名字，不是一个路径，说明加载的是核心模块或者是第三方模块
+3. 判断是否是核心模块,如果不是核心模块
+4. 会在当前目录下查找是否有node_modules目录, 如果有
+5. 在node_modules目录下查找mime这个文件夹
+6. 找到mime文件夹下的package.json文件，找到main属性，模块的入口文件
+7. 如果没有main，默认查找当前目录下的index.js文件
+8. 如果没有找到对应的模块，回去上一层目录，继续查找, 一直找到根目录 C: ||  D: ||  E:
+9. 报错： can not find module xxx
+
+### CommonJS 规范参考文档
+
+- [module (模块)](http://nodejs.cn/api/modules.html)
+- [CommonJS规范](http://javascript.ruanyifeng.com/nodejs/module.html)
+- [浅析JS模块规范：AMD，CMD，CommonJS](http://www.jianshu.com/p/09ffac7a3b2c)
+
+
+
+## 模块化改造hackerNews
+
