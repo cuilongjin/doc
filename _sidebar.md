@@ -30,6 +30,8 @@
 	- [less](zh-cn/_移动web/less)
 * **nodejs**
 	- [nodejs](zh-cn/_nodejs/nodejs)
+* **vue**
+	- [vue](zh-cn/_vue/vue)
 * **Other**
 	- [遍历总结](zh-cn/_other/遍历总结)
 	- [防抖和节流](zh-cn/_other/防抖和节流)
