@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+      <!-- v-model 用在 文本输入框 , 绑定的文本框的值 -->
+    <input type="text" v-model="num">
+    <br>
+    <!-- v-model 用在 多选框  ,  绑定的是选中状态 -->
+    <input type="checkbox" v-model="isChecked">
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        num: 0,
+        isChecked: true
+      }
+    })
+  </script>
+</body>
+</html>

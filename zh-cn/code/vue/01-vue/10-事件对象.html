@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+      <!-- 如果绑定事件的地方,事件函数 没有()  @click='fn' , 在事件处理函数那边直接接收一个形参 e 即可 -->
+    <button @click="fn">按钮</button>
+
+    <!-- 如果绑定事件的地方,事件函数 有()  @click='fn()' 则需要通过$event 获取 -->
+    <button @click="fn1($event, 'haha')">按钮</button>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {},
+      methods: {
+        fn (e) {
+          console.log(e)
+        },
+        fn1 (e, ref) {
+          console.log(e)
+          console.log(ref)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

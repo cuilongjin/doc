@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .red {
+      background-color: red;
+    }
+    .fz {
+      font-size: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <a v-bind:href="href">hahaha</a>
+    <!-- v-bind可以直接省略 -->
+    <a :href="href">hahaha</a>
+
+    <!-- 操作样式 -->
+    <!-- 1. 动态添加类，但不符合vue数据是核心的思想 -->
+    <h1 :class="cls">hahaha</h1>
+
+    <!-- 2. 数据里是一个对象 -->
+    <!-- 属性名为类名 -->
+    <!-- 属性值为布尔值 -->
+    <h1 :class="{red: isRed, fz: isFz}">hahaha</h1>
+
+    <!-- 3.style -->
+    <h1 :style="{backgroundColor: 'red', fontSize: fz + 'px'}">hahaha</h1>
+
+
+    <!-- 其他 -->
+    <div :class="['red', 'fz']">heheheh</div>
+    <!-- ===> <div class="red fz"></div> -->
+
+    <!-- 多个样式对象写成数组的形式，如果有相同样式后面会覆盖前面 -->
+    <div :class="[{red: true}, 'fz']">hehehe</div>
+    <!-- ===> <div class="red fz"></div> -->
+
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+
+    // v-bind :
+    // 说明 : 动态数据绑定 (单向)，因为html的`属性`不能使用{{}} 来动态的读取数据 , 需要使用 v-bind
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        href: 'https://www.baidu.com',
+        cls: 'red fz',
+        isRed: true,
+        isFz: true,
+        fz: 50
+      }
+    })
+  </script>
+</body>
+</html>

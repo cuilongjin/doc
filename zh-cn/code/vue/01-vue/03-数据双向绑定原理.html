@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input id="input" type="text" v-model="num">
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    // 数据双向绑定底层是通过 Object.defineProperty() 来实现的
+    // Object.defineProperty 是 ES5 中一个无法 shim(兼容) 的特性，这也就是为什么 `Vue 不支持 IE8 以及更低版本浏览器
+
+    let obj = {}
+    let temp
+    // 第一个参数 : 给哪个对象添加或者设置属性
+    // 第二个参数 : 要添加/设置什么属性
+    // 第三个参数 : 属性的修饰符 对象格式
+    Object.defineProperty(obj, 'name', {
+      set: function (newVal) {
+        // 设置属性时会触发该函数
+        console.log('设置', newVal)
+        temp = newVal
+        input.value = newVal
+      },
+      get: function () {
+        // 获取属性时会触发该函数
+        console.log('获取')
+        return temp
+      }
+    })
+
+    input.oninput = function () {
+      // console.log(this.value)
+      obj.name = this.value
+      console.log(obj.name)
+    }
+
+  </script>
+</body>
+</html>

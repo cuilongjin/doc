@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="fn">按钮</button>
+    <!-- 简写 @ -->
+    <button @click="fn1">按钮</button>
+    <!-- 传参 -->
+    <button @click="fn2(123)">按钮</button>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    // v-on 注册事件
+    // v-on:click => 绑定点击事件
+
+    const vm = new Vue({
+      el: '#app',
+      data: {},
+
+      // 事件函数写在 methods 中
+      methods: {
+        fn () {
+          console.log('haha')
+        },
+        fn1 () {
+          console.log('haha')
+        },
+        fn2 (ref) {
+          console.log(ref)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

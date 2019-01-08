@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="fn">按钮</button>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        msg: 'zs'
+      },
+      methods: {
+        fn () {
+          console.log(this)
+          // this 指向了 vm 实例
+          console.log(this === vm) // true
+          console.log(this.msg) // zs
+        }
+      }
+    })
+  </script>
+</body>
+</html>

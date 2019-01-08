@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 数据双向绑定 V<===>M -->
+    <input type="checkbox" v-model="isChecked1">
+    <br>
+    <!-- 动态数据绑定 （单向） V<===M -->
+    <input type="checkbox" v-bind:checked="isChecked2">
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        isChecked1: true,
+        isChecked2: true
+      }
+    })
+  </script>
+</body>
+</html>
