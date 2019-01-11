@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ count }}</h1>
+    <button @click="fn">按钮</button>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        count: 0
+      },
+      methods: {
+        fn () {
+          // 数据更新是同步的
+          // console.log(this.count) // 0
+          // this.count = 100
+          // console.log(this.count) // 100
+
+          console.log(this.$el.children[0].innerText) // 0
+          this.count = 100
+          console.log(this.$el.children[0].innerText) // 0
+
+          // DOM 更新后，会执行 this.$nextTick() 的回调函数，所以能拿到值
+          this.$nextTick(() => {
+            console.log(this.$el.children[0].innerText) // 100
+          })
+        }
+      }
+    })
+  </script>
+</body>
+</html>

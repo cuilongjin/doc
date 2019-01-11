@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="val"><span v-show='isTrue'>{{ msg }}</span>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        val: '',
+        msg: '请输入 6-12 位',
+        isTrue: false
+      },
+      watch: {
+        val (newVal) {
+          if (/^[0-9a-zA-z]{6,12}$/.test(newVal)) {
+            this.isTrue = false
+          } else {
+            this.isTrue = true
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

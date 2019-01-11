@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ num }}</h1>
+    <p>{{ msg }}</p>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        num: 0,
+        msg: '',
+        obj: {
+          age: 18
+        }
+      },
+      watch: {
+        // 监听基本数据
+        num (newVal, oldVal) {
+          this.msg = `num 值变化了，新值：${newVal}，旧值：${oldVal}`
+        },
+
+        // 监听对象
+        obj (newVal) {
+          // 虽然obj中的属性值发生改变了，但obj引用的地址没有发生改变，所以不会触发事件
+          console.log(newVal)
+        },
+
+        // 监听对象的属性
+        // obj: {
+        //   // 深度监听 监听对象里面的属性
+        //   // 一旦对象里的属性值发生变化,调用 handler 方法
+        //   deep: true,
+        //   handler (newVal) {
+        //     this.msg = `obj.age 值变化了，新值：${newVal.age}`
+        //   }
+        // },
+        'obj.age' (newVal) {
+          this.msg = `obj.age 值变化了，新值：${newVal}`
+        }
+      }
+    })
+  </script>
+</body>
+</html>
