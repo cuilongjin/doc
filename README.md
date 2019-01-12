@@ -29,6 +29,5 @@ zh-cn
 │ ├─移动web
 │ ├─nodejs
 │ └─vue
-├─demo
 └─参考手册
 ```
