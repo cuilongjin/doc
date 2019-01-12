@@ -36,3 +36,35 @@
 .markdown-section blockquote p {
   margin: 0;
 }
+
+/* 修改侧边栏样式 */
+.sidebar ul li a {
+  border-right: 2px solid transparent;
+}
+.sidebar ul li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background-color: #42b983;
+  background-clip: padding-box;
+  transition: .3s;
+}
+.sidebar ul li.active>a {
+  border-right: 2px solid transparent;
+  color: #fff;
+  background-color: #42b983;
+  background-clip: padding-box;
+  transition: .3s;
+}
+.app-sub-sidebar li:before {
+  content: "";
+}
+.sidebar>.sidebar-nav>ul>li ul>li {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+.sidebar>.sidebar-nav>ul>li ul>li a {
+  padding-left: 15px;
+}
+.sidebar>.sidebar-nav>ul>li ul>li ul>li a {
+  padding-left: 30px;
+}
