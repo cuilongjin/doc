@@ -8,7 +8,7 @@
 </head>
 <body>
   <div id="app">
-
+    <h1>{{ num }}</h1>
   </div>
   <script src="./vue.js"></script>
   <script>
@@ -24,9 +24,37 @@
         console.warn('beforeCreate', this.num, this.fn)
       },
       created () {
+        // 可以获取到数据
         console.warn('created', this.num, this.fn)
-      }
+        this.timeId = setInterval(() => {
+          console.log('haha')
+        }, 1000)
+        // 获取不到DOM
+        // console.warn('created', this.$el.children[0].innerText)
+      },
 
+      beforeUpdate () {
+        // 获取到更新DOM之前的数据
+        console.warn('beforeUpdate', this.$el.children[0].innerText)
+      },
+
+      updated () {
+        // 获取到更新DOM之前的数据
+        console.warn('updated', this.$el.children[0].innerText)
+      },
+
+      // 销毁之前
+      // 控制台调用vm.$destroy()
+      beforeDestroy () {
+        console.warn('beforeDestory')
+        // 可以用来清除定时器
+        clearInterval(this.timeId)
+      },
+
+      // 销毁之后
+      destroyed () {
+        console.log('destroyed')
+      }
     })
   </script>
 </body>
