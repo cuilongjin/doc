@@ -273,3 +273,22 @@ let obj = {
 obj.sayHi()
 ```
 
+
+
+## 对象属性的声明 
+
+```javascript
+// 当属性的key和变量的名相同时可以简写
+let person = {name: name} => let person = {name}
+
+声明函数 
+var cal = {
+    add: function () {
+        return 1
+    },
+    // 可以省略 `:function`
+    add(){
+        return 1
+    }
+}
+```
