@@ -194,6 +194,8 @@ input.oninput = function () {
 - vue 中所有的指令都是以 v- 开头的
 - 比如 : v-model v-bind v-if v-for 等等
 
+
+
 ### v-model (常用)
 
 > 说明 : 用在`表单`元素中，用来实现`数据双向绑定` (input checkbox 等等)
@@ -333,6 +335,8 @@ const vm = new Vue({
 </div>
 ```
 
+
+
 ### v-on
 
 > 注册事件/绑定事件
@@ -434,6 +438,8 @@ const vm = new Vue({
 <h1 v-for="item in 10">我是h1 {{ item }}</h1>
 ```
 
+
+
 ### v-if 和 v-show
 
 ```html
@@ -453,6 +459,59 @@ v-if 和 v-show 的异同点：
   * v-if 因为要不断的创建和删除来切换显示与隐藏，所以性能不高
   * v-if：切换次数不频繁的时候
   * v-show：切换次数频繁的时候
+
+
+
+### v-else-if 和 v-else
+
+- v-else：两种情况的
+
+```html
+<h1 v-if="num > 40">第一个</h1>
+<h1 v-else>第三个</h1>
+```
+
+- v-else-if：三种以上情况
+
+```html
+<h1 v-if="num >= 40">第一个</h1>
+<h1 v-else-if="num >= 30 && num < 40">第二个</h1>
+<h1 v-else>第三个</h1>
+```
+
+
+
+### v-once
+
+作用：告诉 vue 这个标签中的内容只需要解析一次，即便是数据再发送改变，这个标签中的内容也不会被更新
+
+```html
+<p>{{ num }}</p>
+<p v-once>带 onece 的 {{ num }}</p>
+```
+
+
+
+### v-pre
+
+作用：告诉 vue 这段节点中没有指令或表达式，不需要解析，从而，提升性能
+
+```html
+<p>{{ num }}</p>
+<p v-pre>带 v-pre {{ num }}</p>
+```
+
+
+
+### v-cloak
+
+使用遮盖
+
+- 给要遮盖的元素添加一个 v-cloak 指令：`<h1 v-cloak>{{ msg }}</h1>`
+
+- 使用属性选择器，添加样式：`[v-cloak] { display: none }`
+
+- vue 会在解析模板后将 v-cloak 指令从页面中移除，移除指令的时候，{{}} 已经变为对应的数据
 
 
 
@@ -684,8 +743,12 @@ watch: {
   // 从对象的角度来监听的
   obj: {
     // 深度监听 监听对象里面的属性
-    // 一旦对象里的属性值发生变化,调用 handler 方法
     deep: true,
+      
+    // 页面刚进入立即触发监听，以表达式的当前值触发回调
+    immediate: true,
+
+    // 对象里的属性值发生变化，调用 handler 方法
     handler (newVal) {
       this.msg = `obj.age 值变化了，新值：${newVal.age}`
     }
@@ -728,6 +791,7 @@ watch: {
 
 - 所有的 vue 组件，都是 vue 实例，一个组件对应一个实例，并且接收相同的选项对象（一些根实例特有的选项除外）
 - 实例生命周期也叫做：组件生命周期
+- 声明周期图：[01](/zh-cn/_vue/Vue实例生命周期图)
 
 ### 生命周期介绍
 
@@ -828,6 +892,352 @@ beforeDestroy () {
 
 
 
+## 使用接口的形式发送数据 
+
+### json-server 提供假数据接口
+
+- 作用：根据指定的 JSON 文件，提供假数据接口 
+- 地址：[json-server](https://github.com/typicode/json-server)
+- 使用步骤
+
+```js
+1. 全局安装 json-server: `npm i -g json-server`
+2. 准备一个json数据 
+3. 执行 :  `json-server data.json`
+
+data.json
+{
+  "todos": [
+    {
+      "id": 1,
+      "name": "张三",
+      "age": 20
+    }
+  ]
+}
+```
+
+- REST API格式
+
+```js
+1. 查询 : GET
+2. 添加 : POST
+3. 删除 : DELETE
+4. 更新 : 
+	PUT：需要将对象里的所有属性提交
+  PATCH(打补丁)：只需要提交需要修改的属性
+```
+
+- 具体接口
+  - 查询全部数据 http://localhost:3000/todos
+    查询指定数据 http://localhost:3000/todos/2
+  - 添加一个对象 http://localhost:3000/todos
+    POST
+    id 会自动帮我们添加
+  - 更新数据 http://localhost:3000/todos/3
+    PUT 或者 PATCH
+    PUT 需要提供该对象的所有数据
+    PATCH 只需要提供要修改的数据即可
+  - 删除数据http://localhost:3000/todos/3
+    DELETE
+- 可以借助 `postman` 测试接口
+
+
+
+### axios 发送请求
+
+- **作用** : 一个专门用来发送 ajax 请求的库,  可以在浏览器或者node.js 中使用
+- **使用步骤**
+  - 本地安装 axios : `npm i -g axios`
+  - 导入 axios
+- [axios 使用说明](https://github.com/axios/axios)
+- **GTE方式发送请求**
+
+```js
+// 方式1 
+axios.get('http://localhost:3000/todoList/1')
+  .then(res => {
+  console.log('获取到数据了：', res.data)
+})
+// 方式2
+axios.get('http://localhost:3000/todoList',{
+  params : {
+    id : 1
+  }
+})
+  .then(res => {
+  console.log('获取到数据了：', res.data)
+})
+```
+
+- **POST方式发送请求**
+
+```js
+// post 请求
+axios
+// 第一个参数：表示接口地址
+// 第二个参数：表示接口需要的参数
+  .post('http://localhost:3000/todoList', {
+  	name: 'haha',
+  	done: true
+}).then(res => {})
+```
+
+
+
+## 过滤器
+
+**概念 :**
+
+- vue 中的过滤器(filter)：**数据格式化**，让数据按照我们规定的一种格式输出
+- 比如 : 对于日期来说，将日期格式化转化为 `年-月-日 小时:分:秒` 格式的过程
+
+```js
+ // 直接显示
+ <h1>{{ date  }}</h1>
+ 显示：2019-01-11T10:11:19.566Z
+ 不是我们想要的
+ 我们想要的：2019-01-11 18-11-53
+```
+
+
+
+**全局过滤器 和 局部过滤器**
+
+- 全局方式创建的过滤器，在任何一个 Vue 实例中都可以使用 (一般情况下，为了项目方便管理，都是一个 vue 实例)
+- 局部创建的过滤器只能在当前 vue 实例中使用
+- 全局过滤器应在 Vue 实例创建之前创建
+
+
+
+**注册全局过滤器**
+
+```js
+// 第一个参数: 过滤器的名字
+// 第二个参数: 是一个回调函数，只要使用过滤器的时候，这个回调函数就会执行，res => 原始数据
+// 必须要有返回值：通过回调函数的返回值得到格式化后的数据
+Vue.filter('date', res => {
+  return res
+})
+```
+
+
+
+**注册局部过滤器**
+
+在 vm 的配置项里写一个 `filters`，对应的是一个对象
+
+```js
+filters: {
+  date (res) {
+		return res
+  }
+}
+```
+
+
+
+**moment 插件**
+
+- [moment](http://momentjs.cn/)
+
+- 使用：`npm i moment`
+
+- 日期 => 指定格式`moment(res).format('YYYY-MM-DD HH-mm-ss')`
+
+- 时间戳 => 指定格式`moment(res).format('YYYY-MM-DD HH-mm-ss')`
+
+- ```js
+  Vue.filter('dataFilter', res => {
+    return moment(res).format('YYYY-MM-DD HH-mm-ss')
+  })
+  ```
+
+
+
+**使用过滤器**
+
+```html
+<!-- data: 原始数据  dataFilter: 过滤器名称-->
+<h1>{{ date | dataFilter }}</h1>
+```
+
+```javascript
+// 全局
+Vue.filter('dataFilter', res => {
+  return moment(res).format('YYYY-MM-DD HH-mm-ss')
+})
+
+// 局部
+filters: {
+  date (res, format = 'YYYY-MM-DD', arg) {
+    return moment(res).format(format)
+  }
+}
+```
+
+
+
+**参数问题**
+
+```html
+<h1>{{ date | dateFilter('YYYY-MM-DD HH-mm-ss', 888) }}</h1>
+```
+
+```javascript
+Vue.filter('dateFilter', (res, format = 'YYYY-MM-DD', arg) => {
+  // res: 原始数据
+  // format：dateFilter 中的第一个参数，等号后面为默认值
+  // arg: dateFilter 中的第二个参数
+  console.log(arg) // 888
+  return moment(res).format(format)
+})
+```
+
+
+
+## 组件
+
+> 组件系统是 Vue 的另一个重要概念，因为它是一种抽象，允许我们使用小型、独立和通常 **可复用** 的组件构建大型应用。仔细想想，几乎任意类型的应用界面都可以抽象为一个组件树
+
+![组件化图释](/imgs/components.png)
+
+- 注册组件的两种方式：全局组件、局部组件
+- Vue实例中的配置项（如：methods、filters、watch、computed、directives、生命周期钩子函数）都可以在组件中使用
+
+
+
+### 全局组件
+
+- 说明：全局组件在所有的 vue 实例中都可以使用
+- 注意：
+  - 注册全局组件应放在 vm 实例之前
+  - 模板只允许有一个根节点
+  - 组件中的 `data` 必须是函数，并且要返回一个对象
+  - 组件复用时如果 data 为对象，所有复用的组件的 data 指向同一片内存空间，一个组件被修改了会影响其他组件，这不是我们想要的
+
+```js
+// 注册全局组件
+Vue.component('hello', {
+  template: '<p>A custom component!</p>',
+  data () {
+    return {
+      msg: '注意：组件的data必须是一个函数！！！'
+    }
+  }
+})
+```
+
+```html
+<!-- 使用：以自定义元素的方式 -->
+<div id="example">
+  <hello></hello>
+</div>
+
+<!-- 渲染结果 -->
+<div id="example">
+  <p>A custom component!</p>
+</div>
+```
+
+
+
+### 局部组件
+
+
+
+### 组件通讯
+
+- 组件是一个独立、封闭的个体
+- 也就是说：组件中的数据默认情况下，只能在组件内部使用，无法直接在组件外部使用
+- 可以将 vue 实例看做一个组件
+- 对于组件之间需要相互使用彼此的情况，应该使用 **组件通讯机制** 来解决
+- 组件通讯的三种情况 :
+  - 父组件将数据传递给子组件(父 -> 子)
+  - 子组件将数据传递给父组件 (子 => 父)
+  - 非父子组件(兄弟组件)
+
+
+
+#### 父组件到子组件
+
+- 将要传递的数据，通过属性传递给子组件
+
+```html
+<child :msg="pmsg"></child>
+```
+
+- 子组件通过 `props` 配置项来指定要接收的数据，props 是一个数组
+  - 在使用 DOM 中的模板时，camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名代替
+  - 如果使用字符串模板，那么这个限制就不存在了
+
+```javascript
+props: ['msg']
+```
+
+- 传递过来的`props`属性的用法与`data`属性的用法相同
+
+```html
+<!-- 第一步：将你要传递的数据,作为属性传递给子组件 -->
+<hello :num="pnum"></hello>
+```
+
+```javascript
+Vue.component('hello', {
+  template: `<div>{{ num }}</div>`,
+
+  // 第二部：子组件通过 props 配置项来指定要接收的数据
+  props: ['num']
+})
+```
+
+
+
+#### 子组件到父组件
+
+- 方式：父组件给子组件传递一个函数，由子组件调用这个函数
+- 说明：借助 vue 中的自定义事件（v-on:cunstomFn="fn"）
+- `$emit()`：触发事件
+- 第一步：父组件了里准备一个方法
+
+```javascript
+const vm = new Vue({
+  el: '#app',
+  data: {},
+  methods: {
+    pfn (num) {
+      console.log(num)
+    }
+  }
+})
+```
+
+- 第二步：把这个方法作为事件传递给子组件
+
+```html
+<hello @fn="pfn"></hello>
+```
+
+- 第三步：子组件调用父组件传过来的方法
+
+```javascript
+Vue.component('hello', {
+  template: `<button @click='click'>按钮</button>`,
+  data () {
+    return {num: 5}
+  },
+  methods: {
+    click () {
+      // 第一个参数：表示要触发的自定义事件名称，也就是 @fn
+    	// 第二个参数：表示要传递给父组件的数据
+      this.$emit('fn', this.num)
+    }
+  }
+})
+```
+
+
+
 ## TODOMVC 案例
 
 ### 准备工作
@@ -836,6 +1246,7 @@ beforeDestroy () {
 2. [下载模板地址](https://github.com/tastejs/todomvc-app-template) `git clone https://github.com/tastejs/todomvc-app-template.git`
 3. 安装依赖包 : `npm i`
 4. 安装 vue : `npm i vue`
+5. 开始 https://github.com/cuilongjin/todomvc-app-template/tree/master
 
 ### 列表渲染
 
@@ -970,3 +1381,23 @@ created () {
   this.todoList = JSON.parse(localStorage.getItem('todoList')) || []
 }
 ```
+
+
+
+### 获取接口数据
+
+[json-server](https://github.com/typicode/json-server) 提供假数据接口
+
+[axios](https://github.com/axios/axios) 发送请求
+
+```bash
+npm i -g json-server
+npm i axios
+json-server data.json
+```
+
+
+
+### 组件化TODOMVC
+
+https://github.com/cuilongjin/todomvc-app-template/tree/zujianhua
