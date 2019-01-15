@@ -994,7 +994,7 @@ axios
 
 ```js
  // 直接显示
- <h1>{{ date  }}</h1>
+ <h1>{{ date }}</h1>
  显示：2019-01-11T10:11:19.566Z
  不是我们想要的
  我们想要的：2019-01-11 18-11-53
@@ -1058,7 +1058,7 @@ filters: {
 **使用过滤器**
 
 ```html
-<!-- data: 原始数据  dataFilter: 过滤器名称-->
+<!-- data: 原始数据  dataFilter: 过滤器名称  |：管道-->
 <h1>{{ date | dataFilter }}</h1>
 ```
 
@@ -1126,6 +1126,16 @@ Vue.component('hello', {
     }
   }
 })
+
+// 给组件指定返回值
+// 组件名称为 One
+const One = Vue.component('hello', {
+  template: '<p>A custom component!</p>'
+})
+// 可以简写为 ==>
+const One = {
+  template: '<p>A custom component!</p>'
+}
 ```
 
 ```html
@@ -1143,6 +1153,27 @@ Vue.component('hello', {
 
 
 ### 局部组件
+
+- 局部组件是在某一个具体的vue实例（组件）中定义的，只能在当前 vue 实例（组件）中使用
+
+```js
+const vm = new Vue({
+  el: '#app',
+
+  // 局部组件
+  components: {
+    // 子组件 com-a
+    'com-a': {
+      template: `<h1>局部组件：{{ num }}</h1>`,
+      data () {
+        return {
+          num: 10
+        }
+      }
+    }
+  }
+})
+```
 
 
 
@@ -1176,6 +1207,8 @@ props: ['msg']
 ```
 
 - 传递过来的`props`属性的用法与`data`属性的用法相同
+- 子组件不能直接修改父组件传过来的数据，可以将父组件传过来的值保存在一个临时变量中
+  - 如果props 传过来的数据为引用类型，只要不是重新赋值，修改数据不会报错，但不推荐这样做
 
 ```html
 <!-- 第一步：将你要传递的数据,作为属性传递给子组件 -->
@@ -1235,6 +1268,155 @@ Vue.component('hello', {
   }
 })
 ```
+
+
+
+#### 非父子组件通讯
+
+- 是通过 `事件总线 (event bus 公交车) 的机制` 来实现的
+- 事件总线 : 实际上就是一个 `空Vue实例`
+- 可以实现任意两个组件之间的通讯而不管两个组件到底有什么样的层级关系
+
+- `$emit()`：发送数据
+- `$on()`：接收数据
+
+```js
+// 第一步：实例化事件总线 bus
+const bus = new Vue()
+
+// 触发组件 A 中的事件
+bus.$emit('id', 1)
+
+// 在组件 B 创建的钩子中监听事件
+bus.$on('id', id => {
+  // ...
+})
+```
+
+
+
+示例：组件A ---> 组件B
+
+```html
+<div id="app">
+  <com-a></com-a>
+  <com-b></com-b>
+</div>
+```
+
+```javascript
+// 第一步：实例化事件总线 bus
+const bus = new Vue()
+
+// 组件 A
+Vue.component('com-a', {
+  template: `<h1 @click="click">组件A</h1>`,
+  methods: {
+    click () {
+      // 第二部：发送数据
+      bus.$emit('hello', '你好')
+    }
+  }
+})
+
+// 组件 B
+Vue.component('com-b', {
+  template: `<h1>组件B</h1>`,
+  created () {
+    // 第三步：接收数据
+    bus.$on('hello', res => {
+      console.log('接收到数据', res)
+    })
+  }
+})
+const vm = new Vue({
+  el: '#app',
+  data: {}
+})
+```
+
+[开关灯案例]
+
+
+
+## refs
+
+ `vm.$refs` 一个对象，持有已注册过 ref 的所有子组件 ( HTML 元素)
+
+
+
+* 使用 :
+
+```html
+<!-- 在 HTML元素 中，添加ref属性 -->
+<div ref="div">哈哈</div>
+<child ref="child"></child>
+```
+
+```js
+// 在JS中通过 $refs.属性 来获取
+// 在 mounted 函数中使用
+Vue.component('child', {
+  template: `<h1>组件A</h1>`,
+  data () {
+    return {num: 100}
+  },
+  methods: {
+    fn () {}
+  }
+})
+
+const vm = new Vue({
+  el: '#app',
+  data: {},
+  mounted () {
+    console.log(this.$refs)
+    console.log(this.$refs.div) // div 标签
+    console.log(this.$refs.child) // child 组件
+  }
+})
+```
+
+
+
+* 如果获取的是一个子组件，那么通过 ref 就能获取到子组件中的 `data` 和 `methods`
+
+```js
+console.log(this.$refs.child.num) // 100
+console.log(this.$refs.child.fn) // fn
+```
+
+
+
+* 一般在第三方的组件中， 可能会用到这个功能
+
+
+
+## 单页面应用程序
+
+SPA : **Single Page Application** 单页面应用程序
+
+MPA : **Multiple Page Application** 多页面应用程序
+
+* 单页web应用，就是只有一个web页面的应用，是加载单个HTML页面，并在用户与应用程序交互时动态更新该页面的web应用程序
+
+
+
+* 区别
+  * 对于传统的多页面应用程序来说，每次请求服务器返回的都是一个完整的页面
+  * 对于单页应用程序来说，只有第一次会加载页面，以后的每次请求，仅仅是获取必要的数据，然后由页面中js解析获取的数据展示在页面中
+
+
+
+* 优势 :
+  * 减少了请求体积，加快页面响应速度，降低了对服务器的压力
+  * 更好的用户体验，让用户在 web app 感受 native app 的流畅
+
+
+
+
+
+
 
 
 
