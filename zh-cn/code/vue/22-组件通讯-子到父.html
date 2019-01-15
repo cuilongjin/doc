@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 第二步：把这个方法作为事件传递给子组件 -->
+    <hello @fn="pfn"></hello>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    Vue.component('hello', {
+      template: `
+        <button @click='click'>按钮</button>
+      `,
+      data () {
+        return {
+          num: 5
+        }
+      },
+      // 第三步：子组件调用父组件传过来的方法
+      methods: {
+        click () {
+          this.$emit('fn', this.num)
+        }
+      }
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {},
+      methods: {
+        // 第一步：父组件了里准备一个方法
+        pfn (num) {
+          console.log(num)
+        }
+      }
+    })
+  </script>
+  <script>
+    // 子
+    function test (fn) {
+      fn(10)
+    }
+    // 父
+    test(function (num) {
+      console.log(num)
+    })
+  </script>
+</body>
+</html>

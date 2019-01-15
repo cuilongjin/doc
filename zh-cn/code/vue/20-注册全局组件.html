@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <hello></hello>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    // 注册全局组件
+
+    // 参数一：组件名称
+    // 参数二：组件的配置项 对象格式
+
+    Vue.component('hello', {
+      template: `
+        <div>
+          <h1>组件</h1>
+          <h1>{{ num }}</h1>
+          <h1>{{ name }}</h1>
+        </div>
+      `,
+      data () {
+        return {
+          num: 10,
+          name: 'zs'
+        }
+      }
+
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {}
+    })
+  </script>
+</body>
+</html>

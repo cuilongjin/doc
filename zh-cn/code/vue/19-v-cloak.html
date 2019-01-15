@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <p v-cloak>{{ num }}</p>
+    <p>{{ num }}</p>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    alert(1)
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        num: 90
+      }
+    })
+  </script>
+</body>
+</html>

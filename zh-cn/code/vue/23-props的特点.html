@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 第一步：将你要传递的数据,作为属性传递给子组件 -->
+    <hello :num="pnum"></hello>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    Vue.component('hello', {
+      template: `
+        <div>{{ temp }}</div>
+      `,
+      data () {
+        return {
+          // 子组件不能直接修改父组件传过来的数据
+          // 可以将父组件传过来的值保存在一个临时变量中
+          temp: this.num
+        }
+      },
+
+      // 第二部：子组件通过 props 配置项来指定要接收的数据
+      props: ['num'],
+      created () {
+        this.temp = 'hahaha'
+      }
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        pnum: 'zs'
+      }
+    })
+  </script>
+</body>
+</html>
