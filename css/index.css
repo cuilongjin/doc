@@ -6,27 +6,36 @@
   padding: 0 16px;
 }
 .markdown-section code {
-  font-size: 85%;
+  font-size: 100%;
 }
 .markdown-section p {
   margin: 16px 0;
 }
+
+.markdown-section h3 a,
+.markdown-section h4 a{
+  font-weight: normal;
+}
 .markdown-section h1, .markdown-section h2 {
-  margin: 30px 0 16px;
+  /* margin: 30px 0 16px; */
   line-height: 1.25;
   font-size: 24px;
 }
+.markdown-section h2 {
+  padding-bottom: 6px;
+  border-bottom: 1px solid #eee;
+}
 .markdown-section h3 {
   margin-top: 30px;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 .markdown-section h4 {
   margin-top: 30px;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 .markdown-section h5 {
   margin-top: 30px;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 .markdown-section blockquote {
   margin: 24px 0;
@@ -35,6 +44,7 @@
 }
 .markdown-section blockquote p {
   margin: 0;
+  font-weight: normal;
 }
 
 /* 修改侧边栏样式 */
@@ -58,13 +68,55 @@
 .app-sub-sidebar li:before {
   content: "";
 }
+.sidebar li {
+  margin-left: 5px;
+}
+.sidebar li a,
+.sidebar li>strong{
+  padding-left: 10px;
+}
+
 .sidebar>.sidebar-nav>ul>li ul>li {
   margin-left: 0px;
   padding-left: 0px;
 }
 .sidebar>.sidebar-nav>ul>li ul>li a {
-  padding-left: 15px;
+  padding-left: 20px;
 }
 .sidebar>.sidebar-nav>ul>li ul>li ul>li a {
   padding-left: 30px;
 }
+
+blockquote ol,
+blockquote ul {
+  margin: 0;
+}
+
+
+/* 滚动条样式 */
+code::-webkit-scrollbar-thumb {
+  background: #eee;
+  border-radius: 5px;
+}
+code::-webkit-scrollbar-thumb:hover {
+  background: #42b983;
+  background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+  border-radius: 5px;
+}
+
+code::-webkit-scrollbar {
+  /* 设置滚动条宽高和背景色 */
+  /* background-color: #eee; */
+  height: 10px;
+}
+
+/* 设置滚动条首尾 */
+/* code::-webkit-scrollbar-button:start {
+  background: #3DB6A4;
+  background-size: 12px 12px;
+}
+
+code::-webkit-scrollbar-button:end {
+  background:#3DB6A4;
+  background-size: 12px 12px;
+} */
