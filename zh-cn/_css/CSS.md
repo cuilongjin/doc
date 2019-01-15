@@ -29,7 +29,7 @@ tages: css
 
   	称行内样式、行间样式.
 
-  	是通过标签的style属性来设置元素的样式
+    	是通过标签的style属性来设置元素的样式
 
 
 - 其基本语法格式如下：
@@ -60,7 +60,7 @@ tages: css
 
   	称内嵌式
 
-  	是将CSS代码集中写在HTML文档的head头部标签中，并且用style标签定义
+    	是将CSS代码集中写在HTML文档的head头部标签中，并且用style标签定义
 
 - 其基本语法格式如下：
 
@@ -557,7 +557,7 @@ font:italic bold 20px/2 arial,serif;
   - 其中不需要设置的属性可以省略（取默认值），但必须保留font-size和font-family属性，否则font属性将不起作用。
   - line-height 值如果不写，浏览器会默认添加 `normal`
 
-###
+
 
 ## 5.2 text 属性
 
@@ -1843,7 +1843,9 @@ outline: outline-color ||outline-style || outline-width;
 
 **行内**、**行内块**、表单元格 垂直方向的对齐方式: vertical-align
 
-<img src="images/xian.jpg" />
+![](images/xian.jpg)
+
+
 
 ```css
 vertical-align:baseline | sub | super | top(对齐line) | text-top(对齐文字) | middle | bottom | text-bottom | <percentage>(参照line-height向上) | <length>(参照baseline向上);
@@ -1859,7 +1861,7 @@ middle: 当前元素的中线和父元素的基线加上x高度的一半对齐;
 
 **去除图片底侧空白缝隙**
 
-<img src="images/vertical.png">
+![](images/vertical.png)
 
 - 原因：
 

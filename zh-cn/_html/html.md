@@ -1112,7 +1112,7 @@ input新属性：
 
 
 
- <img src="images/html5.png" width="600"/>
+![](images/html5.png ':size=600')
 
 
 
