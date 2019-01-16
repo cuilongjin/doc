@@ -44,7 +44,7 @@
 .markdown-section blockquote {
   margin: 24px 0;
   padding: 6px 0 6px 20px;
-  background-color: rgb(236, 248, 242);
+  background-color: #f8f8f8;
 }
 .markdown-section blockquote p {
   margin: 0;
