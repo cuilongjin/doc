@@ -53,7 +53,25 @@
         placeholder: {
           '/zh-cn/': '搜索'
         }
-      }
+      },
+      formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}',
+      // 自定义插件
+      plugins: [
+        function (hook, vm) {
+          hook.beforeEach(function (html) {
+            // 添加编辑按钮
+            var url = 'https://github.com/cuilongjin/doc/blob/master/' + vm.route.file
+            var editHtml = '[:memo: EDIT DOCUMENT](' + url + ')\n'
+
+            return editHtml
+            + 'Last modified {docsify-updated}\n'
+            + html
+            + '\n----\n'
+
+            + editHtml
+          })
+        }
+      ]
     }
   </script>
   <script>
