@@ -1,4 +1,8 @@
 /* 自定义样式 */
+.markdown-section {
+  max-width: 900px;
+}
+
 .markdown-section pre>code[class] {
   padding: 16px 0;
 }
@@ -94,20 +98,25 @@ blockquote ul {
 
 
 /* 滚动条样式 */
-code::-webkit-scrollbar-thumb {
+code::-webkit-scrollbar-thumb,
+pre::-webkit-scrollbar-thumb,
+html::-webkit-scrollbar-thumb{
   background: #eee;
   border-radius: 5px;
 }
-code::-webkit-scrollbar-thumb:hover {
+code::-webkit-scrollbar-thumb:hover,
+pre::-webkit-scrollbar-thumb:hover,
+html::-webkit-scrollbar-thumb:hover {
   background: #42b983;
-  background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
-  border-radius: 5px;
 }
 
-code::-webkit-scrollbar {
+code::-webkit-scrollbar,
+pre::-webkit-scrollbar,
+html::-webkit-scrollbar {
   /* 设置滚动条宽高和背景色 */
   /* background-color: #eee; */
-  height: 10px;
+  height: 5px;
+  width: 5px;
 }
 
 /* 设置滚动条首尾 */
