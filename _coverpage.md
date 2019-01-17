@@ -1,4 +1,4 @@
-![logo](favicon.png ':no-zoom :size=180x180')
+![logo](favicon.png ':no-zoom')
 
 > 稻草人
 
