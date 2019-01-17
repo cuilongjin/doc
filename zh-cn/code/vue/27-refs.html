@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1 ref="h1">我是h1</h1>
+    <child ref="child"></child>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    Vue.component('child', {
+      template: `<h1>组件A</h1>`,
+      data () {
+        return {num: 100}
+      },
+      methods: {
+        fn () {}
+      }
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {},
+      mounted () {
+        console.log(this.$refs)
+        console.log(this.$refs.h1) // h1 标签
+        console.log(this.$refs.child) // child 组件
+        // 可以获取到 child 组件中的数据和方法
+        console.log(this.$refs.child.num) // 100
+      }
+    })
+  </script>
+</body>
+</html>

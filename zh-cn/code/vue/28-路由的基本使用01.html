@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 5. 出口 -->
+    <router-view></router-view>
+  </div>
+  <script src="./vue.js"></script>
+  <script src="./vue-router.js"></script>
+  <script>
+    // 3. 注册组件并设置返回值
+    const One = {
+      template: `<div>组件 One</div>`
+    }
+
+    const Two = {
+      template: `<div>组件 Two</div>`
+    }
+
+    // 1. 实例化路由对象
+    const router = new VueRouter({
+      routes: [
+        // 4. 配置路由规则，路由和实例一一对应
+        {path: '/one', component: One},
+        {path: '/two', component: Two}
+      ]
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      data: {},
+      // 2. 将路由挂载到vue实例上，让vue和路由关联在一起
+      router
+    })
+
+  </script>
+</body>
+</html>

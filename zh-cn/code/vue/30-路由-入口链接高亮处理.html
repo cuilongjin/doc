@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .red {
+      color: red;
+      font-size: 40px;
+    }
+    /* .router-link-exact-active,
+    .router-link-active {
+      color: red;
+      font-size: 30px;
+    } */
+  </style>
+</head>
+<body>
+  <!--
+    处理链接
+    1. 拿到默认的类名，添加样式
+    2. 给默认类名替换一个别名
+   -->
+
+  <div id="app">
+    <!-- exact 精确匹配 -->
+    <router-link to="/" exact>one</router-link>
+    <router-link to="/two">two</router-link>
+
+    <router-view></router-view>
+  </div>
+  <script src="./vue.js"></script>
+  <script src="./vue-router.js"></script>
+  <script>
+    const One = {
+      template: `<div>One</div>`
+    }
+    const Two = {
+      template: `<div>Two</div>`
+    }
+
+    const router = new VueRouter({
+      routes: [
+        {path: '/', component: One},
+        {path: '/two', component: Two}
+      ],
+      // router-link-active 别名
+      linkActiveClass: 'red',
+      // router-link-exact-active 别名
+      linkExactActiveClass: 'red'
+    })
+
+    const vm = new Vue({
+      el: '#app',
+      router
+    })
+  </script>
+</body>
+</html>

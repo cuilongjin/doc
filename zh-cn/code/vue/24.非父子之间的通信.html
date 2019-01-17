@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <zs></zs>
+    <ls></ls>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    // 第一步：实例化事件总线 bus
+    const bus = new Vue()
+
+    // 组件 zs
+    Vue.component('zs', {
+      template: `<h1 @click="click">zs</h1>`,
+      methods: {
+        click () {
+          // 第二部：发送数据
+          bus.$emit('hello', '你好')
+        }
+      }
+    })
+
+    // 组件 ls
+    Vue.component('ls', {
+      template: `<h1>ls</h1>`,
+      created () {
+        // 第三步：接收数据
+        bus.$on('hello', res => {
+          console.log('接收到数据', res)
+        })
+      }
+    })
+    const vm = new Vue({
+      el: '#app',
+      data: {}
+    })
+  </script>
+</body>
+</html>

@@ -1,41 +1,46 @@
 # Vue
 
-1. [vue 中文网](https://cn.vuejs.org/)
-2. [github 下载地址](https://github.com/vuejs/vue)
-3. Vue.js (读音 /vju:/ view)
-4. 渐进式 JavaScript 框架
+* [vue 中文网](https://cn.vuejs.org/)
 
-   渐进式 
+* [github 下载地址](https://github.com/vuejs/vue)
 
-   > 小型项目使用 vue 就够了
-   > 随着页面的复杂程度提高，就要学习 vue-rouer 来管理更多的页面
-   > 再随着项目的数据越来越多，管理数据也变得麻烦起来了，就开始使用 vuex 来管理数据
+* Vue.js (读音 /vju:/ view)
 
-   框架 : 一整套的解决方案
+* 渐进式 JavaScript 框架
+
+  * 渐进式：小型项目使用 vue 就够了，随着页面的复杂程度提高，就要学习 vue-rouer 来管理更多的页面，再随着项目的数据越来越多，管理数据也变得麻烦起来了，就开始使用 vuex 来管理数据
+
+  * 框架 : 一整套的解决方案
 
 ## 框架和库的区别 (面试)
 
-###1. 库(Library) ，代表 : jquery
+### 库(Library) ，代表 : jquery
 - 库就是一系列函数的集合，我们开发人员在使用库的时候，想要完成什么样的功能，就调用库中提供的某个方法
 
 比如：想要添加样式，就调用 jquery 中的 .css() / .addClass()
 
 - 库起到了一个辅助的作用，在使用库的是时候，是由开发人员说了算，也是由开发人员起主导作用
 
-###2. 框架 (Framework)，代表 : vue
+### 框架 (Framework)，代表 : vue
+
 - 在使用框架的时候，是由框架说了算，由框架起到了主导作用
+
 - 框架是一套完整的解决方案，框架中制定了一套规则，使用框架的时候，只需要按照规则把代码放到合适的地方，然后框架会在合适的时机，主动调用开发人员的代码
 
 比如 : 想用vue组件里遍历就得使用 v-for，使用 for 不行
 
-### 3. 主要区别：控制反转
+### 主要区别：控制反转
 
 > 也就是 : 谁起到了主导作用
 
 - 使用库的时候：开发人员起主导作用
+
 - 使用框架的时候：框架起到了主导作用
+
 - 从体量上看，框架一般比库大
+
 - 会发现使用框架的时候，会受到很多限制
+
 - [我们所说的前端框架与库的区别？](https://zhuanlan.zhihu.com/p/26078359?group_id=830801800406917120)
 
 
@@ -45,8 +50,11 @@
 ### MVC
 
 1. MVC 是一种软件架构模式，也有人叫做设计模式
+
 2. M : Model 数据模型 (专门用来操作数据，数据的 CRUD)
+
 3. V : View 视图 (对于前端来说就是页面)
+
 4. C : Controller 控制器 (是视图和数据模型沟通的桥梁，用于处理业务逻辑)
 
 ### MVVM
@@ -54,19 +62,29 @@
 > Vue 使用的是 MVVM 模式
 
 - MVVM ===> M / V / VM
+
 - M : model 数据层
+
 - V : view 视图层
+
 - VM : ViewModel 视图模型
+
 - 核心 : M <===> VM <===> V
 
 ### MVVM 优势
 
 - MVC 模式将应用程序划为三个部分，实现职责分离
+
   - 但是，在前端中，经常要通过 js 代码来进行一些逻辑操作，最终还要把这些逻辑操作展示页面中，也需要`频繁的操作DOM`
+
   - 比如 : ajax 请求、添加、修改、设置样式、动画
+
 - MVVM 的思想通过 `数据双向绑定` 让数据自动的双向同步
+
   - V (修改视图) --> M
+
   - M (修改数据) --> V
+
 - 采用的是 : **数据驱动视图**的思想，**数据是核心**。不要再想着怎么操作 DOM，而是想着如何操作数据
 
 ### Vue 中的 MVVM
@@ -78,7 +96,9 @@
 ## Vue 基本使用
 
 1. 安装 : `npm i vue`
+
 2. 导入 : `<script src='./vue.js'></script>`
+
 3. 实例化 vue
 
 ```js
@@ -95,13 +115,17 @@ const vm = new Vue({
 
 ### 使用注意点
 
-1. vm 官网建议
-2. Vue 构造函数首字母大写
-3. 参数是一个对象
-4. id='#app', 其他也可以
-5. 边界外的无法使用 msg
+* vm 官网建议
 
-###  {{}} 插值表达式
+* Vue 构造函数首字母大写
+
+* 参数是一个对象
+
+* id='#app', 其他也可以
+
+* 边界外的无法使用 msg
+
+###  插值表达式
 
 1. {{}}：mustache 语法，小胡子语法，插值表达式
 2. 作用 : 使用`{{}}` 从`data`中获取数据，并展示在模板中
@@ -119,18 +143,16 @@ const vm = new Vue({
 
 ## 双向数据绑定
 
-## input + v-model
+### input + v-model
 
  v-model 指令：数据双向绑定的指令
 
 * 作用：把 data 中的 num 值 和 input 上的值绑定到一起，一方的值发生了改变，另 一方 也会跟着改变
 * 注意：v-model 只能用在 表单控件上（input checkbox 等）
 
-```js
 
-```
 
-## Object.defineProperty()
+### Object.defineProperty()
 
 ```js
 let obj = {}
@@ -149,7 +171,9 @@ Object.defineProperty(obj, 'name', {
 })
 ```
 
-## 数据双向绑定的原理
+
+
+### 数据双向绑定的原理
 
 ```html
 <div id="app">
@@ -1414,9 +1438,197 @@ MPA : **Multiple Page Application** 多页面应用程序
 
 
 
+## 路由
+
+- **路由** : 是浏览器 URL 中的`哈希值`( # hash) 与 `展示视图内容` 之间的`对应规则`
+  - 在 web App 中，通过一个页面来展示和管理整个应用的功能。SPA 往往是功能复杂的应用，为了有效管理所有视图内容，前端路由应运而生。简单来说，路由就是一套映射规则(一对一的对应规则)，由开发人员制定规则。当 URL 中的哈希值( `#` hash) 发生改变后，路由会根据制定好的规则，展示对应的视图内容。
+- **vue 中的路由** : 是 **hash** 和 **component** 的对应关系，一个哈希值对应一个组件
 
 
 
+### 基本使用
+
+安装路由 : `npm i vue-router`
+
+引入路由
+
+```html
+<script src="./vue.js"></script>
+<script src="./node_modules/vue-router/dist/vue-router.js"></script>
+```
+
+详细使用步骤
+
+- 实例路由对象并挂载到 vue 实例 上
+
+```javascript
+// 路由实例 与 Vue 实例 关联到一起
+const router = new VueRouter()
+const vm = new Vue({
+  el: '#app',
+  router
+})
+```
+
+
+
+- 入口 (#哈希值)
+
+```html
+<!-- 
+方式1 : url地址为入口 输入url地址改变哈希值
+router.html#/one
+
+方式2 : router-link+to
+to 属性：实际上就是哈希值，将来要参与路由规则中进行与组件匹配
+router-link 标签最终会转化为 a 标签，to 属性转化为 a 标签的 href 属性
+-->
+<router-link to="/one">One</router-link>
+<router-link to="/two">Tow</router-link>
+```
+
+
+
+- 注册组件并设置返回值
+
+```javascript
+const One = {
+  template: `<div>组件 One</div>`
+}
+
+const Two = {
+  template: `<div>组件 Two</div>`
+}
+```
+
+
+
+- 设置规则
+
+```js
+// path : 路由路径
+// component : 将来要展示的路由组件
+const router = new VueRouter({
+  routes: [
+    {path: '/one', component: One},
+    {path: '/two', component: Two}
+  ]
+})
+```
+
+
+
+- 出口
+
+```html
+<!--  出口：组件要展示的地方-->
+<div id="app">
+  <router-view></router-view>
+</div>
+```
+
+
+
+- 示例 ：
+
+```html
+<div id="app">
+  <!-- 入口 -->
+  <!-- 可以直接通过url地址访问路由 -->
+
+  <!-- to 属性：路由匹配路径
+router-link 最终会转化为 a 标签
+-->
+  <router-link to="/one">One</router-link>
+  <router-link to="/two">Tow</router-link>
+
+  <!-- 5. 出口 -->
+  <router-view></router-view>
+</div>
+```
+
+```js
+// 3. 注册组件并设置返回值
+const One = {
+  template: `<div>组件 One</div>`
+}
+
+const Two = {
+  template: `<div>组件 Two</div>`
+}
+
+// 1. 实例化路由对象
+const router = new VueRouter({
+  routes: [
+    // 4. 配置路由规则，路由和实例一一对应
+    {path: '/one', component: One},
+    {path: '/two', component: Two}
+  ]
+})
+
+const vm = new Vue({
+  el: '#app',
+  data: {},
+  // 2. 将路由挂载到vue实例上，让vue和路由关联在一起
+  router
+})
+```
+
+
+
+### 入口菜单高亮处理
+
+点击导航会给链接添加两个类名：
+
+```html
+<a href="#/one" class="router-link-exact-active router-link-active">One</a>
+<a href="#/two" class="">Two</a>
+```
+
+
+
+修改方式 1：直接修改类的内容
+
+```css
+.router-link-exact-active,
+.router-link-active {
+  color: red;
+  font-size: 50px;
+}
+```
+
+
+
+修饰方式 2：给默认高亮类名设置别名，别名为已经定义好样式的类名 (推荐)
+
+```js
+const router = new VueRouter({
+  routes: [],
+
+  // 修改默认高亮的a标签的类名
+  linkActiveClass: 'red'
+})
+```
+
+
+
+### 精确匹配和模糊匹配
+
+- 精确匹配：router-link-exact-active 类名 : 只有当浏览器地址栏中的哈希值 与 router-link 的 to 属性值完全匹配才会添加该类
+- 模糊匹配：router-link-active 类名 : 只要浏览器地址栏中的哈希值包含 router-link 的 to 属性值就会添加该类名
+- 解决办法：加个 exact
+
+```html
+<router-link to="/" exact>
+  One
+</router-link>
+```
+
+- 注意 : 精确匹配和模糊匹配，只对添加类名这个机制有效，与路由的匹配规则无关
+
+
+
+### 路由参数
 
 
 
