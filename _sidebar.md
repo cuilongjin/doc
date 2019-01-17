@@ -44,3 +44,4 @@
 	- [Sublime插件及快捷键](zh-cn/_Tool/Sublime插件及快捷键)
 	- [gulp前端自动化环境](zh-cn/_Tool/gulp前端自动化环境)
 	- [Git基本使用](zh-cn/_Tool/Git)
+	- [webpack配置](zh-cn/_Tool/webpack配置)
