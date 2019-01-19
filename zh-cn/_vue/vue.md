@@ -1632,6 +1632,337 @@ const router = new VueRouter({
 
 
 
+入口
+
+```html
+<!-- 1. 入口  -->
+<router-link to="/detail/1">手机1</router-link>
+<router-link to="/detail/2">手机2</router-link>
+<router-link to="/detail/3">手机3</router-link>
+```
+
+
+
+传参
+
+```js
+const Detail = Vue.component('detail', {
+  template: `<div>{{ $route.path }}</div>`
+})
+routes: [
+  // 方式1：手动一个一个配置
+  {path: '/detail/1', component: Detail},
+  {path: '/detail/2', component: Detail},
+  {path: '/detail/3', component: Detail}，
+  
+  // 正确的方式：把传过去的 1/2/3 当成参数
+  {path: '/detail/:id?', component: Detail}
+]
+```
+
+
+
+`?` 代表参数可传可不传，即可识别的路径包括：`detail`、`detail/1`、`detail2`、`detail3`
+
+
+
+获取参数的三种正确方式
+
+```js
+// $route => 路由配置对象
+
+const Detail = Vue.component('detail', {
+  // 方式1：组件中直接读取
+  // $route.path 为路由路径
+  // $route.params.id 为路由参数
+  template: `
+    <div>{{ $route.path }}</div>
+    <div>{{ $route.params.id }}</div>
+  `,
+  created() {
+    // 方式2：js直接读取
+    // 打印只会打印一次，因为组件是复用的，每次进来钩子函数只会执行一次
+    
+    // #/detail/2?name=zs
+    console.log(this.$route) // 路由配置对象
+    console.log(this.$route.path) // #/detail/2
+    console.log(this.$route.params) // {id: "2"}
+    console.log(this.$route.query) // {name: 'zs'}
+    console.log(this.$route.params.id) // 2
+  },
+  // 方式3：监听路由的参数变化(因为不是 data 中的数据，不需要深度监听)
+  watch: {
+    // to：新值
+    // from：旧值
+    $route(to, from) {
+      console.log(to.params.id)
+    }
+  }
+})
+```
+
+
+
+### 重定向
+
+`redirect`
+
+```js
+// 将 / 重定向到 /home
+{ path: '/', redirect: '/home' }
+```
+
+
+
+## 单文件组件
+
+### vue 是单文件组件
+
+后缀为 .vue 的文件
+
+单文件组件，无法直接在浏览器中使用，必须经过 webpack 这种打包工具处理后，才能在浏览器中使用
+
+单文件组件的三个组成部分
+
+- template (模板结构)
+- script 组件的代码逻辑
+- style 样式
+
+
+
+### 脚手架介绍
+
+**vue-cli** 是 vue 的脚手架工具
+
+因为 webpack 配置繁琐，阻止一批想用 vue 但是不会 webpack 的开发人员
+
+vue-cli 提供了一条命令，我们直接通过这条命令就可以快速的生成一个 vue 项目 (`vue init XX`)，项目的基本结构、以及 webpack 配置项  **全部配置**  好了
+
+
+
+[Vue Loader](https://vue-loader.vuejs.org/zh/) 手动配置置 `webpack`
+
+[Vue CLI3](https://cli.vuejs.org/zh/)
+
+[Vue webpack 配置](https://vuejs-templates.github.io/webpack/)
+
+
+
+#### 使用
+
+安装：`npm i -g vue-cli`
+
+初始化 vue 项目：`vue init webpack 项目名称`
+
+进入到项目根目录运行项目：`npm run dev`
+
+项目安装过程：
+
+```js
+? Project name demo
+? Project description A Vue.js project
+? Author
+? Vue build standalone  => 运行时+编译
+? Install vue-router? Yes
+? Use ESLint to lint your code? Yes? Pick an ESLint preset Standard
+? Set up unit tests No
+? Setup e2e tests with Nightwatch? No
+```
+
+
+
+#### 项目目录介绍
+
+https://vuejs-templates.github.io/webpack/structure.html
+
+```
+.
+├── build/                      # webpack config files
+├── config/index.js             # main project config
+├── src/
+│   ├── main.js                 # app entry file
+│   ├── App.vue                 # main app component
+│   ├── components/             # ui components
+│   └── assets/                 # module assets (processed by webpack)
+├── static/                     # pure static assets (directly copied)
+├── test/
+│   └── unit/                   # unit tests
+│   └── e2e/                    # e2e tests
+├── .babelrc                    # babel config
+├── .editorconfig               # settings for your editor
+├── .eslintrc.js                # eslint config
+├── .eslintignore               # eslint ignore rules
+├── .gitignore                  # sensible defaults for gitignore
+├── .postcssrc.js               # postcss config
+├── index.html                  # index.html template
+├── package.json                # build scripts and dependencies
+└── README.md                   # Default README file
+```
+
+
+
+- build 和 config 不要动，都是一些配置好的，还有一些他们之间的约定
+- .gitkeep：static 为预留的文件夹，空文件夹默认不会上传到 github，添加这个文件让static文件夹被 git 上传
+- `.editorconfig` 编译器配置，需要安装 vscode 插件：Editorconfig
+
+```
+charset = utf-8   utf-8 格式编码
+indent_style = space   空格和tab都可以缩进
+indent_size = 2    缩进为2个
+end_of_line = lf  回车换行
+insert_final_newline = true   结束最后一行+一个空白
+trim_trailing_whitespace = true   开头去除空白
+```
+
+- `eslint` 校验
+  - 忽略文件中有这个 => /\*.js => 意思是根目录下的.js 文件不校验,,但是发现根目录就没有.js 文件
+  - /*  eslint-disable no-new */ eslint 忽略 no-new规则
+  - /_ eslint-disable_/ 也可以
+  - 如果去掉,就会提示你 不要以 new 开头
+  - 可以前面给个变量 var vm = new Vue()
+  - 但是又提示没有用,还要打印一下,其实这个赋值是没有意义的
+  - 不要去掉.这是 eslint 的`不校验下一行代码`
+  - [standard 代码规范](https://standardjs.com/readme-zhcn.html)
+- postcssrc 处理 less css 等
+- src
+  - assets 静态资源
+  - components 组件
+  - router 路由
+  - App.vue 根组件 => 指定路由出口
+  - 脚手架之后，所有的组件都将渲染到 app.vue 中
+  - vm 中的 #app 还是 index.html 中的 #app， app.vue 中的会覆盖前者
+    可以通过分别添加 title 属性验证一下
+  - `<router-view/>` 路由出口要写在 app.vue 组件模板中
+  - main.js
+    - 入口 js 文件
+    - 作用：创建 vue 实例，导入其他组件并挂在到 vue 实例上
+    - `Vue.config.productionTip = false` 不要打印提示
+  - route/index.js：路由
+    - `@`：build/ webpack.base.config.js =>  `'@': resolve('src')`
+    - 如果在一个模块化工程中使用它，必须要通过 `Vue.use()` 明确地安装路由功能
+    - `https://router.vuejs.org/zh/installation.html`
+
+ 
+
+### 两种编译模式
+
+完整版和运行时版
+
+[参考官网](https://cn.vuejs.org/v2/guide/installation.html#%E5%AF%B9%E4%B8%8D%E5%90%8C%E6%9E%84%E5%BB%BA%E7%89%88%E6%9C%AC%E7%9A%84%E8%A7%A3%E9%87%8A)
+
+编译器：用来将模板字符串编译成为 JavaScript 渲染函数的代码
+
+运行时：用来创建 Vue 实例、渲染并处理虚拟 DOM 等的代码。基本上就是除去编译器的其它一切
+
+- 使用 完整版 (包含编译器)
+
+```js
+new Vue({
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
+})
+```
+
+
+
+- 只使用运行时
+
+```js
+new Vue({
+  el: '#app',
+  router,
+  render: h => h(App)
+})
+```
+
+  
+
+查看编译模式：build => webpack.base.config.js =>  `'vue\$': 'vue/dist/vue.esm.js',`
+
+
+
+### 手动配置路由
+
+安装路由 `npm i vue-router`
+
+准备工作：创建一个文件夹 router/router.js
+
+具体配置：
+
+
+
+```js
+/* router.js */
+// 引入路由
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+// 导入组件
+import Home from '@/components/home/Home'   (template + script + style)
+import Login from '@/components/login/Login'
+
+// 把路由当成插件安装
+Vue.use(VueRouter)
+
+// 创建路由，配置路由
+const router = new VueRouter({
+  // 路由规则
+routes: [
+  {
+    path : '/home',
+    component : Home
+  },
+  {
+    path : '/login',
+    component : Login
+  }
+]
+})
+
+// 导出路由
+export default router
+
+// 在 main.js 中绑定路由
+router
+
+在跟组件 App.vue 下配置出口
+<router-view></router-view>
+```
+
+
+
+```javascript
+/* main.js */
+new Vue({
+  // 绑定路由
+  router
+})
+```
+
+
+
+```html
+<!-- App.vue -->
+<!-- 配置出口 -->
+<router-view></router-view>
+```
+
+
+
+### 编辑器配置插件
+
+- `vetur`：vue 单文件组件的高亮
+- eslint
+  - 关闭 **eslint**：打开 config/index.js，将26行 :  `dev.useEslint`设置为false，重启项目 ( npm run dev)
+
+- `Prettier`：格式化插件
+
+
+
+
+
 ## TODOMVC 案例
 
 ### 准备工作
