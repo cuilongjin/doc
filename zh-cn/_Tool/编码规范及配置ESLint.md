@@ -10,17 +10,22 @@
 
 
 
-# 配置 `ESLint`
+##  `Vue + ESLint + Prettier`
 
 
 
-* 安装 `node` https://nodejs.org/zh-cn/
+### 安装 `node` 
 
-* 安装 `ESlint` 
+https://nodejs.org/zh-cn/
+
+
+
+### 配置 `ESlint` 
 
 ```bash
 $ npm install eslint -g
 $ npm install eslint-plugin-html -g
+$ npm install eslint-plugin-vue -g
 $ eslint -v
 $ eslint --init
 
@@ -34,58 +39,129 @@ $ eslint --init
 # $ npm install eslint-plugin-react -g
 
 # standard 标准
+$ npm install eslint-plugin-standard eslint-config-standard eslint-plugin-node eslint-plugin-promise -g
 ```
 
-* 配置 `.eslintrc.json` 文件
+
+
+`.eslintrc.json` 文件
 
 ```json
 {
-    "extends": "google",
-    "plugins": [ "html" ],
-    "rules": {
-        "valid-jsdoc": 2,
-        "no-var": 0,
-        "vars-on-top": 0,
-        "eqeqeq": 2,
-        "space-before-function-paren": [2, "always"],
-        "semi":  [2, "never"],
-        "comma-dangle": [2, "never"],
-        "no-invalid-this": 0
+  //plugin与extend的区别：extend提供的是eslint现有规则的一系列预设
+  //而plugin则提供了除预设之外的自定义规则，当你在eslint的规则里找不到合适的的时候
+  "extends": ["google", "plugin: vue/essential"],
+  "plugins": ["html"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "valid-jsdoc": 2,
+    "require-jsdoc": 0,
+    "no-var": 0,
+    "vars-on-top": 0,
+    "eqeqeq": 2,
+    "space-before-function-paren": [2, "always"],
+    "semi": [2, "never"],
+    "comma-dangle": [2, "never"],
+    "linebreak-style": [2, "unix"],
+    "no-invalid-this": 0,
+    "max-len": 0,
+    "prefer-const": 0,
+    "arrow-parens": 0
+  }
+}
+{
+  "extends": ["standard", "plugin:vue/essential"],
+  "plugins": ["html"],
+  "rules": {
+    "no-new": [0]
+  }
+}
+```
+
+
+
+
+
+vscode 插件安装 `ESLint` 
+
+vscode配置 `User Settings`
+
+```json
+{
+  "javascript.validate.enable": false,
+  "typescript.validate.enable": false,
+  "eslint.nodePath": "C:\\Program Files\\nodejs\\node.exe",
+  "eslint.options": {
+    "configFile": "C:/Users/C/.vscode/.eslintrc.json"
+  },
+  "eslint.alwaysShowStatus": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript", "javascriptreact",
+    {"language": "html", "autoFix": true},
+    {"language": "vue", "autoFix": true}
+  ],
+}
+```
+
+
+
+### 配置 prettier
+
+```
+$ npm install prettier -g
+$ npm install eslint-plugin-prettier -g
+```
+
+
+
+vscode 插件安装 `prettier` 
+
+vscode配置 `User Settings`
+
+```json
+{
+  // 禁用默认html格式化
+  "html.format.enable": false,
+ 
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.eslintIntegration": true,
+  "prettier.htmlWhitespaceSensitivity": "ignore",
+  // 标签换行长度
+  "prettier.printWidth": 800,
+  "prettier.bracketSpacing": true,
+}
+```
+
+
+
+vuter
+
+```json
+{
+  "vetur.format.defaultFormatter.js": "none",
+  // HTML Default Formatter
+  "vetur.format.defaultFormatter.html": "prettyhtml"
+  "vetur.format.defaultFormatterOptions": {
+    "prettyhtml": {
+      "printWidth": 1000,
+      "singleQuote": false,
+      "wrapAttributes": false,
+      "sortAttributes": false
     }
+  }
 }
 ```
 
 
 
-## VSCode
-
-* 安装 `ESLint` 插件
-* 配置 `User Settings`
-
-
-```json
-{
-	// node 路径
-    "eslint.nodePath": "C:\\Program Files\\nodejs\\node.exe",
-    // .eslintrc.json 文件路径
-    "eslint.options": {
-    	"configFile": "C:/Users/C/.vscode/.eslintrc.json"
-    },
-    // 禁用默认 JavaScript/typescript 验证。
-    "javascript.validate.enable": false,
-    "typescript.validate.enable": false,
-    // 配置 html
-    "eslint.validate": [
-		"javascript", "javascriptreact", { "language": "html", "autoFix": true }
-    ],
-    "eslint.alwaysShowStatus": true,
-    "eslint.autoFixOnSave": true
-}
-```
 
 
 
->
 
 ## ESLint 规则列表
 
@@ -96,6 +172,19 @@ $ eslint --init
 "warn"或者1   // 在打开的规则作为警告（不影响退出代码）
 "error"或者2  // 把规则作为一个错误（退出代码触发时为1
 ```
+忽略检测警告
+
+```js
+// 忽略检测下一行
+/* eslint-disable-next-line */
+// 忽略当前整个文件
+/* eslint-disable */
+// 忽略 no-new 规则
+/* eslint-disable no-new */
+```
+
+
+
 [规则列表 https://eslint.org/docs/rules/](https://eslint.org/docs/rules/)
 
 ```json
