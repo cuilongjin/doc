@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <router-link to="/detail">detail</router-link>
+      <router-link to="/detail/1">detail1</router-link>
+      <router-link to="/detail/2">detail2</router-link>
+      <router-link to="/detail/3">detail3</router-link>
+
+      <router-view></router-view>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+      const Detail = {
+        template: `
+        <div>
+          <div>{{$route.path}}</div>
+          <div>{{$route.params}}</div>
+          <div>{{$route.params.id}}</div>
+        </div>
+        `,
+        created () {
+          // #/detail/2?name=zs
+          console.log(this.$route)
+          console.log(this.$route.path) // #/detail/2
+          console.log(this.$route.params) // {id: "2"}
+          console.log(this.$route.query) // {name: 'zs'}
+        },
+        watch: {
+          $route (to, from) {
+            console.log(to.params.id)
+          }
+        }
+      }
+
+      const router = new VueRouter({
+        // 方式1：手动一个一个配置
+        // routes: [
+        //   { path: 'detail', component: Detail },
+        //   { path: '/detail/1', component: Detail },
+        //   { path: '/detail/2', component: Detail },
+        //   { path: '/detail/3', component: Detail }
+        // ]
+
+        // 方式2： 使用参数
+        // ? 表示参数可有可无
+        routes: [{ path: '/detail/:id?', component: Detail }]
+      })
+
+      const vm = new Vue({
+        el: '#app',
+        data: {},
+        router
+      })
+
+      // const platformString =
+      //   Platform.OS == 'ios'
+      //     ? 'iOS'
+      //     : Platform.OS == 'android'
+      //     ? 'Android'
+      //     : 'unknown'
+    </script>
+  </body>
+</html>
