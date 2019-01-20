@@ -1,12 +1,3 @@
----
-title: Fixed定位脱离Viewport的bug
-date: 2018-08-30
-update: 2018-08-30
-tages: css
----
-
-
-
 ### Fixed定位脱离Viewport的bug
 
 
@@ -48,3 +39,4 @@ tages: css
 ```
 
 对于声明transfrom值非none元素，其子元素中若存在position: fixed将以声明transform的最近祖先作为基准而定位，这是因为transfrom值非none的元素[定义了一个局部坐标系统](http://www.w3.org/TR/css3-2d-transforms/#transform-rendering)，导致postion: fixed以此坐标系统计算布局。
+

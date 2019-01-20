@@ -3,7 +3,7 @@
 * **HTML**
 	- [html基础](zh-cn/_html/html)
 * **CSS**
-	- [css基础](zh-cn/_css/css)
+	- [css基础](zh-cn/_css/CSS)
 	- [CSS z-index](zh-cn/_css/CSS-z-index)
 	- [Fixed定位脱离Viewport的bug](zh-cn/_css/Fixed定位脱离Viewport的bug)
 * **JavaScript**

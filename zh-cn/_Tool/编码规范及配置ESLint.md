@@ -75,7 +75,8 @@ $ npm install eslint-plugin-standard eslint-config-standard eslint-plugin-node e
   "extends": ["standard", "plugin:vue/essential"],
   "plugins": ["html"],
   "rules": {
-    "no-new": [0]
+    "no-new": 0,
+    "no-undef": 0
   }
 }
 ```
@@ -364,3 +365,4 @@ vuter
   "yoda": [2, "never"]//禁止尤达条件
 }
 ```
+

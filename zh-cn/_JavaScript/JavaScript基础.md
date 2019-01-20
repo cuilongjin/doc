@@ -1,13 +1,3 @@
----
-title: JavaScript 基础
-date:2017-12-01
-update:2018-09-10
-tages:JavaScript
-
-
-
----
-
 # JavaScript 基础
 
 

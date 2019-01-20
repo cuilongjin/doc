@@ -1,12 +1,3 @@
----
-title: css z-index
-date: 2018-08-30
-update: 2018-08-30
-tages: css
----
-
-
-
 ### 9.3.2 堆叠顺序（z-index）
 
 在使用**定位**布局时，可能会**出现盒子重叠的情况**。加了定位的盒子，默认**后来者居上**， 后面的盒子会压住前面的盒子。
@@ -31,7 +22,7 @@ tages: css
 
 
 
-![层叠顺序](images\z-index.png)
+![层叠顺序](images/z-index.png)
 
 
 
@@ -79,3 +70,4 @@ you在这里和me做比较，比较开始，首先you寻找参考对象，上一
 [ 北风吹雪：不起眼的 z-index 却能牵扯出这么大的学问](http://www.cnblogs.com/bfgis/p/5440956.html)
 
 [张鑫旭:深入理解CSS中的层叠上下文和层叠顺序](https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)
+
