@@ -17,10 +17,6 @@
   margin: 16px 0;
 }
 
-.markdown-section h3 a,
-.markdown-section h4 a {
-  font-weight: 500;
-}
 .markdown-section h1,
 .markdown-section h2 {
   /* margin: 30px 0 16px; */
@@ -137,4 +133,24 @@ code::-webkit-scrollbar-button:end {
 
 body {
   font-size: 14px;
+}
+
+/* 设置 列表间隔 */
+.markdown-section > ul > li {
+  margin: 14px 0;
+}
+#main > ul > li > p {
+  margin: 0;
+}
+
+.markdown-section > details summary {
+  cursor: pointer;
+  color: #42b983;
+}
+.markdown-section > details summary:focus {
+  outline: none;
+}
+/* 设置小三角样式 */
+.markdown-section > details[open] summary::-webkit-details-marker {
+  color: #42b983;
 }
