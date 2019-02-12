@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 在 vue 中的组件内 获取 vuex 里的数据  -->
+      <h1>{{ $store.state.num }}</h1>
+      <button @click="addNum">按钮</button>
+    </div>
+    <!-- 第一步 : 引入 vue 和 vuex  -->
+    <script src="vue.js"></script>
+    <script src="vuex.js"></script>
+    <script>
+      // 2. 实例化 vuex 里的一个仓库
+      const store = new Vuex.Store({
+        // 严格模式
+        strict: true,
+        // 数据
+        state: {
+          num: 100
+        },
+        // mutations
+        mutations: {
+          // 添加数据
+          addNum (state) {
+            // 修改数据
+            state.num++
+          }
+        }
+      })
+
+      // 1. 实例化 vue
+      const vm = new Vue({
+        el: '#app',
+        // vue实例与vuex仓库关联
+        store,
+        methods: {
+          // 添加num
+          addNum () {
+            // 修改数据
+            // 此处是修改 vuex 里面的数据,不是修改vue中的data数据
+            // 触发 mutations 里面的事件
+            // store.commit('事件名')
+            this.$store.commit('addNum')
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -32,6 +32,7 @@
 	- [nodejs](zh-cn/_nodejs/nodejs)
 * **vue**
 	- [vue](zh-cn/_vue/vue)
+	- [vuex](zh-cn/_vue/vuex)
 	- [Vue实例生命周期图](zh-cn/_vue/Vue实例生命周期图)
 * **Other**
 	- [遍历总结](zh-cn/_other/遍历总结)

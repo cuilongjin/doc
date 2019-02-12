@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 引入vue和vuex -->
+    <script src="vue.js"></script>
+    <script src="vuex.js"></script>
+    <script>
+      // 实例化数据仓库
+      const store = new Vuex.Store({
+        // 严格模式
+        strict: true,
+
+        // state 里存放数据，相当于之前组件中的data
+        state: {
+          num: 100
+        },
+
+        // mutation 相当于之前的methods
+        mutations: {
+          // 修改数据
+          // 第一个参数：state
+          // 第二个参数：形参 推荐传入一个对象
+          updateNum (state, playload) {
+            // 修改数据
+            // 直接修改
+            state.num = 200
+
+            // 通过参数修改
+            state.num = playload.newNum
+          }
+        }
+      })
+
+      // 通过 store 获取数据操作数据
+      console.log(store.state.num)
+
+      // store.state.num = 300
+      // 通过 store.state.num=300 修改了数据，但是 vuex 不推荐直接这样使用，在严格模式下,不允许在 mutation 外部修改 state下的数据，否则会报错
+
+      // 触发 mutations 里面的方法/事件
+      store.commit('updateNum', { newNum: 300 })
+      console.log(store.state.num)
+    </script>
+  </body>
+</html>
