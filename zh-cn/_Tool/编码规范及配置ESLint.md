@@ -25,7 +25,7 @@ https://nodejs.org/zh-cn/
 ```bash
 $ npm install eslint -g
 $ npm install eslint-plugin-html -g
-$ npm install eslint-plugin-vue -g
+
 $ eslint -v
 $ eslint --init
 
@@ -33,13 +33,16 @@ $ eslint --init
 # $ npm install eslint-config-google -g
 
 # airbnb 标准
-# $ npm install eslint-config-airbnb -g
-# $ npm install eslint-plugin-jsx-a11y -g
-# $ npm install eslint-plugin-import -g
-# $ npm install eslint-plugin-react -g
+# $ npm install eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react -g
 
 # standard 标准
 $ npm install eslint-plugin-standard eslint-config-standard eslint-plugin-node eslint-plugin-promise -g
+
+# vue
+$ npm install eslint-plugin-vue -g
+
+# es6 语法支持
+$ npm install babel-eslint vue-eslint-parser -g
 ```
 
 
@@ -48,8 +51,8 @@ $ npm install eslint-plugin-standard eslint-config-standard eslint-plugin-node e
 
 ```json
 {
-  //plugin与extend的区别：extend提供的是eslint现有规则的一系列预设
-  //而plugin则提供了除预设之外的自定义规则，当你在eslint的规则里找不到合适的的时候
+  // plugin与extend的区别：extend提供的是eslint现有规则的一系列预设
+  // 而plugin则提供了除预设之外的自定义规则，当你在eslint的规则里找不到合适的的时候
   "extends": ["google", "plugin: vue/essential"],
   "plugins": ["html"],
   "parserOptions": {
@@ -74,9 +77,21 @@ $ npm install eslint-plugin-standard eslint-config-standard eslint-plugin-node e
 {
   "extends": ["standard", "plugin:vue/essential"],
   "plugins": ["html"],
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "rules": {
     "no-new": 0,
-    "no-undef": 0
+    "no-undef": 0,
+    "no-unused-vars": 1,
+    "space-before-function-paren": [2, "always"]
   }
 }
 ```
