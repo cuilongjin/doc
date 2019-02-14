@@ -11,7 +11,6 @@
       <router-link to="/detail">detail</router-link>
       <router-link to="/detail/1">detail1</router-link>
       <router-link to="/detail/2">detail2</router-link>
-      <router-link to="/detail/3">detail3</router-link>
 
       <router-view></router-view>
     </div>
@@ -22,20 +21,25 @@
       const Detail = {
         template: `
         <div>
-          <div>{{$route.path}}</div>
-          <div>{{$route.params}}</div>
-          <div>{{$route.params.id}}</div>
+          <div>this.$route.path：{{$route.path}}</div>
+          <div>this.$route.params：{{$route.params}}</div>
+          <div>this.$route.query：{{$route.params.id}}</div>
         </div>
         `,
         created () {
           // #/detail/2?name=zs
-          console.log(this.$route)
-          console.log(this.$route.path) // #/detail/2
-          console.log(this.$route.params) // {id: "2"}
-          console.log(this.$route.query) // {name: 'zs'}
+          console.log('this.$route:', this.$route)
+          console.log('this.$route.path', this.$route.path) // #/detail/2
+          console.log('this.$route.params', this.$route.params) // {id: "2"}
+          console.log('this.$route.query', this.$route.query) // {name: 'zs'}
         },
+
         watch: {
+          // 当使用路由参数时，例如从 /detail/1 导航到 /detail/2，原来的组件实例会被复用。因为两个路由都渲染同个组件，比起销毁再创建，复用则显得更加高效。不过，这也意味着组件的生命周期钩子不会再被调用。
+          // 想要对路由的变化做出相应，可以监听 $router对象
           $route (to, from) {
+            console.log(to.params) // 跳转后路由参数
+            console.log(from.params) // 跳转前路由参数
             console.log(to.params.id)
           }
         }
@@ -46,13 +50,13 @@
         // routes: [
         //   { path: 'detail', component: Detail },
         //   { path: '/detail/1', component: Detail },
-        //   { path: '/detail/2', component: Detail },
-        //   { path: '/detail/3', component: Detail }
+        //   { path: '/detail/2', component: Detail }
         // ]
 
-        // 方式2： 使用参数
+        // 方式 2： 使用参数
+        // 动态路径参数 以冒号开头
         // ? 表示参数可有可无
-        routes: [{ path: '/detail/:id?', component: Detail }]
+        routes: [{ path: '/detail/:id?', name: 'detail', component: Detail }] // 参数值会被设置到 this.$route.params
       })
 
       const vm = new Vue({

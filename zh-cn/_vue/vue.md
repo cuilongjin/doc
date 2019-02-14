@@ -1697,6 +1697,8 @@ const router = new VueRouter({
 
 传参
 
+[动态路由匹配](https://router.vuejs.org/zh/guide/essentials/dynamic-matching.html#%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%8C%B9%E9%85%8D)
+
 ```js
 const Detail = Vue.component('detail', {
   template: `<div>{{ $route.path }}</div>`
@@ -1751,6 +1753,31 @@ const Detail = Vue.component('detail', {
     }
   }
 })
+```
+
+
+
+[编程式导航](https://router.vuejs.org/zh/guide/essentials/navigation.html#%E7%BC%96%E7%A8%8B%E5%BC%8F%E7%9A%84%E5%AF%BC%E8%88%AA)
+
+```js
+const userId = '123'
+// 字符串
+router.push('/user') // -> /user
+
+// 对象, path为路由的path属性值
+router.push({ path: '/user' }) // -> /user
+router.push({ path: `/user/${userId}` }) // -> /user/123
+
+// 命名的路由，name为路由的name属性值
+router.push({ name: 'user', params: { userId }}) // -> /user/123
+// 如果提供了 path，params 会被忽略
+// 这里的 params 不生效
+router.push({ path: '/user', params: { userId }}) // -> /user
+
+// 带查询参数
+router.push({ path: 'register', query: { plan: 'private' }}) // -> /register?plan=private
+
+routes: [{ path: '/user/:id?', name='user', component: User }] 
 ```
 
 
