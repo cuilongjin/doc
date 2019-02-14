@@ -8,22 +8,13 @@
   </head>
   <body>
     <div id="app">
-      <!-- 入口 -->
-      <!-- 可以直接通过url地址访问路由 -->
-
-      <!-- to 属性：路由匹配路径
-        router-link 最终会转化为 a 标签
-    -->
-      <router-link to="/one">One</router-link>
-      <router-link to="/two">Tow</router-link>
-
-      <!-- 5. 出口 -->
-      <router-view></router-view>
+      <!-- 多个出口的形式 -->
+      <router-view name="one"></router-view>
+      <router-view name="two"></router-view>
     </div>
     <script src="./vue.js"></script>
     <script src="./vue-router.js"></script>
     <script>
-      // 3. 注册组件并设置返回值
       const One = {
         template: `<div>组件 One</div>`
       }
@@ -32,19 +23,24 @@
         template: `<div>组件 Two</div>`
       }
 
-      // 1. 实例化路由对象
       const router = new VueRouter({
         routes: [
-          // 4. 配置路由规则，路由和实例一一对应
-          { path: '/one', component: One },
-          { path: '/two', component: Two }
+          // 配置路由规则，一个路由对应多个实例
+          {
+            path: '/',
+            components: {
+              // key 为出口的 name 属性值
+              // value 为组件实例
+              one: One,
+              two: Two
+            }
+          }
         ]
       })
 
       const vm = new Vue({
         el: '#app',
         data: {},
-        // 2. 将路由挂载到vue实例上，让vue和路由关联在一起
         router
       })
     </script>

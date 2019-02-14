@@ -225,6 +225,7 @@ input.oninput = function () {
 > 说明 : 用在`表单`元素中，用来实现`数据双向绑定` (input checkbox 等等)
 > 作用 : 将 `数据` 和 `文本框的值` 绑定到一起，任何一方发生改变，都会引起对方的改变
 > 注意 : v-model 在不同类型的表单元素中作用不同
+> `v-model` 会忽略所有表单元素的 `value`、`checked`、`selected` 特性的初始值而总是将 Vue 实例的数据作为数据来源
 
 ```html
 <div id="app">
@@ -1582,6 +1583,48 @@ const vm = new Vue({
   router
 })
 ```
+
+
+
+多出口情况
+
+```html
+<div id="app">
+  <!-- 多个出口的形式 -->
+  <router-view name="one"></router-view>
+  <router-view name="two"></router-view>
+</div>
+```
+
+```javascript
+const One = {
+  template: `<div>组件 One</div>`
+}
+
+const Two = {
+  template: `<div>组件 Two</div>`
+}
+
+const router = new VueRouter({
+  routes: [
+    // 配置路由规则，一个路由对应多个实例
+    {
+      path: '/',
+      // conponents 为一个对象
+      components: {
+        // key 为出口的 name 属性值
+        // value 为组件实例
+        one: One,
+        two: Two
+      }
+    }
+  ]
+})
+```
+
+
+
+
 
 
 
