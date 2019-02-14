@@ -234,7 +234,7 @@ navigator.geolocation.getCurrentPosition(function(position){
 
 
 
-# web 存储（重点）
+# web 存储
 
 > 在代码执行的时候，数据都是存储在内存中的，当页面关闭或者浏览器关闭的时候，内存就被释放掉了。数据只有存储在硬盘上，才不会被释放。
 
@@ -242,14 +242,14 @@ navigator.geolocation.getCurrentPosition(function(position){
 
 特点：
 
-1. 大小 4k
-2. 生命周期，默认会话级别，但是可以设置过期时间
-
-3. cookie 中的数据可以在多个页面共享
-
-4. cookie 中的数据，在请求时会进行自动携带
-5. cookie 是以字符串形式存在的，这个字符串有固定的格式：key=value;key1=value1；在获取cookie内容时，一般需要通过正则或者字符串的方法进行处理，转换成对象，最终得到数据
-6. 一般用于存储 sessionId，可以实现登录状态保持 (会话保持)
+* 在浏览器端的存储数据的容器
+* 大小 4k
+* 生命周期，默认会话级别，但是可以设置过期时间
+* cookie 中的数据可以在同一个网站的页面共享
+* cookie 中的数据，在请求时会进行自动携带
+* 不同浏览器的 cookie 不能共享
+* cookie 是以字符串形式存在的，这个字符串有固定的格式：key=value;key1=value1；在获取cookie内容时，一般需要通过正则或者字符串的方法进行处理，转换成对象，最终得到数据
+* 一般用于存储 sessionId，可以实现登录状态保持 (会话保持)
 
 
 
@@ -266,23 +266,26 @@ var result = document.cookie
 console.log(result)
 ```
 
-## sessionStorage与localStorage
+## WebStorage
 
-> HTML5 规范提出了解决方案，使用sessionStorage和localStorage存储数据。设置、读取、删除操作很方便
+> HTML5 规范提出使用 sessionStorage 和 localStorage 存储数据。设置、读取、删除操作很方便
 
-* window.sessionStorage 的特点
+* sessionStorage 和 localStorage 特点
+  * 都保存在客户端
+  * 大小为 5M 左右
+  * 使用方法相同
+  * 以键值对的方式，存储字符串格式的数据
 
-1. 生命周期默认为一个会话周期，且不能设置周期，一旦关闭浏览器, 就销毁了
-2. 不能在多个窗口下共享数据
-3. 大小为5M左右
 
-* window.localStorage的特点
 
-1. 永久生效，除非手动删除
-2. 可以多个窗口共享
-3. 大小为5M左右
 
-* localStorage 的方法
+* sessionStorage 和 localStorage 区别
+  * sessionStorage 生命周期默认为一个会话周期，且不能设置周期，一旦关闭浏览器, 就销毁了，不能在多个窗口下共享数据
+  * localStorage 永久生效，除非手动删除，可以多个窗口共享
+
+  
+
+* 使用方法
 
 ```javascript
 setItem(key, value) // 设置存储内容
@@ -291,17 +294,33 @@ removeItem(key) // 删除键值为key的存储内容
 clear() // 清空所有存储内容（谨慎使用）
 ```
 
-* sessionStorage 的方法和 localStorage 的方法相同
-
-* localStorage 中只能以键值对的方式，存储字符串格式的数据
-
-* localStorage 存取复杂数据类型
-
-  先将复杂数据转换成 JSON字符串   JSON.stringify(obj/arr)在进行存储；使用时将 json字符串转换成复杂数据类型  JSON.parse( jsonStr )
+存取复杂数据类型：先将复杂数据转换成 JSON 字符串 `JSON.stringify(obj/arr)` 在进行存储；使用时将 JSON  字符串转换成复杂数据类型 `JSON.parse( jsonStr )`
 
 
 
 【案例-换肤效果】
+
+
+
+## Cookie 和 WebStorage 比较
+
+**cookie**
+
+* 大小受限
+* 用户可以操作（禁用）cookie，使功能受限
+* 安全性较低
+* 有些状态不可能保存在客户端。
+* 每次访问都要传送cookie给服务器，浪费带宽
+
+
+
+**WebStorage**
+
+* 存储空间更大：cookie 为4KB，而 WebStorage 是 5MB
+* WebStorage 不会传送到服务器，存储在本地的数据可以直接获取，速度更快，并且减少了客户端和服务器端的交互，节省了网络流量
+* 对于那种只需要在用户浏览一组页面期间保存而关闭浏览器后就可以丢弃的数据，sessionStorage 会非常方便
+* 安全性：WebStorage  不会随着 HTTP header 发送到服务器端，所以安全性相对于 cookie 来说比较高一些，不会担心截获，但是仍然存在伪造问题
+* WebStorage 提供了一些方法，数据操作比 cookie 方便
 
 
 
