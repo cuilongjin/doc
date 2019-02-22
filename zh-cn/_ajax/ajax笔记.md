@@ -913,9 +913,9 @@ $.fn.waterfall = function () {
 
 > 随着互联网的发展，“同源策略”越来越严格，目前，如果非同源，以下三种行为都将收到限制。
 
-1. Cookie、LocalStorage 和 IndexDB 无法读取。
-2. DOM 无法获得。
-3. AJAX 请求不能发送。
+1. Cookie、LocalStorage 和 IndexDB 无法读取
+2. DOM 无法获得
+3. AJAX 请求响应被拦截
 
 虽然这些限制是很有必要的，但是也给我们日常开发带来不好的影响。比如实际开发过程中，往往都会把服务器端架设到一台甚至是一个集群的服务器中，把客户端页面放到另外一个单独的服务器。那么这时候就会出现不同源的情况，如果我们知道两个网站都是安全的话，我们是希望两个不同源的网站之间可以相互请求数据的。这就需要使用到 **跨域** 。
 
@@ -967,7 +967,7 @@ html 文件
 <script src="http://www.api.com/testjs.php"></script>
 <script>
     // a打印出来了118
-    console.log(a);
+    console.log(a)
 </script>
 ```
 
@@ -997,7 +997,7 @@ js 代码
 ```html
 <script>
     function func(data) {
-        console.log(data);
+        console.log(data)
     }
 </script>
 <script src="http://www.api.com/testjs.php"></script>
@@ -1026,21 +1026,21 @@ javascript代码
 
 ```javascript
 function fun(data) {
-	console.log(data);
+	console.log(data)
 }
-var button = document.querySelector("button");
+var button = document.querySelector('button')
 button.onclick = function () {
-	var script = document.createElement("script");
-	script.src = "http://www.api.com/testjs.php?callback=fun";
-	document.body.appendChild(script);
+	var script = document.createElement('script')
+	script.src = 'http://www.api.com/testjs.php?callback=fun'
+	document.body.appendChild(script)
 }
 ```
 
 
 
-1. jsonp 的原理就是 **借助了 script 标签 src 请求资源时，不受同源策略的限制**。
-2. 在服务端返回一个函数的调用，将数据当前调用函数的实参
-3. 在浏览器端，需要程序要声明一个全局函数，通过形参就可以获取到服务端返回的对应的值
+1. jsonp 的原理就是 **借助 script 标签 src 请求资源时，不受同源策略的限制**
+2. 在服务端返回一个函数的调用，将数据作为当前调用函数的实参
+3. 在浏览器端，声明一个全局函数，通过形参就可以获取到服务端返回的对应的值
 
 
 
@@ -1051,17 +1051,17 @@ button.onclick = function () {
 ```javascript
 // 使用起来相当的简单，跟普通的get请求没有任何的区别，只需要把 dataType 固定成 jsonp 即可
 $.ajax({
-    type:"get",
-    url:"http://www.Jepson.com/testjs.php",
-    dataType:"jsonp",
+    type: 'get',
+    url: 'http://www.Jepson.com/testjs.php',
+    dataType: 'jsonp',
     data:{
-        uname:"zs",
-        upass:"123456"
+        uname: 'zs',
+        upass: '123456'
     },
     success:function (info) {
-        console.log(info);
+        console.log(info)
     }
-});
+})
 ```
 
 
@@ -1227,24 +1227,24 @@ xhr.send(formData);
 
 
 
-### 跨域资源共享(CORS) ( 兼容性IE10+ )
+### 跨域资源共享(CORS)
 
-#### cors的使用
+#### CORS 的使用
 
 > 新版本的XMLHttpRequest对象，可以向不同域名的服务器发出HTTP请求。这叫做["跨域资源共享"](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing)（Cross-origin resource sharing，简称CORS）。
 
 跨域资源共享（CORS）的前提
 
 - 浏览器支持这个功能( 兼容性IE10+ )
-- 服务器必须允许这种跨域。
+- 服务器必须允许这种跨域
 
 服务器允许跨域的代码：
 
 ```php
 // 允许所有的域名访问这个接口
 header("Access-Control-Allow-Origin:*");
-// 允许www.study.com这个域名访问这个接口
-header("Access-Control-Allow-Origin:http://www.study.com");
+// 允许 www.abc.com 这个域名访问这个接口
+header("Access-Control-Allow-Origin:http://www.abc.com");
 ```
 
 
@@ -1257,19 +1257,19 @@ header("Access-Control-Allow-Origin:http://www.study.com");
 
 3. 浏览器收到响应后，查看是否设置了`header('Access-Control-Allow-Origin:请求源域名或者*');`
 
-   如果当前域已经得到授权，则将结果返回给浏览器，否则浏览器忽略此次响应。
+   如果当前域已经得到授权，则将结果返回给浏览器，否则浏览器忽略此次响应
 
 结论：
 
 1. **跨域行为是浏览器行为，响应是回来了, 只是浏览器安全机制做了限制,  对于跨域响应内容进行了忽略。**
-2. **服务器与服务器之间是不存在跨域的问题的**
+2. **服务器与服务器之间是不存在跨域问题的**
 
 
 
 #### jsonp 与 cors 的对比
 
-- jsonp兼容性好，老版本浏览器也支持，但是jsonp仅支持get请求，发送的数据量有限。使用麻烦
-- cors需要浏览器支持cors功能才行。但是使用简单，**只要服务端设置允许跨域，对于客户端来说，跟普通的get、post请求并没有什么区别。**
-- 跨域的安全性问题：**因为跨域是需要服务端配合控制的** ，也就是说不论 jsonp 还是 cors，如果没有服务端的允许，浏览器是没法做到跨域的。
+- jsonp 兼容性好，老版本浏览器也支持，但是 jsonp 仅支持 get 请求，发送的数据量有限，使用麻烦
+- cors 需要浏览器支持 cors 功能才行。使用简单，**只要服务端设置允许跨域，对于客户端来说，跟普通的get、post请求并没有什么区别**
+- 跨域的安全性问题：**因为跨域是需要服务端配合控制的** ，也就是说不论 jsonp 还是 cors，如果没有服务端的允许，浏览器是没法做到跨域的
 
 【案例：图灵机器人】

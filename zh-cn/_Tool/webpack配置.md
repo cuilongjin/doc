@@ -59,6 +59,20 @@ browserify 是与 webpack 相似的模块化打包工具
 
 
 
+
+
+### webpack 打包原理：
+
+​        入口文件： main.js
+
+​        webpack 从入口出发，递归分析项目中所有的依赖项（模块），使用loader来处理对应的模块最终，打包生成一个 bundle.js 文件。
+
+​        如果配置了 webpack 中的 代码分离（Code Spliting），webpack 会根据 分离点 将这个模块生成一个独立的JS文件
+
+​        还可以通过配置，将 CSS 、 图片、 字体 等文件，从 bundle.js 中抽离为独立的文件
+
+
+
 ## webpack 的基本使用
 
 安装：`npm i -D webpack webpack-cli`

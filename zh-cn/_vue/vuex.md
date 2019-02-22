@@ -68,7 +68,7 @@ mutations: {
 ```javascript
 methods: {
   addTodo () {
-    // 异步 : 分发 dispatch  => actions
+    // 异步: 分发 dispatch  => actions
     this.$store.dispatch('addTodoAsync', {
       todoName: this.todoName
     })

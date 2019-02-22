@@ -106,7 +106,7 @@ const vm = new Vue({
   // 指定 vue 管理的边界，不能是 body 或 html 节点
   el: '#app',
   // 提供视图中 需要的数据
-  // 视图可以直接使用data中的数据
+  // 视图可以直接使用 data 中的数据
   data: {
     msg: 'xxx'
   }
@@ -147,8 +147,8 @@ const vm = new Vue({
 
  v-model 指令：数据双向绑定的指令
 
-* 作用：把 data 中的 num 值 和 input 上的值绑定到一起，一方的值发生了改变，另 一方 也会跟着改变
-* 注意：v-model 只能用在 表单控件上（input checkbox 等）
+* 作用：把 data 中的 num 值 和 input 上的值绑定到一起，一方的值发生了改变，另 一方也会跟着改变
+* 注意：v-model 只能用在表单控件上（input checkbox 等）
 
 
 
@@ -157,14 +157,14 @@ const vm = new Vue({
 ```js
 let obj = {}
 let temp
-// 参数1 : 要给哪个对象设置属性
-// 参数2 : 给对象设置什么属性
-// 参数3 : 属性的修饰符
+// 参数1：要给哪个对象设置属性
+// 参数2：给对象设置什么属性
+// 参数3：属性的修饰符
 Object.defineProperty(obj, 'name', {
   set: function(newVal) {
     console.log('赋值了', newVal)
   },
-  set: function() {
+  get: function() {
     console.log('取值了')
     return temp
   }
@@ -177,16 +177,16 @@ Object.defineProperty(obj, 'name', {
 
 ```html
 <div id="app">
-  <input id="input" type="text" v-model="num">
+  <input id="input" type="text">
 </div>
 ```
 
 ```javascript
 let obj = {}
 let temp
-// 第一个参数 : 给哪个对象添加或者设置属性
-// 第二个参数 : 要添加/设置什么属性
-// 第三个参数 : 属性的修饰符 对象格式
+// 第一个参数：给哪个对象添加或者设置属性
+// 第二个参数：要添加/设置什么属性
+// 第三个参数：属性的修饰符 对象格式
 Object.defineProperty(obj, 'name', {
   set: function (newVal) {
     // 设置属性时会触发该函数
@@ -214,18 +214,17 @@ input.oninput = function () {
 
 ### 指令
 
-- 指令 : 就是一个特殊的标记，起一个辅助作用，使 html 具备原来没有的功能
-- vue 中所有的指令都是以 v- 开头的
-- 比如 : v-model v-bind v-if v-for 等等
+- 指令：就是一个特殊的标记，起一个辅助作用，使 html 具备原来没有的功能
+- vue 中所有的指令都是以 `v-` 开头的，比如 : v-model v-bind v-if v-for 等等
 
 
 
 ### v-model (常用)
 
-> 说明 : 用在`表单`元素中，用来实现`数据双向绑定` (input checkbox 等等)
-> 作用 : 将 `数据` 和 `文本框的值` 绑定到一起，任何一方发生改变，都会引起对方的改变
-> 注意 : v-model 在不同类型的表单元素中作用不同
-> `v-model` 会忽略所有表单元素的 `value`、`checked`、`selected` 特性的初始值而总是将 Vue 实例的数据作为数据来源
+> 说明：用在`表单`元素中，用来实现`数据双向绑定` (input checkbox 等等)
+> 作用：将 `数据` 和 `文本框的值` 绑定到一起，任何一方发生改变，都会引起对方的改变
+> 注意：v-model 在不同类型的表单元素中作用不同
+> `v-model` 会忽略所有表单元素的 `value`、`checked`、`selected` 的初始值而总是将 Vue 实例的数据作为数据来源
 
 ```html
 <div id="app">
@@ -252,7 +251,7 @@ const vm = new Vue({
 
 > 说明 : 设置文本内容
 
-1. v-text : 相当于之前的 innerText 标签内部{{}}
+1. v-text : 相当于之前的 innerText
 2. v-html : 相当于之前的 innerHTML
 
 ```html
@@ -276,20 +275,20 @@ const vm = new Vue({
 
 ### v-bind (常用)
 
-> 说明 : 动态绑定数据 (单向)
-> 出现原因 : 在 HTML 属性中，无法使用插值表达式
+> 说明：动态绑定数据 (单向)
+> 出现原因：在 HTML 属性中，无法使用插值表达式
 
 ```html
 <div id="app">
   <a v-bind:href="href">hahaha</a>
-  <!-- v-bind可以直接省略 -->
+  <!-- v-bind 可以直接省略 -->
   <a :href="href">hahaha</a>
 </div>
 ```
 
 ```javascript
-// v-bind :
-// 说明 : 动态数据绑定 (单向)，因为html的`属性`不能使用{{}} 来动态的读取数据 , 需要使用 v-bind
+// v-bind：
+// 说明：动态数据绑定 (单向)，因为html的`属性`不能使用{{}} 来动态的读取数据, 需要使用 v-bind
 
 const vm = new Vue({
   el: '#app',
@@ -305,11 +304,11 @@ const vm = new Vue({
 
 ```html
 <!-- v-model 数据双向绑定 -->
-<!--场景 :  表单元素中 -->
+<!--场景：表单元素中 -->
 <input type="checkbox" v-model="isChecked1">
 
 <!--  v-bind 数据动态绑定 (单向) -->
-<!--场景 :  主要用在属性中 -->
+<!--场景：主要用在属性中 -->
 <input type="checkbox" :checked="isChecked2">
 ```
 
@@ -644,7 +643,7 @@ v-if 和 v-show 的异同点：
 
 ## 计算属性
 
-1. 写起来像一个方法，用起来像一个属性
+写起来像一个方法，用起来像一个属性
 
 ```js
 computed: {
@@ -652,7 +651,7 @@ computed: {
 }
 ```
 
-特点  : 只有跟计算属性相关的数据发生了改变，计算属性才会重新计算
+特点：只有跟计算属性相关的数据发生了改变，计算属性才会重新计算
 注意点:  
 
 - 计算属性必须返回一个值
@@ -698,7 +697,7 @@ vm.list.unshift({id:4, name:'zl'})
 为什么是异步 DOM 更新?
 
 - 性能的考虑
-- 因为对于前端来说，修改数据进行 DOM 操作是常有的事情,如果频繁操作 DOM，会严重影响页面的加载性能
+- 因为对于前端来说，修改数据进行 DOM 操作是常有的事情，如果频繁操作 DOM，会严重影响页面的加载性能
 - DOM 操作这是前端的性能的瓶颈
 - 比如 : for (let i = 1; i < 10000; i++>) 如果同步 就要重新渲染 1000 次
 
@@ -761,7 +760,7 @@ data: {
 watch: {
   // 监听对象
   obj (newVal) {
-    // 虽然obj中的属性值发生改变了，但obj引用的地址没有发生改变，所以不会触发事件
+    // 虽然 obj 中的属性值发生改变了，但 obj 引用的地址没有发生改变，所以不会触发事件
     console.log(newVal)
   },
   // 监听对象的属性
@@ -824,7 +823,7 @@ watch: {
 
 - 简单说：一个组件（实例）从开始到最后消化所经历的各种状态，就是一个组件的生命周期
 - 生命周期钩子函数的定义：从组件被创建，到组件挂在到页面上运行，再到页面关闭组件被销毁，这三个阶段总是伴随着组件的各种事件，这些事件，统称为组件的生命周期函数（简称 : 钩子函数）
-- 开发人员可以通过 vue 提供的钩子函数，让我们写的代码参与到 vue 的声生命周期里面来，让我们的代码在合适的阶段起到相应的作用
+- 开发人员可以通过 vue 提供的钩子函数，让我们写的代码参与到 vue 的生命周期里面来，让我们的代码在合适的阶段起到相应的作用
 
 注意：
 
@@ -871,7 +870,7 @@ watch: {
 
 
 
-### 钩子函数 - beforeUpdated()
+### 钩子函数 - beforeUpdate()
 
 - 数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程
 
@@ -928,7 +927,7 @@ beforeDestroy () {
 ```js
 1. 全局安装 json-server: `npm i -g json-server`
 2. 准备一个json数据 
-3. 执行 :  `json-server data.json`
+3. 执行：`json-server data.json`
 
 data.json
 {
@@ -945,10 +944,10 @@ data.json
 - REST API格式
 
 ```js
-1. 查询 : GET
-2. 添加 : POST
-3. 删除 : DELETE
-4. 更新 : 
+1. 查询：GET
+2. 添加：POST
+3. 删除：DELETE
+4. 更新：
 	PUT：需要将对象里的所有属性提交
   PATCH(打补丁)：只需要提交需要修改的属性
 ```
@@ -976,7 +975,7 @@ data.json
   - 本地安装 axios : `npm i -g axios`
   - 导入 axios
 - [axios 使用说明](https://github.com/axios/axios)
-- **GTE方式发送请求**
+- **GTE 方式发送请求**
 
 ```js
 // 方式1 
@@ -995,7 +994,7 @@ axios.get('http://localhost:3000/todoList',{
 })
 ```
 
-- **POST方式发送请求**
+- **POST 方式发送请求**
 
 ```js
 // post 请求
@@ -1014,8 +1013,8 @@ axios
 
 **概念 :**
 
-- vue 中的过滤器(filter)：**数据格式化**，让数据按照我们规定的一种格式输出
-- 比如 : 对于日期来说，将日期格式化转化为 `年-月-日 小时:分:秒` 格式的过程
+- vue 中的过滤器(filter)：**数据格式化**，让数据按照我们规定的格式输出
+- 比如 : 对于日期来说，将日期格式化转化为 `年-月-日 小时:分:秒`
 
 ```js
  // 直接显示
@@ -1038,8 +1037,8 @@ axios
 **注册全局过滤器**
 
 ```js
-// 第一个参数: 过滤器的名字
-// 第二个参数: 是一个回调函数，只要使用过滤器的时候，这个回调函数就会执行，res => 原始数据
+// 第一个参数：过滤器的名字
+// 第二个参数：是一个回调函数，只要使用过滤器的时候，这个回调函数就会执行，res => 原始数据
 // 必须要有返回值：通过回调函数的返回值得到格式化后的数据
 Vue.filter('date', res => {
   return res
@@ -1298,8 +1297,8 @@ Vue.component('hello', {
 
 #### 非父子组件通讯
 
-- 是通过 `事件总线 (event bus 公交车) 的机制` 来实现的
-- 事件总线 : 实际上就是一个 `空Vue实例`
+- 是通过 `事件总线 (event bus 公交车) 机制` 来实现的
+- 事件总线：实际上就是一个 `空 Vue 实例`
 - 可以实现任意两个组件之间的通讯而不管两个组件到底有什么样的层级关系
 
 - `$emit()`：发送数据
@@ -1432,7 +1431,7 @@ SPA : **Single Page Application** 单页面应用程序
 
 MPA : **Multiple Page Application** 多页面应用程序
 
-* 单页web应用，就是只有一个web页面的应用，是加载单个HTML页面，并在用户与应用程序交互时动态更新该页面的web应用程序
+* 单页 web 应用，就是只有一个 web 页面的应用，是加载单个 HTML 页面，并在用户与应用程序交互时动态更新该页面的 web 应用程序
 
 
 
@@ -1452,7 +1451,7 @@ MPA : **Multiple Page Application** 多页面应用程序
 
 - **路由** : 是浏览器 URL 中的`哈希值`( # hash) 与 `展示视图内容` 之间的`对应规则`
   - 在 web App 中，通过一个页面来展示和管理整个应用的功能。SPA 往往是功能复杂的应用，为了有效管理所有视图内容，前端路由应运而生。简单来说，路由就是一套映射规则(一对一的对应规则)，由开发人员制定规则。当 URL 中的哈希值( `#` hash) 发生改变后，路由会根据制定好的规则，展示对应的视图内容。
-- **vue 中的路由** : 是 **hash** 和 **component** 的对应关系，一个哈希值对应一个组件
+- **vue 中的路由**；是 **hash** 和 **component** 的对应关系，一个哈希值对应一个组件
 
 
 
@@ -1579,7 +1578,7 @@ const router = new VueRouter({
 const vm = new Vue({
   el: '#app',
   data: {},
-  // 2. 将路由挂载到vue实例上，让vue和路由关联在一起
+  // 2. 将路由挂载到 vue 实例上，让 vue 和路由关联在一起
   router
 })
 ```
@@ -1676,7 +1675,7 @@ const router = new VueRouter({
 </router-link>
 ```
 
-- 注意 : 精确匹配和模糊匹配，只对添加类名这个机制有效，与路由的匹配规则无关
+- 注意：精确匹配和模糊匹配，只对添加类名这个机制有效，与路由的匹配规则无关
 
 
 
@@ -1768,7 +1767,7 @@ router.push('/user') // -> /user
 router.push({ path: '/user' }) // -> /user
 router.push({ path: `/user/${userId}` }) // -> /user/123
 
-// 命名的路由，name为路由的name属性值
+// 命名的路由，name 为路由的 name 属性值
 router.push({ name: 'user', params: { userId }}) // -> /user/123
 // 如果提供了 path，params 会被忽略
 // 这里的 params 不生效

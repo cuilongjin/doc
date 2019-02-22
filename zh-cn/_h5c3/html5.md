@@ -83,13 +83,13 @@ document.createElement("header"); // 创建这个标签即可让IE678识别
 
 ```javascript
 // 添加类
-div.classList.add("classname");
+div.classList.add("classname")
 // 移除类
-div.classList.remove("classname");
+div.classList.remove("classname")
 // 切换类
-div.classList.toggle("classname");
+div.classList.toggle("classname")
 // 判断类
-div.classList.contains("classname");
+div.classList.contains("classname")
 ```
 
 【tab栏案例】
@@ -141,7 +141,7 @@ jquery并没有把 `data-` 当成自定义属性来用，jq中封装了 `data()`
     console.log($('#box').data('id')) // 3
     console.log(box.dataset['id']) // 3
 
-    // 属性里使用json语法，但通过dataa()设置的不能解析成对象
+    // 属性里使用json语法，但通过data()设置的不能解析成对象
     $('#box').data('d', '{"e":"f"}')
     console.log($('#box').data('a')) // {b: "c"} => 对象
     console.log($('#box').data('d')) // '{"e":"f"}'
@@ -280,7 +280,7 @@ console.log(result)
 
 
 * sessionStorage 和 localStorage 区别
-  * sessionStorage 生命周期默认为一个会话周期，且不能设置周期，一旦关闭浏览器, 就销毁了，不能在多个窗口下共享数据
+  * sessionStorage 生命周期默认为一个会话周期，且不能设置周期，一旦关闭浏览器，就销毁了，不能在多个窗口下共享数据
   * localStorage 永久生效，除非手动删除，可以多个窗口共享
 
   
