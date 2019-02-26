@@ -1,93 +1,93 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-	// 闭包和作用域相关
+      // 闭包和作用域相关
 
-        // 1. 访问函数里面的变量
-        // function fn(){
-        //     var num = 10;
-        //     return num;
+      // 1. 访问函数里面的变量
+      // function fn () {
+      //   var num = 10
+      //   return num
+      // }
+      // var ret = fn()
+      // console.log(ret) // 10
+
+      // 2. 实现在函数外边修改num的值
+
+      // 2.1 在函数里面访问num的值
+      /* function fn () {
+        var num = 10
+
+        function inner () {
+          // num的值可以被访问到，因为inner函数的作用域包含外层的fn作用域
+          console.log(num)
+        }
+        inner()
+      }
+      fn() */
+
+      // 2.2 在函数里面去修改num的值
+      /* function fn () {
+        var num = 10
+        function inner (n) {
+          num = n // fn函数中的num 被修改了
+          // num的值可以被访问到，因为inner函数的作用域包含外层的fn作用域
+          console.log(num)
+        }
+        inner(1000)
+      }
+      fn() */
+
+      // 2.3 在函数外面去修改num的值
+      function fn () {
+        var num = 10
+        // inner 函数的作用就是用来修改num的值
+        function inner (n) {
+          // var num = 1; // 如果在inner函数里面声明num的值， inner访问 num就不是外部fn函数的，就不能够形成闭包的条件。
+          num = n // fn函数中的num 被修改了
+          // num的值可以被访问到，因为inner函数的作用域包含外层的fn作用域
+          console.log(num)
+        }
+        // 把inner函数给返回出去
+        return inner
+      }
+      var ret = fn()
+      // 达到了这样的目的，在函数fn的外面去修改fn里面的num值。
+      ret(1000)
+
+      // 闭包是个啥？ （closure）
+      // 闭包是函数和声明该函数的词法环境的组合。
+      // 函数:  指的就是内部函数
+      // 声明该函数： 外部函数
+      // 词法环境： 作用域链
+      // 组合： 是一个综合的环境
+
+      // 闭包的形成条件：
+      // 有两个函数，是嵌套关系，内部函数引用了外部函数的变量，这样就会形成闭包
+
+      // 闭包的基本模型：
+      function outer () {
+        var num = 10
+        // function inner () {
+        //   num++
+        //   console.log(num)
         // }
-        // var ret = fn();
-        // console.log(ret); // 10
+        // return inner // 把inner函数给返回出去，让外部能够调用inner函数
 
-        // 2. 实现在函数外边修改num的值
-
-        // 2.1 在函数里面访问num的值
-        /*function fn(){
-            var num = 10;
-
-            function inner(){
-                // num的值可以被访问到，因为inner函数的作用域包含外层的fn作用域
-                console.log(num);
-            }
-            inner();
+        // 上面的简写
+        return function () {
+          num++
+          console.log(num)
         }
-        fn();*/
+      }
 
-        // 2.2 在函数里面去修改num的值
-        /*function fn(){
-            var num = 10;
-            function inner(n){
-                num = n; // fn函数中的num 被修改了
-                // num的值可以被访问到，因为inner函数的作用域包含外层的fn作用域
-                console.log(num);
-            }
-            inner(1000);
-        }
-        fn();*/
-
-        // 2.3 在函数外面去修改num的值
-        // function fn(){
-        //     var num = 10;
-        //     // inner 函数的作用就是用来修改num的值
-        //     function inner(n){
-        //         // var num = 1; // 如果在inner函数里面声明num的值， inner访问 num就不是外部fn函数的，就不能够形成闭包的条件。
-        //         num = n;   // fn函数中的num 被修改了
-        //         // num的值可以被访问到，因为inner函数的作用域包含外层的fn作用域
-        //         console.log(num);
-        //     }
-        //     // 把inner函数给返回出去
-        //     return inner;
-        // }
-        // var ret = fn();
-        // // 达到了这样的目的，在函数fn的外面去修改fn里面的num值。
-        // ret(1000);
-
-        // 闭包是个啥？ （closure）
-        //      闭包是函数和声明该函数的词法环境的组合。
-        //      函数:  指的就是内部函数
-        //      声明该函数： 外部函数
-        //      词法环境： 作用域链
-        //      组合： 是一个综合的环境
-
-        // 闭包的形成条件：
-        //      有两个函数，是嵌套关系，内部函数引用了外部函数的变量，这样就会形成闭包
-
-        // 闭包的基本模型：
-        function outer(){
-            var num = 10;
-            // function inner(){
-            //     num++;
-            //     console.log(num);
-            // }
-            // return inner;  // 把inner函数给返回出去，让外部能够调用inner函数
-
-            // 上面的简写
-            return function (){
-                num++;
-                console.log(num);
-            };
-        }
-
-        // 闭包是啥？
-        // 闭包的形成条件
-        // 闭包的基本模型
+      // 闭包是啥？
+      // 闭包的形成条件
+      // 闭包的基本模型
     </script>
-</body>
+  </body>
 </html>

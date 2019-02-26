@@ -70,6 +70,9 @@
 .app-sub-sidebar li:before {
   content: '';
 }
+.sidebar ul {
+  margin: 0;
+}
 .sidebar li {
   margin-left: 5px;
 }

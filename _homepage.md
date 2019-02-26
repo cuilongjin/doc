@@ -43,7 +43,7 @@ Emmet 语法https://docs.emmet.io/cheat-sheet/
 
 ## 文档
 
-[Emmeet 语法](https://docs.emmet.io/cheat-sheet/)
+[Emmet 语法](https://docs.emmet.io/cheat-sheet/)
 [Vue](https://cn.vuejs.org/v2/guide/)
 [Element](http://element-cn.eleme.io/#/zh-CN/component/installation)
 

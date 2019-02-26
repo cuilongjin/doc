@@ -30,6 +30,7 @@
 	- [less](zh-cn/_移动web/less)
 * **nodejs**
 	- [nodejs](zh-cn/_nodejs/nodejs)
+	- [ES6](zh-cn/_nodejs/ES6.md)
 * **vue**
 	- [vue](zh-cn/_vue/vue)
 	- [vuex](zh-cn/_vue/vuex)

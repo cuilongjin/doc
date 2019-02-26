@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-    // 1. 统计一个函数调用的次数
-        // 使用到了闭包来解决count 变量不安全的问题
+      // 1. 统计一个函数调用的次数
+      // 使用到了闭包来解决count 变量不安全的问题
 
-        function outer(){
-            var count = 0;  // count 是局部变量， 保护了count的安全
-            // count 只能通过 返回的fn函数进行修改，除了这个没有任何办法能修改count的值。
-            // 每次调用fn 函数，count的值都是在上一次的基础上++的   ==>  持久化维持数据
-            function fn(){
-                count++;
-                console.log("fn 函数被调用了, 函数被调用了" + count + "次");
-            }
-            return fn;
+      function outer () {
+        var count = 0 // count 是局部变量， 保护了count的安全
+        // count 只能通过 返回的fn函数进行修改，除了这个没有任何办法能修改count的值。
+        // 每次调用fn 函数，count的值都是在上一次的基础上++的   ==>  持久化维持数据
+        function fn () {
+          count++
+          console.log('fn 函数被调用了, 函数被调用了' + count + '次')
         }
-        var ret = outer(); // ret 指向的就是 outer函数内部的fn 函数
-        ret();
+        return fn
+      }
+      var ret = outer() // ret 指向的就是 outer函数内部的fn 函数
+      ret()
 
-        // 正常情况下：函数在调用的时候，去开辟一块内存空间用来执行内部的代码,当函数调用结束的时候，要销毁开辟的空间，节省内存
-        // 闭包占用的内存是不会被销毁的
-
+      // 正常情况下：函数在调用的时候，去开辟一块内存空间用来执行内部的代码,当函数调用结束的时候，要销毁开辟的空间，节省内存
+      // 闭包占用的内存是不会被销毁的
     </script>
-</body>
+  </body>
 </html>

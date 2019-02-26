@@ -193,3 +193,51 @@ fn()
 ```
 
 
+
+
+
+```javascript
+// 延时函数
+function sleep (a, b) {
+  const p = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(b)
+    }, a)
+  })
+  return p
+}
+
+async function fn () {
+  const res1 = await sleep(1000, 'a')
+  console.log(res1)
+  const res2 = await sleep(5000, 'b')
+  console.log(res2)
+  const res3 = await sleep(3000, 'c')
+  console.log(res3)
+}
+// fn()
+
+sleep(1000, 'a')
+  .then(res => {
+  console.log(res)
+  return sleep(5000, 'b')
+})
+  .then(res => {
+  console.log(res)
+  return sleep(3000, 'c')
+})
+  .then(res => {
+  console.log(res)
+})
+
+const p1 = Promise.all([sleep(1000, 'a'), sleep(5000, 'b')])
+p1.then(res => {
+  console.log(res)
+})
+
+const p2 = Promise.race([sleep(1000, 'a'), sleep(5000, 'b')])
+p2.then(res => {
+  console.log(res)
+})
+```
+

@@ -87,7 +87,7 @@ obj = {} // TypeError: Assignment to constant variable
 
 - 其他用法和 let 一样
 
-```js
+```
 只能在当前代码块中使用
 不会提升
 不能重复声明
@@ -127,7 +127,7 @@ ES6 标准新增了一种新的函数：Arrow Function（箭头函数）
 ### 基本使用
 
 ```js
-let fn = function(x, y) {
+let fn = function (x, y) {
   console.log(x + y)
 }
 
@@ -143,7 +143,7 @@ let fn = (x, y) => {
 - 如果没有参数列表，使用()表示参数列表
 
 ```js
-let sum = function() {    
+let sum = function () {    
   console.log('哈哈')
 }
 // 等同于：
@@ -155,7 +155,7 @@ let sum = () => {
 - 如果只有一个参数，可以省略()
 
 ```js
-let sum = function(n1) {    
+let sum = function (n1) {    
   console.log('哈哈')
 }
 
@@ -168,7 +168,7 @@ let sum = n1 => {
 - 如果有多个参数，需要使用 () 把参数列表括起来
 
 ```js
-let sum = function(n1, n2) {    
+let sum = function (n1, n2) {    
   console.log('哈哈')
 }
 
@@ -231,7 +231,7 @@ arguments 对象拥有一些自己额外的功能
 - 如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来
 
 ```js
-let sum = function(n1) {    
+let sum = function (n1) {    
   console.log('哈哈')
   return n1
 }
@@ -281,7 +281,7 @@ obj.sayHi()
 
 ```javascript
 // 当属性的 key 和变量的名相同时可以简写
-let person = {name: name} => let person = {name}
+let person = {name: name} ==> let person = {name}
 
 声明函数 
 let cal = {
@@ -317,6 +317,95 @@ let obj = {
 ```
 
 ## class 关键字
+
+ES5 中通过 构造函数 + 原型 的方式来实现面向对象
+
+```javascript
+// 构造函数
+function Person () {
+  this.name = 'jack'
+  this.age = 18
+}
+
+// 在原型中添加实例方法
+Person.prototype.say = function () {
+  console.log(this.name, this.age)
+}
+
+// 创建实例
+const p = new Person()
+
+p.say()
+```
+
+
+
+ES6 中出现了 class 关键字，用来实现面向对象。
+
+class 仅仅是一个语法结构（语法糖），本质上还是通过构造函数+原型的方式来实现继承的
+
+
+
+
+
+```javascript
+// 基本使用
+// 创建 Person 类
+class Person {
+  // 类的构造函数
+  // constructor 固定名称
+  constructor (name, age) {
+    this.name = name
+    this.age = age
+  }
+
+  // 添加实例方法
+  say () {
+    console.log(this.name, this.age)
+  }
+}
+
+// 创建实例
+const p = new Person('tom', 18)
+console.log(p)
+p.say()
+```
+
+
+
+继承：要实现至少需要两个class（子类 和 父类），子类继承自父类，继承后，子类就可以使用父类中的属性或方法
+
+```javascript
+// 继承
+
+// 父类
+class Person {
+  constructor (name, age) {
+    this.name = name
+  }
+
+  say () {
+    console.log('父类中的 say 方法')
+  }
+}
+
+// 子类
+class Chinese extends Person {
+  constructor () {
+    // 子类中使用 constructor 必须手动调用 super
+    // super 表示父类的构造函数
+    // 先调用 super() 在使用this
+    super()
+    this.name = 'ls'
+    this.age = 18
+  }
+}
+
+// 创建实例
+const c = new Chinese()
+console.log(c)
+c.say() // 父类中的方法
+```
 
 
 
