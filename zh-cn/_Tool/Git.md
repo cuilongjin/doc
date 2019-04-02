@@ -26,7 +26,7 @@
 
 1. 如果多人开发，每个人都在不同的系统和电脑上开发，没办法协同工作。
 
-   ​
+   
 
 ### 集中式版本控制系統
 
@@ -53,21 +53,21 @@
 
 
 
-# Git 操作
+# Git
 
 ---
 
 
 
-# Git核心概念
+## Git 核心概念
 
-* **`WorkSpace`**：  
+* **`WorkSpace`**：
 工作区，即从仓库中checkout出来的，需要通过Git进行版本控制的目录和文件，可以简单的理解为在电脑里真实看到的文件；
 
-* **`Stage(Index)`**：  
+* **`Stage(Index)`**：
 暂存区，或者叫做待提交更新区；在提交进入Repository之前，可以把所有的更新放在暂存区, 用 `git add` 的文件都在这里；
 
-* **`Repository(Remote/Local)`**：  
+* **`Repository(Remote/Local)`**：
 仓库，一个存放在远端／本地的版本库，用 `git commit` 提交的文件就到Local Repository,用 `git push` 提交的文件就到Remote Repository；
 
 * **`.git`**：存放Git管理信息的目录，初始化仓库的时候会自动创建。
@@ -78,21 +78,24 @@
 
 
 
-# Git 初始设置
+## Git 初始设置
 
-## 设置用户名和邮箱地址
-
-首先来设置使用 Git 时的用户名和邮箱地址，名字请用英文输入。
+### 设置用户名和邮箱
 
 ```bash
+# 用户名使用英文
+# --global 全局设置
 git config --global user.name 'your_name'
 git config --global user.email 'your_email@example.com'
-git config --list 查看账号信息
-git config --unset -- user.name 重置信息
-git config --global core.quotepath false 解决中文变成数字加百分号 也可以在设置中将编码修改为utf-8
+
+# 查看账号信息
+git config --list
+
+# 重置信息
+git config --unset -- user.name
 ```
 
-这个命令，会在` ~/.gitconfig`中以如下形式输出设置文件。
+全局设置会在` ~/.gitconfig`中以如下形式输出设置文件，可以直接编辑这个文件来修改设置
 
 ```bash
 [user]
@@ -100,12 +103,21 @@ name = your_name
 email = your_email@example.com
 ```
 
->1. 想更改这些信息时，可以直接编辑这个设置文件。
-2. git config命令的 `--global` 参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
+每个仓库的 Git 配置文件都放在 ` .git/config` 文件中，可以直接修改此文件
+`$ cat .git/config` 查看配置文件
 
-## 设置 SSH Key
+ 
 
-GitHub 上连接已有仓库时的认证，是通过使用了 SSH 的公开密钥认证方式进行的。现在我们来创建公开密钥认证所需的 SSH Key，并将其添加至 GitHub。  
+```bash
+# 解决中文变成数字加百分号，也可以在设置中将编码修改为 utf-8
+git config --global core.quotepath false
+```
+
+
+
+### 设置 SSH Key
+
+GitHub 上连接已有仓库时的认证，是通过使用了 SSH 的公开密钥认证方式进行的。现在我们来创建公开密钥认证所需的 SSH Key，并将其添加至 GitHub
 
 运行下面的命令
 
@@ -117,7 +129,7 @@ Enter passphrase (empty for no passphrase):输入密码
 Enter same passphrase again:再次输入密码
 ```
 
-输入密码后会出现以下结果。
+输入密码后会出现以下结果
 
 ```bash
 Your identification has been saved in /Users/your_user_directory/.ssh/id_rsa.
@@ -134,19 +146,19 @@ The key's randomart image is:
 
 `id_rsa` 文件是私有密钥，`id_rsa.pub` 是公开密钥
 
-## 添加公开密钥
+### 添加公开密钥
 
-在 GitHub 中添加公开密钥，今后就可以用私有密钥进行认证了。
-点击右上角的账户设定按钮（Account Settings），选择 SSH Keys 菜单。点击 AddSSH Key 之后，在 Title 中输入适当的密钥名称。Key 部分请粘贴 id_rsa.pub 文件里的内容。
+在 GitHub 中添加公开密钥，今后就可以用私有密钥进行认证了
+点击右上角的账户设定按钮（Account Settings），选择 SSH Keys 菜单。点击 AddSSH Key 之后，在 Title 中输入适当的密钥名称。Key 部分请粘贴 id_rsa.pub 文件里的内容
 
-`id_rsa.pub` 的内容可以用如下方法查看。
+`id_rsa.pub` 的内容可以用如下方法查看
 
 ```bash
 cat ~/.ssh/id_rsa.pub
 ssh-rsa公开密钥的内容your_email@example.com
 ```
 
-完成以上设置后，就可以用手中的私人密钥与 GitHub 进行认证和通信了。
+完成以上设置后，就可以用手中的私人密钥与 GitHub 进行认证和通信了
 
 ```bash
 ssh -T git@github.com
@@ -157,21 +169,20 @@ Warning: Permanently added 'github.com,192.30.255.113' (RSA) to the list of know
 Enter passphrase for key '/c/Users/C.DESKTOP-3S4APJ4/.ssh/id_rsa':
 ```
 
-出现如下结果即为成功。
+出现如下结果即为成功
 
 ```bash
 Hi cuilongjin! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-## 提高命令输出的可读性
-将 `color.ui` 设置为 `auto` 可以让命令的输出拥有更高的可
-读性。
+### 提高命令输出的可读性
+将 `color.ui` 设置为 `auto` 可以让命令的输出拥有更高的可读性
 
 ```bash
 git config --global color.ui true
 ```
 
-`~/.gitconfig` 中会增加下面一行。
+`~/.gitconfig` 中会增加下面一行
 
 ```bash
 [color]
@@ -180,35 +191,16 @@ ui = true
 
 这样一来，各种命令的输出就会变得更容易分辨。
 
-## 设置头像
-通过 Gravatar服务
+### 设置头像
+通过 Gravatar 服务
 
-## 忽略特殊文件
 
->忽略文件的原则是：
 
->* 忽略操作系统自动生成的文件，比如缩略图等；
->* 忽略编译生成的中间文件、可执行文件等，也就是如果一个文件是通过另一个文件自动生成的，那自动生成的文件就没必要放进版本库，比如Java编译产生的.class文件；
->* 忽略你自己的带有敏感信息的配置文件，比如存放口令的配置文件。
-
-在Git工作区的根目录下创建一个特殊的.gitignore文件，然后把要忽略的文件名填进去，把 `.gitignore` 也提交到Git，Git就会自动忽略这些文件。
-检验.gitignore的标准是git status命令是不是说working directory clean
-
-GitHub已经为我们准备了各种配置文件[https://github.com/github/gitignore](https://github.com/github/gitignore)
-
-* 强制添加被.gitignore忽略的文件
+### 配置别名
 
 ```bash
-git add -f <file>			"强制添加被.gitignore忽略的文件"
-
-git check-ignore -v <file>		"检查哪个规则忽略了此文件,以便修订规则"
-.gitignore:x:xxx.xx    xxxxxx
-```
-
-## 配置别名
-
-```bash
-git config --global alias.st status		"配置st别名表示status"
+# 配置st别名表示status
+git config --global alias.st status
 
 git config --global alias.co checkout
 git config --global alias.ci commit
@@ -219,19 +211,72 @@ git config --global alias.last 'log -1'
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 ```
 
-* 配置文件 
-每个仓库的Git配置文件都放在.git/config文件中,可以直接修改此文件，
-`$ cat .git/config` 查看配置文件
 
-## 搭建Git服务器
+
+### 搭建Git服务器
 
 [搭建Git服务器](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000)
 
 
 
-# Git 基本操作
+### 配置多用户
 
-## git init -- 初始化仓库
+根据不同邮箱生成对应的私钥公钥
+
+```bash
+ssh-keygen -t rsa -C email
+```
+
+将公钥上传到对应的用户账号中
+
+在 `.ssh` 目录创建 `config` 文件，配置私钥对应的服务器，每个账号单独配置一个 Host，每个 Host 要取一个别名，每个 Host 主要配置 HostName 和 IdentityFile 两个属性即可
+
+```txt
+# 配置用户1
+Host github
+HostName github.com
+IdentityFile ~/.ssh/id_rsa_github
+User cuilongjin
+
+# 配置用户2
+Host gitlab
+HostName git.gitlab.net
+IdentityFile ~/.ssh/id_rsa_gitlab
+User cuilongjin
+```
+
+Host 的名字可以任意，不过这个会影响 git 相关命令，例如：
+
+Host mygithub 这样定义的话，命令如下
+
+`git clone git@mygithub:cuilongjin/cuilongjin.git`
+
+即 git@ 后面紧跟的名字改为 mygithub
+
+执行 `ssh -T git@github`、`ssh -T git@gitlab` 测试是否成功
+
+
+
+配置局部 git 用户名和邮箱，如果没有局部配置，默认用全局配置
+
+```bash
+git config user.name "Your name"
+git config user.email "your_email@gmail.com"
+```
+
+或者直接找到 `.git/config` 文件，添加
+
+```bash
+[user]
+name = Your name
+email = your_email@gmail.com
+```
+
+
+
+## Git 基本操作
+
+### git init
 
 ```bash
 mkdir project
@@ -243,7 +288,7 @@ git init
 > `mkdir project` 命令创建 project 空文件夹
 * `pwd` 命令用于显示当前目录
 
-## git add -- 向暂存区中添加文件
+### git add
 
 ```bash
 # git add 文件名/目录名
@@ -260,7 +305,7 @@ git add -A
 git add --all
 ```
 
-## git commit -- 保存仓库的历史记录
+### git commit
 
 ```bash
 # 将文件从暂存区提交到仓库
@@ -273,13 +318,13 @@ git commit -a -m '提交说明'
 git commit --amend -m '提交说明'
 ```
 
--m参数后的 `'First commit'` 称作提交信息，是对这个提交的概述,如果想要记述得更加详细，请不加 `-m` ，直接执行 `git commit` 命令，执行后编辑器就会启动。
+-m 参数后的 `'First commit'` 称作提交信息，是对这个提交的概述,如果想要记述得更加详细，请不加 `-m` ，直接执行 `git commit` 命令，执行后编辑器就会启动。
 在编辑器中记述提交信息的格式如下: 
 ​	第一行：用一行文字简述提交的更改内容 
 ​	第二行：空行 
 ​	第三行以后：记述更改的原因和详细内容  
 
-## git status -- 查看仓库的状态
+### git status
 
 ```bash
 # 建立 README.md 文件作为管理对象
@@ -292,7 +337,7 @@ git stauts -s (short)
 
 `git status` 命令可以让我们时刻掌握仓库当前的状态，但不能看到具体修改了什么内容，需要用 `git diff` 这个命令来查看具体修改内容。
 
-## git diff -- 查看更改前后的差别
+### git diff
 
 ```bash
 # 查看当前工作树和最新add之间（暂存区）的差别（difference）
@@ -317,7 +362,7 @@ git diff c265262 de4845b
 
 >HEAD 是指向当前分支中最新一次提交的指针
 
-## git log--查看提交日志
+### git log
 
 ```bash
 # 显示当前版本之前的提交信息
@@ -341,7 +386,7 @@ git log -p 文件名
 git reflog
 ```
 
-## git reset -- 版本回退
+### git reset
 
 ```bash
 git reset -h		'查看帮助'
@@ -360,7 +405,7 @@ git reset --hard commit_id
 git reset HEAD [file]
 ```
 
-## git checkout --file -- 丢弃工作区的修改
+### git checkout --file
 
 ```bash
 git checkout -- README.md
@@ -376,7 +421,7 @@ git checkout -- README.md
 
 总之，就是让这个文件回到最近一次git commit或git add时的状态，可用于**撤销文件修改或恢复误删文件**
 
-## git remote -- 添加远程库
+### git remote
 
 ```bash
 git remote add origin git@github.com:cuilongjin/git_test.git
@@ -400,7 +445,7 @@ git remote rm origin
 
 
 
-## git pull --拉取远程仓库
+### git pull
 
 ```bash
 # 获取远程仓库的更新，并且与本地的分支进行合并
@@ -409,13 +454,13 @@ git pull
 
 
 
-## git push -- 推送到远程
+### git push
 
 ```bash
 git push -u origin master
 ```
 
-> 第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+> 第一次推送 master 分支时，加上了 -u 参数，Git 不但会把本地的 master 分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
 >
 > 之后，只要本地作了提交，就可以通过命令： `git push origin master` 把本地master分支的最新修改推送至GitHub
 
@@ -424,77 +469,100 @@ git push -u origin master
 
 如果推送失败，则因为远程分支比你的本地更新，需要先用git pull抓取远程的新提交
 
-## git clone -- 克隆远程库
+### git clone
 
 ```bash
 git clone git@github.com:cuilongjin/仓库名.git [指定文件夹]
 ```
 
-Git支持多种协议，包括 https，但通过 ssh 支持的原生 git 协议速度最快
+Git 支持多种协议，包括 https，但通过 ssh 支持的原生 git 协议速度最快
 
-从远程库clone时，默认情况下，只能看到本地的master分支
-要在dev分支上开发，就必须创建远程origin的dev分支到本地，于是用这个命令创建本地dev分支
+从远程库 clone 时，默认情况下，只能看到本地的 master 分支
+要在 dev 分支上开发，就必须创建远程 origin 的 dev 分支到本地，于是用这个命令创建本地 dev 分支
 
 ```bash
 git checkout -b dev origin/dev
 
-# 指定本地dev分支与远程origin/dev分支的链接
+# 指定本地 dev 分支与远程 origin/dev 分支的链接
 git branch --set-upstream dev origin/dev
 ```
 
 
 
-## git 忽视文件
+### git 忽视文件
 
-> 在仓库中，有些文件是不想被git管理的，比如数据的配置密码、写代码的一些思路等。git可以通过配置从而达到忽视掉一些文件，这样这些文件就可以不用提交了。
+在仓库中，有些文件是不想被 git 管理的，比如数据的配置密码、写代码的一些思路等。git 可以通过配置从而达到忽视掉一些文件，这样这些文件就可以不用提交了
 
-- 在仓库的根目录创建一个`.gitignore`的文件，文件名是固定的。
-- 将不需要被git管理的文件路径添加到`.gitignore`中
+忽略文件的原则是：
 
-```bash
-# 忽视index.txt文件
+- 忽略操作系统自动生成的文件，比如缩略图等
+- 忽略编译生成的中间文件、可执行文件等，也就是如果一个文件是通过另一个文件自动生成的，那自动生成的文件就没必要放进版本库，比如 Java 编译产生的 .class 文件
+- 忽略你自己的带有敏感信息的配置文件，比如存放口令的配置文件
+
+
+
+在仓库的根目录创建一个`.gitignore`的文件，文件名是固定的
+
+将不需要被 git 管理的文件路径添加到`.gitignore`中，把 `.gitignore` 也提交到 Git，Git 就会自动忽略这些文件
+
+```txt
+# 忽视 index.txt 文件
 index.txt
 
-# 忽视.gitignore文件
+# 忽视 .gitignore 文件
 .gitignore
 
-# 忽视css下的index.css文件
+# 忽视 css 下的 index.css 文件
 css/index.css
 
-# 忽视css下的所有的css文件
+# 忽视 css 下的所有的 css 文件
 css/*.css
 
-# 忽视css下的所有文件
+# 忽视 css 下的所有文件
 css/*.*
 
-# 忽视css文件夹
+# 忽视 css 文件夹
 css
+```
+
+GitHub 已经为我们准备了各种配置文件 [https://github.com/github/gitignore](https://github.com/github/gitignore)
+
+
+
+强制添加被 .gitignore 忽略的文件
+
+```bash
+# 强制添加被.gitignore忽略的文件
+git add -f <file>
+
+# 检查哪个规则忽略了此文件，以便修订规则
+git check-ignore -v <file>
+.gitignore:x:xxx.xx    xxxxxx
 ```
 
 
 
-# Git 分支管理
+### git branch
 
-> 在git中，分支实质上仅仅是一个指针，每次代码提交后，这个分支指针就会向后移动，保证一直指向最后一次提交的的版本。git中使用HEAD指向当前分支
-
-## git branch -- 显示分支一览表
+> 在 git 中，分支实质上仅仅是一个指针，每次代码提交后，这个分支指针就会向后移动，保证一直指向最后一次提交的的版本。git 中使用 HEAD 指向当前分支
 
 ```bash
 git branch
 * master
 ```
 
-master 分支左侧标有 `“*”`（星号），表示这是我们当前所在的分支
+master 分支左侧标有 `*`（星号），表示这是我们当前所在的分支
 
 -a 参数可以查看远程分支(远程分支会用红色表示出来)
 
 * git checkout -b 创建、切换分支
 
 ```bash
+# 创建名为 feature-A 的分支
 git checkout -b feature-A
 ```
 
-创建名为 feature-A 的分支
+
 连续执行下面两条命令也能收到同样效果
 
 ```bash
@@ -508,7 +576,7 @@ git checkout feature-A
 git checkout -
 ```
 
-* git merge ——合并分支
+* git merge 合并分支
 
 首先切换到 master 分支，然后执行
 
@@ -521,19 +589,22 @@ git merge --no-ff -m "描述" feature-A
 * git branch -d 删除分支
 
 ```bash
-# 删除本地feature-A分支
+# 删除本地 feature-A 分支
 git branch -d feature-A
-# 强行删除本地feature-A分支
+
+# 强行删除本地 feature-A 分支
 git branch -D feature-A
-# 删除远程hexo分支
-git push origin :hexo
+
+# 删除远程 feature-A 分支
+git push origin :feature-A
 ```
 
-## git stash -- 存储工作现场
+### git stash
 
 ```bash
 # 把当前工作现场“储藏”起来
 git stash
+
 # 查看存储的工作现场
 git stash list
 ```
@@ -541,43 +612,45 @@ git stash list
 恢复工作现场
 
 ```bash
-# 恢复工作现场，stash内容并不删除
+# 恢复工作现场，stash 内容并不删除
 git stash apply
-# 删除stash内容
+
+# 删除 stash 内容
 git stash drop
-# 恢复的同时把stash内容也删了
+
+# 恢复的同时把 stash 内容也删了
 git stash pop
 ```
 
-恢复指定的stash，用命令：`git stash apply stash@{0}`
+恢复指定的 stash，用命令：`git stash apply stash@{0}`
 
-[廖雪峰_Git教程_创建与合并分支](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000)
+[廖雪峰Git教程创建与合并分支](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000)
 
-[廖雪峰_Git教程_分支管理策略](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013758410364457b9e3d821f4244beb0fd69c61a185ae0000)
+[廖雪峰Git教程分支管理策略](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013758410364457b9e3d821f4244beb0fd69c61a185ae0000)
 
-[廖雪峰_Git教程_Bug分支](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137602359178794d966923e5c4134bc8bf98dfb03aea3000)
+[廖雪峰Git教程Bug分支](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137602359178794d966923e5c4134bc8bf98dfb03aea3000)
 
 
-# Git 标签管理
+## Git 标签管理
 
-## 创建标签
+### 创建标签
 
 ```bash
 # 首先切换到需要打标签的分支上
-# 默认标签是打在最新提交的commit上的
+# 默认标签是打在最新提交的 commit 上的
 git tag v1.0
 
 # 对指定某一次提交打标签
 git tag v1.0 <commit id>
 
-# 创建带有说明的标签，用-a指定标签名，-m指定说明文字
+# 创建带有说明的标签，用 -a 指定标签名，-m 指定说明文字
 git tag -a v1.0 -m "version1.0 released" <commit id>
 
-# 通过-s用私钥签名一个标签(需配置gpg密钥对)
+# 通过 -s 用私钥签名一个标签(需配置gpg密钥对)
 git tag -s v1.0 -m "signed version1.0 released" <commit id>
 ```
 
-## 查看标签
+### 查看标签
 
 ```bash
 # 查看所有标签
@@ -587,35 +660,35 @@ v1.0
 # 查看所有标签信息
 git show
 
-# 查看v1.0标签信息
+# 查看 v1.0 标签信息
 git show v1.0
 commit id:xxx
 Author:xxx
 Date:xxx
 ```
 
-## 推送标签到远程
+### 推送标签到远程
 
 ```bash
-# 推送v1.0标签到远程
+# 推送 v1.0 标签到远程
 git push origin v1.0
 
 # 推送全部尚未推送的本地标签到远程
 git push origin --tags
 ```
 
-## 删除标签
+### 删除标签
 
 ```bash
-# 删除本地标签v1.0
+# 删除本地标签 v1.0
 git tag -d v1.0
-# 删除远程标签v1.0
+# 删除远程标签 v1.0
 git push origin :refs/tags/v1.0
 ```
 
 
 
-# other
+## other
 
 * git add .` 的时候遇到 `warning: LF will be replaced by CRLF in ......` 
 

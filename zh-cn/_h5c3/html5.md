@@ -2,24 +2,24 @@
 
 ## 什么是HTML5？
 
-> HTML5并不仅仅是作为**HTML标记语言的一个最新版本**， 更重要的是它**制定了web应用开发的一系列标准**，成为第一个将web作为应用开发平台的HTML语言。
+> HTML5并不仅仅是作为 **HTML 标记语言的一个最新版本**， 更重要的是它**制定了 web 应用开发的一系列标准**，成为第一个将 web 作为应用开发平台的 HTML 语言。
 
-HTML5定义了一系列新元素，如**新语义标签、多媒体标** 签等，可以帮助开发者开发更加丰富的应用，同时有令人眼花缭乱的css3，还提供了一些Javascript API，如地理定位、重力感应、硬件访问等，可以在浏览器内实现类原生应用，制作webApp，甚至结合Canvas我们可开发网页游戏。
+HTML5 定义了一系列新元素，如 **新语义标签、多媒体标**  签等，可以帮助开发者开发更加丰富的应用，同时有令人眼花缭乱的 css3，还提供了一些 Javascript API，如地理定位、重力感应、硬件访问等，可以在浏览器内实现类原生应用，制作 webApp，甚至结合 Canvas 我们可开发网页游戏。
 
-我们日常讨论的H5其实指的是一个泛称，它是由**HTML5+CSS3+javascript** 等技术组合而成的一个应用开发平台。
+我们日常讨论的 H5 其实指的是一个泛称，它是由**HTML5+CSS3+javascript** 等技术组合而成的一个应用开发平台
 
 ![html5](images/html5.png)
 
 
 
-## HTML5的历史
+## HTML5 的历史
 
 ![HTML5的历史](images/history.png)
 
 
 
 ```javascript
-1. WHATWG:Web Hypertext Application Technology Working。 WHATWG成立的原因是W3C意图放弃HTML，而力图发展XML技术。
+1. WHATWG: Web Hypertext Application Technology Working。 WHATWG成立的原因是W3C意图放弃HTML，而力图发展XML技术。
 2. HTML5 的第一份正式草案已于2008年1月22日公布。
 3. 2014年10月29日，万维网联盟宣布，经过接近8年的艰苦努力，该标准规范终于制定完成。
 ```
@@ -44,7 +44,7 @@ HTML5新的语义化标签
 
 
 
-本质上新语义标签与`<div>`、`<span>`没有区别，只是其具有语义性，使用时除了在HTML结构上需要注意外，其它和普通标签的使用无任何差别，`<nav>`完全可以理解成`<div class="nav">`。不要好奇，它只是一个标签！就是增加了语义性，更加利于SEO的优化。
+本质上新语义标签与`<div>`、`<span>`没有区别，只是其具有语义性，使用时除了在 HTML 结构上需要注意外，其它和普通标签的使用无任何差别，`<nav>`完全可以理解成`<div class="nav">`。不要好奇，它只是一个标签！就是增加了语义性，更加利于 SEO 的优化。
 
 html5 还推出了一些其他的标签：[http://www.w3school.com.cn/tags/index.asp](http://www.w3school.com.cn/tags/index.asp)
 
@@ -55,20 +55,20 @@ IE678 不识别这个标签
 ```javascript
 document.createElement("header"); // 创建这个标签即可让IE678识别
 // 创建的标签默认是行内样式。
-// 还需给标签加一个display:block的属性。
+// 还需给标签加一个 display:block 的属性。
 ```
 
 
 
 借助 `html5shiv.js`
 
-> 我们每次都要去创建标签，并且还需要设置display：block属性，非常麻烦，因此我们可以引入一个第三方js文件，这个js文件的功能就是创建元素和设置display属性。
+> 我们每次都要去创建标签，并且还需要设置 display：block 属性，非常麻烦，因此我们可以引入一个第三方 js 文件，这个 js 文件的功能就是创建元素和设置 display 属性。
 
 ```javascript
 <!-- [if lte IE 8] >  // lte ==> 小于等于
     <script src="js/html5shiv.min.js"></script>
 <! [endif] -->
-// 当ie浏览器的版本小于等于8的时候，才会引入 html5shiv.js
+// 当 ie 浏览器的版本小于等于8的时候，才会引入 html5shiv.js
 // css hack
 // 条件注释 IE独有的注释
 ```
@@ -310,7 +310,7 @@ clear() // 清空所有存储内容（谨慎使用）
 * 用户可以操作（禁用）cookie，使功能受限
 * 安全性较低
 * 有些状态不可能保存在客户端。
-* 每次访问都要传送cookie给服务器，浪费带宽
+* 每次访问都要传送 cookie 给服务器，浪费带宽
 
 
 

@@ -642,189 +642,154 @@ text-decoration   通常我们用于给链接修改装饰效果
 
 ### 5.3 背景(background)属性
 
-#### 5.3.1 背景颜色(color)
-
-- 语法：
-
-  ```css
-  background-color:颜色值;   默认的值是 transparent  透明的,    inherit 继承
-  ```
-
-
-
-#### 5.3.2 背景图片(image)
-
-- 语法：
+#### color
 
 ```css
-background-image : none | url (url)
-```
+/* 背景颜色 */
+background-color: 颜色值;   默认的值是 transparent 透明的  inherit 继承
 
-| 参数 |              作用              |
-| ---- | :----------------------------: |
-| none |       无背景图（默认的）       |
-| url  | 使用绝对或相对地址指定背景图像 |
-
-```css
-background-image : url("demo1.png"), url("demo2.png"); /*demo1在demo2上层*/
-/*在background-color上层*/
-```
-
-- 小技巧：  我们提倡 背景图片后面的地址，url要加引号。
-
-> **img和背景图片的区别：**
-> 1. img直接可以显示在页面，不需要设置宽高，但是背景图片必须要给盒子设置宽高才能显示，背景图片撑不开容器
-> 2. img上面写不了内容（除非后期使用定位），而背景图片完全可以
-> 3. 在实际工作中：img一般用来做产品图片展示（经常更新），而背景图片一般用来做背景或者一些很少更新的小icon
->
-> ```css
->  img {
-> 		width: 200px;/* 插入图片更改大小 width 和 height */
-> 		height: 210px;
-> 		margin-top: 30px;  /* 插入图片更改位置 可以用margin 或padding  盒模型 */
-> 		margin-left: 50px; /* 插入的图片也是一个盒子 */
-> 	}
->
->  div {
-> 		width: 400px;
-> 		height: 400px;
-> 		border: 1px solid purple;
-> 		background: #fff url(images/sun.jpg) no-repeat;
-> 		background-position: 30px 50px; /* 背景图片更改位置 我用 background-position */
-> 	}
-> ```
->
-
-
-
-#### 5.3.3 背景平铺（repeat）
-
-- 语法：
-
-```css
-background-repeat : repeat | no-repeat | repeat-x | repeat-y
-```
-
-| 参数      | 作用                                               |
-| --------- | -------------------------------------------------- |
-| repeat    | 背景图像在纵向和横向上平铺（默认的）               |
-| no-repeat | 背景图像不平铺（常用）                             |
-| repeat-x  | 背景图像在横向上平铺                               |
-| repeat-y  | 背景图像在纵向平铺                                 |
-| space     | 中间有空白，保证显示每个图片完整                   |
-| round     | 通过缩放保证每个图片显示完整，有可能图片会被拉伸。 |
-
-
-
-#### 5.3.4 背景位置(position) 重点
-
-- 语法：
-
-```css
-background-position : length || length
-
-background-position : position || position
-```
-
-| 参数     |                              值                              |
-| -------- | :----------------------------------------------------------: |
-| length   |         百分数 \| 由浮点数字和单位标识符组成的长度值         |
-| position | top \| center \| bottom \| left \| center \| right   方位名词 |
-
-- 注意：
-  - 必须先指定background-image属性
-  - x 轴向右为正方向，y 轴向下为正方向，z轴向屏幕外是正方向
-  - 如果position 后面是精确坐标， 那么第一个是 x ，第二的一定是y
-  - 如果指定的两个值是 精确单位和方位名字混合使用，则第一个值是x坐标，第二个值是y坐标
-  - 如果指定两个值都是方位名字，则两个值前后顺序无关，比如left  top和top  left效果一致
-  - 如果只指定了一个方位名词，另一个值默认**居中对齐**。如果只指定一个数值，那该数值一定是x坐标，另一个默认**垂直居中**
-  - 可设置像素值或百分比（图片百分比位置和容器百分比位置对应重合，50% 50% 等价于 center center 即居中）
-  - right 10px top 20px  表示距离右边10px 距离上边 20px
-
-
-
-#### 5.3.5 背景附着(attachment)
-
-- 背景附着就是解释背景是滚动的还是固定的
-
-- 语法：
-
-```css
-background-attachment : scroll | fixed | inherit
-```
-
-| 参数   |           作用           |
-| ------ | :----------------------: |
-| scroll | 背景图像是随对象内容滚动 |
-| fixed  |       背景图像固定       |
-
-
-
-#### 5.3.6 背景大小(size) 属性
-
-- 跟 width 或者 height 属性是一致的，其实这就是设置背景图片的宽高；
-- 设置百分比则是相对于容器的百分比，而不是图片，50% 不是将图片缩小一半。
-- 特殊值：
-  - cover 是图片等比例缩放至恰好覆盖整个元素，这种情况其实说白了就是某一边正好100%，另一边等于或者大于元素对应方向的长度。
-  - contain 图片等比例缩放至恰好覆盖整个元素，即某一边正好100%，另一边等于或者小于元素对应方向的长度
-
-
-
-#### 5.3.7 origin 属性
-
-`background-origin`设置背景零点参考的盒模型即设置（0.0）坐标位置
-
-* border-box
-
-* padding-box（默认值）
-
-* content-box
-
-
-
-#### 5.3.8 clip 属性
-
-`background-clip`设置背景裁剪参考的盒模型
-
-* border-box （默认值）背景区域 ： border + padding + content
-
-* padding-box   背景区域 ：padding + content
-
-* content-box   背景区域 ：content
-
-* text(需要加-webkit-前缀)   背景区域 ：文字
-
-
-
-#### 5.3.9 背景属性简写
-
-!> **背景简写属性:**
-
-!> background: bg-image|| bg-position/bg-size ||repeat-style|| bg-attachment ||bg-origin||  bg-clip(origin和clip只设置一个值时 则他俩为同一个值)  ||bg-color
-
-
-
-> 多重背景
->
-> background 设置背景的时候，可以设置多个背景图片，使用逗号隔开。注意颜色只能设置一次，并且通常来说，颜色都是在最后面进行设置。
->
-> background是一个合写的属性，如果在 background 之前设置了background相关的样式，会被覆盖掉。
-
-#### 5.3.10 背景透明
-
-- 语法：
-
-```css
+/* 半透明背景 */
 background: rgba(0, 0, 0, 0.3);
+  /* 只作用于盒子背景颜色，不会影响文本和背景图片 */
+  /* 最后一个参数是 alpha 透明度 取值范围 0~1 之间 */
+  /* 0.3 的 0 可以省略 */
+  /* C3 属性，低于 ie9 的版本不支持 */
 ```
 
-- 只作用于颜色，不会影响文本和背景图片
-- 最后一个参数是 alpha 透明度  取值范围 0~1之间
-- 我们习惯把0.3 的 0 省略掉  这样写  background: rgba(0, 0, 0, .3);
-- 注意：  背景半透明是指盒子背景半透明， 盒子里面的内容不受影响
-- 因为是CSS3 ，所以 低于 ie9 的版本是不支持的。
+> **opacity** 属性 设置整个标签的透明度，取值范围 `0~1`之间
 
->  **opacity** 属性 设置整个标签的透明度，取值范围 `0~1`之间
+
+#### image
+
+```css
+/* 背景图片 */
+background-image:
+  none(默认)
+  url(图片地址)
+  url("demo1.png"), url("demo2.png"); /* demo1 在 demo2 上层 */
+```
+
+* 在background-color上层
+
+* 推荐背景图片 url 加引号
+* 多个背景图片，使用逗号隔开
+
+
+
+**img 和背景图片的区别：**
+
+* img 直接可以显示在页面，不需要设置宽高，但是背景图片必须要给盒子设置宽高才能显示，背景图片撑不开容器
+* img 上面写不了内容（除非后期使用定位），而背景图片完全可以
+* 在实际工作中：img 一般用来做产品图片展示（经常更新），而背景图片一般用来做背景或者一些很少更新的小 icon
+
+```css
+img {
+  width: 200px; /* 插入图片更改大小 width 和 height */
+  height: 200px;
+  margin-top: 30px; /* 插入图片更改位置 可以用 margin 或 padding  盒模型 */
+  margin-left: 50px; /* 插入的图片也是一个盒子 */
+}
+
+div {
+  width: 400px;
+  height: 400px;
+  border: 1px solid purple;
+  background: #fff url('images/sun.jpg') no-repeat;
+  background-position: 30px 50px; /* 背景图片更改位置用 */
+}
+```
+
+
+
+#### repeat
+
+```css
+/* 背景平铺 */
+background-repeat:
+repeat：背景图像在纵向和横向上平铺（默认的）
+no-repeat：背景图像不平铺（常用）
+repeat-x：背景图像在横向上平铺
+repeat-y：背景图像在纵向平铺
+space：中间有空白，保证显示每个图片完整
+round：通过缩放保证每个图片显示完整，有可能图片会被拉伸
+```
+
+
+
+#### position
+
+```css
+/* 背景位置 */
+background-position:
+  length：百分数 | 由浮点数字和单位标识符组成的长度值
+  position：top | center | bottom | left | center | right   方位名词
+```
+
+注意：
+- 必须先指定 background-image 属性
+- x 轴向右为正方向，y 轴向下为正方向，z 轴向屏幕外是正方向
+- 如果 position 后面是精确坐标， 那么第一个是 x ，第二的一定是 y
+- 如果指定的两个值是精确单位和方位名字混合使用，则第一个值是 x 坐标，第二个值是 y 坐标
+- 如果指定两个值都是方位名字，则两个值前后顺序无关，比如 left  top 和 top  left 效果一致
+- 如果只指定了一个方位名词，另一个值默认**居中对齐**。如果只指定一个数值，那该数值一定是 x 坐标，另一个默认**垂直居中**
+- 可设置像素值或百分比（百分比对应容器百分比位置，50% 50% 等价于 center center 即居中）
+- right 10px top 20px  表示距离右边10px 距离上边 20px
+
+
+
+#### attachment
+
+```css
+/* 背景附着就是解释背景是滚动的还是固定的 */
+background-attachment:
+  scroll：背景图像是随对象内容滚动
+  fixed：背景图像固定
+  inherit
+```
+
+
+
+#### size
+
+- 跟 width 或者 height 属性是一致的，其实就是设置背景图片的宽高
+- 设置百分比则是相对于容器的百分比，而不是图片，50% 不是将图片缩小一半
+- 特殊值：cover 和 contain 图片等比缩放恰好覆盖整个元素
+  - cover 某一边正好100%，另一边等于或者大于元素对应方向的长度
+  - contain 某一边正好100%，另一边等于或者小于元素对应方向的长度
+
+
+
+#### origin
+
+```css
+/* 设置背景零点参考的盒模型即设置（0.0）坐标位置 */
+background-origin: padding-box（默认值） | border-box | content-box
+```
+
+
+
+#### clip
+
+```css
+/* 设置背景裁剪参考的盒模型 */
+background-clip: 
+  border-box  （默认值）背景区域：border + padding + content
+  padding-box   背景区域：padding + content
+  content-box   背景区域：content
+  text   (需要加 -webkit- 前缀) 背景区域 ：文字
+```
+
+
+
+#### 背景属性简写
+
+!> background: bg-image || bg-position/bg-size || repeat-style || bg-attachment || bg-origin||  bg-clip(origin 和 clip 只设置一个值时则他俩为同一个值)  || bg-color
+
+
+
+多重背景：background 设置背景的时候，可以设置多个背景图片，使用逗号隔开。注意颜色只能设置一次，并且颜色通常都是在最后面进行设置。
+
+background 是一个合写的属性，如果在 background 之前设置了background相关的样式，会被覆盖掉
 
 
 

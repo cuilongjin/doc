@@ -1781,6 +1781,7 @@ constructor.name 获取对象的具体类型
   var obj = {}
   var fn = function () {}
   console.log( arr instanceof Array) // true
+  console.log(arr instanceof Object) // true
   console.log( obj instanceof Object) // true
   console.log( fn instanceof Function) // true
   

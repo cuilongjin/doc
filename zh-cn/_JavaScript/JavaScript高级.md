@@ -46,8 +46,8 @@
 - 封装性
   - 将功能的具体实现，全部封装到对象的内部，外界使用对象时，只需要关注对象提供的方法如何使用，而不需要关心对象的内部具体实现，这就是封装
 - 继承性
-  - 在js中，继承的概念很简单，一个对象没有的一些属性和方法，另外一个对象有，拿过来用，就实现了继承
-  - **注意：在其他语言里面，继承是类与类之间的关系，在js中，是对象与对象之间的关系**
+  - 在 js 中，继承的概念很简单，一个对象没有的一些属性和方法，另外一个对象有，拿过来用，就实现了继承
+  - **注意：在其他语言里面，继承是类与类之间的关系，在 js 中，是对象与对象之间的关系**
 - [多态性]
   - 多态是在强类型的语言中才有的；js 是弱类型语言，所以 js 不支持多态
 
@@ -58,7 +58,7 @@
 我们可以直接通过 `new Object()` 创建：
 
 ```javascript
-// 在js中，对象有动态特性，可以随时的给一个对象增加属性或者删除属性。
+// 在 js 中，对象有动态特性，可以随时的给一个对象增加属性或者删除属性
 var person = new Object()
 person.name = 'zs'
 person.age = 18
@@ -106,7 +106,7 @@ var p2 = createPerson('ls', 18)
 
 ### 继续改进：自定义构造函数
 
-构造函数是一个函数，用于实例化对象，需要配合new操作符使用
+构造函数是一个函数，用于实例化对象，需要配合 new 操作符使用
 
 ```javascript
 function Person (name, age) {
@@ -130,15 +130,15 @@ p2.sayName() // ls
 
 ```javascript
 function Person (name, age) {
-    this.name = name
-    this.age = age
-    this.sayHello = function () {
-        console.log('hello' + this.name)
-    }
+  this.name = name
+  this.age = age
+  this.sayHello = function () {
+    console.log('hello' + this.name)
+  }
 }
 var p1 = new Person('zs', 18)
 var p2 = new Person('ls', 16)
-console.log(p1.sayHello == p2.sayHello) // false
+console.log(p1.sayHello === p2.sayHello) // false
 ```
 
 
@@ -174,7 +174,7 @@ console.log(p1.sayHello === p2.sayHello) // true
 
 ### 原型基本概念
 
-Javascript 规定，每一个函数都有一个 `prototype` 属性，属性值是 一个对象，这个对象就叫做原型（原型对象），这个对象的所有属性和方法，都会被构造函数的实例继承
+Javascript 规定，每一个函数都有一个 `prototype` 属性，属性值是一个对象，这个对象就叫做原型（原型对象），这个对象的所有属性和方法，都会被构造函数的实例继承
 
 这也就意味着，我们可以把所有对象实例需要共享的属性和方法直接定义在 `prototype` 对象上
 
@@ -193,13 +193,13 @@ var p2 = new Person(...)
 console.log(p1.sayName === p2.sayName) // true
 ```
 
-这时所有实例的 `sayName()` 方法，其实都是同一个内存地址
+这时所有实例的 `sayName()` 方法，其实都指向同一个内存地址
 
 
 
 ### `__proto__`
 
-任意对象都有 `__proto__` 属性，这个属性指向了构造函数的prototype属性，也就是原型对象。
+任意对象都有 `__proto__` 属性，这个属性指向了构造函数的 prototype 属性，也就是原型对象
 
 获取原型对象：
 
@@ -209,7 +209,7 @@ console.log(p1.sayName === p2.sayName) // true
 
 
 
-**注意：`__proto__`是浏览器的一个隐藏（私有）属性，IE浏览器不支持，不要通过它来修改原型里的内容，如果要修改原型中的内容，使用构造函数.prototype去修改**
+**注意：`__proto__`是浏览器的一个隐藏（私有）属性，IE浏览器不支持，不要通过它来修改原型里的内容，如果要修改原型中的内容，使用 `构造函数.prototype` 去修改**
 
 
 
@@ -218,9 +218,7 @@ console.log(p1.sayName === p2.sayName) // true
 默认情况下，原型对象中只包含了一个属性：constructor，constructor 属性指向了当前原型对象的构造函数
 
 ```javascript
-function Person () {
-
-}
+function Person () {}
 
 console.log(Person.prototype)
 console.log(Person.prototype.constructor) // 构造函数本身
@@ -259,7 +257,7 @@ console.log(p.constructor == Person.prototype.constructor) // true
 
 * 原型 和 实例对象关系：父子关系
   * 实例对象可以直接访问到原型上的所有成员
-  * 实例对象可以间接的访问到构造函数（通过原型上的constructor 属性）
+  * 实例对象可以间接的访问到构造函数（通过原型上的 constructor 属性）
 
 
 
@@ -267,7 +265,7 @@ console.log(p.constructor == Person.prototype.constructor) // true
 
 ### 原型链概念
 
-任何一个对象，都有原型对象，原型对象本身又是一个对象，所以原型对象也有自己的原型对象，这样形成的链式结构，就是原型链。
+任何一个对象，都有原型对象，原型对象本身又是一个对象，所以原型对象也有自己的原型对象，这样形成的链式结构，就是原型链
 
 
 
@@ -307,47 +305,45 @@ var date = new Date()
 2. 如果自身没有这个属性，那么就会添加这个属性，并不会修改原型中的属性
 
 ```javascript
-function Person(name, age){
-    this.name = name;
-    this.age = age;
+function Person (name, age) {
+  this.name = name
+  this.age = age
 }
-Person.prototype.name = "zs";
-Object.prototype.gender = "male";
+Person.prototype.name = 'zs'
+Object.prototype.gender = 'male'
 
-var p = new Person("ls", 19);
-var p1 = new Person();
-console.log(p);
+var p = new Person('ls', 19)
+var p1 = new Person()
+console.log(p)
 
 // p 的原型链：
-//  p ==> Person.prototype ==> Object.prototype ==> null;
+// p ==> Person.prototype ==> Object.prototype ==> null
 
-console.log(p.name); // ls
-console.log(p.age);  // 19
-console.log(p.gender); // male
-console.log(p.sex);   // undefined
+console.log(p.name) // ls
+console.log(p.age) // 19
+console.log(p.gender) // male
+console.log(p.sex) // undefined
 
-console.log(p1.name); // undefined
-console.log(p1.age);  // undefined
+console.log(p1.name) // undefined
+console.log(p1.age) // undefined
 // p1 对象依旧有 name 和age 属性， 只不过属性值都是 undefined
-console.log(p1.gender); // male
-console.log(p1.sex);   // undefined
+console.log(p1.gender) // male
+console.log(p1.sex) // undefined
 
-p.gender = "不详";
-console.log(p);
-// console.log(p.gender); // 不详
+p.gender = '不详'
+console.log(p.gender) // 不详
 
-p.name = "ww";
-console.log(p);
-// console.log(p.name); // ww
+p.name = 'ww'
+console.log(p.name) // ww
 ```
 
 
 
 ### Object.prototype 成员介绍
 
-> 任何对象的原型链上都有 Object.prototype, 根据属性搜索原则(沿着原型链进行查找)， 任何对象都可以访问到 Object.prototype 上的成员。
+> 任何对象的原型链上都有 Object.prototype，根据属性搜索原则(沿着原型链进行查找)，任何对象都可以访问到 Object.prototype 上的成员
 
-constructor : 指向了构造函数 Object
+constructor：指向了构造函数 Object
 
 #### `hasOwnProperty`
 
@@ -355,11 +351,11 @@ constructor : 指向了构造函数 Object
 
 ```javascript
 var obj = {
-  name:"zs"
+  name: 'zs'
 }
-//判断name属性是不是obj自己提供的
-console.log(obj.hasOwnProperty("name")); // true
-console.log(obj.hasOwnProperty("toString")); // false
+// 判断name属性是不是obj自己提供的
+console.log(obj.hasOwnProperty('name')) // true
+console.log(obj.hasOwnProperty('toString')) // false
 ```
 
 
@@ -368,21 +364,21 @@ console.log(obj.hasOwnProperty("toString")); // false
 
 1. `in` 操作符：判断对象能否访问到该属性（不管这个属性是自己提供的，还是从原型上继承来的），如果可以访问到， 都会返回 true
 
-2. `hasOwnProperty` : 该属性必须是自己提供，才返回 true，否则返回 false。
+2. `hasOwnProperty`：该属性必须是自己提供，才返回 true，否则返回 false
 
 
 
 **hasOwnProperty 的使用场景**：用在for...in 循环中
 
 ```javascript
-for(var k in p){
-    // 可以遍历到对象自身的属性以及对象原型链上的属性
-    console.log(k);
+for (var k in p) {
+  // 可以遍历到对象自身的属性以及对象原型链上的属性
+  console.log(k)
 
-    // 只遍历得到对象自身的属性，if 条件过滤下
-    // if(p.hasOwnProperty(k)){
-    // 		console.log(k);
-    // }
+  // 只遍历得到对象自身的属性，if 条件过滤下
+  // if (p.hasOwnProperty(k)) {
+  // 		console.log(k)
+  // }
 }
 ```
 
@@ -393,27 +389,26 @@ for(var k in p){
 `isPrototypeOf()` 方法用于测试一个对象是否存在于另一个对象的原型链上
 
 ```javascript
-// 判断A对象是否在B对象的原型链上。
-// 返回值：true，在原型链上    false：不在原型链上。
-A.isPrototetypeOf(B);
+// 判断 A 对象是否在 B 对象的原型链上
+// 返回值：true，在原型链上  false：不在原型链上
+A.isPrototetypeOf(B)
 
-function Person(){
-}
-var p = new Person();
+function Person () {}
+var p = new Person()
 
-// p 的原型链： 
-// p ==> Person.prototype ==> Object.prototype ==> null;
+// p 的原型链：
+// p ==> Person.prototype ==> Object.prototype ==> null
 
-console.log(Person.isPrototypeOf(p)); // false Person是构造函数
-console.log(Person.prototype.isPrototypeOf(p)); // true 
-console.log(Object.prototype.isPrototypeOf(p)); // true
+console.log(Person.isPrototypeOf(p)) // false Person 是构造函数
+console.log(Person.prototype.isPrototypeOf(p)) // true
+console.log(Object.prototype.isPrototypeOf(p)) // true
 ```
 
 
 
-**`isPropertyOf` 与 `instanceof`运算符的区别**
+**`isPropertyOf` 与 `instanceof` 运算符的区别**
 
-`instanceof` 运算符用来测试一个对象的原型链中是否存在一个构造函数的 `prototype` 属性。作用和isPrototypeOf类似
+`instanceof` 运算符用来测试一个对象的原型链中是否存在一个构造函数的 `prototype` 属性。作用和isPrototypeOf 类似
 
 语法： 实例对象 instanceof 构造函数
 
@@ -425,27 +420,27 @@ console.log(Object.prototype.isPrototypeOf(p)); // true
 
 
 ```javascript
-console.log(Array.isPrototypeOf([])); // false
-console.log(Array.prototype.isPrototypeOf([])); // true
+console.log(Array.isPrototypeOf([])) // false
+console.log(Array.prototype.isPrototypeOf([])) // true
 
-console.log([] instanceof Array); // true
-console.log([] instanceof Array.prototype); // 语法错误，instanceof 的右边是个构造函数
+console.log([] instanceof Array) // true
+console.log([] instanceof Array.prototype) // 语法错误，instanceof 的右边是个构造函数
 ```
 
 
 
 #### `propertyIsEnumerable`
 
-`propertyIsEnumerable()` 方法返回一个布尔值，表明指定的属性名是否是当前对象可枚举的自身属性。
+`propertyIsEnumerable()` 方法返回一个布尔值，表明指定的属性名是否是当前对象可枚举的自身属性
 
 ```javascript
-function Person(name){
-    this.name = name;
+function Person (name) {
+  this.name = name
 }
-Person.prototype.age = 19;
-var p = new Person("lw");
-console.log(p.propertyIsEnumerable("name")); // true
-console.log(p.propertyIsEnumerable("age")); // false
+Person.prototype.age = 19
+var p = new Person('lw')
+console.log(p.propertyIsEnumerable('name')) // true
+console.log(p.propertyIsEnumerable('age')) // false
 ```
 
 
@@ -453,27 +448,27 @@ console.log(p.propertyIsEnumerable("age")); // false
 拓展：给对象添加不可遍历的属性 : `Object.defineProperty()`
 
 ```javascript
-// 语法： Object.defineProperty(obj, prop, desc);
+// 语法： Object.defineProperty(obj, prop, desc)
 // 参数：
-// 	obj： 给哪个对象添加属性
-// 	prop：属性， 类型是字符串
-// 	desc： 属性描述符， 类型是个对象
+// obj： 给哪个对象添加属性
+// prop：属性， 类型是字符串
+// desc： 属性描述符， 类型是个对象
 
 // 作用： 定义对象的属性特征
 
 var obj = {
-    name: "zs",
-    age: 19
+  name: 'zs',
+  age: 19
 }
 // 给obj 添加一个不可遍历的 gender 属性
-Object.defineProperty(obj, "gender", {
-    value: "female", // 配置该属性的默认值
-    writable: true, // 配置该属性是否可以被修改， 默认值是false， 不可修改
-    enumerable: true // 配置该属性是否可遍历， 默认值是false， 不可遍历
-});
-obj.gender = "male";
-console.log(obj);
-console.log(obj.propertyIsEnumerable("gender")); // false
+Object.defineProperty(obj, 'gender', {
+  value: 'female', // 配置该属性的默认值
+  writable: true, // 配置该属性是否可以被修改， 默认值是false， 不可修改
+  enumerable: true // 配置该属性是否可遍历， 默认值是false， 不可遍历
+})
+obj.gender = 'male'
+console.log(obj)
+console.log(obj.propertyIsEnumerable('gender')) // false
 ```
 
 
@@ -482,30 +477,30 @@ console.log(obj.propertyIsEnumerable("gender")); // false
 
 返回对象的字符串格式
 
-> 每个内置对象的原型上都有属于自己的toString 方法
+> 每个内置对象的原型上都有属于自己的 toString 方法
 
 ```javascript
 var obj = {
-    name: "zs",
-    age: 19
+  name: 'zs',
+  age: 19
 }
-// obj ==> Object.prototype ==> null;
-console.log(obj.toString()); // "[object Object]"
-console.log(obj.toLocaleString()); // "[object Object]"
+// obj ==> Object.prototype ==> null
+console.log(obj.toString()) // '[object Object]'
+console.log(obj.toLocaleString()) // '[object Object]'
 
-var arr = [1,2,3];
-// arr ==>  Array.prototype ==> Object.prototype ==> null;
-//           toString()            toString()
-console.log(Array.prototype); // 含有自己的 toString 方法
-console.log(arr.toString());  // "1,2,3"
-console.log(arr.toLocaleString());  // "1,2,3"
+var arr = [1, 2, 3]
+// arr ==>  Array.prototype ==> Object.prototype ==> null
+//           toString()         toString()
+console.log(Array.prototype) // 含有自己的 toString 方法
+console.log(arr.toString()) // '1,2,3'
+console.log(arr.toLocaleString()) // '1,2,3'
 
-var date = new Date();
-//  date ==> Date.prototype ==> Object.prototype ==> null;
-//           toString()               toString()
-console.log(Date.prototype); // 含有自己的 toString 方法
-console.log(date.toString()); // Wed Oct 10 2018 16:00:51 GMT+0800 (中国标准时间)
-console.log(date.toLocaleString()); // 2018/10/10 下午4:00:51 得到的是本地时间格式
+var date = new Date()
+//  date ==> Date.prototype ==> Object.prototype ==> null
+//           toString()          toString()
+console.log(Date.prototype) // 含有自己的 toString 方法
+console.log(date.toString()) // Wed Oct 10 2018 16:00:51 GMT+0800 (中国标准时间)
+console.log(date.toLocaleString()) // 2018/10/10 下午4:00:51 得到的是本地时间格式
 ```
 
 
@@ -518,21 +513,21 @@ console.log(date.toLocaleString()); // 2018/10/10 下午4:00:51 得到的是本�
 
 ```javascript
 var obj = {
-    name: "zs",
-    age: 19
+  name: 'zs',
+  age: 19
 }
-// obj ==> Object.prototype ==> null;
-console.log(obj.valueOf()); // obj
+// obj ==> Object.prototype ==> null
+console.log(obj.valueOf()) // obj
 
-var arr = [1,2,3];
-// arr ==>  Array.prototype ==> Object.prototype ==> null;
-console.log(arr.valueOf()); // arr
+var arr = [1,2,3]
+// arr ==>  Array.prototype ==> Object.prototype ==> null
+console.log(arr.valueOf()) // arr
 
-var date = new Date();
+var date = new Date()
 // date 原型链
-// date ==> Date.prototype ==> Object.prototype ==> null;
-console.log(Date.prototype); // 含有 valueOf 方法
-console.log(date.valueOf()); // 时间戳
+// date ==> Date.prototype ==> Object.prototype ==> null
+console.log(Date.prototype) // 含有 valueOf 方法
+console.log(date.valueOf()) // 时间戳
 
 ```
 
@@ -540,7 +535,7 @@ console.log(date.valueOf()); // 时间戳
 
 #### valueOf 和 toString 的应用
 
-当对象在参与运算和比较的时候，js内部会自动的调用 valueOf 和 toString 方法
+当对象在参与运算和比较的时候，js 内部会自动的调用 valueOf 和 toString 方法
 
  调用规则：
 
@@ -554,7 +549,7 @@ console.log(date.valueOf()); // 时间戳
 
 沙箱其实就是一个独立的环境，这个环境中任何的改变，都不会对外部环境产生影响
 
-函数自调用一样，在自调用函数内部的变量是不会影响到外部的，因此**函数自调用模式也叫沙箱模式**。
+函数自调用一样，在自调用函数内部的变量是不会影响到外部的，因此**函数自调用模式也叫沙箱模式**
 
 ```javascript
 (function(window){
@@ -616,13 +611,13 @@ console.log(date.valueOf()); // 时间戳
 
 ```javascript
 var ls = {
-    name:"zs",
-    extend: function(obj) {
-        // 只拷贝对象obj自身的成员，原型链上的成员不用拷贝给this
-        if(obj.hasOwnProperty(k)){
-            this[k] = obj[k]; 
-        }
+  name: 'zs',
+  extend: function (obj) {
+    // 只拷贝对象obj自身的成员，原型链上的成员不用拷贝给this
+    if (obj.hasOwnProperty(k)) {
+      this[k] = obj[k]
     }
+  }
 }
 ```
 
@@ -637,62 +632,58 @@ var ls = {
 - mixin+原型替换
 
 ```javascript
-function Person(){
-
-};
+function Person () {}
 
 // 1. 直接给原型增加属性和方法（麻烦）
-Person.prototype.color = "lime";
-Person.prototype.legs = 2;
-Person.prototype.sayHi = function(){
-	console.log("sayHi");
+Person.prototype.color = 'lime'
+Person.prototype.legs = 2
+Person.prototype.sayHi = function () {
+  console.log('sayHi')
 }
 // 2. 原型替换，将原型替换成一个对象
 Person.prototype = {
-    // 手动添加一个constructor属性，如果不手动添加，会找到 Object 的 construction 属性
-    constructor: Person,
+  // 手动添加一个constructor属性，如果不手动添加，会找到 Object 的 constructor 属性
+  constructor: Person,
 
-    color: "lime",
-    legs: 2,
-    sayHi: function(){
-        console.log("sayHi");
-    },
+  color: 'lime',
+  legs: 2,
+  sayHi: function () {
+    console.log('sayHi')
+  }
 }
 // 3. 原型链 + 混入式继承
-function Person(){
-
-}   
+function Person () {}
 var lw = {
-    skill: "翻墙"
+  skill: '翻墙'
 }
-// 给原型添加extend方法  -- 混入式继承
-Person.prototype.extend = function(obj){
-    for(var k in obj){
-        if(obj.hasOwnProperty(k)){
-            this[k] = obj[k];
-        }
+// 给原型添加 extend 方法  -- 混入式继承
+Person.prototype.extend = function (obj) {
+  for (var k in obj) {
+    if (obj.hasOwnProperty(k)) {
+      this[k] = obj[k]
     }
+  }
 }
-// 把lw的成员添加到了Person的原型上， Person的实例就可以访问到原型上的这个成员
-Person.prototype.extend(lw);
-console.log(Person.prototype);
-var p = new Person();
-console.log(p.skill);
+// 把 lw 的成员添加到了 Person 的原型上， Person 的实例就可以访问到原型上的这个成员
+Person.prototype.extend(lw)
+console.log(Person.prototype)
+var p = new Person()
+console.log(p.skill)
 ```
 
 
 
 ### Object.create
 
-> 最初是由道格拉斯丶克罗克福德发布的一篇文章提出的，ECMAScript5新增了Object.create()方法来规范化了这种继承。
+> 最初是由道格拉斯丶克罗克福德发布的一篇文章提出的，ECMAScript5 新增了 Object.create() 方法来规范化了这种继承
 
-ES5中新增了一个方法 `Object.create()`，方法会使用指定的原型对象及其属性去创建一个新的对象
+ES5 中新增了一个方法 `Object.create()`，方法会使用指定的原型对象及其属性去创建一个新的对象
 
 ```javascript
-//参数：proto 一个对象
-//返回值：obj 新对象，新对象的原型就是proto
-var obj = Object.create(proto);
-console.log(obj);
+// 参数：proto 一个对象
+// 返回值：obj 新对象，新对象的原型就是 proto
+var obj = Object.create(proto)
+console.log(obj)
 ```
 
 
@@ -704,48 +695,48 @@ console.log(obj);
 #### 函数声明
 
 ```javascript
-fn();//函数声明可以先调用，在声明
-function fn(){
-  console.log("这是函数声明")
+fn() // 函数声明可以先调用，在声明
+function fn () {
+  console.log('这是函数声明')
 }
 ```
 
 #### 函数表达式
 
 ```javascript
-var fn = function() {
-  console.log("这是函数表达式");
+var fn = function () {
+  console.log('这是函数表达式')
 }
-fn();//函数表达式必须先声明，再调用
+fn() // 函数表达式必须先声明，再调用
 ```
 
-#### 构造函数Function
+#### 构造函数 Function
 
 ```javascript
-//函数也是对象，可以使用Function构造函数new出来
-//相当于var fn = function(){}
-var fn = new Function();
+// 函数也是对象，可以使用 Function 构造函数 new 出来
+// 相当于var fn = function () {}
+var fn = new Function()
 
-//语法：new Function(arg1,arg2,arg3..,body);
-// 1. 所有的参数都是字符串类型。
-// 2. 前面可以定义任意多个形参，最后一个参数是代码体。
-var fn = new Function("alert(1)");
-fn();
+// 语法：new Function(arg1,arg2,arg3..,body)
+// 1. 所有的参数都是字符串类型
+// 2. 前面可以定义任意多个形参，最后一个参数是代码体
+var fn = new Function('alert(1)')
+fn()
 
-var fn1 = new Function("a1", "a2", "alert(a1+a2)");
-fn1(1,2);
+var fn1 = new Function('a1', 'a2', 'alert(a1 + a2)')
+fn1(1, 2)
 ```
 
 【案例：代码实时预览效果.html】
 
-#### eval函数--了解
+#### eval 函数--了解
 
 > eval 可以和 new Function 一样，执行字符串代码
 
 注意：eval 函数的功能非常的强大，但是实际使用的情况并不多。
 
 ```javascript
-eval("var num = 10; console.log(num)"); // 10
+eval('var num = 10; console.log(num)') // 10
 ```
 
 - eval 形式的代码难以阅读
@@ -757,21 +748,21 @@ eval("var num = 10; console.log(num)"); // 10
 
 ### 函数的四种调用模式
 
-分析this的指向问题
+分析 this 的指向问题
 
-1. 任何函数都有属于自己的this
+1. 任何函数都有属于自己的 this
 2. this 是动态的，this 在函数声明的时候是确定不了的，只有当函数被调用了才能够确定 this 的指向，this 的指向和函数在哪被调用没有关系
 
-分析this的问题的思路：
+分析 this 的问题的思路：
 
 1. this 是属于哪个函数
 2. **这个函数是何种调用模式**
 
 
 
-```javascript
-函数：当一个函数不是一个对象的属性时，我们称之为函数。
-方法：当一个函数被保存为对象的一个属性时，我们称之为方法。
+```
+函数：当一个函数不是一个对象的属性时，我们称之为函数
+方法：当一个函数被保存为对象的一个属性时，我们称之为方法
 ```
 
 #### 函数调用模式
@@ -779,11 +770,11 @@ eval("var num = 10; console.log(num)"); // 10
 <font color="red">如果一个函数不是一个对象的属性时，就是被当做一个函数来进行调用的。此时 this 指向了 window</font>
 
 ```javascript
-// 函数名()； 的调用方式
-function fn(){
-  console.log(this);//指向window
+// 函数名() 的调用方式
+function fn () {
+  console.log(this) // 指向window
 }
-fn();
+fn()
 ```
 
 
@@ -794,90 +785,90 @@ fn();
 
 ```javascript
 // 通过点语法或者中括号语法来访问方法，都是属于方法调用模式
-var f = function(){
-    console.log(this);
+var f = function () {
+  console.log(this)
 }
 var obj = {
-    a: 1,
-    fn: f,
+  a: 1,
+  fn: f
 }
-obj.fn();   // obj
-obj['fn']();  // obj
+obj.fn() // obj
+obj['fn']() // obj
 
-var arr = [f, 10, 30];
+var arr = [f, 10, 30]
 // 也是方法调用模式
-arr[0]();  // arr
+arr[0]() // arr
 ```
 
 
 
 #### 构造函数调用模式
 
-<font color="red">如果函数是通过 new 关键字进行调用的，此时 this 被绑定到创建出来的新对象上。</font>
+<font color="red">如果函数是通过 new 关键字进行调用的，此时 this 被绑定到创建出来的新对象上</font>
 
 ```javascript
-function Person(){
-  console.log(this);
+function Person () {
+  console.log(this)
 }
-Person(); // this 指向 window
-var p = new Person(); // this 指向 p
+Person() // this 指向 window
+var p = new Person() // this 指向 p
 ```
 
-**总结：分析this的问题，主要就是区分函数的调用模式，看函数是怎么被调用的。**
+**总结：分析 this 的问题，主要就是区分函数的调用模式，看函数是怎么被调用的**
 
 
 
 ```javascript
-//分析思路：1. 看this是哪个函数的  2. 看这个函数是怎么调用的，处于什么调用模式
+// 分析思路：1. 看 this 是哪个函数的  2. 看这个函数是怎么调用的，处于什么调用模式
 // 1.
-var age = 38;
+var age = 38
 var obj = {
-    age: 18,
-    getAge: function () {
-        console.log(this.age);
-    }
-}
-var f = obj.getAge;
-f(); // window ==> 38
-
-// 2.
-var age = 38;
-var obj = {
-  age:18,
-  getAge:function () {
-    console.log(this.age); // obj ==> 18
-    function foo(){
-      console.log(this.age); // window ==> 38
-    }
-    foo();
+  age: 18,
+  getAge: function () {
+    console.log(this.age)
   }
 }
-obj.getAge();
-// obj["getAge"]();
+var f = obj.getAge
+f() // window ==> 38
+
+// 2.
+var age = 38
+var obj = {
+  age: 18,
+  getAge: function () {
+    console.log(this.age) // obj ==> 18
+    function foo () {
+      console.log(this.age) // window ==> 38
+    }
+    foo()
+  }
+}
+obj.getAge()
+// obj['getAg']()
 
 // 3.
-var length = 10;
-var age = 18;
-function fn() {
-    console.log(this.length);
+var length = 10
+var age = 18
+function fn () {
+  console.log(this.length)
 }
-var arr = [fn, "222"];
-fn(); // 10
-arr[0](); // 2
+var arr = [fn, '222']
+fn() // 10
+arr[0]() // 2
 
 // 4.
 var length = 10
-function fn() {
-    console.log(this.length);
+function fn () {
+  console.log(this.length)
 }
 var obj = {
-    length: 5,
-    method: function (fn) {
-        fn(); // window ==> 10
-        arguments[0](); // argument ==> 3
-    }
+  length: 5,
+  method: function (fn) {
+    fn() // window ==> 10
+    arguments[0]() // argument ==> 3
+  }
 }
-obj.method(fn, 10, 5);
+obj.method(fn, 10, 5)
 ```
 
 
@@ -886,30 +877,30 @@ obj.method(fn, 10, 5);
 
 > 上下文调用模式也叫方法借用模式，分为 apply，call ，bind
 >
-> 使用方法： 函数.call() 或者函数.apply()
+> 使用方法：`函数.call()` 或者 `函数.apply()`
 
 任何函数都可以调用 apply，call ，bind 这三个方法
 
 ##### call 方法
 
-call 方法可以调用一个函数，并且可以指定这个函数的`this`指向、、
+call 方法可以调用一个函数，并且可以指定这个函数的 `this` 指向
 
 ```javascript
-// call方法也可以和()一样，进行函数调用
-// 第一个参数：指定函数的this，如果不传，则this指向window
-// 其余参数：和函数的参数列表一模一样。
+// call 方法也可以和 () 一样，进行函数调用
+// 第一个参数：指定函数的 this，如果不传，则 this 指向 window
+// 其余参数：和函数的参数列表一模一样
 var zs = {
-    name: "zs",
-    sayHi: function(){
-        console.log("hello ,我是" + this.name);
-    }
+  name: 'zs',
+  sayHi: function () {
+    console.log('hello ,我是' + this.name)
+  }
 }
-// zs.sayHi();
+// zs.sayHi()
 var ls = {
-    name: "ls",
+  name: 'ls'
 }
 // ls 借用 zs 的 sayHi 方法
-zs.sayHi.call(ls);
+zs.sayHi.call(ls)
 ```
 
 
@@ -918,43 +909,43 @@ zs.sayHi.call(ls);
 
 > 伪数组也叫类数组
 
-1. 伪数组其实就是一个对象，但是跟数组一样，伪数组也会有`length`属性，也有`0,1,2,3`等属性。
+1. 伪数组其实就是一个对象，但是跟数组一样，伪数组也会有`length`属性，也有`0, 1, 2, 3`等属性
 2. 伪数组并没有数组的方法，不能使用`push/pop`等方法
-3. 伪数组可以跟数组一样进行遍历，通过下标操作。
+3. 伪数组可以跟数组一样进行遍历，通过下标操作
 4. 常见的伪数组：`arguments`、`document.getElementsByTagName的返回值`、`jQuery对象`
 
 ```javascript
 var obj = {
-    0: "zs",
-    1: "ls",
-    2: "ww",
-    length: 3
+  0: 'zs',
+  1: 'ls',
+  2: 'ww',
+  length: 3
 }
 ```
 
 - 伪数组借用数组的方法
 
 ```javascript
-// 给obj添加一项 3: "zl"
-Array.prototype.push.call(obj, "zl");
-// 把obj中的每一项使用 "-" 拼接起来返回一个字符串
-Array.prototype.join.call(obj, "-");
+// 给 obj 添加一项 3: 'zl'
+Array.prototype.push.call(obj, 'zl')
+// 把 obj 中的每一项使用 '-' 拼接起来返回一个字符串
+Array.prototype.join.call(obj, '-')
 ```
 
 - 将伪数组转换成真数组
 
 ```javascript
-var arr = Array.prototype.slice.call(obj);
+var arr = Array.prototype.slice.call(obj)
 ```
 
 
 
 ##### apply 方法
 
-```javascript
-apply的语法：
-apply(thisArg, 实参列表); 
-thisArg ==> 改变函数内的this指向的
+```
+apply 的语法：
+apply(thisArg, 实参列表)
+thisArg ==> 改变函数内的 this 指向的
 实参列表 ==> 是一个数组或者是伪数组
 ```
 
@@ -962,104 +953,109 @@ thisArg ==> 改变函数内的this指向的
 
 ```javascript
 // 1. apply 能够调用函数
-function fn(){
-    console.log(1);
-    }
-fn.apply(); // 1
-
-// 2. apply 改变this 指向
-function fn(){
-	console.log(this);
+function fn () {
+  console.log(1)
 }
-fn.apply([10,20,30]); // [10,20,30]
+fn.apply() // 1
+
+// 2. apply 改变 this 指向
+function fn () {
+  console.log(this)
+}
+fn.apply([10, 20, 30]) // [10, 20, 30]
 
 // 3. apply 第二个参数是数组
-function fn(n1, n2){
-    console.log(this);
-    console.log(n1 + n2);
+function fn (n1, n2) {
+  console.log(this)
+  console.log(n1 + n2)
 }
-fn.apply({name: "zs"}, [10, 20]); // {name: "zs"}, 30
-// apply的特性： 平铺性，把数组中的每一项取出来作为函数的实参
-// fn.call({name: "dahuige"}, 10, 20); // {}, 30
+fn.apply({ name: 'zs' }, [10, 20]) // {name: 'zs'}, 30
+// apply 的特性： 平铺性，把数组中的每一项取出来作为函数的实参
+// fn.call({name: 'ls'}, 10, 20) // {}, 30
 ```
 
 
 
-call和apply的使用场景：
+call 和 apply 的使用场景：
 
-- 如果参数比较少，使用call会更加简洁
-- 如果参数存放在数组中，此时需要使用apply
+- 如果参数比较少，使用 call 会更加简洁
+- 如果参数存放在数组中，此时需要使用 apply
 
 课后练习：
 
-```javascript
-1. 求数组的最大值和最小值
-2. 封装一个函数，能够打印出来所有的参数。
+```
+求数组的最大值和最小值
+封装一个函数，能够打印出来所有的参数
 ```
 
 
 
 ##### bind 方法   
 
-**bind() **方法创建一个新的函数, 可以绑定新的函数的`this`指向
+**bind() **方法创建一个新的函数、可以绑定新的函数的`this`指向
 
 ```javascript
 // 返回值：新的函数(不会被调用)
-// 参数：新函数的this指向，当绑定了新函数的this指向后，无论使用何种调用模式，this都不会改变。
-var newFn = fn.bind(window); 
-var fn = function(){
-    console.log(this);
+// 参数：新函数的 this 指向，当绑定了新函数的 this 指向后，无论使用何种调用模式，this 都不会改变
+// var newFn = fn.bind(window)
+var fn = function () {
+  console.log(this)
 }
-var newFn = fn.bind([1,2,3]);
+
+var newFn = fn.bind([1, 2, 3])
 // newFn 是 bind 创建并返回出来的
-console.log(newFn);
-newFn(); // this ==> [1,2,3]
+console.log(newFn)
+newFn() // this ==> [1,2,3]
 ```
 
 
 
 #### 几种特殊的 this 指向
 
-- 定时器中的 this 指向了window，因为定时器的 function 最终是由 window 来调用的。
+- 定时器中的 this 指向了window，因为定时器的 function 最终是由 window 来调用的
 - 事件中的 this 指向的是当前的元素，在事件触发的时候，浏览器让当前元素调用了 function
 
 
 
 ### 函数也是对象
 
-> 函数是由 new Function 创建出来的，因此函数也是一个对象， `所有的函数都是new Function的实例`。
+> 函数是由 new Function 创建出来的，因此函数也是一个对象，`所有的函数都是 new Function 的实例`
 
 
 
 #### 函数的原型链结构
 
 ```javascript
-// 内部： var Person = new Function();
-function Person(){
-  
-}
+// 内部：var Person = new Function()
+function Person () {}
 // Person 实例对象的原型链：
-// Person ==> Function.prototype ==> Object.prototype ==> null;
+// Person ==> Function.prototype ==> Object.prototype ==> null
 // Function.prototype 原型类型是个函数
-console.dir(Function.prototype);
+console.dir(Function.prototype)
 ```
 
 ![](images/function.jpg) 
 
 #### Function.prototype 成员
 
-- arguments：获取函数的实参，已经被废弃了，现在推荐的做法是使用函数内部可用的 `arguments`对象来访问函数的实参。 
-  - （废弃的意思：已经从 Web 标准中删除，虽然一些浏览器目前仍然支持它，但也许会在未来的某个时间停止支持，请尽量不要使用该特性。 ）
+- arguments：获取函数的实参，已经被废弃了，现在推荐的做法是使用函数内部可用的 `arguments`对象来访问函数的实参
+  - （废弃的意思：已经从 Web 标准中删除，虽然一些浏览器目前仍然支持它，但也许会在未来的某个时间停止支持，请尽量不要使用该特性）
 - length：获取形参的长度
 - name：获取函数的名字，此属性不允许修改
 - caller: 用于获取当前函数是在哪个函数中调用的，已经被废弃了
 - constructor：指向当前构造函数，Function
-- call：调用函数，重新指向 this
-- apply：调用函数，重新指向 this
+- call：调用函数，重新指定 this
+- apply：调用函数，重新指定 this
 - bind：重新指向 this，返回一个新的函数，不调用
 - toString :  得到函数的字符串格式
 
 案例【封装getType函数（获取数据类型）】
+
+```javascript
+function getType (obj) {
+  return Object.prototype.toString.call(obj).slice(8, -1) // '[object 构造函数]'
+}
+```
 
 
 
@@ -1087,11 +1083,11 @@ js执行代码分为两个过程：
 - 预解析过程（变量与函数提升）
 - 代码一行一行执行
 
-预解析过程：JavaScript解析器在执行代码前，会把所有变量的声明和函数的声明提升到当前作用域的顶部。例如`var a = 11;`其实会分为`var a;` 和`a = 11`两部分，其中`var a;`会被提升。
+预解析过程：JavaScript解析器在执行代码前，会把所有变量的声明和函数的声明提升到当前作用域的顶部。例如`var a = 11`其实会分为`var a` 和`a = 11`两部分，其中`var a;`会被提升。
 
 预解析规则：
 
-1. 函数优先，先提升function，后提升 var
+1. 函数优先，先提升 function，后提升 var
 2. 遇到重名的 var 会被忽略
 3. 遇到重名的 function 会被覆盖
 
@@ -1099,17 +1095,18 @@ js执行代码分为两个过程：
 
 ```javascript
 // 1.
-console.log(a); // a 函数体
-function a() {
-  console.log("aaaaa");
+console.log(a) // a 函数体
+function a () {
+  console.log('aaaaa')
 }
-var a = 1;
-console.log(a); // 1
+var a = 1
+console.log(a) // 1
+
 // 2.
-if("a" in window){
-    var a = "abc";
-}
-console.log(a); // abc
+if ('a' in window) {
+  var a = 'abc'
+  }
+console.log(a) // abc
 ```
 
 **推荐：不要在一个作用域内重复的声明相同的变量和函数**
@@ -1118,16 +1115,16 @@ console.log(a); // abc
 
 #### 作用域
 
-> 作用域：变量起作用的区域，也就是说：变量定义后，可以在哪个范围内使用该变量。
+> 作用域：变量起作用的区域，也就是说：变量定义后，可以在哪个范围内使用该变量
 
 ```javascript
-var num = 11;//全局变量
-function fn(){
-  var num1 = 22;//局部变量
-  console.log(num);  // 全局变量在任何地方都能访问到
-  console.log(num1);  
+var num = 11 // 全局变量
+function fn () {
+  var num1 = 22 // 局部变量
+  console.log(num) // 全局变量在任何地方都能访问到
+  console.log(num1)
 }
-console.log(num);
+console.log(num)
 ```
 
 
@@ -1137,29 +1134,29 @@ console.log(num);
 - 词法作用域
 - 块级作用域 --- js没有块级作用域
 
-> 1. 全局变量：在函数外使用var 声明的变量， 在任何地方都可以访问到
+> 1. 全局变量：在函数外使用 var 声明的变量， 在任何地方都可以访问到
 >
-> 2. 局部变量：在函数内使用var 声明的变量，只能在函数内部访问到
+> 2. 局部变量：在函数内使用 var 声明的变量，只能在函数内部访问到
 >
 > 3. 自由变量：对于一个函数来说，函数内部没有声明该变量，但在函数内部有访问该变量。对于这个函数来说， 该变量就是一个自由变量。
 
-在js里只有函数可以形成作用域，所有，**词法作用域**又叫函数作用域。
+在 js 里只有函数可以形成作用域，所有 **词法作用域** 又叫函数作用域。
 
-因为函数能够形成作用域，所以，函数内部声明的变量函数外部无法访问
+因为函数能够形成作用域，所以函数内部声明的变量函数外部无法访问
 
 **函数作用域是在函数定义的时候作用域就确定下来了，和函数在哪调用无关**
 
 ```javascript
-var num = 123;
-function f1() {
-  console.log(num);
+var num = 123
+function f1 () {
+  console.log(num)
 }
 
-function f2(){
-  var num = 456;
-  f1();
+function f2 () {
+  var num = 456
+  f1()
 }
-f2(); // 123
+f2() // 123
 ```
 
 #### 作用域链
@@ -1176,79 +1173,79 @@ f2(); // 123
 
 ```javascript
 // 1.
-var num = 10;
-fn1();
-function fn1() {
-  console.log(num);  // undefined
-  var num = 20;
-  console.log(num);  // 20
+var num = 10
+fn1()
+function fn1 () {
+  console.log(num) // undefined
+  var num = 20
+  console.log(num) // 20
 }
-console.log(num);    // 10
+console.log(num) // 10
 
 // 2 -- 改造上面的面试题
-var num = 10;
-fn1();
-function fn1() {
-  console.log(num);  // 10
-  num = 20;
-  console.log(num);  // 20
+var num = 10
+fn1()
+function fn1 () {
+  console.log(num) // 10
+  num = 20
+  console.log(num) // 20
 }
-console.log(num);    // 20
+console.log(num) // 20
 
 // 3
-var num = 123;
-function f1(num) {
-    console.log(num); // 456 undefined
+var num = 123
+function f1 (num) {
+  console.log(num) // 456 undefined
 }
-function f2() {
-    var num = 456;
-    f1(num);
-    f1();
+function f2 () {
+  var num = 456
+  f1(num)
+  f1()
 }
-f2();
+f2()
 
 // 4
-var num1 = 10;
-var num2 = 20;
-function fn(num1) {
-  num1 = 100;
-  num2 = 200;
-  num3 = 300;
-  console.log(num1); // 100
-  console.log(num2); // 200
-  console.log(num3); // 300
-  var num3;
+var num1 = 10
+var num2 = 20
+function fn (num1) {
+  num1 = 100
+  num2 = 200
+  num3 = 300
+  console.log(num1) // 100
+  console.log(num2) // 200
+  console.log(num3) // 300
+  var num3
 }
-fn();
-console.log(num1); // 10
-console.log(num2); // 200
-console.log(num3); // error
+fn()
+console.log(num1) // 10
+console.log(num2) // 200
+console.log(num3) // error
 
 // 5
-var num = 1;
-function fn(){
-  var num = 100;
-  num++;
-  console.log(num);
+var num = 1
+function fn () {
+  var num = 100
+  num++
+  console.log(num)
 }
-fn(); // 101
-fn(); // 101
-console.log(num); // 1
+fn() // 101
+fn() // 101
+console.log(num) // 1
 
 // 6.
-var color = "red"; // blue
-function outer() {
-    var anotherColor = "blue"; // red
-    function inner() {
-        var tmpColor = color; // red
-        color = anotherColor;
-        anotherColor = tmpColor; // red
-        console.log(anotherColor); // red
-    }
-    inner();
+var color = 'red' // blue
+function outer () {
+  var anotherColor = 'blue' // red
+  function inner () {
+    var tmpColor = color // red
+    color = anotherColor
+    anotherColor = tmpColor // red
+    console.log(anotherColor) // red
+  }
+  inner()
 }
-outer();
-console.log(color); // blue
+outer()
+console.log(color) // blue
 ```
 
 
@@ -1262,7 +1259,7 @@ console.log(color); // blue
 1. 自己调用自己（直接或者间接）
 2. 要有结束条件（出口）
 
-递归函数主要是`化归思想` ,将一个复杂的问题简单化，主要用于解决数学中的一些问题居多。
+递归函数主要是`化归思想`，将一个复杂的问题简单化，主要用于解决数学中的一些问题居多。
 
 - 把要解决的问题，归结为已经解决的问题上。
 - 一定要考虑什么时候结束让函数结束，也就是停止递归（一定要有已知条件）
@@ -1286,19 +1283,19 @@ console.log(color); // blue
 - 如果没有，就进行计算，并且将计算后的结果放到缓存中，方便下次使用。
 
 ```javascript
-//缓存
-var arr = [];
+// 缓存
+var arr = []
 var fbi = function (n) {
-  count++;
-  if (n == 1 || n == 2) {
-    return 1;
+  count++
+  if (n === 1 || n === 2) {
+    return 1
   }
   if (arr[n]) {
-    return arr[n];
+    return arr[n]
   } else {
-    var temp = fbi(n - 1) + fbi(n - 2);
-    arr[n] = temp;//存入缓存
-    return temp;
+    var temp = fbi(n - 1) + fbi(n - 2)
+    arr[n] = temp // 存入缓存
+    return temp
   }
 }
 ```
@@ -1501,14 +1498,14 @@ var reg = new RegExp(/a/); // 匹配字母中有a
 - 正则字面量
 
 ```javascript
-var reg = /a/;
+var reg = /a/
 ```
 
 正则有 test 方法，作用是测试字符串是否符合正则表达式的规律，如果符合， 返回true
 
 ```javascript
-console.log(reg.test("abc")); // true
-console.log(reg.test("def")); // false
+console.log(reg.test('abc')) // true
+console.log(reg.test('def')) // false
 ```
 
 

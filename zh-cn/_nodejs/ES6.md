@@ -394,7 +394,7 @@ class Chinese extends Person {
   constructor () {
     // 子类中使用 constructor 必须手动调用 super
     // super 表示父类的构造函数
-    // 先调用 super() 在使用this
+    // 先调用 super() 在使用 this
     super()
     this.name = 'ls'
     this.age = 18
@@ -516,55 +516,4 @@ console.log(arr3) // [ 'l', 'o', 'v', 'e' ]
 
 
 
-## ES6 模块化 - import 和 export
-
-export default 默认导出一个模块 ( 简单类型 + 复杂类型 )
-
-- **导出 : export default**
-
-  默认只能导出一个
-
-```js
-let str = 'abc'
-let num = 20;
-let obj = { name :'zs' }
-
-export default num
-// export default obj
-```
-
-  
-
-- **导入 : import** 
-
-  导入的名字可以任意
-
-```js
-import res from './a.js'
-console.log(res)
-```
-
-
-
-export 导出多个模块，都放在一个对象里
-
-- **导出 :  export **
-
-```js
-export { 
-num,
-str
-}
-```
-
-- **导入 : import**  
-
-```js
-import { num, str } from './a'
-console.log(num,str)
-```
-
-
-
-
-
+## ES6 模块化

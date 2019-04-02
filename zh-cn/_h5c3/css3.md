@@ -4,7 +4,7 @@
 
 ## CSS3 的现状
 
-- PC端浏览器支持程度差，需要添加私有前缀
+- PC 端浏览器支持程度差，需要添加私有前缀
 - 移动端支持优于PC端
 - 不断改进中
 - 应用相对广泛
@@ -48,7 +48,7 @@ text-shadow：水平偏移 垂直偏移 羽化大小 颜色
 
 
 
-> box-shadow:边框阴影
+> box-shadow: 边框阴影
 
 
 
@@ -66,7 +66,7 @@ inset：设置对象的阴影类型为内阴影。该值为空时，则对象的
 
 # CSS3 背景
 
-> 在css2中已经有background属性了，用于设置盒子的背景相关的一些样式，在CSS3中新增加了几个背景相关的几个属性。
+> 在css2中已经有 background 属性了，用于设置盒子的背景相关的一些样式，在CSS3中新增加了几个背景相关的几个属性。
 
 background-size
 
@@ -95,7 +95,6 @@ background-image: linear-gradient(45deg, red, green);
 background-image: linear-gradient(to right, red 20%, green 80%)
 // 每一个区间表示渐变颜色的范围
 background-image: linear-gradient(to right, red 20%, green 20%)
-
 ```
 
 
@@ -116,16 +115,15 @@ background-image: radial-gradient(200px 80px at center, red, green);
 
 /*4. 指定范围*/
 background-image: radial-gradient(200px at center, green 50%, red 50%);
-
 ```
 
 
 
 # CSS3 盒子模型
 
-> CSS3中可以通过box-sizing 来指定盒模型，即可指定为content-box、border-box，这样我们计算盒子大小的方式就发生了改变。
+> CSS3中可以通过box-sizing 来指定盒模型，即可指定为 content-box、border-box，这样我们计算盒子大小的方式就发生了改变。
 
-可以分成两种情况： 
+可以分成两种情况：
 
 - box-sizing: border-box 计算方式为content = width – border - padding 
 - box-sizing: content-box 计算方式为content = width
@@ -214,7 +212,7 @@ transform: rotate(-360deg); // 逆时针旋转360度
 
 注意：
 
-- 单位是deg，角度，不是px
+- 单位是 deg，角度，不是 px
 - 正值顺时针转，负值逆时针转
 - 可以通过 transition-origin 设定旋转原点
 
@@ -399,11 +397,11 @@ animation-play-state: 设置动画的状态。running：运动(默认) paused：
 
 优点： 
 
-1、将所有图标打包成字体库，减少请求； 
+1、将所有图标打包成字体库，减少请求；
 
-2、具有矢量性，可保证清晰度，可以修改文字的颜色或者样式； 
+2、具有矢量性，可保证清晰度，可以修改文字的颜色或者样式；
 
-3、使用灵活，便于维护； 
+3、使用灵活，便于维护；
 
 阿里巴巴矢量图标：（可以自己定制） <http://www.iconfont.cn/>
 
@@ -421,7 +419,7 @@ CSS3 在布局方面做了非常大的改进，使得我们对块级元素的布
 
 
 
-当给一个盒子设置了display：flex之后，这个盒子就有了 **主轴** 和 **侧轴**  的概念。
+当给一个盒子设置了display：flex之后，这个盒子就有了 **主轴** 和 **侧轴**  的概念
 主轴：默认是水平方向向右，子元素在主轴上排列
 侧轴：与主轴垂直的轴称作侧轴，默认是垂直方向向下
 
@@ -480,7 +478,7 @@ wrap：当宽度不够的时候，会换行
 
 > align-content 用来设置多行的 flex 容器的排列方式。
 
-```javascript
+```css
 flex-start： 各行向侧轴的起始位置堆叠
 flex-end： 各行向弹性盒容器的结束位置堆叠
 center： 各行向弹性盒容器的中间位置堆叠
@@ -489,11 +487,11 @@ space-around： 各行在侧轴中平均分布
 stretch：拉伸，不设置高度的情况下
 ```
 
-align-items与align-content的区别
+align-items 与 align-content 的区别
 
 ```javascript
-align-items调整的是侧轴的对其方式，不换行一般用align-items
-align-content:必须是多行才生效，如果单行，没有效果。换行了就用align-content。
+align-items 调整的是侧轴的对其方式，不换行一般用 align-items
+align-content:必须是多行才生效，如果单行，没有效果。换行了就用 align-content。
 ```
 
 
@@ -512,7 +510,7 @@ flex:1
 
 ### order
 
-> order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。
+> order 属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。
 
 ```css
 order: 1;
