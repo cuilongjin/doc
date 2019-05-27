@@ -18,7 +18,7 @@
 
 ## gulp 环境
 
-Gulp是基于 Node.js的，需要要安装 Node.js
+Gulp 是基于 Node.js 的，需要要安装 Node.js
 
 ### 安装 # 4.0版本
 
@@ -31,10 +31,10 @@ $ npm install -g gulp
 $ gulp -v  #4.0
 
 # 切换到你的在项目根文件夹下，运行
-$ npm install gulp --save-dev
+$ npm install gulp
 
 # 安装 gulp 功能插件依赖包
-$ npm install gulp-less gulp-sass gulp-concat gulp-connect gulp-rename --save-dev
+$ npm install gulp-less gulp-sass gulp-concat gulp-connect gulp-rename
 ```
 
 
@@ -44,70 +44,98 @@ $ npm install gulp-less gulp-sass gulp-concat gulp-connect gulp-rename --save-de
 新建 `gulpfile.js` 配置文件放在项目根目录下
 
 ```javascript
-// gulp3.x配置不能直接在4.0上使用
-// gulp4.0配置内容
+// gulp3.x 配置不能直接在 4.0 上使用
+// gulp4.0 配置内容
 
-// 引入gulp
-var gulp = require('gulp')
+// 引入 gulp
+const gulp = require('gulp')
 // 引入组件
-var less = require('gulp-less')
-var sass = require('gulp-sass')
-var connect = require('gulp-connect')
+const less = require('gulp-less')
+const fileinclude = require('gulp-file-include')
+const connect = require('gulp-connect')
 
 // 启动 serve
 function serve () {
   connect.server({
     root: './',
+    port: '8888',
+    // 启用https
+    // https: true,
     livereload: true
   })
 }
 
 // 编译 less
 function compileLess () {
-  return gulp.src('./less/*.less')
-      .pipe(less())
-      .pipe(gulp.dest('./css'))
-}
-
-// 编译 sass
-function compileSass () {
-  return gulp.src('./sass/*.sass')
-      .pipe(sass.sync({outputStyle: 'compact'}))
-      // nested（嵌套） 默认
-      // expanded 更像是手写的样式
-      // compact 每条 CSS 规则只占一行
-      // compressed 删除所有无意义的空格、空白行、以及注释
-      .pipe(gulp.dest('./css'))
+  return gulp
+  // '!./**' 忽略文件
+    .src(['./less/*.less', '!./less/_*.less'])
+    .pipe(less())
+    .pipe(gulp.dest('./public/css'))
 }
 
 // html 刷新
 function refreshHtml () {
   return gulp.src('./*.html')
-      // .pipe(gulp.dest('./'))
-      .pipe(connect.reload())
+    .pipe(connect.reload())
 }
 
-// 监听 html css js less sass 文件变化
+// 引入外部 html 文件
+function compileHtml () {
+  return gulp
+    .src(['./*.html', '!./_*.html'])
+    .pipe(
+      fileinclude({
+        prefix: '@@'
+      })
+    )
+    .pipe(gulp.dest('./public'))
+}
+// 在 html 中使用 `@@include('_header-aside.html')` 引入公共 html 结构
+ 
+
+
+// 监听文件变化
 function watch () {
-  gulp.watch(['./less/*.less'], compileLess)
-  gulp.watch(['./sass/*.sass'], compileSass)
-  gulp.watch(['./*.html', './css/*.css', './js/*.js'], refreshHtml)
+  gulp.watch(['./less'], compileLess)
+  gulp.watch(['./image'], compileImg)
+  gulp.watch(['./js'], compileJs)
+  gulp.watch(['./*.html'], compileHtml)
+  gulp.watch(['./public'], refreshHtml)
 }
 
-// 默认任务,执行 gulp 会自动执行的任务
+// 默认任务，执行 gulp 会自动执行的任务
 gulp.task('default', gulp.parallel(serve, watch))
+
+// 复制 lib 文件夹
+function copyLib () {
+  return gulp.src('./lib/**/*').pipe(gulp.dest('./dest/lib'))
+}
+
+// 清空 dest 文件夹
+function clean () {
+  return del(['./dest'])
+}
 ```
 
-### 运行gulp任务
+### 运行 gulp 任务
 
 ```bash
-# 执行定义的default任务
+# 执行定义的 default 任务
 # $ gulp default
 $ gulp
 
-# 单独运行sass任务
-$ gulp sass
+# 单独运行 sass 任务
+$ gulp less
 ```
+
+
+
+`!./**` 忽略文件
+
+`gulp.parallel()` –并行运行任务
+
+`gulp.series()` –运行任务序列
 
 
 
@@ -117,12 +145,29 @@ $ gulp sass
 其他 gulp 插件参考
 gulp-imagemin: 		压缩图片
 gulp-minify-css: 	压缩css
-gulp-uglify:      	压缩js
+gulp-uglify:      压缩js
 gulp-concat:    	合并文件
 gulp-rename:  		重命名文件
 gulp-htmlmin: 		压缩html
 gulp-clean:      	清空文件夹
+del:              删除文件
 ```
+
+
+
+gulp-connect 启动服务本机可以打开，局域网下手机打不开解决办法
+
+```js
+connect.server({
+  host: '0.0.0.0'
+  或
+  host: '::'
+})
+```
+
+
+
+
 
 
 
