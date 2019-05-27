@@ -896,10 +896,6 @@ div {
 
 
 
-### 5.6 transition
-
-
-
 ## 6. CSS 三大特性
 
 目标：
@@ -1828,46 +1824,79 @@ middle: 当前元素的中线和父元素的基线加上x高度的一半对齐;
 
 
 
-### 11.6 溢出文字省略号显示
+### 文字溢出省略号显示
 
-#### 11.6.1 white-space
+#### `white-space`
 
-- white-space设置或检索对象内文本显示方式。通常我们使用于强制一行显示内容
-
-```css
-white-space:normal;  /*默认处理方式*/
-white-space:nowrap;　/*强制在同一行内显示所有文本，直到文本结束或者遭遇br标签对象才换行。*/
-```
-
-#### 11.6.2 text-overflow 文字溢出
-
-- 设置或检索是否使用一个省略标记（...）标示对象内文本的溢出
+设置或检索对象内文本显示方式。通常我们使用于强制一行显示内容
 
 ```css
-text-overflow: clip; 不显示省略标记(...)，而是简单的裁切
-text-overflow: ellipsis; 当对象内文本溢出时显示省略标记(...)
+white-space:
+  normal;  /* 默认处理方式 */
+  nowrap;　/* 强制在同一行内显示所有文本，直到文本结束或者遭遇 br 标签才换行 */
 ```
 
-**注意**：
+#### `text-overflow`
 
-一定要首先强制一行内显示，再次和overflow属性  搭配使用
-
-#### 11.6.3 总结三步曲
+设置或检索是否使用一个省略标记（...）标示对象内文本的溢出
 
 ```css
-/*1. 先强制一行内显示文本*/
-	white-space: nowrap;
-
-/*强制最多三行显示文本*/
-	display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-
-/*2. 超出的部分隐藏*/
-	overflow: hidden;
-/*3. 文字用省略号替代超出的部分*/
-	text-overflow: ellipsis;
+text-overflow:
+  clip; 不显示省略标记(...)，而是简单的裁切
+  ellipsis; 当对象内文本溢出时显示省略标记(...)
 ```
+
+**注意**：一定要首先强制一行内显示，再次和 overflow 属性搭配使用
+
+#### 总结
+
+```css
+/* 强制一行内显示文本 */
+white-space: nowrap;
+
+/* 强制最多三行显示文本 */
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+
+/* 超出的部分隐藏 */
+overflow: hidden;
+/* 文字用省略号替代超出的部分 */
+text-overflow: ellipsis;
+```
+
+
+
+### 换行方式
+
+浏览器默认情况下，如果一个单词很长，导致一行中剩下的空间已经放不下时，浏览器会把这个单词挪到下一行去
+
+
+
+word-wrap: break-word 标明是否允许浏览器在单词内进行断句，他会首先尝试挪到下一行，看看下一行的宽度够不够，不够的话就进行单词内的断句。
+
+word-break 属性规定自动换行的处理方法
+
+```
+word-break: normal|break-all|keep-all
+normal：使用浏览器默认的换行规则
+break-all：允许在单词内换行，它不会尝试把长单词挪到下一行，而是直接进行单词内的断句
+keep-all：只能在半角空格或连字符处换行
+```
+
+white-space：normal | pre | nowrap | pre-wrap | pre-line
+
+normal：连续的空白符会被合并，换行符会被当作空白符来处理。填充line盒子时，必要的话会换行。
+
+```
+nowrap：和 normal 一样，连续的空白符会被合并。但换行符无效，除非手动添加换行标签
+pre：所有空白符都会被保留。不会自动换行，原样输出
+pre-wrap：保留空白符序列，但是正常地进行换行
+pre-line：合并空白符序列，但是保留换行符
+```
+
+
+
 
 ### 11.7 CSS精灵技术（sprite) 重点
 

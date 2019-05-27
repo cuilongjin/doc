@@ -75,7 +75,7 @@ normalize 的特点：
 
 [Normalize.css 与 CSS reset 区别](http://www.cnblogs.com/webpush/p/4974063.html)
 
-### container 容器
+### 布局容器
 
 Bootstrap 需要为页面内容和栅格系统包裹一个 .container 容器。默认带了 15px 的 padding 值
 
@@ -101,17 +101,19 @@ Bootstrap 需要为页面内容和栅格系统包裹一个 .container 容器。�
 
 栅格系统，也叫网格系统，bootstrap 栅格系统把一个盒子分成 12 格
 
-- col-xx-yy
+- 栅格参数：`col-xx-yy`
 
-  xx: lg 大屏才生效 md 中屏以及以上生效 sm 小屏以及以上生效 xs 超小屏以及以上生效
+  xx：`lg` 大屏(≥1200px)、`md` 中屏(≥992px)、`sm` 小屏(≥768px)、`xs` 超小屏(<768px)
 
-  yy: 取值范围为 1 - 12 表示占几格
+  yy：取值范围为 1 - 12 表示占几格
 
-- col-xx-offset-yy
+  `col-xx-12`：可以省略不写
 
-  xx ： lg md sm xs
+- 列偏移：`col-xx-offset-yy`
 
-  yy: 取值范围为 1 - 12 表示往右偏移几格
+  xx ：lg、md、sm、xs
+
+  yy：取值范围为 1 - 12 表示往右偏移几格
 
   列偏移：实际上是给当前元素增加了左侧的边距（margin）
 
@@ -120,6 +122,8 @@ Bootstrap 需要为页面内容和栅格系统包裹一个 .container 容器。�
 - `.row`用于抵消 `.container`容器的 15px 的 padding 值，实际上是给元素添加了 margin: -15px
 
 - 可以在`.row`中嵌套`column`
+
+- 列排序：`.col-md-push-*` 和 `.col-md-pull-*` 
 
 栅格系统常用类（总共 12 列）
 
@@ -132,23 +136,11 @@ Bootstrap 需要为页面内容和栅格系统包裹一个 .container 容器。�
 | .col-lg-xx | .col-lg-4 | 在大屏幕及生效，占 1/3   |
 | .col-lg-xx | .col-lg-5 | 在大屏幕及生效，占 1/2   |
 
-【案例：响应式栅格系统】
-
-```html
-<!--
-需求：
-  1. 在大屏时显示6个等分的列
-  2. 在中屏时显示4个等分的列
-  3. 在小屏时显示3个等分的列
-  4. 在超小屏时显示1列（默认占一列，col-xs-12 可以省略不写）
--->
-```
-
 【案例：列嵌套.html】
 
 ```html
 <div class="col-lg-4">
-  <!--栅格系统无处不在，只要父盒子有宽度，就可以使用栅格系统-->
+  <!-- 栅格系统无处不在，只要父盒子有宽度，就可以使用栅格系统 -->
   <div class="row">
     <div class="col-lg-6"></div>
     <div class="col-lg-6"></div>
@@ -159,10 +151,10 @@ Bootstrap 需要为页面内容和栅格系统包裹一个 .container 容器。�
 【案例：列偏移.html】
 
 ```html
-<!-- 使用 .col-md-offset-* 类可以将列向右侧偏移。-->
+<!-- 使用 .col-md-offset-* 类可以将列向右侧偏移-->
 <div class="row">
   <div class="col-lg-3"></div>
-  <!--col-lg-offset-3:在大屏下，这个div将向右侧偏移3个单位-->
+  <!-- col-lg-offset-3:在大屏下，这个div将向右侧偏移3个单位 -->
   <div class="col-lg-6 col-lg-offset-3"></div>
 </div>
 ```
@@ -217,16 +209,16 @@ btn-block (块元素 100%宽度)
 ### 响应式工具
 
 ```
-	         超小屏 小屏幕 中等屏幕 大屏幕桌面
-.visible-xs-*	可见	隐藏	隐藏	隐藏
-.visible-sm-*	隐藏	可见	隐藏	隐藏
-.visible-md-*	隐藏	隐藏	可见	隐藏
-.visible-lg-*	隐藏	隐藏	隐藏	可见
+	            超小屏 小屏幕 中等屏幕 大屏幕桌面
+.visible-xs-*	可见   隐藏   隐藏	  隐藏
+.visible-sm-*	隐藏   可见   隐藏	  隐藏
+.visible-md-*	隐藏   隐藏   可见	  隐藏
+.visible-lg-*	隐藏   隐藏   隐藏	  可见
 
-.hidden-xs	隐藏	可见	可见	可见
-.hidden-sm	可见	隐藏	可见	可见
-.hidden-md	可见	可见	隐藏	可见
-.hidden-lg  可见	可见	可见	隐藏
+.hidden-xs	  隐藏	 可见	  可见	  可见
+.hidden-sm	  可见	 隐藏	  可见	  可见
+.hidden-md	  可见	 可见	  隐藏	  可见
+.hidden-lg    可见	 可见	  可见	  隐藏
 ```
 
 `*` -> block inline inline-block
@@ -243,14 +235,14 @@ http://bootstrapvalidator.votintsev.ru/api
 
 引入 css 文件
 
-```css
+```html
 <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.css">
 ```
 
 引入 js 文件
 
-```javascript
+```html
 <script src="lib/jquery/jquery.js"></script>
 <script src="lib/bootstrap/js/bootstrap.js"></script>
 <script src="lib/bootstrap-validator/js/bootstrapValidator.js"></script>
@@ -320,7 +312,7 @@ $('#form').on('success.form.bv', function(e) {
 
 ```javascript
 // 获取表单校验实例
-var validator = $('#form‘).data('bootstrapValidator')
+var validator = $('#form').data('bootstrapValidator')
 
 // 使用表单校验实例可以调用一些常用的方法
 validator.methodName(params)
@@ -339,11 +331,8 @@ validator.resetForm()
 
 #### 更新字段的状态
 
-# BootstrapValidator 在用户输入内容的时候，会做校验，当调用 bootstrap 的插件的方法可以手动会改变字段值的状态
+BootstrapValidator 在用户输入内容的时候，会做校验，当调用 bootstrap 的插件的方法可以手动会改变字段值的状态
 
-推荐使用 hidden 相关的属性
-
-> > > > > > > 1d090eb776f4546a16e0dda4c72f6375c42720f6
 
 `validator.updateStatus(field*, status*, validator)`
 
