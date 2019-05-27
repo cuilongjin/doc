@@ -435,3 +435,8 @@ module.exports = {
 
 
 
+## webpack 和 gulp 区别
+
+1. Gulp 侧重于前端开发的整个过程的控制管理（像是流水线），我们可以通过给 gulp 配置不通的 task（通过Gulp 中的 gulp.task() 方法配置，比如启动 server、sass/less 预编译、文件的合并压缩等等）来让 gulp 实现不同的功能，从而构建整个前端开发流程
+2. Webpack 也称之为模块打包机 ，由此也可以看出 Webpack 更侧重于模块打包，当然我们可以把开发中的所有资源（图片、js 文件、css 文件等）都可以看成模块，最初 Webpack 本身就是为前端 JS 代码打包而设计的，后来被扩展到其他资源的打包处理。Webpack 是通过 loader（加载器）和 plugins（插件）对资源进行处理的
+3. gulp是构建工具，Webpack是 js 模块化的解决方案

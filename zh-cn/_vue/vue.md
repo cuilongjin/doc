@@ -184,9 +184,6 @@ Object.defineProperty(obj, 'name', {
 ```javascript
 let obj = {}
 let temp
-// 第一个参数：给哪个对象添加或者设置属性
-// 第二个参数：要添加/设置什么属性
-// 第三个参数：属性的修饰符 对象格式
 Object.defineProperty(obj, 'name', {
   set: function (newVal) {
     // 设置属性时会触发该函数
@@ -206,6 +203,56 @@ input.oninput = function () {
   obj.name = this.value
   console.log(obj.name)
 }
+```
+
+
+
+### 深入响应式原理
+
+检测变化注意：受现代 JavaScript 的限制 (而且 `Object.observe` 也已经被废弃)，Vue **不能检测到对象属性的添加或删除**。由于 Vue 会在初始化实例时对属性执行 `getter/setter` 转化过程，所以属性必须在 `data` 对象上存在才能让 Vue 转换它，这样才能让它是响应的
+
+
+
+**Vue 不允许在已经创建的实例上动态添加新的根级响应式属性**，可以使用 `Vue.set(object, key, value)` 方法将响应属性添加到嵌套的对象上，或者创建一个包含原对象属性和新属性的对象替换掉原对象
+
+
+
+### 列表渲染数组更新检测
+
+数组的方法可以触发视图更新：方法如下：
+
+`push()`、`pop()`、`shift()`、`unshift()`、`splice()`、`sort()`、`reverse()`
+
+
+
+替换数组
+
+用一个含有相同元素的数组去替换原来的数组并不会导致 Vue 丢弃现有 DOM 并重新渲染整个列表
+
+
+
+注意：由于 JavaScript 的限制，Vue 不能检测以下变动的数组：
+
+1. 当你利用索引直接设置一个项时，例如：`vm.items[indexOfItem] = newValue`
+2. 当你修改数组的长度时，例如：`vm.items.length = newLength`
+
+
+
+解决第一类问题：
+
+```javascript
+// Vue.set
+Vue.set(vm.items, indexOfItem, newValue)
+// Array.prototype.splice
+vm.items.splice(indexOfItem, 1, newValue)
+```
+
+
+
+解决第二类问题：
+
+```javascript
+vm.items.splice(newLength)
 ```
 
 
@@ -409,8 +456,8 @@ const vm = new Vue({
 
 ```js
 this === vm // true
-this.msg // 获取数据  
-this.msg = 'XXX' // 修改数据  
+this.msg // 获取数据
+this.msg = 'XXX' // 修改数据
 ```
 
 
@@ -652,7 +699,7 @@ computed: {
 ```
 
 特点：只有跟计算属性相关的数据发生了改变，计算属性才会重新计算
-注意点:  
+注意点:
 
 - 计算属性必须返回一个值
 
@@ -665,7 +712,7 @@ computed: {
 
 当 Vue.js 用 `v-for` 正在更新已渲染过的元素列表时，它默认用“就地复用”策略。如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序， 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。
 
-为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 `key` 属性。它的工作方式类似于一个属性，所以你需要用 `v-bind` 来绑定动态值 
+为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 `key` 属性。它的工作方式类似于一个属性，所以你需要用 `v-bind` 来绑定动态值
 
 建议尽可能在使用 `v-for` 时提供 `key`，除非遍历输出的 DOM 内容非常简单，或者是刻意依赖默认行为以获取性能上的提升
 
@@ -717,7 +764,7 @@ console.log(this.$el.children[0].innerText) // 0
 this.$nextTick(() => {
   // DOM 更新后，会执行 this.$nextTick() 的回调函数，所以能拿到值
   console.log(this.$el.children[0].innerText) // 100
-}) 
+})
 ```
 
 
@@ -768,7 +815,7 @@ watch: {
   obj: {
     // 深度监听 监听对象里面的属性
     deep: true,
-      
+
     // 页面刚进入立即触发监听，以表达式的当前值触发回调
     immediate: true,
 
@@ -916,17 +963,17 @@ beforeDestroy () {
 
 
 
-## 使用接口的形式发送数据 
+## 使用接口的形式发送数据
 
 ### json-server 提供假数据接口
 
-- 作用：根据指定的 JSON 文件，提供假数据接口 
+- 作用：根据指定的 JSON 文件，提供假数据接口
 - 地址：[json-server](https://github.com/typicode/json-server)
 - 使用步骤
 
 ```js
 1. 全局安装 json-server: `npm i -g json-server`
-2. 准备一个json数据 
+2. 准备一个json数据
 3. 执行：`json-server data.json`
 
 data.json
@@ -978,7 +1025,7 @@ data.json
 - **GTE 方式发送请求**
 
 ```js
-// 方式1 
+// 方式1
 axios.get('http://localhost:3000/todoList/1')
   .then(res => {
   console.log('获取到数据了：', res.data)
@@ -1213,7 +1260,6 @@ const vm = new Vue({
   - 非父子组件(兄弟组件)
 
 
-
 #### 父组件到子组件
 
 - 将要传递的数据，通过属性传递给子组件
@@ -1230,9 +1276,9 @@ const vm = new Vue({
 props: ['msg']
 ```
 
-- 传递过来的`props`属性的用法与`data`属性的用法相同
+- 传递过来的 `props` 属性的用法与 `data` 属性的用法相同
 - 子组件不能直接修改父组件传过来的数据，可以将父组件传过来的值保存在一个临时变量中
-  - 如果props 传过来的数据为引用类型，只要不是重新赋值，修改数据不会报错，但不推荐这样做
+  - 如果 props 传过来的数据为引用类型，只要不是重新赋值，修改数据不会报错，但不推荐这样做
 
 ```html
 <!-- 第一步：将你要传递的数据,作为属性传递给子组件 -->
@@ -1484,7 +1530,7 @@ const vm = new Vue({
 - 入口 (#哈希值)
 
 ```html
-<!-- 
+<!--
 方式1 : url地址为入口 输入url地址改变哈希值
 router.html#/one
 
@@ -1707,7 +1753,7 @@ routes: [
   {path: '/detail/1', component: Detail},
   {path: '/detail/2', component: Detail},
   {path: '/detail/3', component: Detail}，
-  
+
   // 正确的方式：把传过去的 1/2/3 当成参数
   {path: '/detail/:id?', component: Detail}
 ]
@@ -1735,7 +1781,7 @@ const Detail = Vue.component('detail', {
   created() {
     // 方式2：js直接读取
     // 打印只会打印一次，因为组件是复用的，每次进来钩子函数只会执行一次
-    
+
     // #/detail/2?name=zs
     console.log(this.$route) // 路由配置对象
     console.log(this.$route.path) // #/detail/2
@@ -1776,7 +1822,7 @@ router.push({ path: '/user', params: { userId }}) // -> /user
 // 带查询参数
 router.push({ path: 'register', query: { plan: 'private' }}) // -> /register?plan=private
 
-routes: [{ path: '/user/:id?', name='user', component: User }] 
+routes: [{ path: '/user/:id?', name='user', component: User }]
 ```
 
 
@@ -1920,7 +1966,7 @@ trim_trailing_whitespace = true   开头去除空白
     - 如果在一个模块化工程中使用它，必须要通过 `Vue.use()` 明确地安装路由功能
     - `https://router.vuejs.org/zh/installation.html`
 
- 
+
 
 ### 两种编译模式
 
@@ -1955,7 +2001,7 @@ new Vue({
 })
 ```
 
-  
+
 
 查看编译模式：build => webpack.base.config.js =>  `'vue\$': 'vue/dist/vue.esm.js',`
 

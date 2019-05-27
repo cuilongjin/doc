@@ -37,10 +37,10 @@
 	- [Vue实例生命周期图](zh-cn/_vue/Vue实例生命周期图)
 	- [promise](zh-cn/_vue/promise)
 * **Other**
+	- [面试题](zh-cn/_other/面试题)
 	- [遍历总结](zh-cn/_other/遍历总结)
 	- [防抖和节流](zh-cn/_other/防抖和节流)
 	- [技术栈](zh-cn/_other/技术栈)
-	- [bootstrap-validator插件](zh-cn/_other/bootstrap-validator插件)
 	- [浏览器工作原理](zh-cn/_other/浏览器的工作原理/浏览器工作原理)
 * **Tool**
 	- [编码规范及配置ESLint](zh-cn/_Tool/编码规范及配置ESLint)

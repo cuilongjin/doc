@@ -217,7 +217,7 @@ btn-block (块元素 100%宽度)
 ### 响应式工具
 
 ```
-	          超小屏 小屏幕 中等屏幕 大屏幕桌面
+	         超小屏 小屏幕 中等屏幕 大屏幕桌面
 .visible-xs-*	可见	隐藏	隐藏	隐藏
 .visible-sm-*	隐藏	可见	隐藏	隐藏
 .visible-md-*	隐藏	隐藏	可见	隐藏
@@ -233,32 +233,28 @@ btn-block (块元素 100%宽度)
 
 推荐使用 hidden 相关的属性
 
-
-
 ## bootstrap-validator 插件
 
-基于bootstrap的前端校验插件 
+基于 bootstrap 的前端校验插件
 
 http://bootstrapvalidator.votintsev.ru/api
 
 ### 引包
 
-引入css文件
+引入 css 文件
 
 ```css
 <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="lib/bootstrap-validator/css/bootstrapValidator.css">
 ```
 
-引入js文件
+引入 js 文件
 
 ```javascript
 <script src="lib/jquery/jquery.js"></script>
 <script src="lib/bootstrap/js/bootstrap.js"></script>
 <script src="lib/bootstrap-validator/js/bootstrapValidator.js"></script>
 ```
-
-
 
 ### 初始化表单校验插件
 
@@ -268,7 +264,7 @@ bootstrap-validator 插件会在表单提交的时候进行校验，如果校验
 // 使用表单校验插件
 $(formSelector).bootstrapValidator({
   // 1. 指定不校验的类型，默认为[':disabled', ':hidden', ':not(:visible)'],可以不设置
-  excluded: [],// 全部校验
+  excluded: [], // 全部校验
 
   // 2. 指定校验时的图标显示，默认是bootstrap风格
   feedbackIcons: {
@@ -297,34 +293,26 @@ $(formSelector).bootstrapValidator({
           message: '用户名由数字字母下划线和.组成'
         },
 
-        callback: {
-
-        }
+        callback: {}
       }
     },
 
-    password: {
-
-    }
+    password: {}
   }
 })
 ```
-
-
 
 ### 注册表单校验成功的事件
 
 当表单校验成功时，会触发`success.form.bv`事件，此时会提交表单，通常我们需要禁止表单的自动提交，使用 ajax 进行表单的提交
 
 ```javascript
-$('#form').on('success.form.bv', function (e) {
+$('#form').on('success.form.bv', function(e) {
   e.preventDefault()
   // 使用ajax提交逻辑
   $.ajax({})
 })
 ```
-
-
 
 ### 获取 validator 实例(对象)
 
@@ -351,13 +339,16 @@ validator.resetForm()
 
 #### 更新字段的状态
 
-BootstrapValidator 在用户输入内容的时候，会做校验，当调用 bootstrap 的插件的方法可以手动会改变字段值的状态
+# BootstrapValidator 在用户输入内容的时候，会做校验，当调用 bootstrap 的插件的方法可以手动会改变字段值的状态
+
+推荐使用 hidden 相关的属性
+
+> > > > > > > 1d090eb776f4546a16e0dda4c72f6375c42720f6
 
 `validator.updateStatus(field*, status*, validator)`
 
-| Parameter   | Type           | Description                                                  |
-| ----------- | -------------- | ------------------------------------------------------------ |
-| `field`     | String\|jQuery | The field name or field element                              |
-| `status`    | String         | Can be `NOT_VALIDATED`, `VALIDATING`, `INVALID` or `VALID`   |
+| Parameter   | Type           | Description                                                                          |
+| ----------- | -------------- | ------------------------------------------------------------------------------------ |
+| `field`     | String\|jQuery | The field name or field element                                                      |
+| `status`    | String         | Can be `NOT_VALIDATED`, `VALIDATING`, `INVALID` or `VALID`                           |
 | `validator` | String         | The validator name. If `null`, the method updates validity result for all validators |
-

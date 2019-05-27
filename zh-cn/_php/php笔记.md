@@ -58,88 +58,6 @@ PS: web服务器又叫做http/httpd服务器
 
 
 
-## 网络基础(重点)
-
-
-
-浏览器中地址栏，要输入的内容叫做 `url` 统一资源定位符
-
-`协议://域名:端口号/路径?查询字符串#哈希值`
-
-协议: 规定了客户端和服务器交互方式  http https ftp..
-
-域名: 找到对应的电脑
-
-端口号:找电脑上对应的应用程序，web服务器一般默认端口号都是80
-
-
-
-### ip地址
-
-所谓IP地址就是给每个连接在互联网上的主机(计算机)分配的一个地址。(就像每个人的身份证号码一样)
-
-通过ip就可以找到具体的某一台计算机。
-
-例 `192.168.1.110`
-
-弊端：没有规律，不方便记忆和推广
-
-查看本机IP地址  `ipconfig`、`ifconfig`（linux）
-
-```javascript
-ping 192.168.1.110  // 查看和某个同学的电脑是否连通
-```
-
-**127.0.0.1 **作为本地测试的IP地址。(又叫本地回环地址)
-
-192.168 开头为局域网的地址。
-
-
-
-### 域名
-
-由于IP地址基于数字，不方便记忆，于是便用域名来代替IP地址，域名是一个IP地址的“好记的名字”
-
-查看域名对应的IP地址 `ping`
-
-```javascript
-ping jd.com  // 可以获取到京东的ip
-```
-
-**特殊的域名**
-
-`localhost`，意思为本地主机。这是一个保留域名，主要用于本地测试，对应IP地址为`127.0.0.1`。
-
-
-
-### DNS服务器
-
-DNS（Domain Name System）因特网上作为域名和IP地址相互映射的一个分布式数据库， 能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。
-
-简单的说就是用于记录IP地址和域名之间的对应关系。
-
-查找优先级 本机hosts文件、DNS服务器
-
-
-
-### 端口号
-
->端口号对应的是计算机的应用程序
-
-概念: 端口号是计算机与外界通讯交流的出入口，每个端口对应不同的服务。
-
- apache 的默认端口号为80，所以可以省略不写  (tips:很多web服务器默认端口都是80 Nginx IIS)
-
-
-
-### 本地hosts
-
-> Hosts是一个没有扩展名的系统文件，可以用记事本等工具打开，其作用就是将一些常用的网址域名与其对应的IP地址建立一个关联“数据库”，当用户在浏览器中输入一个需要登录的网址时，系统会**首先自动从Hosts文件中寻找对应的IP地址**，一旦找到，系统会立即打开对应网页，如果没有找到，则系统会再将网址提交DNS域名解析服务器进行IP地址的解析。
-
-hosts文件的地址：`C:\Windows\System32\drivers\etc`
-
-
-
 ## PHP 基础(重点)
 
 
@@ -191,7 +109,7 @@ Client/Server架构，即客户端/服务器架构。需要安装对应的客户
 
 - 性能高效，使用更加稳定和流畅
 
-  ​
+  
 
 
 ####B/S架构
@@ -1036,7 +954,7 @@ Content-Type: text/html;charset=utf-8
   | 100123   | 隔壁老王 | 北京市京顺路99号    |
   | 100124   | 隔壁老宋 | 北京市清华大学1号楼 |
 
-  ​
+  
 
 - 非关系型数据库: 基于键值对的存储方式，数据之间没有耦合性，特点执行效率高
 
@@ -1051,7 +969,7 @@ Content-Type: text/html;charset=utf-8
   }
   ```
 
-  ​
+  
 
 ### MySQL 数据库软件
 
@@ -1119,7 +1037,7 @@ Content-Type: text/html;charset=utf-8
 
    唯一键，设置字段的值为唯一的，可以设置多个字段为唯一键。唯一键字段的值可以为空。
 
-   ​
+   
 
 ##### 创建数据表
 
@@ -1256,7 +1174,7 @@ select * from book where name='zs' and age=20;
 
 - `mysqli_num_rows($res);` 返回结果集的行数
 
-  ​
+  
 
 ### sql 操作
 
@@ -1476,177 +1394,4 @@ mysqli_close( $link );
 	  <input type="hidden" name="id"  value="<?php echo $data['id'] ?>">
 ```
 
-
-
-## COOKIE 和 SESSION
-
-**会话**：浏览器与服务器之间的数据交流。
-
-
-
-### HTTP 协议特点：
-
-**无状态的,  多次请求之间没有相关性**
-
-> 即同一用户请求同一网站的不同页面，服务器无法识别是否是同一用户发起的请求。因此，用户无法进行连续的业务逻辑。
-
-如：登录，已在A页面登录，请求B页面，提示未登录。
-
-
-
-### `cookie`
-
-- 在浏览器端的存储数据的容器
-- 可以使用 js 对 cookie 进行操作
-- cookie 允许服务器脚本（PHP脚本）在浏览器端存储数据
-- **cookie 特点**：
-  - 大小 4k
-  - 生命周期，默认会话级别，但是可以设置过期时间
-  - cookie 中的数据可以被同一个网站的页面所共享
-  - 不同浏览器的 cookie 不能共享
-  - cookie 是以字符串形式存在的，这个字符串有固定的格式：key=value;key1=value1；在获取cookie内容时，一般需要通过正则或者字符串的方法进行处理，转换成对象，最终得到数据
-  - 存储的 cookie 值中不要出现空格，等号，分号
-  - 一般用于存储 sessionId，可以实现登录状态保持 (会话保持)
-  - 在 cookie 中数据设置后，浏览器再次请求服务器指定页面时，会自动携带 cookie 中的数据到服务器，在服务器中可以获取 cookie 中的数据
-  - 服务器端无法直接操作 cookie，是通过在服务器端设置响应头的的方式，通知浏览器对 cookie进行设置
-- 浏览器查看 cookie 数据 `F12 > Application > Storage > Cookies`
-
-
-
-
-#### js 操作 cookie（了解）
-
-```js
-// 设置 cookie
-document.cookie = 'name=zs';
-document.cookie = 'pwd=123';
-
-// 获取 cookie 中的值
-document.cookie;
-```
-
-#### jquery.cookie.js 插件操作 cookie
-
-```javascript
-// 向页面中引入插件js文件，基于jquery的 
-$.cookie(键,值,[{expires:过期天数}]); // expires 可选 是个对象 不设置默认为一个会话的时间
-// 一个会话的时间指从发出请求到浏览器关闭
-$.cookie('age',18,{expires:1}); // 设置cookie 过期时间为1天
-$.cookie('name'); // 获取指定cookie
-$.removeCookie('name'); // 删除指定cookie
-```
-
-#### PHP 操作 cookie(服务器端操作cookie)
-
-```php
-// 设置 cookie
-setcookie('键','值'); // 默认一个会话的时间
-setcookie('键','值'，'有效期'); // 有效期是一个时间戳
-// 如果有效期为之后的时间，即为设置，若有效期设置为之前的时间，即为删除
-setcookie('键',''，time()+1000); // 设置
-setcookie('键',''，time()-1000); // 删除
-// 获取 cookie
-// $_COOKIE是PHP的超全局变量，内部存放有浏览器传过来的cookie数据，$_COOKIE只能用于获取数据
-$_COOKIE['键'];
-```
-
-
-
-**思考?**
-
-cookie 是浏览器中的容器，php是运行在服务器端的脚本语言，为什么php可以设置cookie和获取cookie
-
-因为：当 setcookie 执行的时候，实际上是在响应头中添加了一个信息，浏览器接受到之后，会根据添加的这个信息去操作 cookie；浏览器再次请求对应的网站的时候，会自动把 cookie 中的数据，存放到请求头中，发送给服务器，所以服务器端使用 $_COOKIE 可以接受
-
-
-
-### `session`
-
-- 在服务器端存储数据的容器
-- session 容器是一个数组的形式，通过超全局变量 $_SESSION 进行取值和设置
-- session 在使用前，必须先 session_start 开启session 机制
-- session 中的数据可以被当前网站所共享
-
-#### session 的基本操作
-
-**开启 session 机制**  (使用session前必须调用此方法)
-
-```php
- session_start(); // 开启 session 会话或者重用已经创建的会话
-```
-
-
-
-注意点：
-
-1. 会在服务器中自动对每个第一次访问的用户，随机生成一个 sessionID
-
-2. 再根据 sessionID，自动创建一个session会话文件，在其中存储该用户的数据
-
-3. 响应时，在响应头中设置set-cookie，存放该用户的 sessionID
-
-4. 将来浏览器端根据响应头，将 sessionId 存到 cookie 中，并在下一次请求时携带
-
-5. 下次访问时，服务器端就会根据 sessionId 找到该用户的会话文件，我们可以从session中读取用户信息，实现会话保持
-
-   ​
-
-**设置和获取 session 中的数据 ** (通过超全局变量$_SESSION进行操作)
-
-```php
-// 设置
-$_SESSION['键']='值'; 
-// 删除
-unset($_SESSION['键']);
-// 清空 session
-$_SESSION=[];
-// 直接删除 session 会话文件，PHP 脚本将无法读取 session 数据
-session_destroy();
-// 获取 session 的 id
-session_id();
-```
-
-
-
-### COOKE 和 SESSION 的应用--登录状态保持
-
-登录模块的基本思路：
-
-1. 如果用户登录成功，在服务器中记录用户的登录状态
-
-   - session_start(),  对于第一次访问的用户, 会自动生成 sessionId, 并创建session文件，
-
-   - 我们需要在 session 文件中，记录当前用户的信息
-
-   - 通过响应头，给浏览器的 cookie 设置 sessionID
-
-     ```php
-     if($name=='zs'&&$pwd=='666'){  
-       // 登录成功, 将该用户唯一标识存到 session 中
-       // 该用户数据库中 id 为 1
-       $id = 1;
-       session_start();
-       $_SESSION['userid']=$id;
-     }
-     ```
-
-     ​
-
-2. 后续访问其他页面（个人中心），浏览器会自动发送 cookie 中存放的 sessionID 到服务器
-
-3. 服务器会浏览器传递根据 sessionID，找到对应的 session 文件，查看其中是否存放有当前用户的信息
-
-   - 是： 用户已登录 ，正常浏览
-
-   - 否：用户未登录，跳转到登录页
-
-     ```php
-     session_start();
-     if(!empty($_SESSION['userid'])){
-       // 正常浏览
-     }else{ 
-       header('location:./04-login.html');
-       die();// 后面代码不执行
-     }
-     ```
 
