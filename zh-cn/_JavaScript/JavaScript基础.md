@@ -2089,9 +2089,9 @@ function Person(name, age, salary) {
   var date = new Date()
   
   // 日期格式字符串：创建一个指定时间的日期对象
-  // - 在 safari 下不识别，推荐用 /
-  var date = new Date("2018/12/02")
-  var date = new Date("2018/12/02 00:02:05")
+  // '-' 在 safari 下不识别，推荐用 /
+  var date = new Date('2018/12/02')
+  var date = new Date('2018/12/02 00:02:05')
   
   // 日期以逗号分隔：注意月份从0开始
   var date = new Date(2018, 11, 2, 0, 2, 5) // 2018/12/02 
@@ -2150,7 +2150,7 @@ function Person(name, age, salary) {
   var arr = [1,2,3,4,5]
   arr.join() // 不传参数，默认用逗号进行拼接，返回拼接好的字符串
   arr.join('')
-  arr.join('-') // 用 [-] 进行拼接
+  arr.join('-') // 用 - 进行拼接
   ```
 
 - 数组的增删操作
@@ -2161,6 +2161,7 @@ function Person(name, age, salary) {
   arr.unshift() // 从数组的前面的添加元素，返回新数组的 length
   arr.shift() // 从数组的最前面删除元素，返回删除的那个元素
   arr.push(arr1) // 把 arr1 当成一个整体放到 arr 里
+  
   // 练习1
   var arr = ['刘备']
   // 添加数据后变成：['赵云','马超','刘备','关羽','张飞']
@@ -2179,8 +2180,8 @@ function Person(name, age, salary) {
   arr.sort() // 数组的排序，按照首字符依次比较
   
   // sort 方法可以传递一个函数作为参数，这个参数用来控制数组如何进行排序
-  arr.sort(function(a, b){
-    // 参数为true时，即返回值 > 0 时，交换位置
+  arr.sort(function (a, b) {
+    // 参数为 true 时，即返回值 > 0 时，交换位置
     // return a - b // 从小到大排序
     return b - a  // 从大到小排序
   })
@@ -2189,7 +2190,7 @@ function Person(name, age, salary) {
     ```javascript
   // 思考：
   // 将[3, 6, 1, 5, 10, 2,11]从小到大排列
-  // 将字符串数组按照字符长度从小到大排列
+  // 将字符串数组按照字符长度从小到大排列 a.sort(function (a, b) {return a.length - b.length})
   // 将学生数组按照年龄从小到大排列
     ```
 
@@ -2203,10 +2204,11 @@ function Person(name, age, salary) {
   // slice(begin, end) 包含 begin，不包含 end， begin 和 end 为下标
   // slice(begin) 只有一个参数时，为开始参数，截取到末尾
   // slice() 没有参数，全部截取
+  // 可以为负数，会将字符串的长度与对应的负数相加，结果作为参数，-1 表示从后数第一个
   var newArr = arr.slice(begin, end)
   
-  // splice: 删除或者增加数组元素，修改原数组
-  // start: 开始位置  deletedCount: 删除的个数（如果不删除为 0）items: 替换的内容
+  // splice: 删除或者增加数组元素，修改原数组，返回删除的内容（数组形式）
+  // start: 开始位置  deletedCount: 删除的个数（如果不删除为 0）items: 替换的内容, 可为多个
   arr.splice(start, deletedCount, [items]) // items 将作为 arr 的一项
   
   // 练习：
@@ -2223,11 +2225,11 @@ function Person(name, age, salary) {
   // indexOf 方法返回数组中某个元素第一次出现的位置，如果找不到，返回 -1
   // 可以用来判断元素是否在数组中
   // fromIndex 表示从 fromIndex 下标开始查找
-  arr.indexOf(元素, [fromIndex])
+  arr.indexOf('zs', [fromIndex])
   
   // lastIndexOf() 从后面开始查找数组中元素出现位置,即查找某元素最后一次出现的位置
   // 如果找不到，返回 -1
-  arr.lastIndexOf(元素, [fromIndex])
+  arr.lastIndexOf('zs', [fromIndex])
   ```
 
 - 清空数组
@@ -2260,12 +2262,12 @@ function Person(name, age, salary) {
 arr.forEach(function (item, index, arr) {}, thisArg)
 // item 必需。数组中正在处理的当前元素
 // index 可选。数组中正在处理的当前元素的索引
-// arr 可选  forEach()方法正在操作的数组，就是当前数组
+// arr 可选。当前数组
 // thisArg 可选。当执行回调函数时用作this的值
 var arr = ['zs', 'ls', 'ww']
 arr.forEach (function(item, index, arr) {
-    console.log(item)
-    console.log(this)
+  console.log(item)
+  console.log(this)
 })
 // 返回值: undefined
 // 不支持 return 操作输出，return 只用于控制循环是否跳出当前循环
@@ -2278,14 +2280,14 @@ arr.forEach (function(item, index, arr) {
 ```javascript
 // 语法
 var newArr = arr.map(function (item, index) {
-    // item 必需。数组中正在处理的当前元素
-	// index 可选。数组中正在处理的当前元素的索引
-	// arr 可选。当前数组
-    // 使用 return 操作输出，会循环数组每一项，并返回新的每一项组成的数组
- 	return item * 2
+  // item 必需。数组中正在处理的当前元素
+  // index 可选。数组中正在处理的当前元素的索引
+  // arr 可选。当前数组
+  // 使用 return 操作输出，会循环数组每一项，并返回新的每一项组成的数组
+  return item * 2
 })
 // 不修改原数组
-// 返回一个新数组，新数组的每一项乘以2
+// 返回一个新数组，新数组的每一项乘以 2
 ```
 
 
@@ -2295,12 +2297,12 @@ var newArr = arr.map(function (item, index) {
 ```javascript
 // 语法
 var newArr = arr.filter(function (item, index) {
-    // 参数同 map
-    // 使用 return 操作输出，会循环数组每一项，并返回判断为 true 的每一项组成的数组
-    return item > 2 && item < 5 // return 后是判断条件
+  // 参数同 map
+  // 使用 return 操作输出，会循环数组每一项，并返回判断为 true 的每一项组成的数组
+  return item > 2 && item < 5 // return 后是判断条件
 })
 // 不修改原数组
-// 返回一个新数组，新数组每一项满足 2<item< 5
+// 返回一个新数组，新数组每一项满足 2 < item < 5
 ```
 
 
@@ -2310,9 +2312,9 @@ var newArr = arr.filter(function (item, index) {
 ```javascript
 // 语法
 var newArr = arr.some(function (item, index) {
-    // 参数同 map
-    // 返回布尔值，只要有一项满足条件就返回true，否则返回false
-    return item > 2 // return 后是判断条件
+  // 参数同 map
+  // 返回布尔值，只要有一项满足条件就返回 true，否则返回 false
+  return item > 2 // return 后是判断条件
 })
 // 不修改原数组
 ```
@@ -2324,9 +2326,9 @@ var newArr = arr.some(function (item, index) {
 ```javascript
 // 语法
 var newArr = arr.every(function (item, index) {
-    // 参数同 map
-    // 返回布尔值，只有所有项都满足条件才返回true，否则返回false
-    return item > 2 // return 后是判断条件
+  // 参数同 map
+  // 返回布尔值，只有所有项都满足条件才返回 true，否则返回f alse
+  return item > 2 // return 后是判断条件
 })
 // 不修改原数组
 ```
@@ -2351,9 +2353,9 @@ console.log(new1)
 ```javascript
 // 语法
 var newArr = arr.find(function (item, index) {
-	// 参数同 map
-    // 使用 return 操作输出，会循环数组每一项，当遍历循环到判断到一个为true则跳出循环，输出当前数组元素
-    return item > 2 // return 后是判断条件
+  // 参数同 map
+  // 使用 return 操作输出，会循环数组每一项，当遍历循环到判断到一个为 true 则跳出循环，输出当前数组元素
+  return item > 2 // return 后是判断条件
 })
 // 不修改原数组
 // 返回一个数组元素，如果全不满足返回 undefined
@@ -2366,9 +2368,9 @@ var newArr = arr.find(function (item, index) {
 ```javascript
 // 语法
 var newArr = arr.find(function (item, index) {
-	// 参数同 map
-    // 使用 return 操作输出，会循环数组每一项，当遍历循环到判断到一个为true则跳出循环，输出当前数组元素的下标
-    return item > 2 // return 后是判断条件
+  // 参数同 map
+  // 使用 return 操作输出，会循环数组每一项，当遍历循环到判断到一个为 true 则跳出循环，输出当前数组元素的下标
+  return item > 2 // return 后是判断条件
 })
 // 不修改原数组
 // 返回一个数组元素的下标，如果全不满足返回 -1
@@ -2381,49 +2383,50 @@ var newArr = arr.find(function (item, index) {
 ```javascript
 // 语法
 var new1 = arr.reduce(function (pre, next, index) {
-    // pre 第一次为数组第一项，之后为上一操作的结果
-	// next 数组的下一项
-    // index next项的序列
-	// arr 可选。当前数组
-    // 使用 return 操作输出，
-    return pre + next // 返回素组每一项的和
+  // pre 第一次为数组第一项，之后为上一操作的结果
+  // next 数组的下一项
+  // index next项的序列
+  // arr 可选。当前数组
+  // 使用 return 操作输出
+  return pre + next // 返回数组每一项的和
 })
 // 不修改原数组
 ```
 
 ```javascript
 // 扁平化数组
-var arr2 = [[1,2,3],[4,5],[6,7]]
-var new2 = arr2.reduce(function (pre, next, index){
-	return pre.concat(next)	// 前数组拼接后数组 .concat()
+var arr2 = [[1, 2, 3], [4, 5], [6, 7]]
+var new2 = arr2.reduce(function (pre, next, index) {
+  return pre.concat(next) // 前数组拼接后数组 .concat()
 })
 ```
 
 ```javascript
 // 对象数组叠加计算
-var arr3 = [{price:1,count:1},{price:2,count:2},{price:3,count:3}]
+var arr3 = [{ price: 1, count: 1 }, { price: 2, count: 2 }, { price: 3, count: 3 }]
 var new3 = arr3.reduce(function (pre, next, index) {
-	return pre + next.price * next.count
-    
-	// 当需要操作第一项的时候，利用reduce(callbreak(){},往数组第一项前添加一项，如:0)
-}, 0)	//在原数组第一项添加为0，不改变原数组
+  return pre + next.price * next.count
+
+  // 当需要操作第一项的时候，利用 reduce(callbreak(){},往数组第一项前添加一项，如:0)
+}, 0) // 在原数组第一项添加为 0，不改变原数组
 ```
 
 
 
 ## 基本包装类型
 
-> **简单数据类型是没有方法的**。为了方便操作基本数据类型，JavaScript还提供了三个特殊的引用类型：String/Number/Boolean
+> **简单数据类型是没有方法的**。为了方便操作基本数据类型，JavaScript 还提供了三个特殊的引用类型：String/Number/Boolean
 
 基本包装类型：把基本类型包装成复杂类型
 
 ```javascript
-var str = ‘abc’
-var result = str.indexOf(‘a’)
+var str = 'abc'
+var result = str.indexOf('a')
+
 // 发生了三件事情
-1. 把简单类型转换成复杂类型：var s = new String(str)
-2. 调用包装类型的indexOf方法：var result = s.indexOf(‘a’)
-3. 销毁刚刚创建的复杂类型
+// 1. 把简单类型转换成复杂类型：var s = new String(str)
+// 2. 调用包装类型的 indexOf 方法：var result = s.indexOf('a')
+// 3. 销毁刚刚创建的复杂类型
 ```
 
 ### Number 对象
@@ -2476,20 +2479,27 @@ toString() // 转换成字符串并返回
 - 大小写转换
 
   ```javascript
-  // str.toUpperCase() 全部转换成大写字母
-  // str.toLowerCase() 全部转换成小写字母
+  str.toUpperCase() // 全部转换成大写字母
+  str.toLowerCase() // 全部转换成小写字母
   ```
 
 - 字符串拼接与截取
 
   ```javascript
-  // 字符串拼接
-  // 可以用concat，用法与数组一样，但是字符串拼串我们一般都用+
-  str.slice(start, end) // 从start开始，end结束，并且取不到end，没有end 则截取到末尾
-  // 可以为负数，-1表示从后数第一个，一次为 -2、-3...
+  // 字符串拼接 可以用 concat，用法与数组一样，但是字符串拼串我们一般都用 +
+  
+  str.slice(start, end) // 从 start 开始，end 结束，并且取不到 end，没有 end 则截取到末尾
+  // 可以为负数，会将字符串的长度与对应的负数相加，结果作为参数，-1 表示从后数第一个，一次为 -2、-3...
   str.slice(-3) // 截取字符串后三位
-  str.substring(start, end) // 从start开始，end结束，并且取不到end
-  str.substr(start, length) // 从start开始，截取length个字符，没有length则截取到末尾
+  // str.slice() 与 str.slice(0) 等价 截取全部
+  
+  str.substring(start, end) // 以两个参数中较小一个作为起始位置，较大的参数作为结束位置
+  // 负参数会被直接转换为 0
+  // str.substring() 与 str.substring(0) 等价 截取全部
+  
+  str.substr(start, length) // 从 start 开始，截取 length 个字符，没有 length 则截取到末尾
+  // 第一个参数为负参数时，会将第一个参数与字符串长度相加后的结果作为第一个参数，
+  // 第二个参数为负数时，会被转化为 0 ，即截取长度为 0
   ```
 
 - 字符串切割
@@ -2497,18 +2507,18 @@ toString() // 转换成字符串并返回
   ```javascript
   // 将字符串分割成数组（很常用）
   str.split()
-  // 功能和数组的join正好相反。
-  var str = ’zs,ls,ww’
-  var arr = str.split(’,’)
+  // 功能和数组的 join 正好相反
+  var str = 'zs,ls,ww'
+  var arr = str.split(',')
   ```
 
 - 字符串替换
 
   ```javascript
   str.replace(searchValue, replaceValue)
-  // 参数：searchValue:需要替换的值    replaceValue:用来替换的值  默认只替换第一个
+  // 参数：searchValue: 需要替换的值    replaceValue: 用来替换的值  默认只替换第一个
   str.replace(/searchValue/g, replaceValue) // 全部替换
-  str.replace(/ /g, ’’) // 将全部空格去掉
+  str.replace(/ /g, '') // 将全部空格去掉
   ```
 
 - 访问
