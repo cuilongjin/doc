@@ -191,7 +191,25 @@ ui = true
 
 这样一来，各种命令的输出就会变得更容易分辨。
 
+
+
+### 文件名大小写问题
+
+git 默认对文件名大小写不敏感
+
+```bash
+# 设置 git 大小写敏感
+git config core.ignorecase false
+
+# 或者先删除文件在添加进去
+```
+
+
+
+
+
 ### 设置头像
+
 通过 Gravatar 服务
 
 
@@ -199,7 +217,7 @@ ui = true
 ### 配置别名
 
 ```bash
-# 配置st别名表示status
+# 配置 st 别名表示 status
 git config --global alias.st status
 
 git config --global alias.co checkout
@@ -213,7 +231,7 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 
 
 
-### 搭建Git服务器
+### 搭建 Git 服务器
 
 [搭建Git服务器](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000)
 
@@ -291,16 +309,19 @@ git init
 ### git add
 
 ```bash
-# git add 文件名/目录名
+# 将指定文件夹添加到暂存区（目录中的所有文件，包括新增/修改/删除的文件）--not-all 忽略删除的
+git add 目录名
 
-# 将 README.md 添加到暂存区
+# 将 指定文件 添加到暂存区 （文件可以是新增/修改/删除的）
 git add README.md
 
-# 将当前目录下所有的js文件添加到暂存区
+# 将当前目录下所有的js文件添加到暂存区（文件可以是新增/修改的，不包括删除的）
 git add *.js
 
-# 添加当前目录下所有的文件
+# 添加当前目录及子目录下件 （文件可以是新增/修改/删除的）
 git add .
+
+# 添加当前仓库下所有的文件 （文件可以是新增/修改/删除的）
 git add -A
 git add --all
 ```
@@ -450,6 +471,9 @@ git remote rm origin
 ```bash
 # 获取远程仓库的更新，并且与本地的分支进行合并
 git pull
+
+# 合并 pull 两个不同的项目出现 fatal: refusing to merge unrelated histories
+git pull origin master ----allow-unrelated-histories
 ```
 
 
@@ -458,16 +482,16 @@ git pull
 
 ```bash
 git push -u origin master
+# 以强制覆盖的方式推送修改后的 repo （重新上传 repo）（不指定分支即所有分支）
+git push origin --force --all
 ```
 
-> 第一次推送 master 分支时，加上了 -u 参数，Git 不但会把本地的 master 分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
->
-> 之后，只要本地作了提交，就可以通过命令： `git push origin master` 把本地master分支的最新修改推送至GitHub
+第一次推送分支时，加上 -u 参数，Git 会把本地分支和远程分支关联起来，在以后的推送或者拉取时就可以简化命令
 
 >remote: error: GH007: Your push would publish a private email address. 
 解决方法——http://github.com/settings/emails 把Keep my email address private这一项去掉勾选即可。
 
-如果推送失败，则因为远程分支比你的本地更新，需要先用git pull抓取远程的新提交
+如果推送失败，则因为远程分支比你的本地更新，需要先用 `git pull` 拉取远程的新提交
 
 ### git clone
 
@@ -544,14 +568,14 @@ git check-ignore -v <file>
 
 ### git branch
 
-> 在 git 中，分支实质上仅仅是一个指针，每次代码提交后，这个分支指针就会向后移动，保证一直指向最后一次提交的的版本。git 中使用 HEAD 指向当前分支
+在 git 中，分支实质上仅仅是一个指针，每次代码提交后，这个分支指针就会向后移动，保证一直指向最后一次提交的的版本。git 中使用 HEAD 指向当前分支
 
 ```bash
 git branch
 * master
 ```
 
-master 分支左侧标有 `*`（星号），表示这是我们当前所在的分支
+`*`（星号）表示当前所在的分支
 
 -a 参数可以查看远程分支(远程分支会用红色表示出来)
 
@@ -597,7 +621,19 @@ git branch -D feature-A
 
 # 删除远程 feature-A 分支
 git push origin :feature-A
+或 git push origin --delete feature-A
 ```
+
+* git branch -m 重命名分支
+
+```bash
+# 重命名本地分支
+git branch -m old_branch new_branch
+```
+
+
+
+
 
 ### git stash
 
@@ -684,6 +720,7 @@ git push origin --tags
 git tag -d v1.0
 # 删除远程标签 v1.0
 git push origin :refs/tags/v1.0
+或 git push origin --delete tag v1.0
 ```
 
 
@@ -703,14 +740,6 @@ git config --global core.autocrlf false
 # CRLF (carriagereturnlinefeed)：表示句尾使用回车换行两个字符(即Windows编程时使用"\r\n"换行)
 # LF(line feed)：表示句尾只使用换行(Unix Style)
 # CR：表示只使用回车
-```
-
-
-
-* 合并pull两个不同的项目，出现 `fatal: refusing to merge unrelated histories`
-
-```bash
-git pull origin master ----allow-unrelated-histories
 ```
 
 
@@ -739,4 +768,14 @@ git gc --aggressive --prune=now
 ```
 
 重新[绑定](https://git-scm.com/book/en/Git-Branching-Rebasing)，而不是合并创建的旧（受污染）存储库历史记录中的任何分支
+
+
+
+* git 修改已提交的某一次的邮箱和用户信息
+
+```bash
+git filter-branch -f --env-filter \
+"GIT_AUTHOR_NAME='Newname'; GIT_AUTHOR_EMAIL='newemail'; \
+GIT_COMMITTER_NAME='committed-name'; GIT_COMMITTER_EMAIL='committed-email';" HEAD
+```
 

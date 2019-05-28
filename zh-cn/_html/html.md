@@ -847,7 +847,7 @@ span   跨度，跨距；范围
 
 
 
-### 表单标签(掌握)
+### 表单标签
 
 **语法**:
 
@@ -868,8 +868,6 @@ span   跨度，跨距；范围
 **作用**
 
 表单目的是为了收集用户信息。
-
-在我们网页中， 我们也需要跟用户进行交互，收集用户资料，此时也需要表单。
 
 > 在HTML中，一个完整的表单通常由表单控件（也称为表单元素）、提示信息和表单域3个部分构成。
 
@@ -902,7 +900,7 @@ span   跨度，跨距；范围
 
 
 
-#### input 标签(重点)
+#### input 标签
 
 - 语法：
 
@@ -910,16 +908,12 @@ span   跨度，跨距；范围
   <input type="属性值" value="你好">
   ```
 
-  - input 输入的意思
+  - type 属性设置不同的属性值用来指定不同的控件类型
 
-  - <input /&gt;标签为单标签
-
-  - type属性设置不同的属性值用来指定不同的控件类型
-
-  - 除了type属性还有别的属性
+  - 除了 type 属性还有别的属性
 
 
-##### type属性
+##### type 属性
 
 * text 单行文本输入框
 * password 密码输入框
@@ -928,29 +922,25 @@ span   跨度，跨距；范围
 * button 普通按钮
 * submit 提交按钮
 * reset 重置按钮
-* image 图片按钮 ，添加src属性引入图片
-* file 上传文件
-
-```
-用户名: <input type="text" />
-密  码：<input type="password" />
-```
+* image 图片按钮 ，添加 src 属性引入图片
+* file 上传文件 
 
 
 
-#### value属性值
+#### value 属性值
 
 ```html
-用户名:<input type="text"  name="username" value="请输入用户名">
+<!-- input 框在用户未输入时的默认值 -->
+用户名: <input type="text"  name="username" value="请输入用户名">
 ```
 
-* value 默认的文本值。 有些表单想刚打开页面就默认显示几个文字，就可以通过这个value 来设置。
+
 
 **input `placeholder` 属性与 `value` 属性区别**
 
-- **placeholder** 属性提供一种提示，描述输入域所期待的值,提示会在输入字段为空时显示，并会在字段获得焦点时消失。属性适用于以下类型的input标签：text, search, url, telephone, email 以及 password
+- **placeholder** 属性提供一种提示，描述输入域所期待的值，提示会在输入字段为空时显示，并会在字段获得焦点时消失。属性适用于以下类型的input标签：text、search、url、telephone、email 以及 password
 
-- **value** 属性为 input 元素设定值，对于不同的输入类型，value 属性的用法也不同：
+- **value** 属性为 input 元素设定值，对于不同的输入类型，value 属性的用法也不同
   - `type="button", "reset", "submit"` - 定义按钮上的显示的文本
   - `type="text", "password", "hidden"` - 定义输入字段的初始值
   - `type="checkbox", "radio", "image"` - 定义与输入相关联的值

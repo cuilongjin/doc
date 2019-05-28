@@ -622,21 +622,5 @@ a {
   /* 取消链接高亮, 移动端特有的样式  */
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
-/*单行溢出*/
-.one-txt-cut {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-/*多行溢出*/
-.txt-cut {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
 ```
 
