@@ -725,6 +725,43 @@ git push origin :refs/tags/v1.0
 
 
 
+## git 修改提交历史
+
+修改最后一条commit
+
+```bash
+git commit --amend
+```
+
+修改多条commit
+
+```
+git rebase -i HEAD~3 修改最近三次提交
+git rebase -i --root 修改所有提交
+```
+
+Commands
+
+**p**, pick = use commit: 直接使用commit 不做任何修改，其中p 是pick的缩写，以下雷同；
+
+**r**, reword = use commit, but edit the commit message: 使用commit，但是会更改commit 信息；
+
+**e**, edit = use commit, but stop for amending :使用commit，但是遇到此命令时会停止合并；
+
+**s**, squash = use commit, but meld into previous commit: 使用commit,但是会合并到前一个commit中；
+
+**f**, fixup = like "squash", but discard this commit's log message：和squash类似，但是会抛弃commit的log信息
+
+**x**, exec = run command (the rest of the line) using shell：使用shell运行命令
+
+**d**, drop = remove commit：丢弃commit
+
+
+
+<https://www.jianshu.com/p/67f20d19605a>
+
+
+
 ## other
 
 * git add .` 的时候遇到 `warning: LF will be replaced by CRLF in ......` 
