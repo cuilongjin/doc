@@ -1897,6 +1897,16 @@ pre-line：合并空白符序列，但是保留换行符
 
 
 
+### pre 标签换行
+
+```css
+pre {
+  white-space: pre-wrap;
+}
+```
+
+
+
 
 ### 11.7 CSS精灵技术（sprite) 重点
 
