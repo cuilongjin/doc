@@ -35,6 +35,7 @@
 * **vue**
 	- [vue](zh-cn/_vue/vue)
 	- [vuex](zh-cn/_vue/vuex)
+	- [vue+elementui](zh-cn/_vue/vue+elementui)
 	- [Vue实例生命周期图](zh-cn/_vue/Vue实例生命周期图)
 	- [promise](zh-cn/_vue/promise)
 * **Other**
