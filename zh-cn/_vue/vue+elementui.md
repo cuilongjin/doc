@@ -24,7 +24,7 @@ vue 组件之间的样式有自动复用的问题，给一个类设置样式，�
 作用 1：让当前组件内的样式，只能在当前组件上起效果
 作用 2：如果添加了 scoped，样式只会对本来就存在的标签/组件起效果，如果是动态添加的组件/标签，是无效的 
 
-动态添加的组件/标签，在 `.vue`文件里添加一个 style 标签，在标签里设置该样式属性
+动态添加的组件/标签，在 `.vue`文件里添加一个 style 标签，在标签里设置该样式属性，或者在选择器前添加`/deep/`
 
 
 
@@ -46,7 +46,14 @@ vm.$nextTick( [callback\] )：将回调延迟到下次 DOM 更新循环之后执
 
 
 
- 页面跳转 this.$router.push('/login')
+
+
+```js
+// 页面跳转
+this.$router.push('/login')
+this.$router.push({ name: 'login' })
+this.$router.go(-1)
+```
 
 
 
@@ -59,6 +66,26 @@ vm.$nextTick( [callback\] )：将回调延迟到下次 DOM 更新循环之后执
 `span='1'`：赋值 span 的是一个字符串 '1'
 
 `:span='1'`：前面加一个`:` 意思是动态数据绑定，赋值 span 的是具体数据类型的数据，即数字  1
+
+
+
+### 时间日期选择器
+
+日期选择器限制选择范围
+
+```html
+<el-date-picker v-model="options.endDate" type="date" :picker-options="endDateOptions">
+</el-date-picker>
+```
+
+```js
+endDateOptions: {
+  disabledDate: time => {
+    // 限制结束时间范围为大于开始时间，并在一周内
+  	return time.getTime() < this.options.startDate || time.getTime() > this.options.startDate + 24 * 60 * 60 * 1000 * 7
+  }
+}
+```
 
 
 
@@ -129,7 +156,7 @@ unique-opened：是否只保持一个子菜单的展开
 
 #### 单选框组
 
-结合el-radio-group元素和子元素el-radio可以实现单选组，在el-radio-group中绑定v-model，在el-radio中设置好label即可，无需再给每一个el-radio绑定变量，另外，还提供了change事件来响应变化，它会传入一个参数value。
+结合 el-radio-group 元素和子元素 el-radio 可以实现单选组，在 el-radio-group 中绑定 v-model，在 el-radio 中设置好 label 即可，无需再给每一个 el-radio 绑定变量，另外，还提供了 change 事件来响应变化，它会传入一个参数value
 
 #### Radio Events
 
@@ -157,19 +184,29 @@ props：配置选项，对象
 
 #### Attribute
 
-action：必选参数，上传的完整地址
+* action: 必选参数，上传的完整地址
 
-multiple 是否支持多选文件
+* multiple: 是否支持多选文件
 
-:on-preview 点击文件列表中已上传的文件时的钩子  function(file)
+* :on-preview: 点击文件列表中已上传的文件时的钩子  function(file)
 
-:on-remove 文件列表移除文件时的钩子 function(file, fileList)
+* :on-remove: 文件列表移除文件时的钩子 function(file, fileList)
 
-list-type	文件列表的类型
+* list-type: 文件列表的类型
 
-on-success	文件上传成功时的钩子  function(response, file, fileList)
+* :before-upload: 对文件校验 function(file)，若返回 false 或者返回 Promise 且被 reject，则停止上传
 
-headers	设置上传的请求头部	object 
+* :on-success: 文件上传成功时的钩子  function(response, file, fileList)
+
+​	response：参数一， 接口的响应结；file：参数二， 文件对象；fileLIst：参数三，文件对象列表
+
+​	自定义参数 `:on-success="(res, file, fileList) => UploadImg(1, res, file, fileList)"`
+
+* headers: 设置上传的请求头部 object
+
+* :auto-upload="false"：手动调用`this.$refs.upload.submit()`上传
+
+* on-progress: 文件上传时的钩子	function(event, file, fileList)
 
 
 
@@ -226,7 +263,7 @@ this.$refs.box.getData()
 
 ### 项目上线
 
-打包 : npm run build
+打包 :  npm run build
 把打好的包放到 http-server 里面
 
 介绍 vendor : 里面放一些第三方包 vue/vue-router/element-ui 包等

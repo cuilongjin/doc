@@ -298,8 +298,9 @@ const vm = new Vue({
 
 > 说明 : 设置文本内容
 
-1. v-text : 相当于之前的 innerText
-2. v-html : 相当于之前的 innerHTML
+v-text :  相当于之前的 innerText
+
+v-html :  相当于之前的 innerHTML，会解析 html 标签，（已经废弃三大括号的插值）
 
 ```html
 <div id="app">
