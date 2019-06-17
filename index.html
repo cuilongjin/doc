@@ -26,48 +26,98 @@
         name: '稻草人',
         // 在页面右上角渲染一个 GitHub Corner 挂件
         // repo: 'https://github.com/cuilongjin/doc/',
+
         // 自定义侧边栏
-        loadSidebar: true,
+        // loadSidebar: true,
+
+        // 自定义导航栏
+        loadNavbar: true,
         alias: {
-          '/.*/_sidebar.md': '/_sidebar.md'
+          // '/.*/_sidebar.md': '/_sidebar.md',
+          '/.*/_navbar.md': '/_navbar.md'
         },
+
         // 自动为每个页面增加标题
         // autoHeader: true,
         // 设置生成目录的最大层级,自定义侧边栏后默认不会再生成目录
         subMaxLevel: 2,
+
         // 开启渲染封面的功能,默认加载 _coverpage.md
-        coverpage: true,
+        // coverpage: true,
+
         // 配置最大渲染的标题层级
         maxLevel: 3,
         // 配置切换页面后是否自动跳转到页面顶部
         auto2top: true,
         // 加载自定义导航栏
         // loadNavbar: true,
+
         // 设置首页文件加载路径。适合不想将 README.md 作为入口文件渲染
-        homepage: '_homepage.md',
+        // homepage: '_homepage.md',
+
         // Website logo as it appears in the sidebar, you can resize by CSS
         // logo: '/favicon-logo.png',
         executeScript: true,
 
         search: {
           noData: {
-            '': '搜索',
-            '/zh-cn/': '没有结果!'
+            '': '没有结果!'
+            // '/zh-cn/': '没有结果!'
           },
-          paths: 'auto',
+          paths: [
+            '/',
+            'zh-cn/_html/html',
+            'zh-cn/_css/CSS-z-index',
+            'zh-cn/_css/Fixed定位脱离Viewport的bug',
+            'zh-cn/_JavaScript/JavaScript基础',
+            'zh-cn/_JavaScript/JavaScript高级',
+            'zh-cn/_linux/linux基础',
+            'zh-cn/_webApi/webapi笔记',
+            'zh-cn/_jquery/jquery笔记',
+            'zh-cn/_jquery/jquery-fileupload插件的使用',
+            'zh-cn/_jquery/jquery中AJAX的全局事件',
+            'zh-cn/_php/php笔记',
+            'zh-cn/_ajax/ajax笔记',
+            'zh-cn/_h5c3/css3',
+            'zh-cn/_h5c3/html5',
+            'zh-cn/_h5c3/fullpage',
+            'zh-cn/_移动web/移动web',
+            'zh-cn/_移动web/bootstrap',
+            'zh-cn/_移动web/less',
+            'zh-cn/_nodejs/nodejs',
+            'zh-cn/_nodejs/ES6.md',
+            'zh-cn/_vue/vue',
+            'zh-cn/_vue/vuex',
+            'zh-cn/_vue/vue+elementui',
+            'zh-cn/_vue/Vue实例生命周期图',
+            'zh-cn/_vue/promise',
+            'zh-cn/_other/面试题',
+            'zh-cn/_other/遍历总结',
+            'zh-cn/_other/防抖和节流',
+            'zh-cn/_other/技术栈',
+            'zh-cn/_other/浏览器的工作原理/浏览器工作原理',
+            'zh-cn/_Tool/编码规范及配置ESLint',
+            'zh-cn/_Tool/Sublime插件及快捷键',
+            'zh-cn/_Tool/gulp前端自动化环境',
+            'zh-cn/_Tool/Git',
+            'zh-cn/_Tool/webpack配置',
+            'zh-cn/_Tool/markdown语法',
+            'zh-cn/_Tool/docker'
+          ],
           placeholder: {
-            '': '搜索',
-            '/zh-cn/': '搜索'
+            '': '搜索'
+            // '/zh-cn/': '搜索'
           }
         },
         formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}',
+
         // 自定义插件
         plugins: [
           function (hook, vm) {
             hook.beforeEach(function (html) {
               // 添加页面更新时间
               return (
-                `<span class="modified">页面最后更新于 {docsify-updated}</span>\n ` +
+                `<span class="modified">最后更新于 {docsify-updated}</span>\n ` +
                 html +
                 '\n'
               )
