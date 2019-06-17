@@ -1,5 +1,4 @@
 * [首页](/)
-* [目录](/README)
 
 * HTML与CSS
  * [html基础](zh-cn/_html/html)
