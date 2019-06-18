@@ -5,7 +5,7 @@
 ### 文档
 <div class="homepage">
   <div class="card">
-    <a href="https://dribbble.com/" target="_blank">
+    <a href="https://cn.vuejs.org/" target="_blank">
       <img src="/image/logo/vue.png" />
       <div class="desc">
         <div class="name">Vue.js</div>
