@@ -47,7 +47,7 @@
 
   <div class="card">
     <a href="https://www.mobiledebug.com/" target="_blank">
-      <img src="/image/logo/mobiledebug.ico" />
+      <img src="/image/logo/mobiledebug.png" />
       <div class="desc">
         <div class="name">MOBILE DEBUG</div>
         <div class="info">移动端网页抓包调试工具，不只是个Console</div>
@@ -78,10 +78,10 @@
   </div>
   <div class="card">
     <a href="https://codepen.io/" target="_blank">
-      <img src="https://codepen.io/favicon.ico" />
+      <img src="/image/logo/codepen.ico" />
       <div class="desc">
         <div class="name">CondPen</div>
-        <div class="info"></div>
+        <div class="info">Online Code Editor and Front and End Web Developer Community</div>
       </div>
     </a>
   </div>
@@ -99,8 +99,9 @@
 
 
 ## 软件
-* [Dash/Mac](https://kapeli.com/dash):an API Documentation Browser and Code Snippet Manager
+* ![](/image/logo/mobiledebug.ico) [Dash/Mac](https://kapeli.com/dash):an API Documentation Browser and Code Snippet Manager
 * [Zeal/Win](https://zealdocs.org/)
 
 * [Xshell 5](https://www.netsarang.com/products/xsh_overview.html):Secure terminal emulator
 
+https://developer.mozilla.org/zh-CN/docs/Web
