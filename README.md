@@ -56,9 +56,51 @@
   </div>
 </div>
 
+### 代码在线演示
+<div class="homepage">
+  <div class="card">
+    <a href="https://runjs.cn/" target="_blank">
+      <img src="https://runjs.cn/favicon.ico" />
+      <div class="desc">
+        <div class="name">runjs</div>
+        <div class="info"></div>
+      </div>
+    </a>
+  </div>
+  <div class="card">
+    <a href="https://jsfiddle.net/" target="_blank">
+      <img src="https://jsfiddle.net/favicon.ico" />
+      <div class="desc">
+        <div class="name">Jsfiddle</div>
+        <div class="info"></div>
+      </div>
+    </a>
+  </div>
+  <div class="card">
+    <a href="https://codepen.io/" target="_blank">
+      <img src="https://codepen.io/favicon.ico" />
+      <div class="desc">
+        <div class="name">CondPen</div>
+        <div class="info"></div>
+      </div>
+    </a>
+  </div>
+</div>
+
 ## 博客收藏
 
 ## 文档
 
 ## 在线工具
+
+## IDE/编辑器
+
+[Sublimetext](https://www.sublimetext.com/) [Atom](https://atom.io/)
+
+
+## 软件
+* [Dash/Mac](https://kapeli.com/dash):an API Documentation Browser and Code Snippet Manager
+* [Zeal/Win](https://zealdocs.org/)
+
+* [Xshell 5](https://www.netsarang.com/products/xsh_overview.html):Secure terminal emulator
 
