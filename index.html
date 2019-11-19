@@ -19,89 +19,101 @@
     <div id="app">Loading...</div>
     <script>
       window.$docsify = {
-        // 文档标题，会显示在侧边栏顶部
-        name: '稻草人',
-        // 在页面右上角渲染一个 GitHub Corner 挂件
-        // repo: 'https://github.com/cuilongjin/doc/',
+        name: '稻草人', // 文档标题，会显示在侧边栏顶部
+        // repo: 'https://github.com/cuilongjin/doc/', // 在页面右上角渲染一个 GitHub Corner 挂件
+        // loadSidebar: true, // 自定义侧边栏
 
-        // 自定义侧边栏
-        // loadSidebar: true,
-
-        // 自定义导航栏
-        loadNavbar: true,
+        loadNavbar: true, // 自定义导航栏
         alias: {
           // '/.*/_sidebar.md': '/_sidebar.md',
           '/.*/_navbar.md': '/_navbar.md'
         },
-
-        // 自动为每个页面增加标题
-        // autoHeader: true,
-        // 设置生成目录的最大层级,自定义侧边栏后默认不会再生成目录
-        subMaxLevel: 2,
-
-        // 开启渲染封面的功能,默认加载 _coverpage.md
-        // coverpage: true,
-
-        // 配置最大渲染的标题层级
-        maxLevel: 3,
-        // 配置切换页面后是否自动跳转到页面顶部
-        auto2top: true,
-        // 加载自定义导航栏
-        // loadNavbar: true,
-
-        // 设置首页文件加载路径。适合不想将 README.md 作为入口文件渲染
-        // homepage: '_homepage.md',
-
-        // Website logo as it appears in the sidebar, you can resize by CSS
-        // logo: '/favicon-logo.png',
+        // autoHeader: true, // 自动为每个页面增加标题
+        subMaxLevel: 2, // 设置生成目录的最大层级,自定义侧边栏后默认不会再生成目录
+        // coverpage: true, // 开启渲染封面的功能,默认加载 _coverpage.md
+        maxLevel: 3, // 配置最大渲染的标题层级
+        auto2top: true, // 配置切换页面后是否自动跳转到页面顶部
+        homepage: '_homepage.md', // 设置首页文件加载路径。适合不想将 README.md 作为入口文件渲染
+        // logo: '/favicon-logo.png', // Website logo as it appears in the sidebar, you can resize by CSS
         executeScript: true,
-
         search: {
           noData: {
             '': '没有结果!'
             // '/zh-cn/': '没有结果!'
           },
+          depth: 2,
           paths: [
             '/',
-            'zh-cn/_html/html',
-            'zh-cn/_css/CSS-z-index',
-            'zh-cn/_css/Fixed定位脱离Viewport的bug',
-            'zh-cn/_JavaScript/JavaScript基础',
-            'zh-cn/_JavaScript/JavaScript高级',
-            'zh-cn/_linux/linux基础',
-            'zh-cn/_webApi/webapi笔记',
-            'zh-cn/_jquery/jquery笔记',
-            'zh-cn/_jquery/jquery-fileupload插件的使用',
-            'zh-cn/_jquery/jquery中AJAX的全局事件',
-            'zh-cn/_php/php笔记',
-            'zh-cn/_ajax/ajax笔记',
-            'zh-cn/_h5c3/css3',
-            'zh-cn/_h5c3/html5',
-            'zh-cn/_h5c3/fullpage',
-            'zh-cn/_移动web/移动web',
-            'zh-cn/_移动web/bootstrap',
-            'zh-cn/_移动web/less',
-            'zh-cn/_nodejs/nodejs',
-            'zh-cn/_nodejs/ES6.md',
-            'zh-cn/_vue/vue',
-            'zh-cn/_vue/vuex',
-            'zh-cn/_vue/vue+elementui',
-            'zh-cn/_vue/Vue实例生命周期图',
-            'zh-cn/_vue/promise',
-            'zh-cn/_other/面试题',
-            'zh-cn/_other/遍历总结',
-            'zh-cn/_other/防抖和节流',
-            'zh-cn/_other/技术栈',
-            'zh-cn/_other/浏览器的工作原理/浏览器工作原理',
-            'zh-cn/_Tool/编码规范及配置ESLint',
-            'zh-cn/_Tool/Sublime插件及快捷键',
-            'zh-cn/_Tool/gulp前端自动化环境',
-            'zh-cn/_Tool/Git',
-            'zh-cn/_Tool/webpack配置',
-            'zh-cn/_Tool/markdown语法',
-            'zh-cn/_Tool/docker',
-            'zh-cn/_Tool/移动端调试'
+            'zh-cn/pages/html与css/html',
+            'zh-cn/pages/html与css/html5',
+            'zh-cn/pages/html与css/css',
+            'zh-cn/pages/html与css/css3',
+            'zh-cn/pages/html与css/css-z-index',
+            'zh-cn/pages/html与css/Fixed定位脱离Viewport的bug',
+            'zh-cn/pages/html与css/预解析,async,defer以及preload',
+            'zh-cn/pages/javascript/javascript基础',
+            'zh-cn/pages/javascript/javascript高级',
+            'zh-cn/pages/javascript/ajax',
+            'zh-cn/pages/javascript/webapi',
+            "zh-cn/pages/javascript/'',+0,-0,Number.NaN,NaN,undefined,null相等性判断",
+            'zh-cn/pages/javascript/addEventListener以及vue中的.passive修饰符',
+            'zh-cn/pages/javascript/axios取消请求',
+            'zh-cn/pages/javascript/ES6',
+            'zh-cn/pages/javascript/input-file控件',
+            'zh-cn/pages/javascript/js中编码encode和解码decode的三种方法',
+            'zh-cn/pages/javascript/js不写行尾分号注意事项',
+            'zh-cn/pages/javascript/js模块化',
+            'zh-cn/pages/javascript/nodejs',
+            'zh-cn/pages/javascript/promise',
+            'zh-cn/pages/javascript/settimeout',
+            'zh-cn/pages/javascript/使用axios导致cookie丢失问题',
+            'zh-cn/pages/javascript/浏览器切换标签页时改变title',
+            'zh-cn/pages/javascript/浏览器工作原理',
+            'zh-cn/pages/javascript/遍历总结',
+            'zh-cn/pages/javascript/防抖和节流',
+            'zh-cn/pages/javascript/高阶函数与柯里化',
+            'zh-cn/pages/移动web/移动web',
+            'zh-cn/pages/移动web/移动端Safari浏览网页时对数字禁用电话功能',
+            'zh-cn/pages/移动web/移动端兼容性问题',
+            'zh-cn/pages/linux/linux',
+            'zh-cn/pages/linux/配置web服务器',
+            'zh-cn/pages/bootstrap/bootstrap',
+            'zh-cn/pages/jquery/jquery',
+            'zh-cn/pages/jquery/fullpage',
+            'zh-cn/pages/jquery/jquery-fileupload插件的使用',
+            'zh-cn/pages/jquery/jquery中AJAX的全局事件',
+            'zh-cn/pages/vue/vue',
+            'zh-cn/pages/vue/vuex',
+            'zh-cn/pages/vue/vue-lifecycle',
+            'zh-cn/pages/vue/icon图标的使用',
+            'zh-cn/pages/vue/keep-alive',
+            'zh-cn/pages/vue/vue+elementui',
+            'zh-cn/pages/vue/vue-cli常用配置',
+            'zh-cn/pages/vue/vue-cli3内存溢出解决',
+            'zh-cn/pages/vue/vue-cli3配置通用模板及配置详解',
+            'zh-cn/pages/vue/vue异步组件',
+            'zh-cn/pages/vue/vue项目优化-加载第三方js',
+            'zh-cn/pages/vue/多页模式',
+            'zh-cn/pages/php/php',
+            'zh-cn/pages/tool/ChromeDeveloperTools使用技巧',
+            'zh-cn/pages/tool/docker',
+            'zh-cn/pages/tool/git',
+            'zh-cn/pages/tool/google浏览器使用技巧',
+            'zh-cn/pages/tool/gulp前端自动化环境',
+            'zh-cn/pages/tool/hexo+github搭建博客',
+            'zh-cn/pages/tool/less',
+            'zh-cn/pages/tool/less-mixin混合',
+            'zh-cn/pages/tool/markdown语法',
+            'zh-cn/pages/tool/npm',
+            'zh-cn/pages/tool/Sublime插件及快捷键',
+            'zh-cn/pages/tool/webpack配置',
+            'zh-cn/pages/tool/常用命令',
+            'zh-cn/pages/tool/移动端调试',
+            'zh-cn/pages/tool/编码规范及配置ESLint',
+            'zh-cn/pages/面试题',
+            'zh-cn/pages/ts/ts'
           ],
+
           placeholder: {
             '': '搜索'
             // '/zh-cn/': '搜索'
@@ -111,18 +123,18 @@
 
         // 自定义插件
         plugins: [
-          function (hook, vm) {
-            hook.beforeEach(function (html) {
-              // 添加页面更新时间
-              return `<span class="modified">最后更新于 {docsify-updated}</span>\n ` + html + '\n'
-            })
-            hook.beforeEach(function (html) {
-              // 添加编辑按钮
-              var url = 'https://github.com/cuilongjin/doc/blob/master/' + vm.route.file
-              var editHtml = '[:memo: 在 GitHub 上编辑此页！](' + url + ')\n'
-              return editHtml + html + '\n----\n' + editHtml
-            })
-          }
+          // function (hook, vm) {
+          //   hook.beforeEach(function (html) {
+          //     // 添加页面更新时间
+          //     return `<span class="modified">最后更新于 {docsify-updated}</span>\n ` + html + '\n'
+          //   })
+          //   hook.beforeEach(function (html) {
+          //     // 添加编辑按钮
+          //     var url = 'https://github.com/cuilongjin/doc/blob/master/' + vm.route.file
+          //     var editHtml = '[:memo: 在 GitHub 上编辑此页！](' + url + ')\n'
+          //     return editHtml + html + '\n----\n' + editHtml
+          //   })
+          // }
         ]
       }
     </script>
