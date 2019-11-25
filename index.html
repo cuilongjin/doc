@@ -18,10 +18,16 @@
   <body>
     <div id="app">Loading...</div>
     <script>
+      var flag = location.href.includes('ms')
+      window.addEventListener('hashchange', function () {
+        if (flag !== location.href.includes('ms')) {
+          location.reload()
+        }
+      })
       window.$docsify = {
         name: '稻草人', // 文档标题，会显示在侧边栏顶部
         // repo: 'https://github.com/cuilongjin/doc/', // 在页面右上角渲染一个 GitHub Corner 挂件
-        // loadSidebar: true, // 自定义侧边栏
+        loadSidebar: flag, // 自定义侧边栏
 
         loadNavbar: true, // 自定义导航栏
         alias: {
